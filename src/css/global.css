@@ -1,0 +1,122 @@
+@font-face {
+	font-family: 'Be Vietnam Pro';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/be-vietnam-pro-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Be Vietnam Pro';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/be-vietnam-pro-500.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Be Vietnam Pro';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/be-vietnam-pro-600.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Roboto Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/roboto-mono-400.woff2') format('woff2');
+}
+
+:root {
+	--color-surface: #ffffff;
+	--color-primary: #f53d7a;
+	--color-highlight: #eeeeee;
+	--color-gray-50: #fbfbfb;
+	--color-gray-100: #f6f6f6;
+	--color-gray-200: #d9d9d9;
+	--color-gray-300: #737373;
+	--color-gray-400: #1a1a1a;
+	--color-success: #40bf6a;
+	--color-error: #d92626;
+	--color-beta: #79ec9f;
+	--color-soon: #ffb266;
+
+	--shadow-card: 0px 0px 0.3px rgba(0, 0, 0, 0.081),
+		0px 0px 0.9px rgba(0, 0, 0, 0.119), 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+:root.dark {
+	color-scheme: dark;
+
+	--color-surface: #1a1a1a;
+	--color-primary: #f75a8e;
+	--color-highlight: #212121;
+	--color-gray-50: #1f1f1f;
+	--color-gray-300: #acacac;
+	--color-success: #66cc88;
+	--color-error: #e15151;
+
+	--shadow-card: 0px 0px 0.3px rgba(0, 0, 0, 0.242),
+		0px 0px 0.9px rgba(0, 0, 0, 0.358), 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
+
+:root:not(.dark).high-contrast {
+	--color-primary: #cc0044;
+	--color-gray-300: #4d4d4d;
+	--color-success: #367d4d;
+	--color-error: #cc0000;
+	--color-beta: #1f7a3d;
+	--color-soon: #7a4d1f;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	font-size: 16px;
+}
+
+h1,
+.text-30 {
+	@apply text-3xl tracking-wider;
+	font-weight: 500 default;
+}
+
+h2,
+.text-24 {
+	@apply text-2xl tracking-wide;
+	font-weight: 500 default;
+}
+
+.text-18 {
+	@apply text-lg tracking-wide;
+	font-weight: 400 default;
+}
+
+p,
+.text-16 {
+	@apply text-base tracking-wide;
+	font-weight: 400 default;
+}
+
+.text-14 {
+	@apply text-sm tracking-wide;
+	font-weight: 400 default;
+}
+
+.text-12 {
+	@apply text-xs tracking-widest;
+	font-weight: 500 default;
+}
+
+.focusable:focus {
+	@apply ring-2 ring-primary outline-none;
+}
+
+.focusable:focus:not(:focus-visible) {
+	box-shadow: none !important;
+}
