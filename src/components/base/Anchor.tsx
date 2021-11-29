@@ -34,10 +34,7 @@ function Anchor({
 
 	return (
 		<a
-			className={clsx(
-				'relative z-0 inline-flex justify-center focusable',
-				className,
-			)}
+			className={clsx('relative z-0 inline-flex justify-center', className)}
 			href={href}
 			target={undefinedIfFalsy(external, '_blank')}
 			aria-describedby={undefinedIfFalsy(hasTooltip, tooltipId.current)}

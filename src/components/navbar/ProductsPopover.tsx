@@ -12,7 +12,7 @@ function ProductsPopover() {
 			{({ open }) => (
 				<>
 					<div ref={hoverRef}>
-						<Popover.Button className="h-full inline-flex items-center justify-center focusable px-2 mt-1 font-medium">
+						<Popover.Button className="h-full inline-flex items-center justify-center px-2 mt-1 font-medium">
 							Products
 						</Popover.Button>
 
@@ -28,7 +28,7 @@ function ProductsPopover() {
 						>
 							<Popover.Panel
 								static
-								className="absolute -left-4 mt-2 w-[800px] origin-top-right bg-surface rounded-md shadow-card focus:outline-none p-8 dark:border-2 border-highlight"
+								className="absolute -left-4 mt-2 w-[680px] 1200:w-[800px] origin-top-right bg-surface rounded-md shadow-card focus:outline-none p-8 dark:border-2 border-highlight"
 							>
 								<ProductSnippets />
 							</Popover.Panel>

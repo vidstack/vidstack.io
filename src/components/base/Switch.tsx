@@ -25,7 +25,7 @@ function Switch({ label, initialState = false, onChange }: SwitchProps) {
 			onChange={onSwitch}
 			className={clsx(
 				'relative inline-flex flex-shrink-0 w-10 h-4',
-				'rounded-full cursor-pointer transition-colors ease-in-out duration-200 focusable',
+				'rounded-full cursor-pointer transition-colors ease-in-out duration-200',
 			)}
 			style={{
 				backgroundColor: isOn

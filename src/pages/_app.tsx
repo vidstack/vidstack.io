@@ -1,3 +1,4 @@
+import 'focus-visible/dist/focus-visible.min';
 import '$css/global.css';
 
 import ProgressBar from '@badrap/bar-of-progress';

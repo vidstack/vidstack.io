@@ -18,7 +18,7 @@ function Navbar() {
 			)}
 		>
 			<Link href="/">
-				<a className="flex items-center p-1 focusable">
+				<a className="flex items-center p-1">
 					<LogoIcon className="w-32 h-7" />
 					<span className="sr-only">Go to home page</span>
 				</a>

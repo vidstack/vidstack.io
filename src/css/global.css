@@ -116,12 +116,12 @@ p,
 	font-weight: 500 default;
 }
 
-.focusable:focus {
-	@apply ring-2 ring-primary outline-none;
+.js-focus-visible :focus:not([data-focus-visible-added]) {
+	@apply outline-none;
 }
 
-.focusable:focus:not(:focus-visible) {
-	box-shadow: none !important;
+.js-focus-visible [data-focus-visible-added] {
+	@apply ring-2 ring-primary outline-none;
 }
 
 * {

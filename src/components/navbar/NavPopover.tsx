@@ -16,7 +16,7 @@ function NavPopover() {
 				<>
 					<Popover.Button
 						className={clsx(
-							'992:hidden -mr-4 px-5 -my-4 py-4 group align-top focusable',
+							'992:hidden -mr-4 px-5 -my-4 py-4 group align-top',
 							open && 'opacity-0',
 						)}
 					>
@@ -36,7 +36,7 @@ function NavPopover() {
 						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden">
 							<div className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight">
 								<button
-									className="absolute top-1 right-1 p-3 text-gray-300 focusable"
+									className="absolute top-1 right-1 p-3 text-gray-300"
 									onClick={() => close()}
 								>
 									<CloseIcon className="w-5" />

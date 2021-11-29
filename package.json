@@ -13,6 +13,7 @@
 		"@headlessui/react": "^1.4.2",
 		"@seznam/compose-react-refs": "^1.0.6",
 		"clsx": "^1.1.1",
+		"focus-visible": "^5.2.0",
 		"preact": "^10.6.0"
 	},
 	"devDependencies": {

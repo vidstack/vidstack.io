@@ -15,7 +15,7 @@ function SettingsMenu() {
 			{({ open }) => (
 				<>
 					<div className="h-full px-2" ref={hoverRef}>
-						<Popover.Button className="h-full inline-flex items-center justify-center transform-gpu hover:scale-105 focusable">
+						<Popover.Button className="h-full inline-flex items-center justify-center transform-gpu hover:scale-105">
 							<CogwheelIcon
 								className={clsx(
 									'w-7 transform transition-transform',
