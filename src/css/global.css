@@ -86,34 +86,28 @@ html {
 h1,
 .text-30 {
 	@apply text-3xl tracking-wider;
-	font-weight: 500 default;
 }
 
 h2,
 .text-24 {
 	@apply text-2xl tracking-wide;
-	font-weight: 500 default;
 }
 
 .text-18 {
 	@apply text-lg tracking-wide;
-	font-weight: 400 default;
 }
 
 p,
 .text-16 {
 	@apply text-base tracking-wide;
-	font-weight: 400 default;
 }
 
 .text-14 {
 	@apply text-sm tracking-widest;
-	font-weight: 400 default;
 }
 
 .text-12 {
 	@apply text-xs tracking-widest;
-	font-weight: 500 default;
 }
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
@@ -121,7 +115,7 @@ p,
 }
 
 .js-focus-visible [data-focus-visible-added] {
-	@apply ring-2 ring-primary outline-none;
+	/*  */
 }
 
 * {

@@ -25,6 +25,7 @@ export type ButtonProps = {
 	monochrome?: boolean;
 	compact?: boolean;
 	contained?: boolean;
+	size?: 'small';
 };
 
 function Button({
@@ -38,6 +39,7 @@ function Button({
 	monochrome = false,
 	compact = false,
 	contained = false,
+	size,
 }: ButtonProps) {
 	const tooltipId = useRef(`anchor-tooltip-${tooltip?.toLowerCase()}`);
 	const hasTooltip = isString(tooltip);
@@ -49,7 +51,8 @@ function Button({
 
 	const props = {
 		className: clsx(
-			'text-16 font-medium flex items-center flex-row group',
+			'font-medium flex items-center flex-row group relative',
+			size === 'small' ? 'text-14' : 'text-16',
 			!compact && 'px-4 py-2',
 			contained && 'rounded-full',
 			!monochrome && !contained && 'text-primary',
@@ -79,8 +82,8 @@ function Button({
 
 			{icon === 'arrow' && (
 				<>
-					<ArrowRightIcon className="w-5 h-5 ml-1.5 hidden group-hover:inline-block" />
-					<ChevronIcon className="w-5 h-5 transform -rotate-90 ml-1.5 group-hover:hidden" />
+					<ArrowRightIcon className="w-5 h-5 ml-1 hidden group-hover:inline-block" />
+					<ChevronIcon className="w-5 h-5 transform -rotate-90 ml-1 group-hover:hidden" />
 				</>
 			)}
 		</>

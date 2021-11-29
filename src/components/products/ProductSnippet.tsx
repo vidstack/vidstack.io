@@ -25,25 +25,26 @@ function ProductSnippet({
 				<span className="inline-block pr-4 font-semibold text-16">{name}</span>
 
 				<Chip
-					title={
-						releaseStage === 'soon'
-							? 'Coming Soon'
-							: uppercaseFirstLetter(releaseStage)
-					}
 					className={clsx(
 						releaseStage === 'soon' && 'bg-soon',
 						releaseStage === 'alpha' && 'bg-alpha',
 						releaseStage === 'beta' && 'bg-beta',
 					)}
-				/>
+				>
+					{releaseStage === 'soon'
+						? 'Coming Soon'
+						: uppercaseFirstLetter(releaseStage)}
+				</Chip>
 			</div>
 
 			{description && (
 				<p className="text-16 mt-3.5 font-normal">{description}</p>
 			)}
 
-			<div className="mt-2 -ml-4 overflow-hidden">
-				<Button icon="arrow">{action}</Button>
+			<div className="mt-2">
+				<Button icon="arrow" compact className="py-2">
+					{action}
+				</Button>
 			</div>
 		</div>
 	);

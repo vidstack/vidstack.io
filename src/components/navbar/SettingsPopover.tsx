@@ -15,11 +15,11 @@ function SettingsMenu() {
 			{({ open }) => (
 				<>
 					<div className="h-full px-2" ref={hoverRef}>
-						<Popover.Button className="h-full inline-flex items-center justify-center transform-gpu hover:scale-105">
+						<Popover.Button className="h-full inline-flex items-center justify-center">
 							<CogwheelIcon
 								className={clsx(
 									'w-7 transform transition-transform',
-									open ? 'rotate-180' : 'rotate-0',
+									open || isHovering ? 'rotate-180' : 'rotate-0',
 								)}
 							/>
 							<span className="sr-only">Open website settings</span>

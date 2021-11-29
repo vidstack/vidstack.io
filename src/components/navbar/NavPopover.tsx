@@ -21,7 +21,7 @@ function NavPopover() {
 							open && 'opacity-0',
 						)}
 					>
-						<HamburgerIcon className="w-7 h-full transform-gpu group-hover:scale-105" />
+						<HamburgerIcon className="w-7 h-full" />
 						<span className="sr-only">Open navigation menu</span>
 					</Popover.Button>
 
@@ -34,7 +34,7 @@ function NavPopover() {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden">
+						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden z-50">
 							<div className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight">
 								<button
 									className="absolute top-1 right-1 p-3 text-gray-300"

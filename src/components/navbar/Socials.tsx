@@ -47,10 +47,7 @@ function Socials({
 						(tooltip !== 'Discord' || !hideDiscord) && (
 							<Button
 								key={href}
-								className={clsx(
-									'transform-gpu hover:scale-105 mx-2 items-center',
-									anchorClassName,
-								)}
+								className={clsx('mx-2 items-center', anchorClassName)}
 								href={href}
 								label={label}
 								external

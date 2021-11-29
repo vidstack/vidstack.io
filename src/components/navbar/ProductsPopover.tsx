@@ -28,7 +28,7 @@ function ProductsPopover() {
 						>
 							<Popover.Panel
 								static
-								className="absolute -left-4 mt-2 w-[680px] 1200:w-[800px] origin-top-right bg-surface rounded-md shadow-card focus:outline-none p-8 dark:border-2 border-highlight"
+								className="absolute -left-4 mt-2 w-[680px] 1200:w-[800px] origin-top-right bg-surface rounded-md shadow-card focus:outline-none p-8 dark:border-2 border-highlight z-50"
 							>
 								<ProductSnippets />
 							</Popover.Panel>
