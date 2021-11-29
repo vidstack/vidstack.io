@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import Anchor from '$base/Anchor';
+import Button from '$base/Button';
 import { ReactComponent as DiscordIcon } from '$svg/socials/discord.svg';
 import { ReactComponent as GitHubIcon } from '$svg/socials/github.svg';
 import { ReactComponent as TwitterIcon } from '$svg/socials/twitter.svg';
@@ -43,26 +43,28 @@ function Socials({
 		<>
 			<div className={className}>
 				{socialLinks.map(
-					(social) =>
-						(social.tooltip !== 'Discord' || !hideDiscord) && (
-							<Anchor
-								key={social.href}
+					({ href, label, Icon, tooltip }) =>
+						(tooltip !== 'Discord' || !hideDiscord) && (
+							<Button
+								key={href}
 								className={clsx(
 									'transform-gpu hover:scale-105 mx-2 items-center',
 									anchorClassName,
 								)}
-								href={social.href}
-								label={social.label}
+								href={href}
+								label={label}
 								external
-								tooltip={showTooltips ? social.tooltip : undefined}
+								monochrome
+								compact
+								tooltip={showTooltips ? tooltip : undefined}
 							>
-								<social.Icon className="w-7 h-full" />
+								<Icon className="w-7 h-full" />
 								{!showTooltips && (
 									<span className="inline-block font-medium ml-2">
-										{social.tooltip}
+										{tooltip}
 									</span>
 								)}
-							</Anchor>
+							</Button>
 						),
 				)}
 			</div>

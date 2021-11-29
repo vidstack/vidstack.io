@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 
+import Button from '$base/Button';
 import Chip from '$base/Chip';
-import { ReactComponent as ArrowRightIcon } from '$svg/arrow-right.svg';
-import { ReactComponent as ChevronIcon } from '$svg/chevron-down.svg';
 import { uppercaseFirstLetter } from '$utils/string';
 
 export type ProductSnippetProps = {
@@ -43,12 +42,8 @@ function ProductSnippet({
 				<p className="text-16 mt-3.5 font-normal">{description}</p>
 			)}
 
-			<div className="mt-2">
-				<button className="text-16 font-medium text-primary py-2 flex items-center flex-row group filter hover:brightness-90">
-					{action}
-					<ArrowRightIcon className="w-5 h-5 ml-1.5 hidden group-hover:inline-block" />
-					<ChevronIcon className="w-5 h-5 transform -rotate-90 ml-1.5 group-hover:hidden" />
-				</button>
+			<div className="mt-2 -ml-4 overflow-hidden">
+				<Button icon="arrow">{action}</Button>
 			</div>
 		</div>
 	);
