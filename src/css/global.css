@@ -123,3 +123,7 @@ p,
 .focusable:focus:not(:focus-visible) {
 	box-shadow: none !important;
 }
+
+* {
+	-webkit-tap-highlight-color: transparent;
+}
