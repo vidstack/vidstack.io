@@ -58,7 +58,7 @@ export default class Document extends NextDocument {
 					<script dangerouslySetInnerHTML={{ __html: contrastScript }}></script>
 				</Head>
 
-				<body className="w-screen min-h-screen bg-surface text-gray-400 dark:text-gray-100">
+				<body className="w-screen min-h-screen bg-surface text-gray-400 dark:text-gray-400 overflow-x-hidden">
 					<Main />
 					<NextScript />
 				</body>

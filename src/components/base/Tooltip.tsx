@@ -22,7 +22,7 @@ function Tooltip({ id, className, visible = false, children }: TooltipProps) {
 			role="tooltip"
 			aria-hidden={ariaBool(!visible)}
 		>
-			<span className="py-1.5 px-2 shadow-card flex items-center justify-center text-14 rounded-sm bg-surface dark:bg-gray-50">
+			<span className="py-1.5 px-2 shadow-card flex items-center justify-center text-12 font-medium rounded-sm bg-surface dark:border-2 border-highlight">
 				{children}
 			</span>
 		</div>
