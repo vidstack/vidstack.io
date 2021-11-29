@@ -2,6 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { Fragment } from 'react';
 
+import Button from '$base/Button';
 import ProductSnippets from '$components/products/ProductSnippets';
 import { ReactComponent as CloseIcon } from '$svg/close.svg';
 import { ReactComponent as HamburgerIcon } from '$svg/hamburger.svg';
@@ -39,7 +40,7 @@ function NavPopover() {
 									className="absolute top-1 right-1 p-3 text-gray-300"
 									onClick={() => close()}
 								>
-									<CloseIcon className="w-5" />
+									<CloseIcon className="w-6" />
 									<span className="sr-only">Close navigation menu</span>
 								</button>
 
@@ -75,6 +76,12 @@ function NavPopover() {
 										<VisualOptions />
 									</div>
 								</section>
+
+								<div className="w-full h-[100px] bg-gray-100 flex items-center justify-center">
+									<Button contained icon="arrow">
+										Early Access
+									</Button>
+								</div>
 							</div>
 						</Popover.Panel>
 					</Transition>
