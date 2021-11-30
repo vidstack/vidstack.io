@@ -1,9 +1,10 @@
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import Button from '$base/Button';
 import ProductSnippets from '$components/products/ProductSnippets';
+import { useMediaQuery } from '$hooks/useMediaQuery';
 import { ReactComponent as CloseIcon } from '$svg/close.svg';
 import { ReactComponent as HamburgerIcon } from '$svg/hamburger.svg';
 
@@ -11,6 +12,18 @@ import Socials from './Socials';
 import VisualOptions from './VisualOptions';
 
 function NavPopover() {
+	const isLargeScreen = useMediaQuery('(min-width: 992px)');
+
+	function hideDocumentOverflow(hidden: boolean) {
+		document.documentElement.classList[hidden ? 'add' : 'remove'](
+			'overflow-hidden',
+		);
+	}
+
+	useEffect(() => {
+		if (isLargeScreen) hideDocumentOverflow(false);
+	}, [isLargeScreen]);
+
 	return (
 		<Popover>
 			{({ open, close }) => (
@@ -20,15 +33,17 @@ function NavPopover() {
 							'992:hidden -mr-4 px-5 -my-4 py-4 group align-top',
 							open && 'opacity-0',
 						)}
+						onPointerDown={() => hideDocumentOverflow(!open)}
 					>
 						<HamburgerIcon className="w-7 h-full" />
 						<span className="sr-only">Open navigation menu</span>
 					</Popover.Button>
 
 					<Popover.Overlay
-						className={`${
-							open ? 'opacity-90 fixed inset-0' : 'opacity-0'
-						} bg-gray-200 z-50`}
+						className={clsx(
+							open ? 'opacity-90 fixed inset-0' : 'opacity-0',
+							'bg-gray-200 z-50 992:hidden',
+						)}
 					/>
 
 					<Transition
@@ -40,11 +55,17 @@ function NavPopover() {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden z-50">
-							<div className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight">
+						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden z-50 max-h-screen">
+							<div
+								className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight overflow-y-scroll"
+								style={{ maxHeight: 'calc(100vh - 32px)' }}
+							>
 								<button
-									className="absolute top-1 right-1 p-3 text-gray-300"
-									onClick={() => close()}
+									className="fixed top-4 right-[var(--scrollbar-width)] mr-4 p-3 text-gray-300"
+									onClick={() => {
+										close();
+										hideDocumentOverflow(false);
+									}}
 								>
 									<CloseIcon className="w-6" />
 									<span className="sr-only">Close navigation menu</span>

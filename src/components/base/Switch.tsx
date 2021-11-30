@@ -14,7 +14,6 @@ function Switch({ label, initialState = false, onChange }: SwitchProps) {
 	const [isOn, setIsOn] = useState(initialState);
 
 	function onSwitch(isSwitchedOn: boolean) {
-		console.log('ok');
 		setIsOn(isSwitchedOn);
 		onChange?.(isSwitchedOn);
 	}

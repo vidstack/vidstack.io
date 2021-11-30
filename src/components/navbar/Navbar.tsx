@@ -13,7 +13,7 @@ function Navbar() {
 	return (
 		<nav
 			className={clsx(
-				'px-5 py-4 flex items-center dark:border-b-2 border-highlight',
+				'px-5 py-4 flex items-center dark:border-b-2 border-highlight fixed top-0 z-50 bg-surface w-full',
 				...Object.values(styles),
 			)}
 		>

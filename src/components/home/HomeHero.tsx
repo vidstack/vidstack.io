@@ -27,8 +27,9 @@ function HomeHero() {
 					</h1>
 					<p className="mt-4">
 						Vidstack enables developers to easily build their own video
-						pipeline, design their player, and measure video engagement and
-						performance - all in once place... without being a video engineer.
+						pipeline, connect it to their frontend, and measure video engagement
+						and performance - all in once place... without being a video
+						engineer.
 					</p>
 				</div>
 				<div className="flex flex-row mt-8">
