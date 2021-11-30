@@ -25,6 +25,12 @@ function NavPopover() {
 						<span className="sr-only">Open navigation menu</span>
 					</Popover.Button>
 
+					<Popover.Overlay
+						className={`${
+							open ? 'opacity-90 fixed inset-0' : 'opacity-0'
+						} bg-gray-200 z-50`}
+					/>
+
 					<Transition
 						as={Fragment}
 						enter="transition duration-150 ease-out"
