@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import HomeHero from '$components/home/HomeHero';
+import HomeProductSuite from '$components/home/HomeProductSuite';
 import Navbar from '$components/navbar/Navbar';
 
 const Home: NextPage = () => {
@@ -24,8 +25,9 @@ const Home: NextPage = () => {
 
 			<Navbar />
 
-			<main className="flex flex-col min-w-full px-4 items-center 768:items-start 768:px-8 992:px-14">
+			<main className="flex flex-col min-w-full items-center 768:items-start">
 				<HomeHero />
+				<HomeProductSuite />
 			</main>
 		</>
 	);

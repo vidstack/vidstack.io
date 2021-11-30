@@ -49,7 +49,7 @@ function NavPopover() {
 										Products
 									</h1>
 
-									<ProductSnippets />
+									<ProductSnippets className="gap-10 grid-cols-1 576:grid-cols-2" />
 								</section>
 
 								<hr className="border-gray-200 w-full border-dashed" />

@@ -10,6 +10,7 @@ export type ProductSnippetProps = {
 	action: string;
 	releaseStage: 'soon' | 'alpha' | 'beta';
 	className?: string;
+	descriptionClassName?: string;
 };
 
 function ProductSnippet({
@@ -17,6 +18,7 @@ function ProductSnippet({
 	description,
 	action,
 	className,
+	descriptionClassName,
 	releaseStage,
 }: ProductSnippetProps) {
 	return (
@@ -38,7 +40,9 @@ function ProductSnippet({
 			</div>
 
 			{description && (
-				<p className="text-16 mt-3.5 font-normal">{description}</p>
+				<p className={clsx('text-16 mt-3.5 font-normal', descriptionClassName)}>
+					{description}
+				</p>
 			)}
 
 			<div className="mt-2">

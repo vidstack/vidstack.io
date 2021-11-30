@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import ProductSnippet from './ProductSnippet';
 
 const products = [
@@ -23,9 +25,17 @@ const products = [
 	},
 ];
 
-function ProductSnippets() {
+export type ProductSnippetsProps = {
+	className?: string;
+	descriptionClassName?: string;
+};
+
+function ProductSnippets({
+	className,
+	descriptionClassName,
+}: ProductSnippetsProps) {
 	return (
-		<div className="w-full grid grid-cols-1 576:grid-cols-2 gap-10">
+		<div className={clsx('w-full grid', className)}>
 			{products.map(({ name, description }) => (
 				<ProductSnippet
 					key={name}
@@ -33,6 +43,7 @@ function ProductSnippets() {
 					description={description}
 					action="Get Notified"
 					releaseStage="soon"
+					descriptionClassName={descriptionClassName}
 				/>
 			))}
 		</div>

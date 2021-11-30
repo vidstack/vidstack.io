@@ -7,7 +7,10 @@ import { ReactComponent as YCombinatorIcon } from '$svg/partners/ycombinator.svg
 
 function HomeHero() {
 	return (
-		<section className="w-full max-w-6xl mx-auto" aria-label="Hero">
+		<section
+			className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14"
+			aria-label="Hero"
+		>
 			<div className="flex flex-col mt-14 992:mt-20 max-w-lg">
 				<div className="flex flex-row items-center">
 					<Chip className="bg-soon">Coming Soon</Chip>

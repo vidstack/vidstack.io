@@ -26,6 +26,23 @@ if (localStorage.contrastLevel === 'high') {
 }
 `;
 
+const scrollbarWidthScript = `
+document.addEventListener("DOMContentLoaded", function(event) {
+	var scrollDiv = document.createElement("div");
+	scrollDiv.style.width = '100px';
+	scrollDiv.style.height = '100px';
+	scrollDiv.style.overflow = 'scroll';
+	scrollDiv.style.position = 'absolute';
+	scrollDiv.style.top = '-9999px';
+	document.body.appendChild(scrollDiv);
+	window.requestAnimationFrame(() => {
+		var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+		document.documentElement.style.setProperty('--scrollbar-width', scrollbarWidth + 'px');
+		document.body.removeChild(scrollDiv);
+	})
+});
+`;
+
 export default class Document extends NextDocument {
 	static async getInitialProps(ctx: DocumentContext): Promise<any> {
 		const initialProps = await NextDocument.getInitialProps(ctx);
@@ -56,6 +73,9 @@ export default class Document extends NextDocument {
 					<link rel="manifest" href="/manifest.json" />
 					<script dangerouslySetInnerHTML={{ __html: themeScript }}></script>
 					<script dangerouslySetInnerHTML={{ __html: contrastScript }}></script>
+					<script
+						dangerouslySetInnerHTML={{ __html: scrollbarWidthScript }}
+					></script>
 				</Head>
 
 				<body className="w-screen min-h-screen bg-surface text-gray-400 dark:text-gray-400 overflow-x-hidden">
