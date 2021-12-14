@@ -1,20 +1,22 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
 
-import { ReactComponent as CheckmarkIcon } from '$svg/checkmark.svg';
-import { ReactComponent as AwsIcon } from '$svg/providers/aws.svg';
-import { ReactComponent as CloudflareIcon } from '$svg/providers/cloudflare.svg';
-import { ReactComponent as GoogleIcon } from '$svg/providers/google.svg';
-import { ReactComponent as MuxIcon } from '$svg/providers/mux.svg';
+import Button from '$base/Button';
+
+import AnalyzeStep from './steps/AnalyzeStep';
+import ConnectStep from './steps/ConnectStep';
+import ManageStep from './steps/ManageStep';
 
 const Step = ({
 	no,
 	title,
+	description,
 	className,
 	children,
 }: {
 	no: number;
 	title: string;
+	description: string;
 	className?: string;
 	children?: ReactNode;
 }) => (
@@ -30,10 +32,13 @@ const Step = ({
 
 		<h2 className="mt-8 text-3xl font-medium text-center">{title}</h2>
 
-		<p className="text-lg max-w-sm 992:max-w-lg text-center mt-8 mb-12 992:mb-16 text-gray-300">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua.
+		<p className="text-lg max-w-sm 992:max-w-lg text-center mt-8 text-gray-300">
+			{description}
 		</p>
+
+		<Button icon="arrow" size="small" className="mt-6 mb-12 992:mb-16">
+			Early access
+		</Button>
 
 		{children}
 	</div>
@@ -49,16 +54,31 @@ function HomeProcess() {
 					What can you do with Vidstack?
 				</h1>
 
-				<Step no={1} title="Manage your videos" className="mt-28 992:mt-28">
-					<div>...</div>
+				<Step
+					no={1}
+					title="Manage your videos"
+					description="We integrate with a variety of hosting and streaming providers so you can store, and organize your videos in one place. Create workspaces, prepare videos for streaming, and more in our beautiful dashboard."
+					className="mt-28 992:mt-28"
+				>
+					<ManageStep />
 				</Step>
 
-				<Step no={2} title="Connect your frontend" className="mt-28">
-					<div>...</div>
+				<Step
+					no={2}
+					title="Connect your frontend"
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					className="mt-28"
+				>
+					<ConnectStep />
 				</Step>
 
-				<Step no={3} title="Analyze video playback" className="mt-28">
-					<div>...</div>
+				<Step
+					no={3}
+					title="Analyze video playback"
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					className="mt-28"
+				>
+					<AnalyzeStep />
 				</Step>
 			</div>
 		</section>
