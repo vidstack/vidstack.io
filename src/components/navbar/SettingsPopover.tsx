@@ -40,7 +40,7 @@ function SettingsMenu() {
 								className="absolute right-0 w-64 mt-1 origin-top-right bg-surface rounded-md shadow-card focus:outline-none p-4 dark:border-2 border-highlight"
 							>
 								<section role="application" aria-label="Visual Options">
-									<div className="text-14 font-medium text-gray-300 pt-1 pb-2">
+									<div className="text-sm font-medium text-gray-300 tracking-wide pt-1 pb-2">
 										Visual Options
 									</div>
 

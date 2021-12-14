@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { ReactComponent as LogoIcon } from '$svg/vidstack-logo.svg';
 
-import styles from './Navbar.module.css';
 import NavPopover from './NavPopover';
 import SettingsPopover from './SettingsPopover';
 import Socials from './Socials';
@@ -12,16 +11,10 @@ function Navbar() {
 	return (
 		<nav
 			className={clsx(
-				'px-5 py-4 flex items-center dark:border-b-2 border-highlight fixed top-0 z-50 bg-surface w-full',
-				...Object.values(styles),
+				'px-5 py-4 flex items-center bg-surface w-full 1200:max-w-7xl 1200:mx-auto 1200:py-5',
 			)}
 		>
-			<Link href="/">
-				<a className="flex items-center p-1">
-					<LogoIcon className="w-32 h-7" />
-					<span className="sr-only">Go to home page</span>
-				</a>
-			</Link>
+			<LogoIcon className="w-32 h-7" />
 
 			<div className="flex-1"></div>
 

@@ -24,13 +24,13 @@ const Step = ({
 			className,
 		)}
 	>
-		<div className="shadow-card flex items-center justify-center rounded-full h-10 w-10 font-medium">
+		<div className="shadow-card flex items-center justify-center rounded-full h-11 w-11 text-lg font-medium dark:border-2 dark:border-gray-200">
 			{no}
 		</div>
 
-		<h2 className="mt-5">{title}</h2>
+		<h2 className="mt-8 text-3xl font-medium text-center">{title}</h2>
 
-		<p className="text-16 max-w-sm 992:max-w-lg text-center mt-4 mb-12 992:mb-16">
+		<p className="text-lg max-w-sm 992:max-w-lg text-center mt-8 mb-12 992:mb-16 text-gray-300">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.
 		</p>
@@ -41,15 +41,15 @@ const Step = ({
 
 function HomeProcess() {
 	return (
-		<section className="w-full relative px-4">
-			<div className="border-[#f99fbd] w-14 h-4 border-dashed border-t-2 mt-20 transform rotate-90 mx-auto text-center" />
+		<section className="w-full relative px-4 mt-32">
+			<div className="border-primary w-14 h-4 border-dashed border-t-2 transform rotate-90 mx-auto text-center" />
 
-			<div className="mt-20">
-				<h1 className="text-24 font-medium text-center text-primary">
+			<div className="mt-28">
+				<h1 className="text-3xl font-medium text-center text-primary">
 					What can you do with Vidstack?
 				</h1>
 
-				<Step no={1} title="Manage your videos" className="mt-16 992:mt-28">
+				<Step no={1} title="Manage your videos" className="mt-28 992:mt-28">
 					<div>...</div>
 				</Step>
 

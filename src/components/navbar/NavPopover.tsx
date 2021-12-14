@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { Fragment, useEffect } from 'react';
 
 import Button from '$base/Button';
-import ProductSnippets from '$components/products/ProductSnippets';
 import { useMediaQuery } from '$hooks/useMediaQuery';
 import { ReactComponent as CloseIcon } from '$svg/close.svg';
 import { ReactComponent as HamburgerIcon } from '$svg/hamburger.svg';
@@ -59,12 +58,12 @@ function NavPopover() {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Popover.Panel className=" absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden z-50 max-h-screen">
+						<Popover.Panel className="absolute top-0 right-0 w-full p-5 pt-4 origin-top-right focus:outline-none 992:hidden z-50 max-h-screen">
 							<div
-								className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight overflow-y-scroll"
+								className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight"
 								style={{ maxHeight: 'calc(100vh - 32px)' }}
 							>
-								<div className="w-full flex justify-end items-center text-gray-300 sticky top-0 bg-surface z-50">
+								<div className="w-full flex justify-end items-center text-gray-300 sticky top-0 bg-surface z-50 rounded-md">
 									<button
 										className="p-4"
 										onClick={() => {
@@ -78,7 +77,7 @@ function NavPopover() {
 								</div>
 
 								<section className="pb-10 px-5 576:px-8 768:px-10">
-									<h1 className="text-16 font-medium text-gray-300 mb-6">
+									<h1 className="text-base font-medium text-gray-300 mb-6">
 										Socials
 									</h1>
 
@@ -91,7 +90,7 @@ function NavPopover() {
 								<hr className="border-gray-200 w-full border-dashed" />
 
 								<section className="py-10 px-5 576:px-8 768:px-10">
-									<h1 className="text-16 font-medium text-gray-300 mb-6">
+									<h1 className="text-base font-medium text-gray-300 mb-6">
 										Visual Options
 									</h1>
 
@@ -100,7 +99,7 @@ function NavPopover() {
 									</div>
 								</section>
 
-								<div className="w-full h-[100px] bg-gray-100 flex items-center justify-center">
+								<div className="w-full h-[100px] bg-gray-100 flex items-center justify-center rounded-b-md">
 									<Button contained icon="arrow">
 										Early Access
 									</Button>

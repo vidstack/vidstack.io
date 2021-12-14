@@ -8,8 +8,8 @@ function VisualOptions() {
 
 	return (
 		<>
-			<div className="flex rounded-md items-center w-full py-3 text-16">
-				<span className="flex-1 font-medium text-16">Dark Mode</span>
+			<div className="flex rounded-md items-center w-full py-3 text-base">
+				<span className="flex-1 font-medium text-base">Dark Mode</span>
 				<Switch
 					label="Toggle dark mode"
 					initialState={isDarkTheme}
@@ -17,8 +17,8 @@ function VisualOptions() {
 				/>
 			</div>
 
-			<div className="flex rounded-md items-center w-full py-3 text-16">
-				<span className="flex-1 font-medium text-16">High Contrast</span>
+			<div className="flex rounded-md items-center w-full py-3 text-base">
+				<span className="flex-1 font-medium text-base">High Contrast</span>
 				<Switch
 					label="Toggle high contrast"
 					initialState={isHighContrast}

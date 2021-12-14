@@ -52,8 +52,8 @@ function Button({
 	const props = {
 		className: clsx(
 			'font-medium flex items-center flex-row group relative',
-			size === 'small' ? 'text-14' : 'text-16',
-			!compact && 'px-4 py-2',
+			size === 'small' ? 'text-sm' : 'text-lg',
+			!compact && 'pl-6 pr-5 py-3',
 			contained && 'rounded-full',
 			!monochrome && !contained && 'text-primary',
 			!monochrome && contained && 'bg-primary text-gray-50',

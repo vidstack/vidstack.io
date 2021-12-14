@@ -17,7 +17,7 @@
 @font-face {
 	font-family: 'Be Vietnam Pro';
 	font-style: normal;
-	font-weight: 600;
+	font-weight: bold;
 	font-display: swap;
 	src: url('/fonts/be-vietnam-pro-600.woff2') format('woff2');
 }
@@ -97,33 +97,6 @@
 
 html {
 	font-size: 16px;
-}
-
-h1,
-.text-30 {
-	@apply text-3xl tracking-wider;
-}
-
-h2,
-.text-24 {
-	@apply text-2xl tracking-wide;
-}
-
-.text-18 {
-	@apply text-lg tracking-wide;
-}
-
-p,
-.text-16 {
-	@apply text-base tracking-wide;
-}
-
-.text-14 {
-	@apply text-sm tracking-widest;
-}
-
-.text-12 {
-	@apply text-xs tracking-widest;
 }
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {

@@ -1,33 +1,26 @@
 import Button from '$base/Button';
-import Chip from '$base/Chip';
 
 function HomeHero() {
 	return (
 		<section
-			className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14"
+			className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16"
 			aria-label="Hero"
 		>
-			<div className="flex flex-col mt-14 992:mt-20 max-w-lg">
-				<div className="flex flex-row items-center">
-					<Chip className="bg-soon">Coming Soon</Chip>
-					<Button icon="arrow" monochrome size="small">
-						Vidstack Player
-					</Button>
-				</div>
-				<div className="mt-8">
-					<h1 className="text-primary text-24 font-semibold">
+			<div className="flex flex-col mt-4 992:mt-20">
+				<div className="mt-0">
+					<h1 className="text-primary font-bold text-4xl 992:text-6xl tracking-tight text-center">
 						<span className="576:hidden">Video for frontend devs.</span>
 						<span className="hidden 576:block">
 							Video for frontend developers.
 						</span>
 					</h1>
-					<p className="mt-4">
-						We want to give developers the tools they need to easily integrate
+					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-gray-300">
+						Vidstack gives developers the tools they need to easily integrate
 						video onto the web - all in one place... without being a video
 						engineer.
 					</p>
 				</div>
-				<div className="flex flex-row mt-8">
+				<div className="flex flex-row justify-center mt-12">
 					<Button contained icon="arrow">
 						Early Access
 					</Button>

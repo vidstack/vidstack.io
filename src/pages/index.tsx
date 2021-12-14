@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 
 			<Navbar />
 
-			<main className="flex flex-col min-w-full items-center 768:items-start z-0 pt-16">
+			<main className="flex flex-col min-w-full items-center 768:items-start z-0 pt-16 pr-[var(--scrollbar-width)]">
 				<HomeHero />
 				<HomeProcess />
 			</main>

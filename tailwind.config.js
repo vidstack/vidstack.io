@@ -1,11 +1,10 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-	mode: 'jit',
 	experimental: {
 		optimizeUniversalDefaults: true,
 	},
-	purge: ['./src/**/*.tsx'],
+	content: ['./src/**/*.tsx'],
 	darkMode: 'class',
 	theme: {
 		colors: {
@@ -39,11 +38,6 @@ module.exports = {
 			boxShadow: {
 				card: 'var(--shadow-card)',
 			},
-		},
-	},
-	variants: {
-		extend: {
-			scale: ['group-hover'],
 		},
 	},
 	plugins: [],
