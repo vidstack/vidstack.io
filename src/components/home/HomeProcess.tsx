@@ -66,7 +66,7 @@ function HomeProcess() {
 				<Step
 					no={2}
 					title="Connect your frontend"
-					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					description="Build and design your video player only using HTML and CSS. Our headless web components let you finally craft the perfect media experience, without being tangled up 10-feet deep in JS."
 					className="mt-28"
 				>
 					<ConnectStep />
@@ -75,7 +75,7 @@ function HomeProcess() {
 				<Step
 					no={3}
 					title="Analyze video playback"
-					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					description="It's never been easier to gather critical performance and user behaviour data. Store and view the data in our dashboard, or forward it to any one of our analytics outlets."
 					className="mt-28"
 				>
 					<AnalyzeStep />
