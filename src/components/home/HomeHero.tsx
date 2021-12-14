@@ -1,9 +1,5 @@
 import Button from '$base/Button';
 import Chip from '$base/Chip';
-import { ReactComponent as PlyrIcon } from '$svg/partners/plyr.svg';
-import { ReactComponent as RedditIcon } from '$svg/partners/reddit.svg';
-import { ReactComponent as VimeIcon } from '$svg/partners/vime.svg';
-import { ReactComponent as YCombinatorIcon } from '$svg/partners/ycombinator.svg';
 
 function HomeHero() {
 	return (
@@ -26,9 +22,8 @@ function HomeHero() {
 						</span>
 					</h1>
 					<p className="mt-4">
-						Vidstack enables developers to easily build their own video
-						pipeline, connect it to their frontend, and measure video engagement
-						and performance - all in once place... without being a video
+						We want to give developers the tools they need to easily integrate
+						video onto the web - all in one place... without being a video
 						engineer.
 					</p>
 				</div>
@@ -36,12 +31,6 @@ function HomeHero() {
 					<Button contained icon="arrow">
 						Early Access
 					</Button>
-				</div>
-				<div className="mt-14 992:mt-16 flex flex-row space-x-7 576:space-x-10 items-center -ml-3">
-					<RedditIcon className="h-16" />
-					<YCombinatorIcon className="h-16" />
-					<PlyrIcon className="h-16" />
-					<VimeIcon className="h-16" />
 				</div>
 			</div>
 		</section>

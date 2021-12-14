@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import HomeHero from '$components/home/HomeHero';
 import HomeProcess from '$components/home/HomeProcess';
-import HomeProductSuite from '$components/home/HomeProductSuite';
 import Navbar from '$components/navbar/Navbar';
 
 const Home: NextPage = () => {
@@ -28,7 +27,6 @@ const Home: NextPage = () => {
 
 			<main className="flex flex-col min-w-full items-center 768:items-start z-0 pt-16">
 				<HomeHero />
-				<HomeProductSuite />
 				<HomeProcess />
 			</main>
 		</>

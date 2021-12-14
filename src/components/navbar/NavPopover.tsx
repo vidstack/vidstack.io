@@ -14,14 +14,18 @@ import VisualOptions from './VisualOptions';
 function NavPopover() {
 	const isLargeScreen = useMediaQuery('(min-width: 992px)');
 
-	function hideDocumentOverflow(hidden: boolean) {
-		document.documentElement.classList[hidden ? 'add' : 'remove'](
-			'overflow-hidden',
-		);
+	function hideMainScrollbar(hidden: boolean) {
+		window.requestAnimationFrame(() => {
+			document.documentElement.classList[hidden ? 'add' : 'remove'](
+				'overflow-hidden',
+			);
+		});
 	}
 
 	useEffect(() => {
-		if (isLargeScreen) hideDocumentOverflow(false);
+		if (isLargeScreen) {
+			hideMainScrollbar(false);
+		}
 	}, [isLargeScreen]);
 
 	return (
@@ -33,7 +37,7 @@ function NavPopover() {
 							'992:hidden -mr-4 px-5 -my-4 py-4 group align-top',
 							open && 'opacity-0',
 						)}
-						onPointerDown={() => hideDocumentOverflow(!open)}
+						onPointerDown={() => hideMainScrollbar(!open)}
 					>
 						<HamburgerIcon className="w-7 h-full" />
 						<span className="sr-only">Open navigation menu</span>
@@ -60,28 +64,20 @@ function NavPopover() {
 								className="bg-surface rounded-md shadow-card relative dark:border-2 border-highlight overflow-y-scroll"
 								style={{ maxHeight: 'calc(100vh - 32px)' }}
 							>
-								<button
-									className="fixed top-4 right-[var(--scrollbar-width)] mr-4 p-3 text-gray-300"
-									onClick={() => {
-										close();
-										hideDocumentOverflow(false);
-									}}
-								>
-									<CloseIcon className="w-6" />
-									<span className="sr-only">Close navigation menu</span>
-								</button>
+								<div className="w-full flex justify-end items-center text-gray-300 sticky top-0 bg-surface z-50">
+									<button
+										className="p-4"
+										onClick={() => {
+											close();
+											hideMainScrollbar(false);
+										}}
+									>
+										<CloseIcon className="w-6" />
+										<span className="sr-only">Close navigation menu</span>
+									</button>
+								</div>
 
-								<section className="py-10 px-5 576:px-8 768:px-10">
-									<h1 className="text-16 font-medium text-gray-300 mb-6">
-										Products
-									</h1>
-
-									<ProductSnippets className="gap-10 grid-cols-1 576:grid-cols-2" />
-								</section>
-
-								<hr className="border-gray-200 w-full border-dashed" />
-
-								<section className="py-10 px-5 576:px-8 768:px-10">
+								<section className="pb-10 px-5 576:px-8 768:px-10">
 									<h1 className="text-16 font-medium text-gray-300 mb-6">
 										Socials
 									</h1>

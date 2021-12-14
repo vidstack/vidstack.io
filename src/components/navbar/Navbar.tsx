@@ -5,7 +5,6 @@ import { ReactComponent as LogoIcon } from '$svg/vidstack-logo.svg';
 
 import styles from './Navbar.module.css';
 import NavPopover from './NavPopover';
-import ProductsPopover from './ProductsPopover';
 import SettingsPopover from './SettingsPopover';
 import Socials from './Socials';
 
@@ -23,10 +22,6 @@ function Navbar() {
 					<span className="sr-only">Go to home page</span>
 				</a>
 			</Link>
-
-			<div className="ml-20 text-16 font-medium hidden 992:block">
-				<ProductsPopover />
-			</div>
 
 			<div className="flex-1"></div>
 
