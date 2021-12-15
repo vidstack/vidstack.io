@@ -16,7 +16,6 @@ import Tooltip from './Tooltip';
 
 export type ButtonProps = {
 	href?: string;
-	tooltip?: string;
 	className?: string;
 	external?: boolean;
 	label?: string;
@@ -26,12 +25,15 @@ export type ButtonProps = {
 	compact?: boolean;
 	contained?: boolean;
 	size?: 'small';
+	tooltip?: string;
+	tooltipPosition?: 'left' | 'center' | 'right';
 };
 
 function Button({
 	href,
 	className,
 	tooltip,
+	tooltipPosition = 'right',
 	label,
 	children,
 	external = false,
@@ -75,7 +77,11 @@ function Button({
 			{isString(label) && <span className="sr-only">{label}</span>}
 
 			{hasTooltip && (
-				<Tooltip id={tooltipId.current} visible={isHovering || isFocusing}>
+				<Tooltip
+					id={tooltipId.current}
+					visible={isHovering || isFocusing}
+					position={tooltipPosition}
+				>
 					{tooltip}
 				</Tooltip>
 			)}

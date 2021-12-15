@@ -8,15 +8,25 @@ export type TooltipProps = {
 	className?: string;
 	visible?: boolean;
 	children: ReactNode;
+	position?: 'left' | 'center' | 'right';
 };
 
-function Tooltip({ id, className, visible = false, children }: TooltipProps) {
+function Tooltip({
+	id,
+	className,
+	visible = false,
+	position = 'right',
+	children,
+}: TooltipProps) {
 	return (
 		<div
 			id={id}
 			className={clsx(
-				'transition-opacity absolute bottom-0 right-0 top-full mt-1 z-50',
+				'transition-opacity absolute bottom-0 top-full mt-1 z-50',
 				!visible && 'opacity-0 invisible',
+				position === 'left' && 'left-0',
+				position === 'center' && 'left-0 right-0 mx-auto',
+				position === 'right' && 'right-0',
 				className,
 			)}
 			role="tooltip"

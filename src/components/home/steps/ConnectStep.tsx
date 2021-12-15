@@ -1,3 +1,4 @@
+import Button from '$base/Button';
 import CodeSnippet from '$components/code/CodeSnippet';
 import { ReactComponent as NextjsIcon } from '$svg/frameworks/nextjs.svg';
 import { ReactComponent as ReactIcon } from '$svg/frameworks/react.svg';
@@ -9,6 +10,14 @@ import { highlightedCode as apiCodeSnippet } from './code-snippets/api-snippet.g
 import { highlightedCode as playerCodeSnippet } from './code-snippets/player-snippet.html?highlight';
 import { highlightedCode as sdkCodeSnippet } from './code-snippets/sdk-snippet.js?highlight';
 import { highlightedCode as uploaderCodeSnippet } from './code-snippets/uploader-snippet.html?highlight';
+
+const frameworks = [
+	{ name: 'Vue', href: 'https://vuejs.org', Icon: VueIcon },
+	{ name: 'React', href: 'https://reactjs.org', Icon: ReactIcon },
+	{ name: 'Svelte', href: 'https://svelte.dev', Icon: SvelteIcon },
+	{ name: 'Nextjs', href: 'https://nextjs.org', Icon: NextjsIcon },
+	{ name: 'Tailwind', href: 'https://tailwindcss.com', Icon: TailwindIcon },
+];
 
 function ConnectStep() {
 	return (
@@ -30,11 +39,18 @@ function ConnectStep() {
 				</p>
 
 				<div className="flex flex-row flex-wrap space-x-4 992:space-x-10 justify-center mt-10 w-full">
-					<VueIcon className="w-16 h-16 mb-4 576:mb-0" />
-					<ReactIcon className="w-16 h-16" />
-					<SvelteIcon className="w-16 h-16" />
-					<NextjsIcon className="w-16 h-16" />
-					<TailwindIcon className="w-16 h-16" />
+					{frameworks.map(({ name, href, Icon }) => (
+						<Button
+							href={href}
+							label={name}
+							external
+							monochrome
+							compact
+							key={name}
+						>
+							<Icon className="w-16 h-16 first:mb-4 576:first:mb-0" />
+						</Button>
+					))}
 				</div>
 			</div>
 		</div>
