@@ -2,10 +2,7 @@ import Button from '$base/Button';
 
 function HomeHero() {
 	return (
-		<section
-			className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16"
-			aria-label="Hero"
-		>
+		<section className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16">
 			<div className="flex flex-col mt-4 992:mt-20">
 				<div className="mt-0">
 					<h1 className="text-primary font-bold text-4xl 992:text-6xl tracking-tight text-center">
