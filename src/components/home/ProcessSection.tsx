@@ -26,7 +26,7 @@ const Step = ({
 			className,
 		)}
 	>
-		<div className="shadow-card flex items-center justify-center rounded-full h-11 w-11 text-lg font-medium dark:border-2 dark:border-gray-200 pt-0.5">
+		<div className="shadow-card flex items-center justify-center rounded-full h-11 w-11 text-lg font-semibold dark:border-2 dark:border-gray-200 pt-0.5">
 			{no}
 		</div>
 
@@ -44,7 +44,7 @@ const Step = ({
 	</div>
 );
 
-function HomeProcess() {
+function ProcessSection() {
 	return (
 		<section className="w-full relative mt-32">
 			<div className="border-primary w-14 h-4 border-dashed border-t-2 transform rotate-90 mx-auto text-center" />
@@ -85,4 +85,4 @@ function HomeProcess() {
 	);
 }
 
-export default HomeProcess;
+export default ProcessSection;

@@ -16,7 +16,7 @@ function Chip({ children, className }: ChipProps) {
 	return (
 		<div
 			className={clsx(
-				'px-2.5 py-1 dark:text-gray-100 text-sm font-semibold flex items-center justify-center rounded-full h-6',
+				'px-2.5 py-1 dark:text-gray-100 text-sm font-medium flex items-center justify-center rounded-full h-6',
 				!isDarkTheme && isHighContrast && 'text-gray-100',
 				className,
 			)}

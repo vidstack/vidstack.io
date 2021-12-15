@@ -34,11 +34,11 @@ function ConnectStep() {
 			/>
 
 			<div>
-				<p className="text-400 text-sm tracking-widest text-center mt-12 992:mt-16 font-medium dark:font-normal">
+				<p className="text-400 text-sm tracking-widest leading-7 text-center mt-12 992:mt-16 font-medium dark:font-normal">
 					NO MATTER YOUR STACK - VIDSTACK PLAYER WILL WORK.
 				</p>
 
-				<div className="flex flex-row flex-wrap space-x-4 992:space-x-10 justify-center mt-10 w-full">
+				<div className="flex flex-row flex-wrap space-x-10 justify-center mt-10 w-full">
 					{frameworks.map(({ name, href, Icon }) => (
 						<Button
 							href={href}
@@ -48,7 +48,7 @@ function ConnectStep() {
 							compact
 							key={name}
 						>
-							<Icon className="w-16 h-16 first:mb-4 576:first:mb-0" />
+							<Icon className="w-16 h-16 first:mb-8 576:first:mb-0" />
 						</Button>
 					))}
 				</div>

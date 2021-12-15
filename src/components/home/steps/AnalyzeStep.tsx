@@ -17,7 +17,7 @@ const outlets = [
 
 function AnalyzeStep() {
 	return (
-		<div className="flex flex-col 992:flex-row items-center py-8 992:py-20 w-full max-w-6xl relative overflow-hidden p-2 justify-between">
+		<div className="flex flex-col 992:flex-row items-center py-8 992:py-24 w-full max-w-6xl relative overflow-hidden p-2 justify-between">
 			<div className="left-2 right-2 h-0.5 border-b-2 border-dashed z-0 hidden 992:inline-block absolute" />
 			<div className="absolute top-8 bottom-8 left-[50%] border-l-2 border-dashed 992:hidden" />
 

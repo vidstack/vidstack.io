@@ -1,6 +1,6 @@
 import Button from '$base/Button';
 
-function HomeHero() {
+function HeroSection() {
 	return (
 		<section className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16">
 			<div className="flex flex-col mt-4 992:mt-20">
@@ -27,4 +27,4 @@ function HomeHero() {
 	);
 }
 
-export default HomeHero;
+export default HeroSection;
