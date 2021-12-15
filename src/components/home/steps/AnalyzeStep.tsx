@@ -21,7 +21,7 @@ function AnalyzeStep() {
 			<div className="left-2 right-2 h-0.5 border-b-2 border-dashed z-0 hidden 992:inline-block absolute" />
 			<div className="absolute top-8 bottom-8 left-[50%] border-l-2 border-dashed 992:hidden" />
 
-			<div className="w-60 h-40 shadow-card flex items-center justify-center relative z-10 bg-surface rounded-lg"></div>
+			<div className="w-60 h-40 shadow-card flex items-center justify-center relative z-10 bg-surface rounded-lg dark:border-2 dark:border-gray-200"></div>
 
 			<div className="min-w-[320px] h-56 mt-20 992:mt-0">
 				<CodeSnippet
@@ -32,7 +32,7 @@ function AnalyzeStep() {
 				/>
 			</div>
 
-			<div className="w-56 flex flex-col relative z-10 bg-surface py-6 shadow-card rounded-lg mt-20 992:mt-0">
+			<div className="w-56 flex flex-col relative z-10 bg-surface py-6 shadow-card rounded-lg mt-20 992:mt-0 dark:border-2 dark:border-gray-200">
 				{outlets.map(({ name, Icon }) => (
 					<div
 						key={name}

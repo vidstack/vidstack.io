@@ -32,7 +32,7 @@ const Step = ({
 
 		<h2 className="mt-8 text-3xl font-medium text-center">{title}</h2>
 
-		<p className="text-lg max-w-sm 992:max-w-lg text-center mt-8 text-gray-300">
+		<p className="text-lg max-w-sm 992:max-w-lg text-center mt-8 text-subtitle">
 			{description}
 		</p>
 

@@ -8,7 +8,7 @@ import { ReactComponent as MuxIcon } from '$svg/providers/mux.svg';
 import { ReactComponent as VidstackSymbolIcon } from '$svg/vidstack-symbol.svg';
 
 const DashboardWireframe = () => (
-	<div className="w-full rounded-md overflow-hidden flex flex-row h-56 max-w-xs shadow-card bg-surface">
+	<div className="w-full rounded-md overflow-hidden flex flex-row h-56 max-w-xs shadow-card bg-surface dark:border-2 dark:border-gray-200">
 		<div className="w-2/12 bg-gray-100">
 			<VidstackSymbolIcon className="w-6 ml-2.5 mt-2" />
 		</div>
@@ -38,7 +38,7 @@ const ProviderCard = ({
 	Icon: FC<SVGProps<SVGSVGElement>>;
 	iconClassName?: string;
 }) => (
-	<div className="shadow-card rounded-sm w-24 h-24 flex items-center justify-center dark:border-2 dark:border-highlight bg-surface">
+	<div className="shadow-card rounded-sm w-24 h-24 flex items-center justify-center dark:border-2 dark:border-gray-200 bg-surface">
 		<Icon className={clsx('w-14 h-14', iconClassName)} />
 	</div>
 );

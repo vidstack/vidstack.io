@@ -11,7 +11,7 @@ function HomeHero() {
 							Video for frontend developers.
 						</span>
 					</h1>
-					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-gray-300">
+					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
 						Vidstack gives developers the tools they need to easily integrate
 						video onto the web - all in one place... without being a video
 						engineer.

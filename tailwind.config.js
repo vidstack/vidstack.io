@@ -18,6 +18,7 @@ module.exports = {
 				300: 'var(--color-gray-300)',
 				400: 'var(--color-gray-400)',
 			},
+			subtitle: 'var(--color-subtitle)',
 			success: 'var(--color-success)',
 			error: 'var(--color-error)',
 			beta: 'var(--color-beta)',
