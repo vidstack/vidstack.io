@@ -4,10 +4,12 @@ import { inBrowser } from '$utils/browser';
 
 export type ContrastLevel = 'low' | 'high';
 
+const storageKey = 'vidstack::constrast-level';
+
 export function initialContrastLevel(): ContrastLevel {
 	if (!inBrowser) return 'low';
 
-	const savedLevel = localStorage.contrastLevel;
+	const savedLevel = localStorage[storageKey];
 
 	if (savedLevel) {
 		return savedLevel;
@@ -21,7 +23,7 @@ export function initialContrastLevel(): ContrastLevel {
 export function saveContrastLevel(level: ContrastLevel) {
 	if (inBrowser) {
 		const isHighContrast = level === 'high';
-		localStorage.contrastLevel = level;
+		localStorage[storageKey] = level;
 		document.documentElement.classList[isHighContrast ? 'add' : 'remove'](
 			'high-contrast',
 		);

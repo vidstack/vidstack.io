@@ -82,8 +82,8 @@ function Button({
 
 			{icon === 'arrow' && (
 				<>
-					<ArrowRightIcon className="w-5 h-5 ml-1 hidden group-hover:inline-block" />
-					<ChevronIcon className="w-5 h-5 transform -rotate-90 ml-1 group-hover:hidden" />
+					<ArrowRightIcon className="w-5 h-5 ml-1 hidden group-hover:inline-block group-focus-visible:inline-block" />
+					<ChevronIcon className="w-5 h-5 transform -rotate-90 ml-1 group-hover:hidden group-focus-visible:hidden" />
 				</>
 			)}
 		</>

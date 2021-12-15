@@ -5,3 +5,9 @@ declare module '*.svg' {
 	export { ReactComponent };
 	export default url;
 }
+
+declare module '*?highlight' {
+	const code: string;
+	const highlightedCode: string;
+	export { code, highlightedCode };
+}

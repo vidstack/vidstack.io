@@ -8,12 +8,14 @@ export const prefersDark = inBrowser
 
 export type Theme = 'light' | 'dark';
 
+const storageKey = 'vidstack::theme';
+
 export function initialTheme(): Theme {
 	if (!inBrowser) return 'dark';
 
 	if (
-		localStorage.theme === 'dark' ||
-		(!('theme' in localStorage) &&
+		localStorage[storageKey] === 'dark' ||
+		(!(storageKey in localStorage) &&
 			window.matchMedia('(prefers-color-scheme: dark)').matches)
 	) {
 		return 'dark';
@@ -28,9 +30,9 @@ export function saveTheme(theme: Theme) {
 	const isDarkTheme = theme === 'dark';
 
 	if (isDarkTheme && prefersDark) {
-		localStorage.removeItem('theme');
+		localStorage.removeItem(storageKey);
 	} else {
-		localStorage.theme = theme;
+		localStorage[storageKey] = theme;
 	}
 
 	document.documentElement.classList[isDarkTheme ? 'add' : 'remove']('dark');

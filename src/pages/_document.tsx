@@ -8,8 +8,8 @@ import NextDocument, {
 
 const themeScript = `
 if (
-	localStorage.theme === 'dark' ||
-	(!('theme' in localStorage) &&
+	localStorage['vidstack::theme'] === 'dark' ||
+	(!('vidstack::theme' in localStorage) &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches)
 ) {
 	document.documentElement.classList.add('dark');
@@ -19,7 +19,7 @@ if (
 `;
 
 const contrastScript = `
-if (localStorage.contrastLevel === 'high') {
+if (localStorage['vidstack::constrast-level'] === 'high') {
 	document.documentElement.classList.add('high-contrast');
 } else {
 	document.documentElement.classList.remove('high-contrast');

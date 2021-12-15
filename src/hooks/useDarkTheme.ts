@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { ThemeContext } from '$context/ThemeContext';
 
 export function useDarkTheme() {
 	const { theme, setTheme } = useContext(ThemeContext);
+
 	return [
 		theme === 'dark',
 		(darkTheme: boolean) => {

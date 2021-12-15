@@ -25,7 +25,7 @@ module.exports = {
 		},
 		fontFamily: {
 			sans: ['Be Vietnam Pro', ...defaultTheme.fontFamily.sans],
-			mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
+			mono: ['Fira Code', ...defaultTheme.fontFamily.mono],
 		},
 		screens: {
 			420: '420px',
