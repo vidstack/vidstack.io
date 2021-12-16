@@ -7,29 +7,29 @@ const openSourceProjects = [
 	{
 		name: 'Elements',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in ante quis arcu iaculis dictum.',
+			'Collection of headless web components that make integrating media on the a web a breeze.',
 		badge: 'Alpha',
 		repoHref: 'https://github.com/vidstack/elements',
 	},
 	{
 		name: 'Uploader',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in ante quis arcu iaculis dictum.',
-		badge: 'Coming Soon',
+			'A light and customizable media uploader component that integrates directly with Vidstack.',
+		badge: 'Planning',
 		repoHref: 'https://github.com/vidstack/uploader',
 	},
 	{
-		name: 'Player',
+		name: 'SDK',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in ante quis arcu iaculis dictum.',
-		badge: 'Coming Soon',
-		repoHref: 'https://github.com/vidstack/player',
+			'Our Node.js SDK for interacting with the Vidstack API and services to make video magic happen.',
+		badge: 'Planning',
+		repoHref: 'https://github.com/vidstack/node-sdk',
 	},
 	{
 		name: 'Analytics',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in ante quis arcu iaculis dictum.',
-		badge: 'Coming Soon',
+			'Start collecting invaluable video performance and user-behaviour data with a few lines of code.',
+		badge: 'Planning',
 		repoHref: 'https://github.com/vidstack/analytics',
 	},
 ];
@@ -49,8 +49,18 @@ function OpenSourceSection() {
 				</h1>
 
 				<p className="text-lg text-subtitle text-center mt-10 max-w-lg">
-					Follow us on GitHub. Watch the releases of each repository to get
-					notified when we are ready for Early Access launch.
+					We truly love open-source. You&apos;ll find most the work we do will
+					be open to everyone, and can be found on{' '}
+					<a
+						href="https://github.com/vidstack"
+						target="_blank"
+						rel="noreferrer"
+						className="text-primary"
+					>
+						GitHub
+					</a>
+					. Watch the releases of each repository to get notified when it&apos;s
+					ready.
 				</p>
 
 				<div className="grid grid-cols-1 768:grid-cols-2 gap-12 mt-16 pb-10">
@@ -65,7 +75,7 @@ function OpenSourceSection() {
 									className={clsx(
 										'ml-3 tracking-wide',
 										project.badge === 'Alpha' && 'bg-beta',
-										project.badge === 'Coming Soon' && 'bg-soon',
+										project.badge === 'Planning' && 'bg-soon',
 									)}
 								>
 									{project.badge}

@@ -10,7 +10,7 @@ function CommunitySection() {
 
 				<p className="text-lg text-subtitle text-center mt-10 max-w-lg">
 					Our goal is to make video accessible to all frontend developers. We’d
-					love to hear how you’re tackling video and how we can make a
+					love to hear how you’re tackling video, and how we can make a
 					difference in your life. Join our community and share your
 					experiences!
 				</p>

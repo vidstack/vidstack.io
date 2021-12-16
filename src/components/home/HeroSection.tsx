@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Button from '$base/Button';
 
 function HeroSection() {

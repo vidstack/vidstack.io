@@ -6,6 +6,7 @@ import { ReactComponent as SvelteIcon } from '$svg/frameworks/svelte.svg';
 import { ReactComponent as TailwindIcon } from '$svg/frameworks/tailwind.svg';
 import { ReactComponent as VueIcon } from '$svg/frameworks/vue.svg';
 
+// import { highlightedCode as analyticsCodeSnippet } from './code-snippets/analytics-snippet.html?highlight';
 import { highlightedCode as apiCodeSnippet } from './code-snippets/api-snippet.graphql?highlight';
 import { highlightedCode as playerCodeSnippet } from './code-snippets/player-snippet.html?highlight';
 import { highlightedCode as sdkCodeSnippet } from './code-snippets/sdk-snippet.js?highlight';
@@ -24,10 +25,17 @@ function ConnectStep() {
 		<div className="flex flex-col w-full items-center">
 			<CodeSnippet
 				defaultTab={1}
-				tabs={['uploader.html', 'player.html', 'api.gql', 'sdk.js']}
+				tabs={[
+					'uploader.html',
+					'player.html',
+					// 'analytics.html',
+					'api.gql',
+					'sdk.js',
+				]}
 				snippets={[
 					uploaderCodeSnippet,
 					playerCodeSnippet,
+					// analyticsCodeSnippet,
 					apiCodeSnippet,
 					sdkCodeSnippet,
 				]}
