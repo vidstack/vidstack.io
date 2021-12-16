@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import Button from '$base/Button';
-import Chip from '$base/chip';
+import Chip from '$base/Chip';
 
 const openSourceProjects = [
 	{
