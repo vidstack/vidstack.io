@@ -35,7 +35,7 @@ const Home: NextPage = () => {
 			</main>
 
 			<footer className="text-center w-full text-base font-medium pb-16">
-				© Vidstack 2021
+				© Vidstack {new Date().getFullYear()}
 			</footer>
 		</>
 	);

@@ -106,11 +106,11 @@ function OpenSourceSection() {
 												strokeLinejoin="round"
 											></path>
 										</g>
-
-										<span className="sr-only">
-											Vidstack {project.name} GitHub Repo
-										</span>
 									</svg>
+
+									<span className="sr-only">
+										Vidstack {project.name} GitHub Repo
+									</span>
 								</Button>
 							</div>
 						</div>
