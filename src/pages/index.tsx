@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
+import CommunitySection from '$components/home/CommunitySection';
 import HeroSection from '$components/home/HeroSection';
 import OpenSourceSection from '$components/home/OpenSourceSection';
 import ProcessSection from '$components/home/ProcessSection';
@@ -30,7 +31,12 @@ const Home: NextPage = () => {
 				<HeroSection />
 				<ProcessSection />
 				<OpenSourceSection />
+				<CommunitySection />
 			</main>
+
+			<footer className="text-center w-full text-base font-medium pb-16">
+				© Vidstack 2021
+			</footer>
 		</>
 	);
 };

@@ -8,6 +8,7 @@ import { ReactComponent as TwitterIcon } from '$svg/socials/twitter.svg';
 export type SocialsProps = {
 	className?: string;
 	anchorClassName?: string;
+	iconClassName?: string;
 	showTooltips?: boolean;
 	hideDiscord?: boolean;
 };
@@ -36,8 +37,9 @@ const socialLinks = [
 function Socials({
 	className,
 	anchorClassName,
-	showTooltips,
+	iconClassName,
 	hideDiscord,
+	showTooltips = false,
 }: SocialsProps) {
 	return (
 		<>
@@ -55,7 +57,7 @@ function Socials({
 								compact
 								tooltip={showTooltips ? tooltip : undefined}
 							>
-								<Icon className="w-7 h-full" />
+								<Icon className={clsx('w-7 h-full', iconClassName)} />
 								{!showTooltips && (
 									<span className="inline-block font-medium ml-2">
 										{tooltip}
