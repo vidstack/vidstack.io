@@ -57,7 +57,7 @@ function ProcessSection() {
 				<Step
 					no={1}
 					title="Manage your videos"
-					description="We integrate with a variety of hosting and streaming providers so you can store, and organize your videos in one place. Create workspaces, prepare videos for streaming, and more, all in our beautiful dashboard."
+					description="We integrate with a variety of hosting and streaming providers so you can store, and organize your videos in one place. Create workspaces, prepare videos for streaming, and more - all in our beautiful dashboard."
 					className="mt-28 px-4"
 				>
 					<ManageStep />
