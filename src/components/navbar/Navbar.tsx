@@ -23,6 +23,7 @@ function Navbar() {
 			<div className="hidden 992:flex 992:space-x-2">
 				<Socials
 					className="flex items-center space-x-4"
+					iconClassName="w-7"
 					showTooltips
 					hideDiscord
 				/>

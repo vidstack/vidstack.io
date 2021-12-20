@@ -17,7 +17,7 @@ function CommunitySection() {
 
 				<Socials
 					className="flex flex-row mt-12 space-x-8"
-					iconClassName="w-9"
+					iconClassName="w-8"
 					showTooltips
 				/>
 			</div>

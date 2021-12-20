@@ -57,7 +57,7 @@ function Socials({
 								compact
 								tooltip={showTooltips ? tooltip : undefined}
 							>
-								<Icon className={clsx('w-7 h-full', iconClassName)} />
+								<Icon className={clsx('h-full', iconClassName)} />
 								{!showTooltips && (
 									<span className="inline-block font-medium ml-2">
 										{tooltip}
