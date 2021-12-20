@@ -69,6 +69,7 @@ const Player = ({
 
 	useEffect(() => {
 		function handleCanPlay() {
+			videoRef.current.pause();
 			setIsMediaReady(true);
 		}
 
@@ -89,6 +90,9 @@ const Player = ({
 	useEffect(() => {
 		if (isInView) {
 			startedLoadingAt.current = Date.now();
+			if (!videoRef.current.src) {
+				videoRef.current.src = '/media/agent-327-snippet.mp4';
+			}
 		}
 	}, [isInView]);
 
@@ -112,6 +116,8 @@ const Player = ({
 				timeToFirstFrame: 0,
 				timeToInteractive: startDuration,
 			};
+
+			videoRef.current.pause();
 
 			setIsBuffering(false);
 			setIsVideoHidden(false);
@@ -178,7 +184,7 @@ const Player = ({
 						setPlayedPercent(playedPercent);
 
 						const threshold = Math.round(playedPercent);
-						if (threshold % 10 === 0) {
+						if (threshold > 0 && threshold % 10 === 0) {
 							setEventCodeSnippet(
 								createEventCodeSnippet(
 									`watch_${threshold}_percent`,
@@ -228,12 +234,12 @@ const Player = ({
 			<div className="flex-1 w-full relative overflow-hidden z-10 bg-[#000]">
 				<video
 					preload="auto"
-					src="/media/agent-327-snippet.mp4"
 					muted
 					width="280"
 					height="157.5"
 					className="relative z-10"
 					playsInline
+					autoPlay
 					controlsList="noremoteplayback"
 					ref={videoRef}
 				/>
