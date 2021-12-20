@@ -39,6 +39,7 @@ function ConnectStep() {
 					apiCodeSnippet,
 					sdkCodeSnippet,
 				]}
+				badges={['', 'Tailwind Example']}
 			/>
 
 			<div>

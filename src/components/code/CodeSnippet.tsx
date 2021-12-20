@@ -10,11 +10,13 @@ export type CodeSnippetProps = {
 	noLineNumbers?: boolean;
 	noFrame?: boolean;
 	block?: boolean;
+	badges?: string[];
 };
 
 function CodeSnippet({
 	snippets,
 	tabs,
+	badges,
 	defaultTab = 0,
 	noLineNumbers = false,
 	noFrame = false,
@@ -25,6 +27,11 @@ function CodeSnippet({
 	const currentCode = useMemo(
 		() => snippets[currentTab],
 		[currentTab, snippets],
+	);
+
+	const currentBadge = useMemo(
+		() => badges?.[currentTab],
+		[currentTab, badges],
 	);
 
 	const noOfLines = useMemo(
@@ -40,7 +47,7 @@ function CodeSnippet({
 				'bg-[#292D3E] relative flex flex-col w-full overflow-hidden shadow-lg rounded-lg',
 				block
 					? 'w-full h-full'
-					: 'max-w-2xl h-[31.625rem] max-h-[60vh] 576:max-h-[none] 992:h-[34.6875rem] 1200:h-[31.625rem]',
+					: 'max-w-2xl h-[31.625rem] max-h-[60vh] 576:max-h-[none] 992:h-[34.6875rem] 1200:h-[32rem]',
 			)}
 		>
 			{!noFrame && (
@@ -109,12 +116,17 @@ function CodeSnippet({
 				</div>
 			)}
 
-			<div className="flex w-full flex-1 overflow-y-auto">
+			<div
+				className={clsx(
+					'flex w-full flex-1 overflow-y-auto relative',
+					currentBadge && 'pt-2',
+				)}
+			>
 				{!noLineNumbers && (
 					<div
 						className={clsx(
 							'hidden 576:block w-12 text-[#bcbcbc] font-mono pt-4 pr-4 text-right select-none min-h-full whitespace-pre-wrap',
-							zoomedIn ? 'text-lg leading-7' : 'text-sm leading-6',
+							zoomedIn ? 'text-lg leading-7 pl-2' : 'text-sm leading-6',
 						)}
 					>
 						{[...Array(noOfLines - 1)].map((_, i) => `${i + 1}\n`)}
@@ -135,6 +147,17 @@ function CodeSnippet({
 						}}
 					/>
 				</pre>
+
+				{currentBadge && (
+					<div
+						className={clsx(
+							'bg-[#464b68] px-2 py-1 rounded-sm absolute top-3 right-3 text-gray-50 dark:text-gray-400 tracking-wider',
+							zoomedIn ? 'text-sm' : 'text-xs',
+						)}
+					>
+						{currentBadge}
+					</div>
+				)}
 			</div>
 		</div>
 	);

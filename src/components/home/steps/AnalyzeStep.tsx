@@ -185,6 +185,10 @@ const Player = ({
 
 						const threshold = Math.round(playedPercent);
 						if (threshold > 0 && threshold % 10 === 0) {
+							if (threshold === 100) {
+								eventState.paused = true;
+							}
+
 							setEventCodeSnippet(
 								createEventCodeSnippet(
 									`watch_${threshold}_percent`,
@@ -225,7 +229,7 @@ const Player = ({
 			if (isInView) {
 				rollAnimation();
 			}
-		}, 2000);
+		}, 1000);
 	}, [isMediaReady, isInView, setEventCodeSnippet]);
 
 	return (
@@ -343,16 +347,14 @@ function AnalyzeStep() {
 
 			<Player setEventCodeSnippet={setEventCodeSnippet} />
 
-			<div className="min-w-[320px] h-90 mt-20 992:mt-0 relative pt-2">
+			<div className="min-w-[320px] h-90 mt-20 992:mt-0">
 				<CodeSnippet
 					snippets={[currentEventCodeSnippet]}
 					noLineNumbers
 					noFrame
 					block
+					badges={['Example']}
 				/>
-				<div className="bg-[#464b68] text-xs px-2 py-1 rounded-sm absolute top-4 right-2 text-gray-50 dark:text-gray-400 tracking-wider">
-					Example
-				</div>
 			</div>
 
 			<div className="w-56 flex flex-col relative z-10 bg-surface py-6 shadow-card rounded-lg mt-20 992:mt-0 dark:border-2 dark:border-gray-200 992:ml-4">

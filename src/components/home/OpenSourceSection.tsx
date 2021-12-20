@@ -15,21 +15,21 @@ const openSourceProjects = [
 		name: 'Uploader',
 		description:
 			'A light and customizable media uploader component that integrates directly with Vidstack.',
-		badge: 'Planning',
+		badge: 'Pre-alpha',
 		repoHref: 'https://github.com/vidstack/uploader',
 	},
 	{
 		name: 'SDK',
 		description:
 			'Our Node.js SDK for interacting with the Vidstack API and services to make video magic happen.',
-		badge: 'Planning',
+		badge: 'Pre-alpha',
 		repoHref: 'https://github.com/vidstack/node-sdk',
 	},
 	{
 		name: 'Analytics',
 		description:
 			'Start collecting invaluable video performance and user-behaviour data with a few lines of code.',
-		badge: 'Planning',
+		badge: 'Pre-alpha',
 		repoHref: 'https://github.com/vidstack/analytics',
 	},
 ];
@@ -75,7 +75,7 @@ function OpenSourceSection() {
 									className={clsx(
 										'ml-3 tracking-wide',
 										project.badge === 'Alpha' && 'bg-beta',
-										project.badge === 'Planning' && 'bg-soon',
+										project.badge === 'Pre-alpha' && 'bg-soon',
 									)}
 								>
 									{project.badge}
