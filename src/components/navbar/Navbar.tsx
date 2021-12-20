@@ -20,8 +20,12 @@ function Navbar() {
 
 			<NavPopover />
 
-			<div className="hidden 992:flex">
-				<Socials className="flex items-center" showTooltips hideDiscord />
+			<div className="hidden 992:flex 992:space-x-2">
+				<Socials
+					className="flex items-center space-x-4"
+					showTooltips
+					hideDiscord
+				/>
 				<SettingsPopover />
 			</div>
 		</nav>

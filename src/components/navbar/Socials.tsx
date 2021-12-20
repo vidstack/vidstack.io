@@ -49,7 +49,7 @@ function Socials({
 						(tooltip !== 'Discord' || !hideDiscord) && (
 							<Button
 								key={href}
-								className={clsx('mx-2 items-center', anchorClassName)}
+								className={clsx('items-center', anchorClassName)}
 								href={href}
 								label={label}
 								external

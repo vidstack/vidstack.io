@@ -7,7 +7,7 @@ const openSourceProjects = [
 	{
 		name: 'Elements',
 		description:
-			'Collection of headless web components that make integrating media on the a web a breeze.',
+			'Collection of headless web components that make integrating media on the web a breeze.',
 		badge: 'Alpha',
 		repoHref: 'https://github.com/vidstack/elements',
 	},
@@ -55,7 +55,7 @@ function OpenSourceSection() {
 						href="https://github.com/vidstack"
 						target="_blank"
 						rel="noreferrer"
-						className="text-primary"
+						className="text-primary font-medium"
 					>
 						GitHub
 					</a>
