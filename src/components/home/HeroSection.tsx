@@ -14,9 +14,9 @@ function HeroSection() {
 						</span>
 					</h1>
 					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
-						Vidstack gives developers the tools they need to easily integrate
-						video onto the web - all in one place... without being a video
-						engineer.
+						Vidstack is the optimal video workflow for frontend developers.
+						Manage your videos, connect your frontend, and analyze video
+						playback - all in one place.
 					</p>
 				</div>
 				<div className="flex flex-row justify-center mt-12">
