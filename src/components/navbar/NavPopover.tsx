@@ -84,6 +84,7 @@ function NavPopover() {
 									<Socials
 										className="flex flex-col items-start 576:flex-row 576:items-center"
 										anchorClassName="mb-8 last:mb-0 576:mb-0 576:ml-8 576:first:ml-0"
+										iconClassName="w-6 h-6"
 									/>
 								</section>
 

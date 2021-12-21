@@ -1,5 +1,11 @@
 import clsx from 'clsx';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import {
+	MutableRefObject,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 
 import CodeSnippet from '$components/code/CodeSnippet';
 import { useIntersectionObserver } from '$hooks/useIntersectionObserver';
@@ -12,8 +18,10 @@ import { ReactComponent as VideoCaptionsIcon } from '$svg/video/captions.svg';
 import { ReactComponent as VideoFullscreenIcon } from '$svg/video/fullscreen.svg';
 import { ReactComponent as VideoPauseIcon } from '$svg/video/pause.svg';
 import { ReactComponent as VideoPlayIcon } from '$svg/video/play.svg';
+import { ReactComponent as VideoReplayIcon } from '$svg/video/replay.svg';
 import { ReactComponent as VideoSettingsIcon } from '$svg/video/settings.svg';
 import { ReactComponent as VideoVolumeIcon } from '$svg/video/volume.svg';
+import { ariaBool } from '$utils/aria';
 import { listen } from '$utils/events';
 import { wait } from '$utils/timing';
 
@@ -56,16 +64,134 @@ const Player = ({
 }) => {
 	const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
 	const isInView = useIntersectionObserver(videoRef);
-	const hasStartedAnimation = useRef(false);
 	const startTimerId = useRef(-1);
 	const startedLoadingAt = useRef(0);
 	const [isVideoHidden, setIsVideoHidden] = useState(true);
 	const disposal = useRef<(() => void)[]>([]);
 	const [isBuffering, setIsBuffering] = useState(false);
+	const [hasMediaEnded, setHasMediaEnded] = useState(false);
 	const [isMediaReady, setIsMediaReady] = useState(false);
 	const [playedPercent, setPlayedPercent] = useState(0);
 	const [bufferedPercent, setBufferedPercent] = useState(0);
 	const [userPaused, setUserPaused] = useState(true);
+	const [replayCount, setReplayCount] = useState(0);
+
+	const rollAnimation = useCallback(async () => {
+		const startDuration = Date.now() - startedLoadingAt.current;
+
+		const eventState = {
+			paused: true,
+			currentTime: 0,
+			buffered: 0,
+			bufferingCount: 1,
+			bufferingDuration: startDuration,
+			timeToFirstFrame: 0,
+			timeToInteractive: startDuration,
+		};
+
+		videoRef.current.pause();
+
+		setIsBuffering(false);
+		setIsVideoHidden(false);
+		setEventCodeSnippet(createEventCodeSnippet('media_ready', eventState));
+
+		await wait(1500);
+
+		const playRequestedAt = Date.now();
+
+		setUserPaused(false);
+		eventState.paused = false;
+		setEventCodeSnippet(
+			createEventCodeSnippet('user_play_request', eventState),
+		);
+
+		setIsBuffering(true);
+		eventState.bufferingCount += 1;
+
+		await wait(1000);
+
+		const updateBuffered = () => {
+			const video = videoRef.current;
+			const bufferedAmount = video.buffered.end(0);
+			const bufferedPercent = Math.min(
+				(bufferedAmount / video.duration) * 100,
+				100,
+			);
+			eventState.buffered = Math.round(bufferedAmount * 1000);
+			setBufferedPercent(bufferedPercent);
+		};
+
+		try {
+			videoRef.current!.play();
+
+			let hasPlaybackStarted = false;
+			disposal.current.push(
+				listen(videoRef.current, 'playing', () => {
+					setIsBuffering(false);
+
+					if (!hasPlaybackStarted) {
+						const timeToFirstFrame = Date.now() - playRequestedAt;
+						eventState.timeToFirstFrame = timeToFirstFrame;
+						eventState.bufferingDuration += timeToFirstFrame;
+						updateBuffered();
+						setEventCodeSnippet(
+							createEventCodeSnippet('playback_start', eventState),
+						);
+						hasPlaybackStarted = true;
+					}
+				}),
+			);
+
+			disposal.current.push(
+				listen(videoRef.current, 'timeupdate', () => {
+					const video = videoRef.current;
+
+					eventState.currentTime = Math.round(video.currentTime * 1000);
+
+					const playedPercent = Math.min(
+						(video.currentTime / video.duration) * 100,
+						100,
+					);
+
+					setPlayedPercent(playedPercent);
+
+					const threshold = Math.round(playedPercent);
+					if (threshold > 0 && threshold % 10 === 0) {
+						if (threshold === 100) {
+							eventState.paused = true;
+						}
+
+						setEventCodeSnippet(
+							createEventCodeSnippet(`watch_${threshold}_percent`, eventState),
+						);
+					}
+				}),
+			);
+
+			disposal.current.push(
+				listen(videoRef.current, 'progress', () => updateBuffered()),
+			);
+
+			disposal.current.push(
+				listen(videoRef.current, 'ended', async () => {
+					eventState.paused = true;
+					setUserPaused(true);
+					await wait(1000);
+					setEventCodeSnippet(
+						createEventCodeSnippet('media_ended', eventState),
+					);
+					setHasMediaEnded(true);
+				}),
+			);
+		} catch (e) {
+			setUserPaused(true);
+			setIsBuffering(false);
+			eventState.paused = true;
+			setEventCodeSnippet(
+				createEventCodeSnippet('playback_failed', eventState),
+			);
+		}
+	}, [setEventCodeSnippet]);
 
 	useEffect(() => {
 		function handleCanPlay() {
@@ -88,149 +214,46 @@ const Player = ({
 	}, []);
 
 	useEffect(() => {
-		if (isInView) {
-			startedLoadingAt.current = Date.now();
-			if (!videoRef.current.src) {
+		if (isInView && !videoRef.current.src) {
+			window.setTimeout(() => {
+				startedLoadingAt.current = Date.now();
 				videoRef.current.src = '/media/agent-327-snippet.mp4';
-			}
+			}, 1000);
 		}
 	}, [isInView]);
 
 	useEffect(() => {
-		if (!isMediaReady || hasStartedAnimation.current) {
-			return;
+		if (isMediaReady) {
+			rollAnimation();
+		}
+	}, [isMediaReady, rollAnimation]);
+
+	useEffect(() => {
+		function replay() {
+			disposal.current.forEach((dispose) => dispose());
+			setIsVideoHidden(true);
+
+			window.requestAnimationFrame(() => {
+				setPlayedPercent(0);
+				setBufferedPercent(0);
+				setIsBuffering(true);
+				setHasMediaEnded(false);
+
+				window.requestAnimationFrame(async () => {
+					videoRef.current.currentTime = 0;
+					videoRef.current.pause();
+					setEventCodeSnippet(createEventCodeSnippet('initializing'));
+					await wait(1000);
+					startedLoadingAt.current = Date.now();
+					rollAnimation();
+				});
+			});
 		}
 
-		async function rollAnimation() {
-			if (hasStartedAnimation.current) return;
-			hasStartedAnimation.current = true;
-
-			const startDuration = Date.now() - startedLoadingAt.current;
-
-			const eventState = {
-				paused: true,
-				currentTime: 0,
-				buffered: 0,
-				bufferingCount: 1,
-				bufferingDuration: startDuration,
-				timeToFirstFrame: 0,
-				timeToInteractive: startDuration,
-			};
-
-			videoRef.current.pause();
-
-			setIsBuffering(false);
-			setIsVideoHidden(false);
-			setEventCodeSnippet(createEventCodeSnippet('media_ready', eventState));
-
-			await wait(1500);
-
-			const playRequestedAt = Date.now();
-
-			setUserPaused(false);
-			eventState.paused = false;
-			setEventCodeSnippet(
-				createEventCodeSnippet('user_play_request', eventState),
-			);
-
-			setIsBuffering(true);
-			eventState.bufferingCount += 1;
-
-			await wait(1000);
-
-			const updateBuffered = () => {
-				const video = videoRef.current;
-				const bufferedAmount = video.buffered.end(0);
-				const bufferedPercent = Math.min(
-					(bufferedAmount / video.duration) * 100,
-					100,
-				);
-				eventState.buffered = Math.round(bufferedAmount * 1000);
-				setBufferedPercent(bufferedPercent);
-			};
-
-			try {
-				videoRef.current!.play();
-
-				let hasPlaybackStarted = false;
-				disposal.current.push(
-					listen(videoRef.current, 'playing', () => {
-						setIsBuffering(false);
-
-						if (!hasPlaybackStarted) {
-							const timeToFirstFrame = Date.now() - playRequestedAt;
-							eventState.timeToFirstFrame = timeToFirstFrame;
-							eventState.bufferingDuration += timeToFirstFrame;
-							updateBuffered();
-							setEventCodeSnippet(
-								createEventCodeSnippet('playback_start', eventState),
-							);
-							hasPlaybackStarted = true;
-						}
-					}),
-				);
-
-				disposal.current.push(
-					listen(videoRef.current, 'timeupdate', () => {
-						const video = videoRef.current;
-
-						eventState.currentTime = Math.round(video.currentTime * 1000);
-
-						const playedPercent = Math.min(
-							(video.currentTime / video.duration) * 100,
-							100,
-						);
-
-						setPlayedPercent(playedPercent);
-
-						const threshold = Math.round(playedPercent);
-						if (threshold > 0 && threshold % 10 === 0) {
-							if (threshold === 100) {
-								eventState.paused = true;
-							}
-
-							setEventCodeSnippet(
-								createEventCodeSnippet(
-									`watch_${threshold}_percent`,
-									eventState,
-								),
-							);
-						}
-					}),
-				);
-
-				disposal.current.push(
-					listen(videoRef.current, 'progress', () => updateBuffered()),
-				);
-
-				disposal.current.push(
-					listen(videoRef.current, 'ended', async () => {
-						eventState.paused = true;
-						setUserPaused(true);
-						await wait(1500);
-						setEventCodeSnippet(
-							createEventCodeSnippet('media_ended', eventState),
-						);
-					}),
-				);
-			} catch (e) {
-				setUserPaused(true);
-				setIsBuffering(false);
-				eventState.paused = true;
-				setEventCodeSnippet(
-					createEventCodeSnippet('playback_failed', eventState),
-				);
-			}
+		if (isMediaReady && replayCount > 0) {
+			replay();
 		}
-
-		window.clearTimeout(startTimerId.current);
-		// @ts-expect-error - .
-		startTimerId.current = setTimeout(() => {
-			if (isInView) {
-				rollAnimation();
-			}
-		}, 1000);
-	}, [isMediaReady, isInView, setEventCodeSnippet]);
+	}, [replayCount, setEventCodeSnippet, isMediaReady, rollAnimation]);
 
 	return (
 		<div className="w-[280px] shadow-card flex flex-col relative z-10 bg-surface rounded-md dark:border-2 dark:border-gray-200 overflow-hidden">
@@ -241,7 +264,7 @@ const Player = ({
 					muted
 					width="280"
 					height="157.5"
-					className="relative z-10"
+					className="relative z-10 w-[280px] h-[157.5px]"
 					playsInline
 					autoPlay
 					controlsList="noremoteplayback"
@@ -254,6 +277,24 @@ const Player = ({
 						isVideoHidden ? 'opacity-100' : 'opacity-0',
 					)}
 				></div>
+
+				<div
+					className={clsx(
+						'absolute z-30 inset-0 flex justify-center items-center transition-opacity text-gray-50 dark:text-gray-400',
+						hasMediaEnded ? 'opacity-100 visible' : 'opacity-0 invisible',
+					)}
+				>
+					<button
+						className={clsx(
+							'p-2.5 bg-gray-400 hover:bg-primary focus-visible:bg-primary rounded-sm',
+							'dark:bg-gray-100 dark:hover:bg-primary dark:focus-visible:bg-primary dark:hover:text-gray-100 dark:focus-visible:text-gray-100',
+						)}
+						onClick={() => setReplayCount(replayCount + 1)}
+						aria-hidden={ariaBool(!hasMediaEnded)}
+					>
+						<VideoReplayIcon className="w-7 h-7 mt-1" />
+					</button>
+				</div>
 
 				<div
 					className={clsx(

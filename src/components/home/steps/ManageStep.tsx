@@ -16,17 +16,9 @@ import { ReactComponent as MuxIcon } from '$svg/providers/mux.svg';
 import { ReactComponent as VideoFileIcon } from '$svg/video-file.svg';
 import { ReactComponent as VidstackSymbolIcon } from '$svg/vidstack-symbol.svg';
 
-import styles from './AnalyzeStep.module.css';
+import styles from './ManageStep.module.css';
 
 const DashboardWireframe = ({ inView = false }) => {
-	const [showVideoBlock, setShowVideoBlock] = useState(false);
-
-	useEffect(() => {
-		window.requestAnimationFrame(() => {
-			setShowVideoBlock(true);
-		});
-	}, []);
-
 	return (
 		<div className="w-full rounded-md overflow-hidden flex flex-row h-56 max-w-xs shadow-card bg-surface dark:border-2 dark:border-gray-200">
 			<div className="w-2/12 bg-gray-100">
@@ -76,8 +68,41 @@ const DashedLine = ({ className }: { className?: string }) => (
 );
 
 function ManageStep() {
+	const [animationStart, setAnimationStart] = useState(false);
+	const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
 	const rootRef = useRef() as MutableRefObject<HTMLDivElement>;
-	const isInView = useIntersectionObserver(rootRef, { threshold: 1 });
+	const isInView = useIntersectionObserver(rootRef, { threshold: 0.65 });
+
+	useEffect(() => {
+		if (isInView) {
+			if (!hasEnteredViewport) setAnimationStart(true);
+			setHasEnteredViewport(true);
+		}
+	}, [isInView, hasEnteredViewport]);
+
+	useEffect(() => {
+		if (!hasEnteredViewport) return;
+
+		let timerId: number;
+
+		function runTimer() {
+			timerId = window.setTimeout(() => {
+				setAnimationStart(false);
+				window.requestAnimationFrame(() => {
+					window.requestAnimationFrame(() => {
+						setAnimationStart(true);
+					});
+				});
+				runTimer();
+			}, 18250);
+		}
+
+		runTimer();
+
+		return () => {
+			window.clearTimeout(timerId);
+		};
+	}, [hasEnteredViewport]);
 
 	return (
 		<div className="w-full mx-auto max-w-xl mt-4 relative" ref={rootRef}>
@@ -88,17 +113,17 @@ function ManageStep() {
 			</div>
 
 			<div className="my-12 w-full flex justify-center z-20 relative">
-				<DashboardWireframe inView={isInView} />
+				<DashboardWireframe inView={animationStart} />
 			</div>
 
 			<div className="w-full flex z-20 relative">
 				<ProviderCard
-					className={isInView ? styles.muxPulse : ''}
+					className={animationStart ? styles.muxPulse : ''}
 					Icon={MuxIcon}
 				/>
 				<div className="flex-1"></div>
 				<ProviderCard
-					className={isInView ? styles.cloudflarePulse : ''}
+					className={animationStart ? styles.cloudflarePulse : ''}
 					Icon={CloudflareIcon}
 				/>
 			</div>
@@ -111,37 +136,37 @@ function ManageStep() {
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.topLeftVideoFile,
+					animationStart && styles.topLeftVideoFile,
 				)}
 			/>
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.bottomLeftVideoFile,
+					animationStart && styles.bottomLeftVideoFile,
 				)}
 			/>
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.topRightVideoFile,
+					animationStart && styles.topRightVideoFile,
 				)}
 			/>
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.bottomRightVideoFile,
+					animationStart && styles.bottomRightVideoFile,
 				)}
 			/>
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.bottomLeftEncodedFile,
+					animationStart && styles.bottomLeftEncodedFile,
 				)}
 			/>
 			<VideoFileIcon
 				className={clsx(
 					'w-8 h-8 absolute z-10 opacity-0 text-gray-300',
-					isInView && styles.bottomRightEncodedFile,
+					animationStart && styles.bottomRightEncodedFile,
 				)}
 			/>
 		</div>
