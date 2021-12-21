@@ -4,7 +4,7 @@ import { inBrowser } from '$utils/browser';
 
 export type ContrastLevel = 'low' | 'high';
 
-const storageKey = 'vidstack::constrast-level';
+const storageKey = 'vidstack::contrast_level';
 
 export function initialContrastLevel(): ContrastLevel {
 	if (!inBrowser) return 'low';

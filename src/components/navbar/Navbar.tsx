@@ -14,7 +14,11 @@ function Navbar() {
 				'px-5 py-4 flex items-center bg-surface w-full 1200:max-w-7xl 1200:mx-auto 1200:py-5',
 			)}
 		>
-			<LogoIcon className="w-32 h-7" />
+			<Link href="/">
+				<a className="hover:scale-110 transition-transform">
+					<LogoIcon className="w-32 h-7" />
+				</a>
+			</Link>
 
 			<div className="flex-1"></div>
 

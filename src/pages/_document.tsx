@@ -19,7 +19,7 @@ if (
 `;
 
 const contrastScript = `
-if (localStorage['vidstack::constrast-level'] === 'high') {
+if (localStorage['vidstack::contrast_level'] === 'high') {
 	document.documentElement.classList.add('high-contrast');
 } else {
 	document.documentElement.classList.remove('high-contrast');

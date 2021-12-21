@@ -39,7 +39,7 @@ function CodeSnippet({
 		[currentTab, snippets],
 	);
 
-	const [zoomedIn, setZoomedIn] = useLocalStorage('is-code-zoomed-in', false);
+	const [zoomedIn, setZoomedIn] = useLocalStorage('is_code_zoomed_in', false);
 
 	return (
 		<div

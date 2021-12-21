@@ -13,8 +13,8 @@ export function useIsFocusing<T extends HTMLElement = HTMLElement>() {
 		const handleFocus = () => setIsFocusing(true);
 		const handleBlur = () => setIsFocusing(false);
 
-		const handleDocumentClick = (e: PointerEvent) => {
-			if (e.target && (e.target as HTMLElement).contains(node as Node))
+		const handleClick = (e: PointerEvent) => {
+			if (e.target && !(e.target as HTMLElement).contains(node as Node))
 				window.requestAnimationFrame(() => {
 					setIsFocusing(false);
 				});
@@ -23,14 +23,13 @@ export function useIsFocusing<T extends HTMLElement = HTMLElement>() {
 		if (node) {
 			node.addEventListener('focus', handleFocus);
 			node.addEventListener('blur', handleBlur);
-			node.addEventListener('pointerleave', handleBlur);
-			document.addEventListener('pointerdown', handleDocumentClick);
+			document.addEventListener('pointerdown', handleClick);
 
 			return () => {
 				node.removeEventListener('focus', handleFocus);
 				node.removeEventListener('blur', handleBlur);
 				node.removeEventListener('pointerleave', handleBlur);
-				document.removeEventListener('pointerdown', handleDocumentClick);
+				document.removeEventListener('pointerdown', handleClick);
 			};
 		}
 

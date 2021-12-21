@@ -36,7 +36,12 @@ const Step = ({
 			{description}
 		</p>
 
-		<Button icon="arrow" size="small" className="mt-6 mb-12 992:mb-16">
+		<Button
+			icon="arrow"
+			size="small"
+			className="mt-6 mb-12 992:mb-16"
+			href="/early-access"
+		>
 			Early Access
 		</Button>
 

@@ -7,7 +7,7 @@ import OpenSourceSection from '$components/home/OpenSourceSection';
 import ProcessSection from '$components/home/ProcessSection';
 import Navbar from '$components/navbar/Navbar';
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
 	return (
 		<>
 			<Head>
@@ -27,18 +27,18 @@ const Home: NextPage = () => {
 
 			<Navbar />
 
-			<main className="flex flex-col min-w-full items-center 768:items-start z-0 pt-16 pr-[var(--scrollbar-width)]">
+			<main className="flex flex-col min-w-full items-center 768:items-start z-0 pt-16">
 				<HeroSection />
 				<ProcessSection />
 				<OpenSourceSection />
 				<CommunitySection />
 			</main>
 
-			<footer className="text-center w-full text-base font-medium pb-16">
+			<footer className="text-center w-full text-base font-medium pb-16 text-subtitle">
 				© Vidstack {new Date().getFullYear()}
 			</footer>
 		</>
 	);
 };
 
-export default Home;
+export default HomePage;

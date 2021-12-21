@@ -14,13 +14,13 @@ function HeroSection() {
 						</span>
 					</h1>
 					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
-						Vidstack is the optimal video workflow for frontend developers.
-						Manage your videos, connect your frontend, and analyze video
+						Vidstack is the optimal video workflow for frontend developers and
+						teams. Manage your videos, connect your frontend, and analyze video
 						playback - all in one place.
 					</p>
 				</div>
 				<div className="flex flex-row justify-center mt-12">
-					<Button contained icon="arrow">
+					<Button contained icon="arrow" href="/early-access">
 						Early Access
 					</Button>
 				</div>

@@ -11,6 +11,11 @@ export type SocialsProps = {
 	iconClassName?: string;
 	showTooltips?: boolean;
 	hideDiscord?: boolean;
+	customMessages?: {
+		discord?: string;
+		twitter?: string;
+		github?: string;
+	};
 };
 
 const socialLinks = [
@@ -40,6 +45,7 @@ function Socials({
 	iconClassName,
 	hideDiscord,
 	showTooltips = false,
+	customMessages = {},
 }: SocialsProps) {
 	return (
 		<>
@@ -60,7 +66,8 @@ function Socials({
 								<Icon className={clsx('h-full', iconClassName)} />
 								{!showTooltips && (
 									<span className="inline-block font-medium ml-2">
-										{tooltip}
+										{customMessages[tooltip.toLowerCase() as 'github'] ??
+											tooltip}
 									</span>
 								)}
 							</Button>

@@ -1,5 +1,6 @@
 import composeRefs from '@seznam/compose-react-refs';
 import clsx from 'clsx';
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { useRef } from 'react';
 
@@ -17,10 +18,11 @@ import Tooltip from './Tooltip';
 export type ButtonProps = {
 	href?: string;
 	className?: string;
+	type?: 'button' | 'submit';
 	external?: boolean;
 	label?: string;
 	children: ReactNode;
-	icon?: 'arrow';
+	icon?: 'arrow' | 'spinner';
 	monochrome?: boolean;
 	compact?: boolean;
 	contained?: boolean;
@@ -31,6 +33,7 @@ export type ButtonProps = {
 
 function Button({
 	href,
+	type,
 	className,
 	tooltip,
 	tooltipPosition = 'right',
@@ -52,11 +55,12 @@ function Button({
 	const [isHighContrast] = useHighContrast();
 
 	const props = {
+		type,
 		className: clsx(
 			'font-medium flex items-center flex-row group relative',
 			size === 'small' ? 'text-base' : 'text-lg',
 			!compact && 'pl-6 pr-5 py-3',
-			contained && 'rounded-full',
+			contained && 'rounded-full justify-center',
 			!monochrome && !contained && 'text-primary',
 			!monochrome && contained && 'bg-primary text-gray-50',
 			monochrome && contained && 'bg-gray-400 text-gray-50',
@@ -64,7 +68,6 @@ function Button({
 			!isDarkTheme && isHighContrast && contained && 'dark:text-gray-100',
 			className,
 		),
-		href,
 		target: undefinedIfFalsy(external, '_blank'),
 		'aria-describedby': undefinedIfFalsy(hasTooltip, tooltipId.current),
 		ref: composeRefs(hoverRef, focusRef),
@@ -86,6 +89,29 @@ function Button({
 				</Tooltip>
 			)}
 
+			{icon === 'spinner' && (
+				<svg
+					aria-hidden="true"
+					className="animate-spin w-6 h-6 ml-2"
+					fill="none"
+					viewBox="0 0 24 24"
+				>
+					<circle
+						className="opacity-25"
+						cx="12"
+						cy="12"
+						r="10"
+						stroke="currentColor"
+						strokeWidth="3.5"
+					></circle>
+					<path
+						className="opacity-75"
+						fill="currentColor"
+						d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+					></path>
+				</svg>
+			)}
+
 			{icon === 'arrow' && (
 				<>
 					<ArrowRightIcon className="w-5 h-5 ml-1 hidden group-hover:inline-block group-focus-visible:inline-block" />
@@ -95,7 +121,19 @@ function Button({
 		</>
 	);
 
-	return href ? <a {...props}>{inner}</a> : <button {...props}>{inner}</button>;
+	return href ? (
+		external ? (
+			<a href={href} {...props}>
+				{inner}
+			</a>
+		) : (
+			<Link href={href}>
+				<a {...props}>{inner}</a>
+			</Link>
+		)
+	) : (
+		<button {...props}>{inner}</button>
+	);
 }
 
 export default Button;

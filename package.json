@@ -12,8 +12,11 @@
 		"@badrap/bar-of-progress": "^0.1.2",
 		"@headlessui/react": "^1.4.2",
 		"@seznam/compose-react-refs": "^1.0.6",
+		"@tailwindcss/forms": "^0.4.0",
 		"clsx": "^1.1.1",
+		"firebase-admin": "^10.0.1",
 		"focus-visible": "^5.2.0",
+		"lru-cache": "^6.0.0",
 		"preact": "^10.6.0"
 	},
 	"devDependencies": {
