@@ -76,6 +76,11 @@ export default class Document extends NextDocument {
 					<script
 						dangerouslySetInnerHTML={{ __html: scrollbarWidthScript }}
 					></script>
+					<script
+						defer
+						data-domain="vidstack.io"
+						src="https://plausible.io/js/plausible.js"
+					></script>
 				</Head>
 
 				<body className="w-screen min-h-screen bg-surface text-gray-400 dark:text-gray-400 overflow-x-hidden">
