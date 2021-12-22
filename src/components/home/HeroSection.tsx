@@ -25,7 +25,9 @@ function HeroSection() {
 						icon="arrow"
 						href="/early-access"
 						onClick={() =>
-							plausible('Early Access', { props: { Section: 'Hero' } })
+							plausible('Early Access', {
+								props: { State: 'Interested', Section: 'Hero' },
+							})
 						}
 					>
 						Early Access
