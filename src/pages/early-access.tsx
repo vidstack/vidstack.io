@@ -122,7 +122,7 @@ const EarlyAccessPage: NextPage = () => {
 						/>
 						<Checkbox
 							name="subscribed"
-							label="I'd love to receive bi-weekly updates via email on how Vidstack is progressing."
+							label="I'd love to receive updates via email on how Vidstack is progressing."
 							className="mt-12"
 						/>
 						<Checkbox
