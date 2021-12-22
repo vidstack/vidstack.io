@@ -50,13 +50,16 @@ const EarlyAccessPage: NextPage = () => {
 			setIsSubmitting(false);
 			plausible('Early Access', {
 				props: {
-					Success: true,
-					Subscribed: formProps.subscribed ? true : false,
-					Available: formProps.available ? true : false,
+					State: `Success${formProps.subscribed ? '+Subscribed' : ''}${
+						formProps.available ? '+Available' : ''
+					}`,
+					Section: 'Form',
 				},
 			});
 		} catch (err) {
-			plausible('Early Access', { props: { Success: false } });
+			plausible('Early Access', {
+				props: { State: 'Failed', Section: 'Form' },
+			});
 			// console.log(err)
 			alert('Failed to submit early access form. Please try again.');
 		}

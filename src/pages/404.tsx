@@ -1,14 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 import Button from '$base/Button';
-import CommunitySection from '$components/home/CommunitySection';
-import HeroSection from '$components/home/HeroSection';
-import OpenSourceSection from '$components/home/OpenSourceSection';
-import ProcessSection from '$components/home/ProcessSection';
 import Navbar from '$components/navbar/Navbar';
 
-const HomePage: NextPage = () => {
+const NotFoundPage: NextPage = () => {
+	useEffect(() => {
+		plausible('404', { props: { path: document.location.pathname } });
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -223,4 +224,4 @@ const HomePage: NextPage = () => {
 	);
 };
 
-export default HomePage;
+export default NotFoundPage;
