@@ -20,7 +20,14 @@ function HeroSection() {
 					</p>
 				</div>
 				<div className="flex flex-row justify-center mt-12">
-					<Button contained icon="arrow" href="/early-access">
+					<Button
+						contained
+						icon="arrow"
+						href="/early-access"
+						onClick={() =>
+							plausible('Early Access', { props: { Section: 'Hero' } })
+						}
+					>
 						Early Access
 					</Button>
 				</div>

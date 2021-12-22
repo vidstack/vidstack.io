@@ -43,6 +43,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 `;
 
+const plausibleEventScript = `
+window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+`;
+
 export default class Document extends NextDocument {
 	static async getInitialProps(ctx: DocumentContext): Promise<any> {
 		const initialProps = await NextDocument.getInitialProps(ctx);
@@ -80,6 +84,9 @@ export default class Document extends NextDocument {
 						defer
 						data-domain="vidstack.io"
 						src="https://plausible.io/js/plausible.js"
+					></script>
+					<script
+						dangerouslySetInnerHTML={{ __html: plausibleEventScript }}
 					></script>
 				</Head>
 

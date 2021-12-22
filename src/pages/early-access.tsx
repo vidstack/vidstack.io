@@ -48,8 +48,16 @@ const EarlyAccessPage: NextPage = () => {
 			setUserName(formProps.name);
 			setHasSubmitted(true);
 			setIsSubmitting(false);
-		} catch (e) {
-			// console.log(e)
+			plausible('Early Access', {
+				props: {
+					Success: true,
+					Subscribed: formProps.subscribed ? true : false,
+					Available: formProps.available ? true : false,
+				},
+			});
+		} catch (err) {
+			plausible('Early Access', { props: { Success: false } });
+			// console.log(err)
 			alert('Failed to submit early access form. Please try again.');
 		}
 	}

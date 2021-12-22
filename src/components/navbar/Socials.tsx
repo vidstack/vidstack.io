@@ -62,6 +62,7 @@ function Socials({
 								monochrome
 								compact
 								tooltip={showTooltips ? tooltip : undefined}
+								onClick={() => plausible('Socials', { props: { tooltip } })}
 							>
 								<Icon className={clsx('h-full', iconClassName)} />
 								{!showTooltips && (

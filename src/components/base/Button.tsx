@@ -29,6 +29,7 @@ export type ButtonProps = {
 	size?: 'small';
 	tooltip?: string;
 	tooltipPosition?: 'left' | 'center' | 'right';
+	onClick?: () => void;
 };
 
 function Button({
@@ -45,6 +46,7 @@ function Button({
 	compact = false,
 	contained = false,
 	size,
+	onClick,
 }: ButtonProps) {
 	const tooltipId = useRef(`anchor-tooltip-${tooltip?.toLowerCase()}`);
 	const hasTooltip = isString(tooltip);
@@ -71,6 +73,7 @@ function Button({
 		target: undefinedIfFalsy(external, '_blank'),
 		'aria-describedby': undefinedIfFalsy(hasTooltip, tooltipId.current),
 		ref: composeRefs(hoverRef, focusRef),
+		onClick,
 	};
 
 	const inner = (

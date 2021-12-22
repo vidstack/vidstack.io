@@ -41,6 +41,7 @@ const Step = ({
 			size="small"
 			className="mt-6 mb-12 992:mb-16"
 			href="/early-access"
+			onClick={() => plausible('Early Access', { props: { Section: title } })}
 		>
 			Early Access
 		</Button>
