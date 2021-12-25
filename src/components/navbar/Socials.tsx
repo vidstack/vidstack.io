@@ -26,7 +26,7 @@ const socialLinks = [
 		Icon: TwitterIcon,
 	},
 	{
-		href: 'https://discord.gg/DmrmRqCRZS',
+		href: 'https://discord.com/invite/7RGU7wvsu9',
 		label: 'Vidstack on Discord',
 		tooltip: 'Discord',
 		Icon: DiscordIcon,
