@@ -21,6 +21,8 @@ export default async function handler(
 		try {
 			await limiter.check(res, 10, email); // 10 requests per minute
 
+			const now = new Date();
+
 			await getFirestore(firebaseApp)
 				.collection('early_access')
 				.doc(email)
@@ -28,6 +30,10 @@ export default async function handler(
 					name,
 					subscribed: !!subscribed,
 					available: !!available,
+					seen: false,
+					date: `${now.getUTCDate()}/${
+						now.getUTCMonth() + 1
+					}/${now.getUTCFullYear()}`,
 				});
 		} catch (e) {
 			console.log(e);
