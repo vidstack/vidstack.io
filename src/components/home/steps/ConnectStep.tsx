@@ -36,7 +36,7 @@ function ConnectStep() {
 					// analyticsCodeSnippet,
 					// apiCodeSnippet,
 				]}
-				badges={['', 'Tailwind Example']}
+				badges={['Tailwind Example']}
 			/>
 
 			<div>
