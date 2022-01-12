@@ -5,11 +5,11 @@ import Chip from '$base/Chip';
 
 const openSourceProjects = [
 	{
-		name: 'Elements',
+		name: 'Player',
 		description:
 			'Collection of headless web components that make integrating media on the web a breeze.',
 		badge: 'Alpha',
-		repoHref: 'https://github.com/vidstack/elements',
+		repoHref: 'https://github.com/vidstack/player',
 	},
 	{
 		name: 'Uploader',
@@ -17,13 +17,6 @@ const openSourceProjects = [
 			'A light and customizable media uploader component that integrates directly with Vidstack.',
 		badge: 'Pre-alpha',
 		repoHref: 'https://github.com/vidstack/uploader',
-	},
-	{
-		name: 'SDK',
-		description:
-			'Our Node.js SDK for interacting with the Vidstack API and services to make video magic happen.',
-		badge: 'Pre-alpha',
-		repoHref: 'https://github.com/vidstack/node-sdk',
 	},
 	{
 		name: 'Analytics',
@@ -63,7 +56,7 @@ function OpenSourceSection() {
 					ready.
 				</p>
 
-				<div className="grid grid-cols-1 768:grid-cols-2 gap-12 mt-16 pb-10">
+				<div className="grid grid-cols-1 1200:grid-cols-3 gap-12 mt-16 pb-10">
 					{openSourceProjects.map((project) => (
 						<div
 							key={project.name}

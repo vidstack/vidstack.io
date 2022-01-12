@@ -7,9 +7,9 @@ import { ReactComponent as TailwindIcon } from '$svg/frameworks/tailwind.svg';
 import { ReactComponent as VueIcon } from '$svg/frameworks/vue.svg';
 
 // import { highlightedCode as analyticsCodeSnippet } from './code-snippets/analytics-snippet.html?highlight';
-import { highlightedCode as apiCodeSnippet } from './code-snippets/api-snippet.graphql?highlight';
+// import { highlightedCode as apiCodeSnippet } from './code-snippets/api-snippet.graphql?highlight';
 import { highlightedCode as playerCodeSnippet } from './code-snippets/player-snippet.html?highlight';
-import { highlightedCode as sdkCodeSnippet } from './code-snippets/sdk-snippet.js?highlight';
+// import { highlightedCode as sdkCodeSnippet } from './code-snippets/sdk-snippet.js?highlight';
 import { highlightedCode as uploaderCodeSnippet } from './code-snippets/uploader-snippet.html?highlight';
 
 const frameworks = [
@@ -24,20 +24,17 @@ function ConnectStep() {
 	return (
 		<div className="flex flex-col w-full items-center">
 			<CodeSnippet
-				defaultTab={1}
 				tabs={[
-					'uploader.html',
 					'player.html',
+					'uploader.html',
 					// 'analytics.html',
-					'api.gql',
-					'sdk.js',
+					// 'api.gql',
 				]}
 				snippets={[
-					uploaderCodeSnippet,
 					playerCodeSnippet,
+					uploaderCodeSnippet,
 					// analyticsCodeSnippet,
-					apiCodeSnippet,
-					sdkCodeSnippet,
+					// apiCodeSnippet,
 				]}
 				badges={['', 'Tailwind Example']}
 			/>
