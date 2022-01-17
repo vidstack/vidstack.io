@@ -8,12 +8,12 @@ function HeroSection() {
 					<h1 className="font-bold text-5xl 992:text-6xl tracking-tight text-center max-w-3xl leading-[3.5rem] 992:leading-[4.5rem]">
 						<span className="576:hidden">Video tools for frontend devs.</span>
 						<span className="hidden 576:block">
-							A collection of video tools for frontend developers.
+							Video tools for frontend developers.
 						</span>
 					</h1>
-					<p className="mt-12 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
-						A video framework built with high-quality web components such
-						as&nbsp;
+					<p className="mt-12 text-center max-w-[600px] mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
+						Vidstack is a video framework built with high-quality web components
+						such as&nbsp;
 						<code className="text-primary">vds-video-player</code>,&nbsp;
 						<code className="text-primary">vds-uploader</code>, and&nbsp;
 						<code className="text-primary">vds-analytics</code>&nbsp;to make
