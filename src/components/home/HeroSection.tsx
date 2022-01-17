@@ -16,7 +16,7 @@ function HeroSection() {
 						such as&nbsp;
 						<code className="text-primary">vds-video-player</code>,&nbsp;
 						<code className="text-primary">vds-uploader</code>, and&nbsp;
-						<code className="text-primary">vds-analytics</code>,&nbsp;to make
+						<code className="text-primary">vds-analytics</code>,&nbsp;that make
 						integrating video into modern web apps easier.
 					</p>
 				</div>
