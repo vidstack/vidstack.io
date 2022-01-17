@@ -7,7 +7,7 @@ const openSourceProjects = [
 	{
 		name: 'Player',
 		description:
-			'Headless web components that make integrating media on the web a breeze.',
+			'Video player built with headless web components to truly make it your own.',
 		badge: 'Alpha',
 		repoHref: 'https://github.com/vidstack/player',
 	},
@@ -21,7 +21,7 @@ const openSourceProjects = [
 	{
 		name: 'Analytics',
 		description:
-			'Start collecting invaluable video performance and user-behaviour data with a few lines of code.',
+			'Collect video performance and user-behavior data with a few lines of HTML.',
 		badge: 'Pre-alpha',
 		repoHref: 'https://github.com/vidstack/analytics',
 	},
@@ -50,7 +50,7 @@ function OpenSourceSection() {
 				{openSourceProjects.map((project) => (
 					<div
 						key={project.name}
-						className="shadow-card flex flex-col relative z-10 bg-surface rounded-lg dark:border-2 dark:border-gray-200 p-4 pb-0 max-w-xs"
+						className="shadow-card flex flex-col relative z-10 bg-surface rounded-lg dark:border-2 dark:border-gray-200 p-4 pb-0 max-w-xs h-[220px]"
 					>
 						<div className="flex flex-row items-center">
 							<h2 className="text-lg font-medium">{project.name}</h2>
@@ -64,7 +64,7 @@ function OpenSourceSection() {
 								{project.badge}
 							</Chip>
 						</div>
-						<p className="mt-4 text-base text-subtitle leading-7">
+						<p className="mt-4 text-base text-subtitle leading-7 flex-1">
 							{project.description}
 						</p>
 						<div className="py-4 rounded-b-lg flex justify-end">
