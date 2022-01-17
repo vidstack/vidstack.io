@@ -27,7 +27,7 @@ const HomePage: NextPage = () => {
 			</Head>
 
 			{/* Announcement bar. */}
-			<p className="w-full bg-[#ffebf2] px-2 hidden items-center justify-center">
+			{/* <p className="w-full bg-[#ffebf2] px-2 hidden items-center justify-center">
 				<Button external monochrome href="https://github.com/vidstack/player">
 					<div className="w-full text-center font-normal text-base">
 						<span className="text-gray-400 dark:text-gray-100 break-words">
@@ -36,7 +36,7 @@ const HomePage: NextPage = () => {
 						<span className="text-primary ml-1 underline">Join Server</span>
 					</div>
 				</Button>
-			</p>
+			</p> */}
 
 			<Navbar />
 
