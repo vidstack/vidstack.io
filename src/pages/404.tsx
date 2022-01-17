@@ -1,15 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useEffect } from 'react';
 
 import Button from '$base/Button';
 import Navbar from '$components/navbar/Navbar';
 
 const NotFoundPage: NextPage = () => {
-	useEffect(() => {
-		plausible('404', { props: { path: document.location.pathname } });
-	}, []);
-
 	return (
 		<>
 			<Head>

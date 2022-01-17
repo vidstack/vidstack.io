@@ -1,36 +1,34 @@
-import Image from 'next/image';
-
 import Button from '$base/Button';
 
 function HeroSection() {
 	return (
 		<section className="w-full max-w-6xl mx-auto px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16">
-			<div className="flex flex-col mt-4 992:mt-20">
-				<div className="mt-0">
-					<h1 className="text-primary font-bold text-4xl 992:text-6xl tracking-tight text-center">
-						<span className="576:hidden">Video for frontend devs.</span>
+			<div className="flex flex-col 992:mt-12">
+				<div className="flex flex-col items-center justify-center">
+					<h1 className="font-bold text-5xl 992:text-6xl tracking-tight text-center max-w-3xl leading-[3.5rem] 992:leading-[4.5rem]">
+						<span className="576:hidden">Video tools for frontend devs.</span>
 						<span className="hidden 576:block">
-							Video for frontend developers.
+							A collection of video tools for frontend developers.
 						</span>
 					</h1>
-					<p className="mt-10 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
-						Vidstack is the optimal video workflow for frontend developers and
-						teams. Manage your videos, connect your frontend, and analyze video
-						playback - all in one place.
+					<p className="mt-12 text-center max-w-2xl mx-auto text-lg 576:text-xl tracking-wide text-subtitle">
+						A video framework built with high-quality web components such
+						as&nbsp;
+						<code className="text-primary">vds-video-player</code>,&nbsp;
+						<code className="text-primary">vds-uploader</code>, and&nbsp;
+						<code className="text-primary">vds-analytics</code>&nbsp;to make
+						integrating video into modern web apps easier.
 					</p>
 				</div>
-				<div className="flex flex-row justify-center mt-12">
+
+				<div className="flex flex-row justify-center mt-16">
 					<Button
+						external
 						contained
 						icon="arrow"
-						href="/early-access"
-						onClick={() =>
-							plausible('Early Access', {
-								props: { State: 'Interested', Section: 'Hero' },
-							})
-						}
+						href="https://github.com/vidstack"
 					>
-						Early Access
+						Follow us on GitHub
 					</Button>
 				</div>
 			</div>

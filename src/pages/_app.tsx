@@ -59,12 +59,12 @@ function App({ Component, pageProps, router }: AppProps) {
 	return (
 		<>
 			<Head>
-				<meta key="twitter:site" name="twitter:site" content="@vidstackhq" />
+				<meta key="twitter:site" name="twitter:site" content="@vidstackjs" />
 
 				<meta
 					key="twitter:creator"
 					name="twitter:creator"
-					content="@vidstackhq"
+					content="@vidstackjs"
 				/>
 
 				<meta

@@ -20,7 +20,7 @@ export type SocialsProps = {
 
 const socialLinks = [
 	{
-		href: 'https://twitter.com/vidstackhq?lang=en',
+		href: 'https://twitter.com/vidstackjs?lang=en',
 		label: 'Vidstack on Twitter',
 		tooltip: 'Twitter',
 		Icon: TwitterIcon,
@@ -62,9 +62,6 @@ function Socials({
 								monochrome
 								compact
 								tooltip={showTooltips ? tooltip : undefined}
-								onClick={() =>
-									plausible('Socials', { props: { Channel: tooltip } })
-								}
 							>
 								<Icon className={clsx('h-full', iconClassName)} />
 								{!showTooltips && (

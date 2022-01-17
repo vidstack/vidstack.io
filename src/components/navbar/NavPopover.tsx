@@ -99,12 +99,6 @@ function NavPopover() {
 										<VisualOptions />
 									</div>
 								</section>
-
-								<div className="w-full h-[100px] bg-gray-100 flex items-center justify-center rounded-b-md">
-									<Button contained icon="arrow">
-										Early Access
-									</Button>
-								</div>
 							</div>
 						</Popover.Panel>
 					</Transition>

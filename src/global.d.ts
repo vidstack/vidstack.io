@@ -11,8 +11,3 @@ declare module '*?highlight' {
 	const highlightedCode: string;
 	export { code, highlightedCode };
 }
-
-declare function plausible(
-	event: string,
-	data?: { props?: Record<string, string | number | boolean> },
-);
