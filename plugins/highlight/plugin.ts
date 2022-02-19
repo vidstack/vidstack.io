@@ -1,0 +1,42 @@
+import type { Plugin } from 'vite';
+import { getHighlighter, type Highlighter, renderToHtml, type Lang } from 'shiki';
+import path from 'path';
+
+export const PLUGIN_NAME = '@vidstack/highlight-code' as const;
+
+export const highlightCodePlugin = (): Plugin => {
+	let highlighter: Highlighter;
+
+	const highlightQueryRE = /\?highlight/;
+
+	return {
+		name: PLUGIN_NAME,
+		enforce: 'pre' as const,
+		async configResolved() {
+			highlighter = await getHighlighter({
+				theme: 'nord',
+				langs: []
+			});
+		},
+		transform(code, id) {
+			if (!highlightQueryRE.test(id)) {
+				return null;
+			}
+
+			const lang = (new URLSearchParams(id).get('lang') ??
+				path.extname(id.replace(highlightQueryRE, '')).slice(1)) as Lang;
+
+			const tokens = highlighter.codeToThemedTokens(code, lang);
+
+			const html = renderToHtml(tokens)
+				.replace(/\sclass="shiki" style=".*?"/, '')
+				.trim();
+
+			return `
+				export const tokens = ${JSON.stringify(tokens)}
+				export const code = ${JSON.stringify(code)}
+				export const highlightedCode = ${JSON.stringify(html)}
+			`;
+		}
+	};
+};

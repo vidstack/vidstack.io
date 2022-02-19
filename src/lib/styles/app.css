@@ -1,0 +1,39 @@
+:root {
+	--color-brand: #f53d7a;
+
+	--viewport-width: calc(100vw - var(--scrollbar-width));
+
+	--section-angle-sin: 0.106;
+	--section-angle-height: calc(var(--viewport-width) * var(--section-angle-sin));
+	--section-max-width: 1080px;
+	--section-padding-top-base: 40px;
+	--section-gutter-width: calc(var(--viewport-width) / 2 - var(--section-max-width) / 2);
+	--section-angle-padding-top: calc(
+		var(--section-angle-height) + var(--section-padding-top-base) - var(--section-angle-sin) *
+			var(--section-gutter-width)
+	);
+}
+
+:root.dark {
+	color-scheme: dark;
+	--color-brand: #ff6397;
+}
+
+.js-focus-visible :focus:not([data-focus-visible-added]) {
+	@apply outline-none;
+}
+
+.js-focus-visible [data-focus-visible-added] {
+}
+
+* {
+	-webkit-tap-highlight-color: transparent;
+}
+
+.no-scrollbar {
+	scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}

@@ -1,0 +1,214 @@
+import fs from 'fs';
+import LRUCache from 'lru-cache';
+import matter from 'gray-matter';
+import toml from 'toml';
+import MagicString from 'magic-string';
+import type {
+	MarkdownMeta,
+	MarkdownParser,
+	MarkdownParserEnv,
+	ParsedMarkdownResult,
+	ParseMarkdownOptions
+} from './types';
+import { preventViteReplace } from './utils/preventViteReplace';
+
+export type ParsedMarkdownToSvelteResult = {
+	component: string;
+	meta: MarkdownMeta;
+};
+
+const cache = new LRUCache<string, ParsedMarkdownToSvelteResult>({ max: 1024 });
+
+export function parseMarkdownToSvelte(
+	parser: MarkdownParser,
+	source: string,
+	filePath: string,
+	options: ParseMarkdownOptions = {}
+): ParsedMarkdownToSvelteResult {
+	const cachedResult = cache.get(source);
+	if (cachedResult) return cachedResult;
+
+	const {
+		html,
+		meta,
+		env: parserEnv
+	} = parseMarkdown(parser, commentOutTemplateTags(source), filePath, {
+		...options
+	});
+
+	const { hoistedTags } = parserEnv as MarkdownParserEnv;
+
+	const component = addHeadTags(
+		buildMetaExport(dedupeHoistedTags(hoistedTags), meta).join('\n') +
+			`\n\n<div class="markdown">${uncommentTemplateTags(html)}</div>`,
+		meta
+	);
+
+	const result: ParsedMarkdownToSvelteResult = {
+		component,
+		meta
+	};
+
+	cache.set(source, result);
+	return result;
+}
+
+const OPENING_SCRIPT_TAG_RE = /<\s*script[^>]*>/;
+const OPENING_SCRIPT_MODULE_TAG_RE = /<\s*script[^>]*\scontext="module"\s*[^>]*>/;
+const CLOSING_SCRIPT_TAG_RE = /<\/script>/;
+
+const OPENING_STYLE_TAG_RE = /<\s*style[^>]*>/;
+const CLOSING_STYLE_TAG_RE = /<\/style>/;
+
+const IMPORT_GLOBALS_CODE = ['Admonition', 'CodeFence', 'TableOfContents']
+	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
+	.join('\n');
+
+const SVELTE_OPENING_HEAD_TAG = '<svelte:head>';
+const SVELTE_CLOSING_HEAD_TAG = '</svelte:head>';
+
+function addHeadTags(component: string, meta: MarkdownMeta) {
+	const mcs = new MagicString(component);
+
+	const openingIndex = mcs.original.indexOf(SVELTE_OPENING_HEAD_TAG);
+	const closingIndex = mcs.original.indexOf(SVELTE_CLOSING_HEAD_TAG);
+
+	const hasHeadTags = openingIndex > -1 && closingIndex > -1;
+	const existingContent = hasHeadTags
+		? mcs.original.substring(openingIndex + SVELTE_OPENING_HEAD_TAG.length, closingIndex - 1)
+		: '';
+
+	const newContent = [
+		meta.title && !existingContent.includes('<title>') && `<title>${meta.title}</title>`,
+		meta.description &&
+			!existingContent.includes('<meta name="description"') &&
+			`<meta name="description" content="${meta.description}" />`
+	]
+		.filter(Boolean)
+		.join('\n  ');
+
+	if (hasHeadTags) {
+		mcs.overwrite(
+			openingIndex,
+			closingIndex + SVELTE_CLOSING_HEAD_TAG.length,
+			`<svelte:head>${existingContent}\n  ${newContent}\n</svelte:head>\n\n`
+		);
+	} else {
+		mcs.prependLeft(0, `<svelte:head>  ${newContent}\n</svelte:head>\n\n`);
+	}
+
+	return mcs.toString();
+}
+
+function buildMetaExport(tags: string[], meta: MarkdownMeta): string[] {
+	const code = `\nconst __markdown = ${JSON.stringify(meta, null, 2)};\nexport{ __markdown };\n`;
+
+	const scriptModuleIndex = tags.findIndex((tag) => OPENING_SCRIPT_MODULE_TAG_RE.test(tag));
+
+	if (scriptModuleIndex > -1) {
+		const tagSrc = tags[scriptModuleIndex];
+		tags[scriptModuleIndex] = tagSrc.replace(
+			CLOSING_SCRIPT_TAG_RE,
+			IMPORT_GLOBALS_CODE + code + `</script>`
+		);
+	} else {
+		tags.unshift(`<script context="module">${IMPORT_GLOBALS_CODE}${code}</script>`);
+	}
+
+	return tags;
+}
+
+const TEMPLATE_TAG_RE =
+	/(\{#(if|each|await|key).*\})|(\{:(else|then|catch).*\})|(\{\/(if|each|key|await)\})|(\{@(html|debug).*\})/gim;
+
+function commentOutTemplateTags(source: string) {
+	return source.replace(TEMPLATE_TAG_RE, (match) => {
+		return `<!--&%& ${match} &%&-->`;
+	});
+}
+
+const TEMPLATE_TAG_COMMENT_RE = /(<!--&%&\s)|(\s&%&-->)/gim;
+
+function uncommentTemplateTags(source: string) {
+	return source.replace(TEMPLATE_TAG_COMMENT_RE, '');
+}
+
+function dedupeHoistedTags(tags: string[] = []): string[] {
+	const deduped = new Map();
+
+	const merge = (key: string, tag: string, openingTagRe: RegExp, closingTagRE: RegExp) => {
+		if (!deduped.has(key)) {
+			deduped.set(key, tag);
+			return;
+		}
+
+		const block = deduped.get(key)!;
+		deduped.set(key, block.replace(closingTagRE, tag.replace(openingTagRe, '')));
+	};
+
+	tags.forEach((tag) => {
+		if (OPENING_SCRIPT_MODULE_TAG_RE.test(tag)) {
+			merge('module', tag, OPENING_SCRIPT_MODULE_TAG_RE, CLOSING_SCRIPT_TAG_RE);
+		} else if (OPENING_SCRIPT_TAG_RE.test(tag)) {
+			merge('script', tag, OPENING_SCRIPT_TAG_RE, CLOSING_SCRIPT_TAG_RE);
+		} else if (OPENING_STYLE_TAG_RE.test(tag)) {
+			merge('style', tag, OPENING_STYLE_TAG_RE, CLOSING_STYLE_TAG_RE);
+		} else {
+			// Treat unknowns as unique and leave them as-is.
+			deduped.set(Symbol(), tag);
+		}
+	});
+
+	return Array.from(deduped.values());
+}
+
+function parseMarkdown(
+	parser: MarkdownParser,
+	source: string,
+	filePath: string,
+	options: ParseMarkdownOptions = {}
+): ParsedMarkdownResult {
+	const {
+		data: frontmatter,
+		content,
+		excerpt
+	} = matter(source, {
+		excerpt_separator: '<!-- more -->',
+		engines: {
+			toml: toml.parse.bind(toml)
+		}
+	});
+
+	const parserEnv: MarkdownParserEnv = {
+		filePath,
+		frontmatter
+	};
+
+	let html = parser.render(content, parserEnv);
+
+	const excerptHtml = parser.render(excerpt ?? '');
+
+	if (options.escapeConstants) {
+		html = preventViteReplace(html, options.define);
+	}
+
+	const { headers = [], importedFiles = [], links = [], title = '' } = parserEnv;
+
+	const result: ParsedMarkdownResult = {
+		content,
+		html,
+		links,
+		importedFiles,
+		env: parserEnv,
+		meta: {
+			excerpt: excerptHtml,
+			headers,
+			title: frontmatter.title ?? title,
+			description: frontmatter.description,
+			frontmatter,
+			lastUpdated: Math.round(fs.statSync(filePath).mtimeMs)
+		}
+	};
+
+	return result;
+}
