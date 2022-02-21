@@ -3,7 +3,7 @@ import { getHighlighter, renderToHtml } from 'shiki';
 
 export const createShikiPlugin: () => Promise<PluginSimple> = async () => {
 	const highlighter = await getHighlighter({
-		theme: 'nord',
+		theme: 'material-palenight',
 		langs: []
 	});
 

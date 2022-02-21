@@ -11,9 +11,22 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
+		<script>
+			const key = 'vidstack::color-scheme';
+			const scheme = localStorage[key];
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (scheme === 'dark' || (scheme !== 'light' && prefersDark)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+
 		%svelte.head%
 	</head>
-	<body class="min-h-screen w-screen overflow-x-hidden">
+	<body
+		class="min-h-screen w-screen overflow-x-hidden bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-50"
+	>
 		<div>%svelte.body%</div>
 	</body>
 </html>

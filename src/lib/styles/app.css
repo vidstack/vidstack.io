@@ -1,22 +1,17 @@
 :root {
-	--color-brand: #f53d7a;
+	font-size: 16px;
 
-	--viewport-width: calc(100vw - var(--scrollbar-width));
-
-	--section-angle-sin: 0.106;
-	--section-angle-height: calc(var(--viewport-width) * var(--section-angle-sin));
-	--section-max-width: 1080px;
-	--section-padding-top-base: 40px;
-	--section-gutter-width: calc(var(--viewport-width) / 2 - var(--section-max-width) / 2);
-	--section-angle-padding-top: calc(
-		var(--section-angle-height) + var(--section-padding-top-base) - var(--section-angle-sin) *
-			var(--section-gutter-width)
-	);
+	--color-brand: #f30c59;
+	--color-gray-300: #545454;
+	--color-gray-strong: #121212;
 }
 
 :root.dark {
 	color-scheme: dark;
-	--color-brand: #ff6397;
+
+	--color-brand: #f75a8e;
+	--color-gray-300: #a5a5a5;
+	--color-gray-strong: #ffffff;
 }
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {
@@ -36,4 +31,9 @@
 
 .no-scrollbar::-webkit-scrollbar {
 	display: none;
+}
+
+.svg-responsive > svg {
+	width: 100%;
+	height: 100%;
 }

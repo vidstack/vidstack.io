@@ -14,7 +14,7 @@ export const highlightCodePlugin = (): Plugin => {
 		enforce: 'pre' as const,
 		async configResolved() {
 			highlighter = await getHighlighter({
-				theme: 'nord',
+				theme: 'material-palenight',
 				langs: []
 			});
 		},

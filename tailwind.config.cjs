@@ -20,7 +20,33 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				brand: 'var(--color-brand)',
+				brand: {
+					DEFAULT: 'var(--color-brand)',
+					50: '#F87EA7',
+					100: '#E8E8E8',
+					200: '#F76998',
+					300: '#F75A8E',
+					400: '#F64C84',
+					500: '#F53D7A',
+					600: '#F30C59',
+					700: '#C20A47',
+					800: '#920735',
+					900: '#610523'
+				},
+				gray: {
+					DEFAULT: '#313131',
+					50: '#FFFFFF',
+					100: '#FBFBFB',
+					200: '#EAEAEA',
+					300: 'var(--color-gray-300)',
+					400: '#616161',
+					500: '#313131',
+					600: '#292929',
+					700: '#222222',
+					800: '#1A1A1A',
+					900: '#121212',
+					strong: 'var(--color-gray-strong)'
+				},
 				code: {
 					highlight: 'rgb(125 211 252 / 0.1)'
 				}
@@ -29,11 +55,18 @@ module.exports = {
 				'flash-code': {
 					'0%': { backgroundColor: 'rgb(125 211 252 / 0.1)' },
 					'100%': { backgroundColor: 'transparent' }
+				},
+				'brand-text-colors': {
+					'0%': { color: '#ff6418' },
+					'33%': { color: '#e72828' },
+					'66%': { color: '#f64480' },
+					'100%': { color: '#ff6418' }
 				}
 			},
 			animation: {
 				'flash-code': 'flash-code 1s forwards',
-				'flash-code-slow': 'flash-code 2s forwards'
+				'flash-code-slow': 'flash-code 2s forwards',
+				'brand-text-colors': 'brand-text-colors 15s infinite'
 			},
 			typography: typography()
 		}
@@ -42,6 +75,10 @@ module.exports = {
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),
 		function ({ addVariant }) {
+			addVariant(
+				'supports-backdrop-blur',
+				'@supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))'
+			);
 			addVariant('supports-scrollbars', '@supports selector(::-webkit-scrollbar)');
 			addVariant('children', '& > *');
 			addVariant('scrollbar', '&::-webkit-scrollbar');

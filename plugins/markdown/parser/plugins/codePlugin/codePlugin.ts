@@ -23,8 +23,7 @@ export const codePlugin: PluginSimple = (parser) => {
 
 		let html = code.replace(/\sclass="shiki" style=".*?"/, '').trim();
 
-		// Code fences always have an ending `\n`, so we should trim the last line.
-		const lines = code.split('\n').slice(0, -1);
+		const linesCount = (code.match(/"line"/g) || []).length;
 
 		// Resolve highlight line ranges from token info.
 		const highlightLinesRanges = resolveHighlightLines(info);
@@ -36,8 +35,8 @@ export const codePlugin: PluginSimple = (parser) => {
 		// Resolve line-numbers mark from token info.
 		const useLineNumbers = /:line-numbers\b/.test(info);
 
-		html = `<CodeFence lang="${language.name}" ext="${language.ext}" lines={${lines.length}}${
-			useLineNumbers ? ' lineNumbers' : ''
+		html = `<CodeFence lang="${language.name}" ext="${language.ext}" linesCount={${linesCount}}${
+			useLineNumbers ? ' showLineNumbers' : ''
 		}${
 			(highlightLinesRanges?.length ?? 0) > 0 ? ` highlightLines={${highlight}}` : ''
 		}>{@html \`${html}\`}</CodeFence>`;

@@ -21,6 +21,7 @@ const config = {
 					$actions: path.resolve('./src/lib/actions'),
 					$components: path.resolve('./src/lib/components'),
 					$fonts: path.resolve('./src/lib/fonts'),
+					$img: path.resolve('./src/lib/img'),
 					$polyfills: path.resolve('./src/lib/polyfills'),
 					$stores: path.resolve('./src/lib/stores'),
 					$styles: path.resolve('./src/lib/styles'),

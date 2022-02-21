@@ -78,11 +78,17 @@ function addHeadTags(component: string, meta: MarkdownMeta) {
 		? mcs.original.substring(openingIndex + SVELTE_OPENING_HEAD_TAG.length, closingIndex - 1)
 		: '';
 
+	const includeTitle = meta.title && !existingContent.includes('<title>');
+	const includeDescription =
+		meta.description && !existingContent.includes('<meta name="description"');
+
+	const description = `${meta.description} | Vidstack`;
+
 	const newContent = [
-		meta.title && !existingContent.includes('<title>') && `<title>${meta.title}</title>`,
-		meta.description &&
-			!existingContent.includes('<meta name="description"') &&
-			`<meta name="description" content="${meta.description}" />`
+		includeTitle && `<title>${meta.title}</title>`,
+		includeDescription && `<meta name="description" content="${description}" />`,
+		includeDescription && `<meta name="og:title" content="${description}" />`,
+		includeDescription && `<meta name="twitter:title" content="${description}" />`
 	]
 		.filter(Boolean)
 		.join('\n  ');

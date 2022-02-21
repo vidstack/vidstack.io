@@ -1,10 +1,10 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import NoteIcon from '~icons/ph/pen-bold';
-	import InfoIcon from '~icons/ph/info-bold';
-	import TipIcon from '~icons/ph/lightbulb-bold';
-	import WarningIcon from '~icons/ph/warning-bold';
-	import DangerIcon from '~icons/ph/skull-bold';
+	import NoteIcon from '~icons/ri/pencil-fill';
+	import InfoIcon from '~icons/ri/information-fill';
+	import TipIcon from '~icons/ri/lightbulb-flash-fill';
+	import WarningIcon from '~icons/ri/error-warning-fill';
+	import DangerIcon from '~icons/ri/skull-2-fill';
 
 	export let type: 'note' | 'info' | 'tip' | 'warning' | 'danger';
 	export let title: string | null = null;
