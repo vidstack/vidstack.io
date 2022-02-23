@@ -1,6 +1,6 @@
 ---
 title: Fullscreen
-position: 6
+position: 7
 ---
 
 # Fullscreen

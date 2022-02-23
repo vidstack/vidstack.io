@@ -1,6 +1,6 @@
 ---
 title: Autoplay
-position: 5
+position: 6
 ---
 
 # Autoplay
