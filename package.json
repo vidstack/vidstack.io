@@ -22,8 +22,9 @@
 	},
 	"devDependencies": {
 		"@iconify-json/ri": "^1.1.0",
-		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/kit": "next",
+		"@sveltejs/adapter-auto": "1.0.0-next.17",
+		"@sveltejs/adapter-vercel": "1.0.0-next.43",
+		"@sveltejs/kit": "1.0.0-next.278",
 		"@tailwindcss/typography": "^0.5.2",
 		"@types/lru-cache": "^5.1.1",
 		"@types/markdown-it": "^12.2.3",
