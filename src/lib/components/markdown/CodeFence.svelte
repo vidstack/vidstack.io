@@ -19,7 +19,6 @@
 <div
 	class={clsx(
 		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg',
-		'border-gray-200 dark:border-gray-500',
 		lang && `lang-${lang}`,
 		ext && `ext-${ext}`,
 		showLineNumbers && 'pl-10'

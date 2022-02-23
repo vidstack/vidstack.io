@@ -73,11 +73,11 @@ export function dialogManager(
 								(e) => wasEnterKeyPressed(e) && setTimeout(() => onCloseDialog(true), 150)
 							)
 						);
-						dialogDisposal.add(
-							listen(element, 'pointerdown', () => {
-								setTimeout(() => onCloseDialog(), 150);
-							})
-						);
+						// dialogDisposal.add(
+						// 	listen(element, 'click', () => {
+						// 		setTimeout(() => onCloseDialog(), 150);
+						// 	})
+						// );
 					}
 				}
 			}
