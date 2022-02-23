@@ -172,7 +172,7 @@ function typography() {
 				},
 				pre: {
 					backgroundColor: 'var(--prose-pre-bg)',
-					boxShadow: theme('boxShadow.md'),
+					boxShadow: 'none',
 					display: 'flex'
 				},
 				'p + pre': {

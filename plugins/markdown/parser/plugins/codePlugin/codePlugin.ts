@@ -33,13 +33,25 @@ export const codePlugin: PluginSimple = (parser) => {
 			.join(',')}]`;
 
 		// Resolve line-numbers mark from token info.
-		const useLineNumbers = /:line-numbers\b/.test(info);
+		const useLineNumbers = /:line-numbers/.test(info);
 
-		html = `<CodeFence lang="${language.name}" ext="${language.ext}" linesCount={${linesCount}}${
-			useLineNumbers ? ' showLineNumbers' : ''
-		}${
-			(highlightLinesRanges?.length ?? 0) > 0 ? ` highlightLines={${highlight}}` : ''
-		}>{@html \`${html}\`}</CodeFence>`;
+		// Resolve line-numbers mark from token info.
+		const showCopyCode = /:copy/.test(info);
+
+		const props = [
+			`lang="${language.name}"`,
+			`ext="${language.ext}"`,
+			`linesCount={${linesCount}}`,
+			useLineNumbers && 'showLineNumbers',
+			(highlightLinesRanges?.length ?? 0) > 0 && `highlightLines={${highlight}}`,
+			showCopyCode && `rawCode={${JSON.stringify(token.content)}}`,
+			showCopyCode && 'showCopyCode',
+			`code={${JSON.stringify(html)}}`
+		]
+			.filter(Boolean)
+			.join(' ');
+
+		html = `<CodeFence ${props} />`;
 
 		return html;
 	};

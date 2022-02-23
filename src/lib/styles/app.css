@@ -21,16 +21,18 @@
 	--color-gray-soft: #a5a5a5;
 }
 
+.markdown pre {
+	tab-size: 2;
+	-o-tab-size: 2;
+	-moz-tab-size: 4;
+}
+
 .markdown p + .admonition {
 	margin-top: 2.5rem;
 }
 
 .markdown .admonition + table {
 	margin-top: 4rem;
-}
-
-.markdown .code-fence pre {
-	border-radius: 0;
 }
 
 .markdown .code-fence .code pre {

@@ -1,12 +1,16 @@
 <script lang="ts">
 	import clsx from 'clsx';
 
+	import CopyFileIcon from '~icons/ri/file-copy-line';
+
 	export let lang: string | null = null;
 	export let ext: string | null = null;
 	export let code: string | null = null;
+	export let rawCode: string | null = null;
 	export let linesCount: number = (code?.match(/"line"/g) || []).length;
 	export let showLineNumbers = false;
 	export let highlightLines: [number, number][] = [];
+	export let showCopyCode = false;
 
 	const isHighlightLine = (lineNumber: number): boolean =>
 		highlightLines.some(([start, end]) => lineNumber >= start && lineNumber <= end);
@@ -14,39 +18,88 @@
 	// `linesCount-1` since last line is always empty (prettier)
 	$: lines = [...Array(linesCount - 1).keys()].map((n) => n + 1);
 	$: highlightedLines = lines.filter(isHighlightLine);
+
+	let showCopiedCodePrompt = false;
+	async function copyCodeToClipboard() {
+		await navigator.clipboard.writeText(rawCode);
+		showCopiedCodePrompt = true;
+	}
+
+	$: if (showCopiedCodePrompt) {
+		setTimeout(() => {
+			showCopiedCodePrompt = false;
+		}, 400);
+	}
 </script>
 
 <div
 	class={clsx(
-		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg',
+		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg max-w-2xl mx-auto',
+		'border border-gray-200 dark:border-gray-500',
 		lang && `lang-${lang}`,
-		ext && `ext-${ext}`,
-		showLineNumbers && 'pl-10'
+		ext && `ext-${ext}`
 	)}
+	style="background-color: var(--prose-pre-bg);"
 >
-	<div class="code">
-		{#if code}
-			{@html code}
-		{:else}
-			<slot />
-		{/if}
-	</div>
+	{#if showCopyCode}
+		<div
+			class="sticky top-0 left-0 z-10 flex items-center rounded-md pt-2 backdrop-blur supports-backdrop-blur:bg-white/60"
+			style="background-color: rgba(31, 41, 55, 0.3);"
+		>
+			{#if ext}
+				<span class="ml-3.5 font-mono text-sm text-gray-300">{ext.toUpperCase()}</span>
+			{/if}
 
-	{#if showLineNumbers}
-		<pre class="absolute top-0 left-0 m-0 flex min-h-full flex-col text-sm leading-[28px]">
-			<div
-				class="hidden flex-none select-none text-right text-slate-600 992:block"
-				aria-hidden="true">{lines.join('\n')}</div>
-		</pre>
+			<div class="flex-1" />
+
+			<button type="button" class="mr-2 px-2 py-1 hover:text-white" on:click={copyCodeToClipboard}>
+				<div
+					class={clsx(
+						'text-white absolute top-2.5 right-4 transition-opacity z-10 duration-300 bg-green-300/60 px-2 py-1 rounded-md ease-out text-sm font-mono',
+						showCopiedCodePrompt ? 'opacity-100' : 'hidden opacity-0'
+					)}
+					aria-hidden="true"
+				>
+					Copied!
+				</div>
+
+				<CopyFileIcon
+					width="24"
+					height="24"
+					class={clsx(
+						showCopiedCodePrompt
+							? 'opacity-0'
+							: 'opacity-100 transition-opacity duration-600 ease-in'
+					)}
+				/>
+				<span class="sr-only">Copy code</span>
+			</button>
+		</div>
 	{/if}
 
-	{#each highlightedLines as lineNumber}
-		<div
-			class="absolute top-1.5 left-0 w-full bg-slate-400/10 font-mono text-transparent"
-			style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
-			aria-hidden="true"
-		>
-			x
+	<div class="code relative z-0">
+		<div class={clsx(showLineNumbers && 'pl-10')}>
+			{@html code}
 		</div>
-	{/each}
+
+		{#if showLineNumbers}
+			<pre
+				class="absolute top-3.5 left-0 m-0 flex flex-col text-sm leading-[27px]"
+				style="background-color: transparent; border-radius: 0; padding-top: 0;">
+			<div
+					class="hidden flex-none select-none text-right text-slate-600 992:block"
+					aria-hidden="true">{lines.join('\n')}</div>
+		</pre>
+		{/if}
+
+		{#each highlightedLines as lineNumber}
+			<div
+				class="absolute top-2.5 left-0 w-full bg-slate-400/10 font-mono text-[0.875em] text-transparent"
+				style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
+				aria-hidden="true"
+			>
+				x
+			</div>
+		{/each}
+	</div>
 </div>
