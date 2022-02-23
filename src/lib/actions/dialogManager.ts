@@ -51,6 +51,8 @@ export function dialogManager(
 		const dialogEl = document.querySelector(`#${dialogId}`);
 
 		if (dialogEl) {
+			(dialogEl as HTMLElement).style.pointerEvents = 'none';
+
 			// Prevent it bubbling up to document body so we can determine when to close dialog.
 			dialogDisposal.add(listen(dialogEl, 'pointerdown', (e) => e.stopPropagation()));
 
@@ -73,17 +75,31 @@ export function dialogManager(
 								(e) => wasEnterKeyPressed(e) && setTimeout(() => onCloseDialog(true), 150)
 							)
 						);
-						// dialogDisposal.add(
-						// 	listen(element, 'click', () => {
-						// 		setTimeout(() => onCloseDialog(), 150);
-						// 	})
-						// );
+
+						let pointerTimer;
+						dialogDisposal.add(
+							listen(element, 'pointerdown', () => {
+								window.clearTimeout(pointerTimer);
+								// Prevent user scrolling triggering close.
+								const y = dialogEl.scrollTop;
+								pointerTimer = setTimeout(() => {
+									if (dialogEl.scrollTop === y) {
+										onCloseDialog();
+									}
+								}, 150);
+							})
+						);
 					}
 				}
 			}
 		}
 
 		options.onOpen?.();
+
+		// Prevent dialog button click triggering a click inside dialog.
+		setTimeout(() => {
+			(dialogEl as HTMLElement).style.pointerEvents = 'auto';
+		}, 300);
 
 		return dialogEl;
 	}
