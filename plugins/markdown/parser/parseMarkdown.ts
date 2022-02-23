@@ -2,7 +2,6 @@ import fs from 'fs';
 import LRUCache from 'lru-cache';
 import matter from 'gray-matter';
 import toml from 'toml';
-import MagicString from 'magic-string';
 import type {
 	MarkdownMeta,
 	MarkdownParser,
@@ -36,13 +35,13 @@ export function parseMarkdownToSvelte(
 		...options
 	});
 
-	const { hoistedTags } = parserEnv as MarkdownParserEnv;
+	const { hoistedTags = [] } = parserEnv as MarkdownParserEnv;
 
-	const component = addHeadTags(
+	addMarkdownMetaStore(hoistedTags);
+
+	const component =
 		buildMetaExport(dedupeHoistedTags(hoistedTags), meta).join('\n') +
-			`\n\n<div class="markdown">${uncommentTemplateTags(html)}</div>`,
-		meta
-	);
+		`\n\n<div class="markdown">${uncommentTemplateTags(html)}</div>`;
 
 	const result: ParsedMarkdownToSvelteResult = {
 		component,
@@ -63,48 +62,6 @@ const CLOSING_STYLE_TAG_RE = /<\/style>/;
 const IMPORT_GLOBALS_CODE = ['Admonition', 'CodeFence', 'TableOfContents']
 	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
 	.join('\n');
-
-const SVELTE_OPENING_HEAD_TAG = '<svelte:head>';
-const SVELTE_CLOSING_HEAD_TAG = '</svelte:head>';
-
-function addHeadTags(component: string, meta: MarkdownMeta) {
-	const mcs = new MagicString(component);
-
-	const openingIndex = mcs.original.indexOf(SVELTE_OPENING_HEAD_TAG);
-	const closingIndex = mcs.original.indexOf(SVELTE_CLOSING_HEAD_TAG);
-
-	const hasHeadTags = openingIndex > -1 && closingIndex > -1;
-	const existingContent = hasHeadTags
-		? mcs.original.substring(openingIndex + SVELTE_OPENING_HEAD_TAG.length, closingIndex - 1)
-		: '';
-
-	const includeTitle = meta.title && !existingContent.includes('<title>');
-	const includeDescription =
-		meta.description && !existingContent.includes('<meta name="description"');
-
-	const description = `${meta.description} | Vidstack`;
-
-	const newContent = [
-		includeTitle && `<title>${meta.title}</title>`,
-		includeDescription && `<meta name="description" content="${description}" />`,
-		includeDescription && `<meta name="og:title" content="${description}" />`,
-		includeDescription && `<meta name="twitter:title" content="${description}" />`
-	]
-		.filter(Boolean)
-		.join('\n  ');
-
-	if (hasHeadTags) {
-		mcs.overwrite(
-			openingIndex,
-			closingIndex + SVELTE_CLOSING_HEAD_TAG.length,
-			`<svelte:head>${existingContent}\n  ${newContent}\n</svelte:head>\n\n`
-		);
-	} else {
-		mcs.prependLeft(0, `<svelte:head>  ${newContent}\n</svelte:head>\n\n`);
-	}
-
-	return mcs.toString();
-}
 
 function buildMetaExport(tags: string[], meta: MarkdownMeta): string[] {
 	const code = `\nconst __markdown = ${JSON.stringify(meta, null, 2)};\nexport{ __markdown };\n`;
@@ -168,6 +125,23 @@ function dedupeHoistedTags(tags: string[] = []): string[] {
 	return Array.from(deduped.values());
 }
 
+function addMarkdownMetaStore(hoistedTags: string[]) {
+	hoistedTags.push(
+		[
+			'<script>',
+			[
+				"import { markdownMeta } from '$stores/markdownMeta';",
+				'markdownMeta.set(__markdown);',
+				!hoistedTags.join('').includes('onDestroy') && "import { onDestroy } from 'svelte';",
+				'onDestroy(() => { markdownMeta.set(null); });'
+			]
+				.filter(Boolean)
+				.join('\n  '),
+			'</script>'
+		].join('\n')
+	);
+}
+
 function parseMarkdown(
 	parser: MarkdownParser,
 	source: string,
@@ -200,6 +174,12 @@ function parseMarkdown(
 
 	const { headers = [], importedFiles = [], links = [], title = '' } = parserEnv;
 
+	const _title = frontmatter.title ?? title;
+	const description = frontmatter.description;
+
+	delete frontmatter['title'];
+	delete frontmatter['description'];
+
 	const result: ParsedMarkdownResult = {
 		content,
 		html,
@@ -209,8 +189,8 @@ function parseMarkdown(
 		meta: {
 			excerpt: excerptHtml,
 			headers,
-			title: frontmatter.title ?? title,
-			description: frontmatter.description,
+			title: _title,
+			description,
 			frontmatter,
 			lastUpdated: Math.round(fs.statSync(filePath).mtimeMs)
 		}

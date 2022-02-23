@@ -38,14 +38,15 @@ module.exports = {
 					50: '#FFFFFF',
 					100: '#FBFBFB',
 					200: '#EAEAEA',
-					300: 'var(--color-gray-300)',
+					300: '#a5a5a5',
 					400: '#616161',
 					500: '#313131',
 					600: '#292929',
 					700: '#222222',
 					800: '#1A1A1A',
 					900: '#121212',
-					strong: 'var(--color-gray-strong)'
+					soft: 'var(--color-gray-soft)',
+					inverse: 'var(--color-gray-inverse)'
 				},
 				code: {
 					highlight: 'rgb(125 211 252 / 0.1)'
@@ -92,6 +93,8 @@ function typography() {
 	return (theme) => ({
 		DEFAULT: {
 			css: {
+				color: theme('colors.gray.300'),
+				fontSize: '18px',
 				maxWidth: 'none',
 				hr: {
 					marginTop: '3em',
@@ -133,7 +136,7 @@ function typography() {
 				},
 				'ul > li': {
 					position: 'relative',
-					paddingLeft: '1.75em'
+					paddingLeft: '1rem'
 				},
 				'ul > li::before': {
 					content: '""',
@@ -147,7 +150,7 @@ function typography() {
 				a: {
 					fontWeight: theme('fontWeight.semibold'),
 					textDecoration: 'none',
-					borderBottom: `1px solid ${theme('colors.gray.300')}`
+					borderBottom: `1px solid var(--color-brand)`
 				},
 				'a:hover': {
 					borderBottomWidth: '2px'
@@ -168,27 +171,18 @@ function typography() {
 					fontVariantLigatures: 'none'
 				},
 				pre: {
-					borderRadius: theme('borderRadius.md'),
-					padding: theme('padding.5'),
+					backgroundColor: 'var(--prose-pre-bg)',
 					boxShadow: theme('boxShadow.md'),
-					display: 'flex',
-					marginTop: `${20 / 14}em`,
-					marginBottom: `${32 / 14}em`
+					display: 'flex'
 				},
 				'p + pre': {
 					marginTop: `${-4 / 14}em`
-				},
-				'pre + pre': {
-					marginTop: `${-16 / 14}em`
 				},
 				'pre code': {
 					flex: 'none',
 					minWidth: '100%'
 				},
-				table: {
-					fontSize: theme('fontSize.sm')[0],
-					lineHeight: theme('fontSize.sm')[1].lineHeight
-				},
+				table: {},
 				'thead th': {
 					paddingTop: 0,
 					fontWeight: theme('fontWeight.semibold')
@@ -197,7 +191,7 @@ function typography() {
 					borderBottomWidth: '1px'
 				},
 				'tbody code': {
-					fontSize: theme('fontSize.xs')[0]
+					fontSize: theme('fontSize.sm')[0]
 				},
 				'figure figcaption': {
 					textAlign: 'center',
@@ -205,6 +199,11 @@ function typography() {
 				},
 				'figure > figcaption': {
 					marginTop: `${12 / 14}em`
+				},
+				blockQuote: {
+					color: theme('colors.gray.inverse'),
+					borderRadius: 2,
+					borderColor: 'currentColor'
 				}
 			}
 		}

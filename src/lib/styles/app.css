@@ -1,17 +1,64 @@
 :root {
 	font-size: 16px;
+	scroll-padding-top: 8rem;
 
 	--color-brand: #f30c59;
-	--color-gray-300: #545454;
-	--color-gray-strong: #121212;
+	--color-gray-soft: #707070;
+	--color-gray-inverse: #121212;
+
+	--prose-pre-bg: #1f2937;
 }
 
 :root.dark {
 	color-scheme: dark;
 
 	--color-brand: #f75a8e;
-	--color-gray-300: #a5a5a5;
-	--color-gray-strong: #ffffff;
+	--color-gray-soft: #8d8d8d;
+	--color-gray-inverse: #ffffff;
+}
+
+.dark .markdown {
+	--color-gray-soft: #a5a5a5;
+}
+
+.markdown p + .admonition {
+	margin-top: 2.5rem;
+}
+
+.markdown .admonition + table {
+	margin-top: 4rem;
+}
+
+.markdown .code-fence pre {
+	border-radius: 0;
+}
+
+.markdown .code-fence .code pre {
+	margin: 0;
+}
+
+.markdown .header-anchor {
+	margin-left: -1.25em;
+	padding: 0 0.23em;
+	font-size: 0.9em;
+	opacity: 0;
+	border: 0;
+	background-color: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.markdown h1:hover .header-anchor,
+	.markdown h2:hover .header-anchor,
+	.markdown h3:hover .header-anchor,
+	.markdown h4:hover .header-anchor {
+		opacity: 1;
+		margin-left: 0;
+	}
+}
+
+.markdown .header-anchor:focus-visible {
+	opacity: 1;
+	margin-left: 0;
 }
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {

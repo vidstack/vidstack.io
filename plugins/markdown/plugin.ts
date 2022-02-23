@@ -6,13 +6,14 @@ import { createMarkdownParser, parseMarkdownToSvelte, MarkdownParser } from './p
 export const PLUGIN_NAME = '@vidstack/markdown' as const;
 
 const DEFAULT_INCLUDE_RE = /\.md($|\?)/;
+const DEFAULT_EXCLUDE_RE = /^\/?~nav/;
 
 export function svelteMarkdownPlugin(): Plugin {
 	let parser: MarkdownParser;
 	let isBuild: boolean;
 	let define: Record<string, unknown> | undefined;
 
-	const filter = createFilter(DEFAULT_INCLUDE_RE);
+	const filter = createFilter(DEFAULT_INCLUDE_RE, DEFAULT_EXCLUDE_RE);
 
 	/** Page system file paths. */
 	const files = new Set<string>();

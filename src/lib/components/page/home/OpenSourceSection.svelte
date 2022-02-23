@@ -29,7 +29,7 @@
 <section class="mt-28 flex w-full flex-col items-center justify-center px-4 992:mt-40">
 	<h1 class="text-center text-4xl font-bold leading-[3.5rem] 768:text-5xl">Open Source</h1>
 
-	<p class="mt-10 max-w-lg text-center text-lg text-gray-300">
+	<p class="text-gray-soft mt-10 max-w-lg text-center text-lg">
 		You can find most our work on
 		<a
 			href="https://github.com/vidstack"
@@ -59,12 +59,12 @@
 						)}>{project.badge}</Chip
 					>
 				</div>
-				<p class="mt-6 flex-1 text-base leading-7 text-gray-300">
+				<p class="text-gray-soft mt-6 flex-1 text-base leading-7">
 					{project.description}
 				</p>
 				<div class="flex justify-end rounded-b-lg py-6">
 					<a href={project.repoHref} target="_blank">
-						<GitHubIcon class="ml-2 h-7 w-7 text-gray-300 hover:text-gray-strong" />
+						<GitHubIcon class="text-gray-soft ml-2 h-7 w-7 hover:text-gray-inverse" />
 						<span class="sr-only">{`Vidstack ${project.name} GitHub Repo`}</span>
 					</a>
 				</div>

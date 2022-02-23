@@ -4,16 +4,17 @@
 	import OpenSourceSection from '$components/page/home/OpenSourceSection.svelte';
 	import Footer from '$components/layout/Footer.svelte';
 	import HowSection from '$components/page/home/HowSection.svelte';
+
+	const title = 'Vidstack - Frontend video tools to build awesome media experiences on the web.';
 </script>
 
 <svelte:head>
-	<title>Vidstack</title>
-	<meta name="description" content="Video for frontend developers." />
-	<meta name="og:title" content="Vidstack - video for frontend developers." />
-	<meta name="twitter:title" content="Vidstack - video for frontend developers." />
+	<title>{title}</title>
+	<meta name="twitter:title" content={title} />
+	<meta property="og:title" content={title} />
 </svelte:head>
 
-<Navbar />
+<Navbar contain />
 
 <main class="z-0 flex min-w-full flex-col items-center pt-16 768:items-start">
 	<HeroSection />

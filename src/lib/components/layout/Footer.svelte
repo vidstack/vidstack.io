@@ -11,7 +11,7 @@
 		<SocialLink type="gitHub" />
 	</div>
 
-	<span class="mt-8 text-gray-300">
+	<span class="text-gray-soft mt-8">
 		© Vidstack {new Date().getFullYear()}
 	</span>
 </footer>

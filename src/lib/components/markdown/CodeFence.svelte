@@ -18,34 +18,36 @@
 
 <div
 	class={clsx(
-		'flex w-full flex-1 overflow-y-auto relative bg-slate-900 p-4 max-h-[60vh] 576:max-h-[32rem]',
+		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg',
+		'border-gray-200 dark:border-gray-500',
 		lang && `lang-${lang}`,
-		ext && `ext-${ext}`
+		ext && `ext-${ext}`,
+		showLineNumbers && 'pl-10'
 	)}
 >
-	{#if showLineNumbers}
-		<pre class="flex min-h-full flex-col text-sm leading-6">
-			<div
-				class="hidden flex-none select-none pr-4 text-right text-slate-600 992:block"
-				aria-hidden="true">{lines.join('\n')}</div>
-		</pre>
-	{/if}
-
-	{#each highlightedLines as lineNumber}
-		<div
-			class="absolute top-4 left-0 w-full bg-slate-600 bg-opacity-20 font-mono text-transparent"
-			style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
-			aria-hidden="true"
-		>
-			x
-		</div>
-	{/each}
-
-	<div class={clsx('flex-none', showLineNumbers && 'pl-4')}>
+	<div class="code">
 		{#if code}
 			{@html code}
 		{:else}
 			<slot />
 		{/if}
 	</div>
+
+	{#if showLineNumbers}
+		<pre class="absolute top-0 left-0 m-0 flex min-h-full flex-col text-sm leading-[28px]">
+			<div
+				class="hidden flex-none select-none text-right text-slate-600 992:block"
+				aria-hidden="true">{lines.join('\n')}</div>
+		</pre>
+	{/if}
+
+	{#each highlightedLines as lineNumber}
+		<div
+			class="absolute top-1.5 left-0 w-full bg-slate-400/10 font-mono text-transparent"
+			style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
+			aria-hidden="true"
+		>
+			x
+		</div>
+	{/each}
 </div>

@@ -28,7 +28,7 @@
 </script>
 
 <a
-	class="relative flex items-center text-gray-300 hover:text-gray-strong"
+	class="text-gray-soft relative flex items-center hover:text-gray-inverse"
 	href={href[type]}
 	target="_blank"
 >

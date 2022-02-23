@@ -1,31 +1,53 @@
-<script>
+<script lang="ts">
+	import clsx from 'clsx';
+	import { createEventDispatcher } from 'svelte';
+	import { page } from '$app/stores';
+
 	import MenuIcon from '~icons/ri/menu-5-line';
 	import ArrowDropDownIcon from '~icons/ri/arrow-drop-down-fill';
 
 	import VidstackLogoIcon from '$img/brand/vidstack-logo.svg?raw';
-	import SocialLink from '$components/social/SocialLink.svelte';
 
 	import ColorSchemeMenu from './ColorSchemeMenu.svelte';
-	import Popover from '$components/base/Popover.svelte';
 	import { colorScheme } from '$stores/colorScheme';
 	import { uppercaseFirstLetter } from '$utils/string';
+	import Popover from '$components/base/Popover.svelte';
+	import SocialLink from '$components/social/SocialLink.svelte';
+
+	export let contain = false;
+
+	const dispatch = createEventDispatcher();
+
+	function onOpenPopover() {
+		dispatch('open-popover');
+	}
+
+	function onClosePopover() {
+		dispatch('close-popover');
+	}
+
+	const navLinks = [{ title: 'Documentation', slug: '/docs/player/getting-started/installation' }];
 </script>
 
-<div class="flex w-full items-center px-5 py-4 1200:py-5">
-	<div class="flex w-full items-center 1200:mx-auto 1200:max-w-7xl">
+<div class="flex w-full flex-col items-center justify-center px-5 py-4 1200:py-5">
+	<div class={clsx('flex w-full items-center', contain && '1200:mx-auto 1200:max-w-7xl')}>
 		<a
 			href="/"
-			class="flex transform-gpu items-center transition-transform duration-100 hover:scale-105"
+			class="ml-1 flex transform-gpu items-center transition-transform duration-100 hover:scale-105"
+			sveltekit:prefetch
 		>
+			<span class="sr-only">Go home</span>
 			<div class="svg-responsive h-7 w-32 overflow-hidden text-gray-900 dark:text-gray-50">
 				{@html VidstackLogoIcon}
 			</div>
 		</a>
 
+		<slot name="left" />
+
 		<div class="flex-1" />
 
-		<div class="flex items-center 992:hidden">
-			<Popover overlay>
+		<div class="-mr-2 flex items-center 992:hidden">
+			<Popover overlay on:open={onOpenPopover} on:close={onClosePopover}>
 				<svelte:fragment slot="button">
 					<MenuIcon width="30" height="30" />
 					<span class="sr-only">Main navigation menu</span>
@@ -33,7 +55,25 @@
 
 				<section class="flex flex-col items-start">
 					<h1 class="mb-6 text-xl font-medium">Links</h1>
-					<a class="text-gray-300 hover:text-gray-strong" href="/docs/player"> Documentation </a>
+					<nav>
+						<ul>
+							{#each navLinks as { title, slug } (title + slug)}
+								{@const isActive = slug.startsWith($page.url.pathname)}
+								<li>
+									<a
+										class={clsx(
+											'text-gray-soft hover:text-gray-inverse',
+											isActive && 'border-b-2 border-current'
+										)}
+										href={slug}
+										sveltekit:prefetch
+									>
+										{title}
+									</a>
+								</li>
+							{/each}
+						</ul>
+					</nav>
 				</section>
 
 				<hr class="my-6 h-2 w-full border-t-2 border-dashed border-gray-200 dark:border-gray-400" />
@@ -79,11 +119,21 @@
 		<div class="hidden 992:flex 992:items-center">
 			<nav>
 				<ul class="flex items-center space-x-8 text-lg font-medium">
-					<li>
-						<a class="focus-visible:text-bra border-brand hover:border-b-2" href="/docs/player">
-							Documentation
-						</a>
-					</li>
+					{#each navLinks as { title, slug } (title + slug)}
+						{@const isActive = $page.url.pathname.startsWith(slug)}
+						<li>
+							<a
+								class={clsx(
+									'border-current hover:border-b-2 focus-visible:border-b-2',
+									isActive && 'border-b-2'
+								)}
+								href={slug}
+								sveltekit:prefetch
+							>
+								{title}
+							</a>
+						</li>
+					{/each}
 				</ul>
 			</nav>
 
@@ -99,4 +149,6 @@
 			</div>
 		</div>
 	</div>
+
+	<slot name="bottom" />
 </div>

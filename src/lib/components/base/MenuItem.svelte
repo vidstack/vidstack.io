@@ -19,7 +19,9 @@
 <li
 	class={clsx(
 		'flex items-center px-4 py-2 text-sm hover:cursor-pointer transition-colors duraiton-100',
-		selected ? 'text-brand' : 'text-gray-300 hover:text-gray-strong focus-visible:text-gray-strong'
+		selected
+			? 'text-brand'
+			: 'text-gray-soft hover:text-gray-inverse focus-visible:text-gray-inverse'
 	)}
 	role="menuitem"
 	tabindex="-1"

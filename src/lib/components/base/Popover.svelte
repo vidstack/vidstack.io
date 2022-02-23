@@ -4,54 +4,54 @@
 
 <script lang="ts">
 	import clsx from 'clsx';
+	import { createEventDispatcher } from 'svelte';
 	import Transition from 'svelte-class-transition';
 
 	import CloseIcon from '~icons/ri/close-fill';
 
 	import { ariaBool } from '$utils/aria';
 	import { wasEnterKeyPressed } from '$utils/keyboard';
+	import { hideDocumentScrollbar } from '$utils/scroll';
 	import { dialogManager, type CloseDialogCallback } from '$actions/dialogManager';
-	import { mediaQuery } from '$stores/mediaQuery';
+	import { isLargeScreen } from '$stores/isLargeScreen';
+
+	import Overlay from './Overlay.svelte';
 
 	export let open = false;
 	export let overlay = false;
+
+	const dispatch = createEventDispatcher();
 
 	let popoverId = `popover-${(idCount += 1)}`;
 	let popoverButtonId = `popover-button-${idCount}`;
 
 	let closeDialog: CloseDialogCallback;
 
-	const isLargeScreen = mediaQuery('(min-width: 992px)');
-
 	function onOpenPopover() {
 		open = true;
-		hideMainScrollbar(true);
+		hideDocumentScrollbar(true);
+		dispatch('open');
 	}
 
 	function onClosePopover() {
 		open = false;
-		hideMainScrollbar(false);
-	}
-
-	function hideMainScrollbar(hidden: boolean) {
-		window.requestAnimationFrame(() => {
-			document.documentElement.classList[hidden ? 'add' : 'remove']('overflow-hidden');
-		});
+		hideDocumentScrollbar(false);
+		dispatch('close');
 	}
 
 	$: if ($isLargeScreen) {
 		closeDialog?.();
-		hideMainScrollbar(false);
+		hideDocumentScrollbar(false);
 	}
 </script>
 
-<div class="inline-block text-left">
+<div class="relative inline-block text-left">
 	<button
 		id={popoverButtonId}
 		type="button"
 		class={clsx(
 			'inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium ',
-			open ? 'text-gray-strong' : 'text-gray-300 hover:text-gray-strong'
+			open ? 'text-gray-inverse' : 'text-gray-soft hover:text-gray-inverse'
 		)}
 		aria-controls={popoverId}
 		aria-expanded={ariaBool(open)}
@@ -68,12 +68,7 @@
 	</button>
 
 	{#if overlay}
-		<div
-			class={clsx(
-				'fixed inset-0 bg-gray-600 bg-opacity-50 transition-opacity duration-75 pointer-events-auto z-40',
-				open ? 'opacity-100 visible' : 'opacity-0 invisible'
-			)}
-		/>
+		<Overlay {open} />
 	{/if}
 
 	<Transition
@@ -87,7 +82,7 @@
 		<div
 			id={popoverId}
 			class={clsx(
-				'absolute top-0 right-0 w-full p-5 pt-4 origin-top-right z-50',
+				'absolute -top-4 -right-5 min-w-[340px] p-5 pt-4 origin-top-right z-50',
 				!open && 'invisible'
 			)}
 			tabindex="-1"
@@ -99,16 +94,19 @@
 				<div class="flex items-center">
 					<div class="flex-1" />
 					<button
-						class={clsx('p-4 text-gray-300 hover:text-gray-strong', !open && 'pointer-events-none')}
+						class={clsx(
+							'p-4 text-gray-soft hover:text-gray-inverse',
+							!open && 'pointer-events-none'
+						)}
 						on:pointerdown={() => closeDialog()}
 						on:keydown={(e) => wasEnterKeyPressed(e) && closeDialog(true)}
 					>
 						<CloseIcon width="24" height="24" />
-						<span class="sr-only">Close popover</span>
+						<span class="sr-only">Close dialog</span>
 					</button>
 				</div>
 
-				<div class="p-4 pt-0">
+				<div class="px-4 pt-0 pb-8">
 					<slot />
 				</div>
 			</div>

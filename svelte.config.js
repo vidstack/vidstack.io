@@ -3,6 +3,7 @@ import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 import Icons from 'unplugin-icons/vite';
 
+import { navPlugin } from './plugins/dist/nav/index.js';
 import { svelteMarkdownPlugin } from './plugins/dist/markdown/index.js';
 import { highlightCodePlugin } from './plugins/dist/highlight/index.js';
 
@@ -28,7 +29,25 @@ const config = {
 					$utils: path.resolve('./src/lib/utils')
 				}
 			},
-			plugins: [svelteMarkdownPlugin(), highlightCodePlugin(), Icons({ compiler: 'svelte' })]
+			plugins: [
+				navPlugin({
+					formatCategoryName(baseUrl, category) {
+						if (baseUrl === '/docs/player') {
+							if (category === 'ui') return 'UI';
+						}
+
+						return null;
+					},
+					sortCategories(baseUrl) {
+						if (baseUrl === '/docs/player') {
+							return ['getting-started', 'core-concepts', 'providers', 'ui'];
+						}
+					}
+				}),
+				svelteMarkdownPlugin(),
+				highlightCodePlugin(),
+				Icons({ compiler: 'svelte' })
+			]
 		}
 	}
 };

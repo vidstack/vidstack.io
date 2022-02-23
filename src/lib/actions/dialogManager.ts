@@ -8,6 +8,7 @@ export type DialogManagerOptions = {
 	focusSelectors?: string[];
 	openOnPointerEnter?: boolean;
 	closeOnPointerLeave?: boolean;
+	closeOnSelectSelectors?: string[];
 	close?: (callback: CloseDialogCallback) => void;
 };
 
@@ -53,10 +54,32 @@ export function dialogManager(
 			// Prevent it bubbling up to document body so we can determine when to close dialog.
 			dialogDisposal.add(listen(dialogEl, 'pointerdown', (e) => e.stopPropagation()));
 
-			disposal.add(listen(dialogEl, 'vds-close-dialog', onCloseDialog));
+			disposal.add(
+				listen(dialogEl, 'vds-close-dialog', (e: CustomEvent<boolean>) => onCloseDialog(e.detail))
+			);
 
 			if (options.closeOnPointerLeave) {
-				dialogDisposal.add(listen(dialogEl, 'pointerleave', onCloseDialog));
+				dialogDisposal.add(listen(dialogEl, 'pointerleave', () => onCloseDialog()));
+			}
+
+			if (options.closeOnSelectSelectors) {
+				for (const selector of options.closeOnSelectSelectors) {
+					const elements = Array.from(dialogEl.querySelectorAll(selector)) as HTMLElement[];
+					for (const element of elements) {
+						dialogDisposal.add(
+							listen(
+								element,
+								'keydown',
+								(e) => wasEnterKeyPressed(e) && setTimeout(() => onCloseDialog(true), 150)
+							)
+						);
+						dialogDisposal.add(
+							listen(element, 'pointerdown', () => {
+								setTimeout(() => onCloseDialog(), 150);
+							})
+						);
+					}
+				}
 			}
 		}
 
@@ -88,8 +111,6 @@ export function dialogManager(
 				const elements = Array.from(dialogEl.querySelectorAll(selector)) as HTMLElement[];
 				focusableElements.push(...elements);
 			}
-
-			console.log(focusableElements);
 
 			if (focusableElements.length === 0) {
 				(dialogEl as HTMLElement)?.focus();

@@ -48,3 +48,20 @@ declare module '*.md' {
 	export { __markdown };
 	export default SvelteComponent;
 }
+
+declare module '~nav/*' {
+	type NavItem = {
+		title: string;
+		slug: string;
+	};
+
+	type NavCategory = {
+		category: string;
+		items: NavItem[];
+	};
+
+	type NavCategories = NavCategory[];
+
+	const nav: NavCategories;
+	export default nav;
+}
