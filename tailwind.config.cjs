@@ -93,7 +93,7 @@ function typography() {
 	return (theme) => ({
 		DEFAULT: {
 			css: {
-				color: theme('colors.gray.300'),
+				color: theme('colors.gray.soft'),
 				fontSize: '18px',
 				maxWidth: 'none',
 				hr: {
