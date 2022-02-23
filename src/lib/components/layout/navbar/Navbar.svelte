@@ -26,7 +26,13 @@
 		dispatch('close-popover');
 	}
 
-	const navLinks = [{ title: 'Documentation', slug: '/docs/player/getting-started/installation' }];
+	const navLinks = [
+		{
+			title: 'Documentation',
+			slug: '/docs/player/getting-started/installation',
+			match: /^\/docs\/player/
+		}
+	];
 </script>
 
 <div class="flex w-full flex-col items-center justify-center px-5 py-4 1200:py-5">
@@ -57,8 +63,8 @@
 					<h1 class="mb-6 text-xl font-medium">Links</h1>
 					<nav>
 						<ul>
-							{#each navLinks as { title, slug } (title + slug)}
-								{@const isActive = slug.startsWith($page.url.pathname)}
+							{#each navLinks as { title, slug, match } (title + slug)}
+								{@const isActive = match.test($page.url.pathname)}
 								<li>
 									<a
 										class={clsx(
@@ -119,8 +125,8 @@
 		<div class="hidden 992:flex 992:items-center">
 			<nav>
 				<ul class="flex items-center space-x-8 text-lg font-medium">
-					{#each navLinks as { title, slug } (title + slug)}
-						{@const isActive = $page.url.pathname.startsWith(slug)}
+					{#each navLinks as { title, slug, match } (title + slug)}
+						{@const isActive = match.test($page.url.pathname)}
 						<li>
 							<a
 								class={clsx(
