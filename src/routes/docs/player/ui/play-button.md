@@ -1,6 +1,6 @@
 ---
 title: Play Button
-position: 4
+sidebar_position: 4
 ---
 
 # Play Button

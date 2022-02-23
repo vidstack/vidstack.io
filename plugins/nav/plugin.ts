@@ -64,12 +64,12 @@ export function navPlugin(options?: NavPluginOptions): Plugin {
 
 					const title = frontmatter.title ?? '___Unknown___';
 					const slug = '/' + path.relative(ROUTES_DIR, filePath).replace(/(\/index)?\..*?$/, '');
-					const position = frontmatter.position ?? 0;
+					const sidebar_position = frontmatter.sidebar_position ?? 0;
 					const category = slug.replace(`${baseUrl}/`, '').split('/')[0] ?? '';
 
 					if (!nav[category]) nav[category] = [];
 
-					nav[category].push({ title, slug, position });
+					nav[category].push({ title, slug, position: sidebar_position });
 
 					watching.set(filePath, id);
 				}

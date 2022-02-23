@@ -1,6 +1,6 @@
 ---
 title: Custom Elements
-position: 8
+sidebar_position: 8
 ---
 
 # Custom Elements

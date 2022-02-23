@@ -1,6 +1,6 @@
 ---
 title: Time
-position: 10
+sidebar_position: 10
 ---
 
 # Time

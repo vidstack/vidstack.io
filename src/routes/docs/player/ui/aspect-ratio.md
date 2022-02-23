@@ -1,6 +1,6 @@
 ---
 title: Aspect Ratio
-position: 1
+sidebar_position: 1
 ---
 
 # Aspect Ratio

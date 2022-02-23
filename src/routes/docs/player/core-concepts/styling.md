@@ -1,6 +1,6 @@
 ---
 title: Styling
-position: 4
+sidebar_position: 4
 ---
 
 # Styling

@@ -1,6 +1,6 @@
 ---
 title: Volume Slider
-position: 9
+sidebar_position: 9
 ---
 
 # Volume Slider
