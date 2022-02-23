@@ -9,7 +9,11 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: ['Inter VF', ...defaultTheme.fontFamily.sans],
-			mono: ['Fira Code VF', ...defaultTheme.fontFamily.mono]
+			mono: [
+				'ui-monospace',
+				'Fira Code VF',
+				...defaultTheme.fontFamily.mono.filter((f) => f !== 'ui-monospace')
+			]
 		},
 		screens: {
 			420: '420px',
