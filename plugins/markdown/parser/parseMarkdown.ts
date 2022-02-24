@@ -59,7 +59,7 @@ const CLOSING_SCRIPT_TAG_RE = /<\/script>/;
 const OPENING_STYLE_TAG_RE = /<\s*style[^>]*>/;
 const CLOSING_STYLE_TAG_RE = /<\/style>/;
 
-const IMPORT_GLOBALS_CODE = ['Admonition', 'CodeFence', 'TableOfContents']
+const IMPORT_GLOBALS_CODE = ['Admonition', 'CodeFence', 'TableOfContents', 'Steps', 'Step']
 	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
 	.join('\n');
 

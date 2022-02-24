@@ -4,13 +4,13 @@ import container from 'markdown-it-container';
 
 import type { MarkdownParser } from '../types';
 
-export const containerPlugin: PluginSimple = (parser: MarkdownParser) => {
+export const admonitionPlugin: PluginSimple = (parser: MarkdownParser) => {
 	parser
-		.use(...createContainer('note'))
-		.use(...createContainer('tip'))
-		.use(...createContainer('info'))
-		.use(...createContainer('warning'))
-		.use(...createContainer('danger'));
+		.use(...createAdmonition('note'))
+		.use(...createAdmonition('tip'))
+		.use(...createAdmonition('info'))
+		.use(...createAdmonition('warning'))
+		.use(...createAdmonition('danger'));
 };
 
 type ContainerArgs = [
@@ -21,7 +21,7 @@ type ContainerArgs = [
 	}
 ];
 
-function createContainer(type: string): ContainerArgs {
+function createAdmonition(type: string): ContainerArgs {
 	return [
 		container,
 		type,

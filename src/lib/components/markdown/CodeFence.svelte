@@ -74,7 +74,7 @@
 				>
 					<div
 						class={clsx(
-							'text-white absolute top-2.5 right-4 transition-opacity z-10 duration-300 bg-green-300/60 px-2 py-1 rounded-md ease-out text-sm font-mono',
+							'text-white absolute top-2.5 right-4 transition-opacity z-10 duration-300 bg-brand-300/80 px-2 py-1 rounded-md ease-out text-sm font-mono',
 							showCopiedCodePrompt ? 'opacity-100' : 'hidden opacity-0'
 						)}
 						aria-hidden="true"

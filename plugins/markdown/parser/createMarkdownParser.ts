@@ -3,7 +3,7 @@ import MarkdownIt from 'markdown-it';
 import {
 	anchorPlugin,
 	codePlugin,
-	containerPlugin,
+	admonitionPlugin,
 	createShikiPlugin,
 	customComponentPlugin,
 	emojiPlugin,
@@ -12,7 +12,8 @@ import {
 	hoistTagsPlugin,
 	importCodePlugin,
 	linksPlugin,
-	tocPlugin
+	tocPlugin,
+	stepsPlugin
 } from './plugins';
 import { type MarkdownParser } from './types';
 
@@ -26,7 +27,8 @@ export async function createMarkdownParser(): Promise<MarkdownParser> {
 	parser.use(tocPlugin);
 	parser.use(extractHeadersPlugin);
 	parser.use(extractTitlePlugin);
-	parser.use(containerPlugin);
+	parser.use(admonitionPlugin);
+	parser.use(stepsPlugin);
 	parser.use(customComponentPlugin);
 	parser.use(linksPlugin);
 	parser.use(codePlugin);

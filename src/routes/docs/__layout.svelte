@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '$styles/markdown.css';
+
 	import { page } from '$app/stores';
 	import socialCardLarge from '$img/brand/social-card-large.jpg';
 	import { activeMarkdownCategory, markdownMeta } from '$stores/markdownMeta';

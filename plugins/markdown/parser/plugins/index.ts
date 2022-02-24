@@ -1,6 +1,6 @@
 export * from './anchorPlugin';
 export * from './codePlugin';
-export * from './containersPlugin';
+export * from './admonitionPlugin';
 export * from './customComponentPlugin';
 export * from './emojiPlugin';
 export * from './extractHeadersPlugin';
@@ -10,3 +10,4 @@ export * from './importCodePlugin';
 export * from './linksPlugin';
 export * from './tocPlugin';
 export * from './shikiPlugin';
+export * from './stepsPlugin';
