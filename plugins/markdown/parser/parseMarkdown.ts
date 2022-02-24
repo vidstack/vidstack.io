@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import LRUCache from 'lru-cache';
 import matter from 'gray-matter';
 import toml from 'toml';
@@ -10,6 +11,7 @@ import type {
 	ParseMarkdownOptions
 } from './types';
 import { preventViteReplace } from './utils/preventViteReplace';
+import { slugify } from './utils/slugify';
 
 export type ParsedMarkdownToSvelteResult = {
 	component: string;
@@ -38,6 +40,7 @@ export function parseMarkdownToSvelte(
 	const { hoistedTags = [] } = parserEnv as MarkdownParserEnv;
 
 	addMarkdownMetaStore(hoistedTags);
+	addSlug(options.baseUrl ?? '/', filePath, hoistedTags);
 
 	const component =
 		buildMetaExport(dedupeHoistedTags(hoistedTags), meta).join('\n') +
@@ -59,7 +62,14 @@ const CLOSING_SCRIPT_TAG_RE = /<\/script>/;
 const OPENING_STYLE_TAG_RE = /<\s*style[^>]*>/;
 const CLOSING_STYLE_TAG_RE = /<\/style>/;
 
-const IMPORT_GLOBALS_CODE = ['Admonition', 'CodeFence', 'TableOfContents', 'Steps', 'Step']
+const IMPORT_GLOBALS_CODE = [
+	'Admonition',
+	'CodeFence',
+	'TableOfContents',
+	'Steps',
+	'Step',
+	'TabbedLinks'
+]
 	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
 	.join('\n');
 
@@ -123,6 +133,25 @@ function dedupeHoistedTags(tags: string[] = []): string[] {
 	});
 
 	return Array.from(deduped.values());
+}
+
+const ROOT_ROUTES_PATH = path.resolve(process.cwd(), 'src/routes');
+function addSlug(baseUrl: string, filePath: string, hoistedTags: string[]) {
+	const route = `${baseUrl}${path.relative(ROOT_ROUTES_PATH, filePath)}`;
+
+	const slug = route
+		.replace(/\/?(index|md).*?$/, '')
+		.split('/')
+		.map(slugify)
+		.join('/');
+
+	hoistedTags.push(
+		[
+			'<script context="module">',
+			`export const /*#__PURE__*/__slug = \`${slug}\`;`,
+			'</script>'
+		].join('\n')
+	);
 }
 
 function addMarkdownMetaStore(hoistedTags: string[]) {

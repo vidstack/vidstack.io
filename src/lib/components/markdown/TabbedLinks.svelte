@@ -1,0 +1,38 @@
+<script lang="ts" context="module">
+	export type Link = {
+		title: string;
+		href: string;
+	};
+</script>
+
+<script lang="ts">
+	import { page } from '$app/stores';
+	import clsx from 'clsx';
+
+	export let links: Link[] = [];
+</script>
+
+<div class="not-prose -mx-4 mb-6 flex overflow-auto 576:-mx-6">
+	<div class="min-w-full flex-none px-4 576:px-6">
+		<ul class="flex space-x-6 whitespace-nowrap border-b border-gray-200 dark:border-gray-500">
+			{#each links as link (link.title + link.href)}
+				{@const isActive = $page.url.pathname === link.href}
+				<li>
+					<h2>
+						<a
+							class={clsx(
+								'-mb-px flex border-current pt-3 pb-2.5 leading-6 px-4 hover:border-b-2',
+								isActive
+									? 'text-brand font-semibold border-b-2'
+									: 'text-gray-soft hover:text-gray-inverse'
+							)}
+							href={link.href}
+						>
+							{link.title}
+						</a>
+					</h2>
+				</li>
+			{/each}
+		</ul>
+	</div>
+</div>

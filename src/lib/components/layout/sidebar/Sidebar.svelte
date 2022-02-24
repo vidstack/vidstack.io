@@ -2,14 +2,15 @@
 	export type SidebarItem = {
 		title: string;
 		slug: string;
+		match?: boolean;
 	};
 
-	export type SidebarCategory = {
-		category: string;
-		items: SidebarItem[];
-	};
+	export type SidebarNav = Record<string, SidebarItem[]>;
 
-	export type SidebarCategories = SidebarCategory[];
+	export function isActiveSidebarItem({ match, slug }: SidebarItem, currentPath: string) {
+		const isMatch = match && currentPath.startsWith(slug);
+		return match ? isMatch : currentPath === slug;
+	}
 </script>
 
 <script lang="ts">
@@ -29,7 +30,7 @@
 	// Only valid on small screen (<992px).
 	export let open = false;
 
-	export let categories: SidebarCategories = [];
+	export let nav: SidebarNav = [];
 </script>
 
 <aside
@@ -58,24 +59,24 @@
 
 	<nav class="p-6 pt-0 pl-8 992:pt-6">
 		<ul>
-			{#each categories as { category, items } (category)}
+			{#each Object.keys(nav) as category (category)}
+				{@const items = nav[category]}
 				<li class="mt-12 first:mt-4 992:mt-10">
 					<h5 class="text-gray-strong mb-8 text-lg font-semibold 992:mb-3">{category}</h5>
 					<ul class="space-y-3 border-l border-gray-200 dark:border-gray-500">
-						{#each items as { title, slug }}
-							{@const isActive = $page.url.pathname === slug}
+						{#each items as item (item.title + item.slug)}
 							<li class="first:mt-6">
 								<a
 									class={clsx(
 										'border-l-2 -ml-px pl-4 py-2 992:py-1.5 block',
-										isActive
+										isActiveSidebarItem(item, $page.url.pathname)
 											? 'border-brand-200 dark:border-brand font-semibold text-brand'
 											: 'border-transparent font-normal hover:border-gray-inverse text-gray-soft hover:text-gray-inverse'
 									)}
-									href={slug}
+									href={item.slug}
 									sveltekit:prefetch
 								>
-									{title}
+									{item.title}
 								</a>
 							</li>
 						{/each}

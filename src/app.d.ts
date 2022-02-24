@@ -44,24 +44,8 @@ declare module '*.md' {
 
 	const component: SvelteComponent;
 	const __markdown: MarkdownMeta;
+	const __slug: string;
 
-	export { __markdown };
+	export { __markdown, __slug };
 	export default SvelteComponent;
-}
-
-declare module '~nav/*' {
-	type NavItem = {
-		title: string;
-		slug: string;
-	};
-
-	type NavCategory = {
-		category: string;
-		items: NavItem[];
-	};
-
-	type NavCategories = NavCategory[];
-
-	const nav: NavCategories;
-	export default nav;
 }

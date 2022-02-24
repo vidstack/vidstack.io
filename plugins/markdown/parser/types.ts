@@ -3,6 +3,7 @@ import type MarkdownIt from 'markdown-it';
 export type MarkdownParser = MarkdownIt;
 
 export type ParseMarkdownOptions = {
+	baseUrl?: string;
 	escapeConstants?: boolean;
 	define?: Record<string, unknown>;
 };

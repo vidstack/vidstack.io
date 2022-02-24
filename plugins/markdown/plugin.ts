@@ -5,10 +5,14 @@ import { createMarkdownParser, parseMarkdownToSvelte, MarkdownParser } from './p
 
 export const PLUGIN_NAME = '@vidstack/markdown' as const;
 
+export type SvelteMarkdownPluginOptions = {
+	baseUrl: string;
+};
+
 const DEFAULT_INCLUDE_RE = /\.md($|\?)/;
 const DEFAULT_EXCLUDE_RE = /^\/?~nav/;
 
-export function svelteMarkdownPlugin(): Plugin {
+export function svelteMarkdownPlugin({ baseUrl }: SvelteMarkdownPluginOptions): Plugin {
 	let parser: MarkdownParser;
 	let isBuild: boolean;
 	let define: Record<string, unknown> | undefined;
@@ -17,6 +21,13 @@ export function svelteMarkdownPlugin(): Plugin {
 
 	/** Page system file paths. */
 	const files = new Set<string>();
+
+	const parseOptions = () =>
+		({
+			baseUrl,
+			escapeConstants: isBuild,
+			define
+		} as const);
 
 	return {
 		name: PLUGIN_NAME,
@@ -28,10 +39,7 @@ export function svelteMarkdownPlugin(): Plugin {
 		},
 		transform(code, id) {
 			if (filter(id)) {
-				const { component } = parseMarkdownToSvelte(parser, code, id, {
-					escapeConstants: isBuild,
-					define
-				});
+				const { component } = parseMarkdownToSvelte(parser, code, id, parseOptions());
 
 				return component;
 			}
@@ -44,12 +52,7 @@ export function svelteMarkdownPlugin(): Plugin {
 			// Hot reload `.md` files as `.svelte` files.
 			if (files.has(file)) {
 				const content = await read();
-
-				const { component } = parseMarkdownToSvelte(parser, content, file, {
-					escapeConstants: isBuild,
-					define
-				});
-
+				const { component } = parseMarkdownToSvelte(parser, content, file, parseOptions());
 				ctx.read = () => component;
 			}
 		}

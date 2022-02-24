@@ -4,7 +4,7 @@
 
 	import clsx from 'clsx';
 	import Navbar from '../navbar/Navbar.svelte';
-	import Sidebar, { type SidebarCategories } from '../sidebar/Sidebar.svelte';
+	import Sidebar, { isActiveSidebarItem, type SidebarNav } from '../sidebar/Sidebar.svelte';
 
 	import { ariaBool } from '$utils/aria';
 	import { type CloseDialogCallback, dialogManager } from '$actions/dialogManager';
@@ -16,16 +16,15 @@
 	let isNavPopoverOpen = false;
 	let closeSidebar: CloseDialogCallback;
 
-	export let categories: SidebarCategories = [];
+	export let nav: SidebarNav = {};
 
-	$: activeItem = categories
-		.map(({ items }) => items)
+	$: activeItem = Object.values(nav)
 		.flat()
-		.find((item) => $page.url.pathname === item.slug);
+		.find((item) => isActiveSidebarItem(item, $page.url.pathname));
 
-	$: activeCategory = categories.find(({ items }) =>
-		items.some((item) => item.title === activeItem.title && item.slug === activeItem.slug)
-	)?.category;
+	$: activeCategory = Object.keys(nav).find((category) =>
+		nav[category].some((item) => item.title === activeItem?.title && item.slug === activeItem?.slug)
+	);
 
 	$: activeMarkdownCategory.set(activeCategory ?? '');
 </script>
@@ -82,7 +81,7 @@
 					<RightArrowIcon class="mx-1" width="16" height="16" />
 				</li>
 				<li class="truncate font-semibold text-slate-900 dark:text-slate-200">
-					{activeItem.title}
+					{activeItem?.title}
 				</li>
 			</ol>
 		</div>
@@ -90,7 +89,7 @@
 </div>
 
 <main class="max-w-8xl z-20 mx-auto">
-	<Sidebar open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} {categories} />
+	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
 	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">
 		<div class="relative mx-auto mt-[13rem] max-w-3xl 992:mt-32 1200:max-w-none">

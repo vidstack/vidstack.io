@@ -50,7 +50,9 @@ function createStep(): ContainerArgs {
 				const [, description] = token.info.trim().match(/desc=(.*?)$/) ?? [];
 
 				const content = [
-					headingTag && title && `<${headingTag} slot="title">${title}</${headingTag}>`,
+					headingTag &&
+						title &&
+						`<${headingTag} slot="title" class="not-prose">${title}</${headingTag}>`,
 					description &&
 						`<svelte:fragment slot="description">${parser.render(description)}</svelte:fragment>`
 				];

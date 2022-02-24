@@ -19,7 +19,7 @@
 	style="counter-increment: step;"
 >
 	<div class="col-span-2 mb-6 1200:mb-2">
-		<span class="mb-2 text-gray-soft">
+		<span class="not-prose mb-4 text-base font-semibold leading-6 text-gray-inverse">
 			<slot name="title" />
 		</span>
 
