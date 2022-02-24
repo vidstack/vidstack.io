@@ -7,10 +7,12 @@
 	export let ext: string | null = null;
 	export let code: string | null = null;
 	export let rawCode: string | null = null;
+	export let title: string | null = null;
 	export let linesCount: number = (code?.match(/"line"/g) || []).length;
 	export let showLineNumbers = false;
 	export let highlightLines: [number, number][] = [];
 	export let showCopyCode = false;
+	export let copyHighlightOnly = false;
 
 	const isHighlightLine = (lineNumber: number): boolean =>
 		highlightLines.some(([start, end]) => lineNumber >= start && lineNumber <= end);
@@ -21,7 +23,15 @@
 
 	let showCopiedCodePrompt = false;
 	async function copyCodeToClipboard() {
-		await navigator.clipboard.writeText(rawCode);
+		const copiedCode =
+			highlightLines.length > 0 && copyHighlightOnly
+				? rawCode
+						.split('\n')
+						.filter((_, i) => isHighlightLine(i + 1))
+						.join('\n')
+				: rawCode;
+
+		await navigator.clipboard.writeText(copiedCode);
 		showCopiedCodePrompt = true;
 	}
 
@@ -30,6 +40,10 @@
 			showCopiedCodePrompt = false;
 		}, 400);
 	}
+
+	$: showTopBar = title || showCopyCode;
+	$: hasTopbarTitle = title || ext;
+	$: topbarTitle = title ?? (ext === 'sh' ? 'Terminal' : ext?.toUpperCase());
 </script>
 
 <div
@@ -41,39 +55,45 @@
 	)}
 	style="background-color: var(--prose-pre-bg);"
 >
-	{#if showCopyCode}
+	{#if showTopBar}
 		<div
 			class="sticky top-0 left-0 z-10 flex items-center rounded-md pt-2 backdrop-blur supports-backdrop-blur:bg-white/60"
 			style="background-color: rgba(31, 41, 55, 0.3);"
 		>
-			{#if ext}
-				<span class="ml-3.5 font-mono text-sm text-gray-300">{ext.toUpperCase()}</span>
+			{#if hasTopbarTitle}
+				<span class="ml-3.5 font-mono text-sm text-gray-300">{topbarTitle}</span>
 			{/if}
 
 			<div class="flex-1" />
 
-			<button type="button" class="mr-2 px-2 py-1 hover:text-white" on:click={copyCodeToClipboard}>
-				<div
-					class={clsx(
-						'text-white absolute top-2.5 right-4 transition-opacity z-10 duration-300 bg-green-300/60 px-2 py-1 rounded-md ease-out text-sm font-mono',
-						showCopiedCodePrompt ? 'opacity-100' : 'hidden opacity-0'
-					)}
-					aria-hidden="true"
+			{#if showCopyCode}
+				<button
+					type="button"
+					class="mr-2 px-2 py-1 hover:text-white"
+					on:click={copyCodeToClipboard}
 				>
-					Copied!
-				</div>
+					<div
+						class={clsx(
+							'text-white absolute top-2.5 right-4 transition-opacity z-10 duration-300 bg-green-300/60 px-2 py-1 rounded-md ease-out text-sm font-mono',
+							showCopiedCodePrompt ? 'opacity-100' : 'hidden opacity-0'
+						)}
+						aria-hidden="true"
+					>
+						Copied!
+					</div>
 
-				<CopyFileIcon
-					width="24"
-					height="24"
-					class={clsx(
-						showCopiedCodePrompt
-							? 'opacity-0'
-							: 'opacity-100 transition-opacity duration-600 ease-in'
-					)}
-				/>
-				<span class="sr-only">Copy code</span>
-			</button>
+					<CopyFileIcon
+						width="24"
+						height="24"
+						class={clsx(
+							showCopiedCodePrompt
+								? 'opacity-0'
+								: 'opacity-100 transition-opacity duration-600 ease-in'
+						)}
+					/>
+					<span class="sr-only">Copy code</span>
+				</button>
+			{/if}
 		</div>
 	{/if}
 

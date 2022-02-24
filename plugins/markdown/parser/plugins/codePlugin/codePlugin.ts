@@ -32,13 +32,13 @@ export const codePlugin: PluginSimple = (parser) => {
 			?.map((range) => `[${range[0]}, ${range[1]}]`)
 			.join(',')}]`;
 
-		// Resolve line-numbers mark from token info.
+		const title = info.match(/:title=(.*?)(:|{|$)/)?.[1];
 		const useLineNumbers = /:line-numbers/.test(info);
-
-		// Resolve line-numbers mark from token info.
-		const showCopyCode = /:copy/.test(info);
+		const showCopyCode = /:copy(-highlight)?/.test(info);
+		const copyHighlightOnly = /:copy-highlight/.test(info);
 
 		const props = [
+			title && `title="${title}"`,
 			`lang="${language.name}"`,
 			`ext="${language.ext}"`,
 			`linesCount={${linesCount}}`,
@@ -46,6 +46,7 @@ export const codePlugin: PluginSimple = (parser) => {
 			(highlightLinesRanges?.length ?? 0) > 0 && `highlightLines={${highlight}}`,
 			showCopyCode && `rawCode={${JSON.stringify(token.content)}}`,
 			showCopyCode && 'showCopyCode',
+			copyHighlightOnly && `copyHighlightOnly`,
 			`code={${JSON.stringify(html)}}`
 		]
 			.filter(Boolean)
