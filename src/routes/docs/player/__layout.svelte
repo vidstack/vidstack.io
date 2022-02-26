@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DocsSidebar from '$components/layout/sidebar/DocsSidebar.svelte';
+	import DocsLayout from '$components/layout/DocsLayout.svelte';
 	import type { SidebarNav } from '$components/layout/sidebar/Sidebar.svelte';
 	import { activeMarkdownCategory } from '$stores/markdownMeta';
 
@@ -13,9 +13,8 @@
 
 	const nav: SidebarNav = {
 		'Getting Started': [
-			{ title: 'Installation', slug: s.gettingStarted('installation'), match: true },
-			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') },
-			{ title: 'Build Player', slug: s.gettingStarted('build-player') }
+			{ title: 'Quickstart', slug: s.gettingStarted('quickstart'), match: true },
+			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') }
 		],
 		'Core Concepts': [
 			{ title: 'Architecture', slug: s.coreConcepts('architecture') },
@@ -48,12 +47,12 @@
 	};
 </script>
 
-<DocsSidebar {nav}>
-	<div class="prose z-10 mx-auto w-full max-w-[768px] dark:prose-invert">
+<DocsLayout {nav}>
+	<div class="markdown prose z-10 mx-auto w-full max-w-[768px] pb-[50vh] dark:prose-invert">
 		<p class="mb-3.5 text-[15px] font-semibold leading-6 text-brand">
 			{$activeMarkdownCategory}
 		</p>
 
 		<slot />
 	</div>
-</DocsSidebar>
+</DocsLayout>

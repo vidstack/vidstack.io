@@ -3,8 +3,8 @@
 	import RightArrowIcon from '~icons/ri/arrow-right-s-line';
 
 	import clsx from 'clsx';
-	import Navbar from '../navbar/Navbar.svelte';
-	import Sidebar, { isActiveSidebarItem, type SidebarNav } from '../sidebar/Sidebar.svelte';
+	import Navbar from './navbar/Navbar.svelte';
+	import Sidebar, { isActiveSidebarItem, type SidebarNav } from './sidebar/Sidebar.svelte';
 
 	import { ariaBool } from '$utils/aria';
 	import { type CloseDialogCallback, dialogManager } from '$actions/dialogManager';
@@ -18,9 +18,9 @@
 
 	export let nav: SidebarNav = {};
 
-	$: activeItem = Object.values(nav)
-		.flat()
-		.find((item) => isActiveSidebarItem(item, $page.url.pathname));
+	$: allItems = Object.values(nav).flat();
+	$: activeItemIndex = allItems.findIndex((item) => isActiveSidebarItem(item, $page.url.pathname));
+	$: activeItem = allItems[activeItemIndex];
 
 	$: activeCategory = Object.keys(nav).find((category) =>
 		nav[category].some((item) => item.title === activeItem?.title && item.slug === activeItem?.slug)
@@ -88,12 +88,14 @@
 	</Navbar>
 </div>
 
-<main class="max-w-8xl z-20 mx-auto">
+<main class="max-w-8xl z-20 mx-auto 1200:pr-10">
 	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
 	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">
 		<div class="relative mx-auto mt-[13rem] max-w-3xl 992:mt-32 1200:max-w-none">
 			<slot />
+
+			<!--  -->
 		</div>
 	</div>
 </main>

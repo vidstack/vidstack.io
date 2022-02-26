@@ -140,7 +140,7 @@ function typography() {
 				},
 				'ul > li': {
 					position: 'relative',
-					paddingLeft: '1rem'
+					paddingLeft: '0.75rem'
 				},
 				'ul > li::before': {
 					content: '""',

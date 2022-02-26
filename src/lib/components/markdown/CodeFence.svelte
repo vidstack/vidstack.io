@@ -48,7 +48,7 @@
 
 <div
 	class={clsx(
-		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg max-w-2xl mx-auto',
+		'code-fence overflow-y-auto relative max-h-[60vh] 576:max-h-[32rem] my-8 rounded-md shadow-lg mx-auto',
 		'border border-gray-200 dark:border-gray-500',
 		lang && `lang-${lang}`,
 		ext && `ext-${ext}`
@@ -114,7 +114,7 @@
 
 		{#each highlightedLines as lineNumber}
 			<div
-				class="absolute top-2.5 left-0 w-full bg-slate-400/10 font-mono text-[0.875em] text-transparent"
+				class="absolute top-2.5 left-0 w-full border-l-[5px] border-l-brand-300 bg-brand-200/10 font-mono text-[0.875em] text-transparent"
 				style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
 				aria-hidden="true"
 			>

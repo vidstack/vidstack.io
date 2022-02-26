@@ -40,7 +40,6 @@ export function svelteMarkdownPlugin({ baseUrl }: SvelteMarkdownPluginOptions): 
 		transform(code, id) {
 			if (filter(id)) {
 				const { component } = parseMarkdownToSvelte(parser, code, id, parseOptions());
-
 				return component;
 			}
 

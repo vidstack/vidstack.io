@@ -22,7 +22,7 @@
 
 <div
 	class={clsx(
-		'admonition my-8 border-2 border-l-8 px-2 py-4 rounded-md max-w-2xl mx-auto shadow-xl',
+		'admonition my-8 border-2 border-l-8 p-4 rounded-md mx-auto shadow-xl',
 		type === 'note' && 'border-pink-400 bg-pink-300/10',
 		type === 'info' && 'border-blue-400 bg-blue-300/10',
 		type === 'tip' && 'border-green-400 bg-green-300/10',
@@ -46,7 +46,7 @@
 		</span>
 	</div>
 
-	<div class="pl-1 text-lg leading-6 text-gray-inverse">
+	<div class="pl-1 text-lg text-gray-inverse">
 		<slot />
 	</div>
 </div>

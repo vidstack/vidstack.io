@@ -46,19 +46,21 @@ function createStep(): ContainerArgs {
 			marker: '!',
 			render(tokens, idx) {
 				const token = tokens[idx];
-				const [, headingTag, title] = token.info.trim().match(/(h[1-9])=(.*?)(?:desc=|$)/) ?? [];
-				const [, description] = token.info.trim().match(/desc=(.*?)$/) ?? [];
+				const [, headingTag = 'h3', title] =
+					token.info.trim().match(/:title(\[h[1-9]\])?=(.*?)(?::|$)/) ?? [];
+				const [, description] = token.info.trim().match(/:desc=(.*?)(?::|$)/) ?? [];
+				const [, orientation] = token.info.trim().match(/:orientation=(.*?)(?::|$)/) ?? [];
+
+				const props = [orientation && `orientation="${orientation}"`].filter(Boolean).join(' ');
 
 				const content = [
-					headingTag &&
-						title &&
-						`<${headingTag} slot="title" class="not-prose">${title}</${headingTag}>`,
+					title && `<${headingTag} slot="title" class="not-prose">${title}</${headingTag}>`,
 					description &&
 						`<svelte:fragment slot="description">${parser.render(description)}</svelte:fragment>`
 				];
 
 				if (token.nesting === 1) {
-					return `<Step>\n ${content.join('\n ')}`;
+					return `<Step ${props}>\n ${content.join('\n ')}`;
 				} else {
 					return `</Step>\n`;
 				}

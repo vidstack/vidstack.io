@@ -1,4 +1,5 @@
 import type { PluginSimple } from 'markdown-it';
+import he from 'he';
 import { resolveHighlightLines } from './resolveHighlightLines';
 import { resolveLanguage } from './resolveLanguage';
 
@@ -6,6 +7,13 @@ import { resolveLanguage } from './resolveLanguage';
  * Plugin to enable styled code fences with line numbers, syntax highlighting, etc.
  */
 export const codePlugin: PluginSimple = (parser) => {
+	// Override default inline renderer.
+	// const codeInlineRule = parser.renderer.rules.code_inline;
+	parser.renderer.rules.code_inline = (...args) => {
+		const token = args[0][args[1]];
+		return `<code>{@html ${JSON.stringify(he.encode(token.content))}}</code>`;
+	};
+
 	// Override default fence renderer.
 	parser.renderer.rules.fence = (tokens, idx, options) => {
 		const token = tokens[idx];
@@ -21,7 +29,7 @@ export const codePlugin: PluginSimple = (parser) => {
 			options.highlight?.(token.content, language.name, '') ||
 			parser.utils.escapeHtml(token.content);
 
-		let html = code.replace(/\sclass="shiki" style=".*?"/, '').trim();
+		const html = code.replace(/\sclass="shiki" style=".*?"/, '').trim();
 
 		const linesCount = (code.match(/"line"/g) || []).length;
 
@@ -52,8 +60,6 @@ export const codePlugin: PluginSimple = (parser) => {
 			.filter(Boolean)
 			.join(' ');
 
-		html = `<CodeFence ${props} />`;
-
-		return html;
+		return `<CodeFence ${props} />`;
 	};
 };

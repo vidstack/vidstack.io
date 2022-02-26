@@ -27,14 +27,14 @@ export async function createMarkdownParser(): Promise<MarkdownParser> {
 	parser.use(tocPlugin);
 	parser.use(extractHeadersPlugin);
 	parser.use(extractTitlePlugin);
-	parser.use(admonitionPlugin);
-	parser.use(stepsPlugin);
 	parser.use(customComponentPlugin);
 	parser.use(linksPlugin);
 	parser.use(codePlugin);
 	parser.use(importCodePlugin);
-	parser.use(hoistTagsPlugin);
 	parser.use(await createShikiPlugin());
+	parser.use(admonitionPlugin);
+	parser.use(stepsPlugin);
+	parser.use(hoistTagsPlugin);
 
 	return parser;
 }

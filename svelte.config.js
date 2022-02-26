@@ -1,6 +1,6 @@
 import path from 'path';
 import adapter from '@sveltejs/adapter-auto';
-import preprocess from 'svelte-preprocess';
+import * as preprocess from 'svelte-preprocess';
 import Icons from 'unplugin-icons/vite';
 
 import { svelteMarkdownPlugin } from './plugins/dist/markdown/index.js';
@@ -10,7 +10,8 @@ import { highlightCodePlugin } from './plugins/dist/highlight/index.js';
 const config = {
 	extensions: ['.svelte', '.md'],
 
-	preprocess: preprocess(),
+	// @ts-expect-error - CJS -> ESM conversion.
+	preprocess: [preprocess.default.typescript()],
 
 	kit: {
 		adapter: adapter(),

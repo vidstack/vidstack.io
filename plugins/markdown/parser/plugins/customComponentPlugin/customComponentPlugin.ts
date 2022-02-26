@@ -19,11 +19,9 @@ export const svelteReservedTags = [
 	'slot'
 ];
 
-const svelteHtmlBlockSequence: HTMLBlockSequence = [
+const svelteHtmlBlockSequence: HTMLBlockSequence[] = [
 	// Treat Svelte reserved tags as block tags.
-	new RegExp('^</?(' + svelteReservedTags.join('|') + ')(?=(\\s|/?>|$))', 'i'),
-	/^$/,
-	true
+	[new RegExp('^</?(' + svelteReservedTags.join('|') + ')(?=(\\s|/?>|$))', 'i'), /^$/, true]
 ];
 
 /**
@@ -31,7 +29,7 @@ const svelteHtmlBlockSequence: HTMLBlockSequence = [
  */
 export const customComponentPlugin: PluginSimple = (parser) => {
 	// Override default html block ruler.
-	parser.block.ruler.at('html_block', htmlBlockRule([svelteHtmlBlockSequence]), {
+	parser.block.ruler.at('html_block', htmlBlockRule(svelteHtmlBlockSequence), {
 		alt: ['paragraph', 'reference', 'blockquote']
 	});
 

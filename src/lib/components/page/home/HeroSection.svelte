@@ -12,14 +12,14 @@
 				<span class="hidden 576:block"> Video tools for frontend developers. </span>
 			</h1>
 
-			<p class="text-gray-soft mx-auto mt-12 max-w-[600px] text-center text-lg 576:text-xl">
+			<p class="mx-auto mt-12 max-w-[600px] text-center text-lg text-gray-soft 576:text-xl">
 				Vidstack is a video framework that makes it easy to build and integrate awesome media
 				experiences into modern web apps.
 			</p>
 
 			<RaisedButton
 				class="mt-16"
-				href="/docs/player/getting-started/installation"
+				href="/docs/player/getting-started/quickstart"
 				showArrowOnHover
 				sveltekit:prefetch
 			>
