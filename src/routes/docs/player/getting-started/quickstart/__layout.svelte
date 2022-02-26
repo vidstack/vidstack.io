@@ -131,7 +131,41 @@
 				</li>
 			</ul>
 		{:else}
-			<p>CDN INFO HERE.</p>
+			<p>
+				Using a CDN like <a href="https://jsdelivr.com" target="_blank">JSDelivr</a> is the simplest
+				and fastest way to get started using the player library, but as with all things in software,
+				it comes with tradeoffs. So you can best decide what install method is best for you, we'll quickly
+				look at some good reasons to use a CDN. Refer to the NPM option to find good counter reasons
+				using the select menu above.
+			</p>
+
+			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
+				<li>
+					It's simple. There's no build step or anything to install. Add a few script tags, and
+					you're ready to start creating a player, making this an ideal option for development,
+					playground, and low-code environments (e.g., WordPress and Shopify).
+				</li>
+				<li>
+					If you aren't importing from the library or building any custom elements, there may be no
+					point in checking it into Git. It's one less dependency to track, version control, and
+					load in your Git repository. Refer to the NPM install option to find good reasons why you
+					should still bundle it locally (if possible).
+				</li>
+				<li>
+					You'll get much faster load times because JSDelivr uses a
+					<a href="https://www.jsdelivr.com/network/infographic" target="_blank">
+						multi-CDN architecture
+					</a>
+					and has more than 750 points of presence (PoPs). All other users of our library who are also
+					using the CDN will pull the code closer to all PoPs while keeping the cache warm every time
+					they make a request.
+				</li>
+				<li>
+					It'll reduce the load and stress on your servers. If you're already at your server limit
+					computationally or financially, it may be best to delegate some resources to an externally
+					managed CDN.
+				</li>
+			</ul>
 		{/if}
 	</Step>
 
