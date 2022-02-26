@@ -178,8 +178,8 @@
 		>
 			{#if libType === 'Vanilla'}
 				<p>
-					Select the <code>Vanilla</code> option if you're writing HTML or using a JS library such
-					as Angular, Preact, Svelte, or Vue. Native web components have
+					Select the <code>Vanilla</code> option if you're writing plain HTML or using a JS library
+					such as Angular, Preact, Svelte, or Vue. Native web components have
 					<a href="https://custom-elements-everywhere.com" target="_blank">excellent support</a>
 					in these libraries.
 				</p>
@@ -203,7 +203,28 @@
 		bind:value={providerType}
 		on:change={onOptionsChange}
 	>
-		<p>Content here.</p>
+		{#if providerType === 'Audio'}
+			<p>
+				Embed sound content into documents via the native <code>&lt;audio&gt;</code> element.
+			</p>
+		{:else if providerType === 'Video'}
+			<p>
+				Embed video content into documents via the native <code>&lt;video&gt;</code> element.
+			</p>
+		{:else if providerType === 'HLS'}
+			<p>
+				Embed video content into documents via the native <code>&lt;video&gt;</code> element. This
+				provider also enables streaming video using the HTTP Live Streaming (HLS) protocol.
+				<a href="https://caniuse.com/?search=hls" target="_blank">HLS isn't widely supported </a>
+				yet, but we use the popular
+				<a href="https://github.com/video-dev/hls.js/" target="_blank">hls.js</a>
+				library to ensure it works anywhere
+				<a href="https://caniuse.com/mediasource" target="_blank">
+					Media Source Extensions (MSE) are supported
+				</a>
+				, which accounts for ~96.42% of users tracked on caniuse.
+			</p>
+		{/if}
 	</Step>
 
 	<slot />
