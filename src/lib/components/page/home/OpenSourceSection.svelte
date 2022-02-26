@@ -29,7 +29,7 @@
 <section class="mt-28 flex w-full flex-col items-center justify-center px-4 992:mt-40">
 	<h1 class="text-center text-4xl font-bold leading-[3.5rem] 768:text-5xl">Open Source</h1>
 
-	<p class="text-gray-soft mt-10 max-w-lg text-center text-lg">
+	<p class="mt-10 max-w-lg text-center text-lg text-gray-soft">
 		You can find most our work on
 		<a
 			href="https://github.com/vidstack"
@@ -44,7 +44,7 @@
 	<div class="mt-16 grid grid-cols-1 gap-12 pb-10 1200:grid-cols-3">
 		{#each openSourceProjects as project (project)}
 			<div
-				class="relative z-10 flex h-[224px] max-w-xs flex-col rounded-md border-2 border-gray-200 p-4 pb-0 dark:border-gray-500"
+				class="relative z-10 flex h-[224px] max-w-xs flex-col rounded-md border-2 border-gray-200 p-4 pb-0 shadow-md dark:border-gray-500"
 			>
 				<div class="flex flex-row items-center">
 					<h2 class="text-xl font-medium">{project.name}</h2>
@@ -59,12 +59,12 @@
 						)}>{project.badge}</Chip
 					>
 				</div>
-				<p class="text-gray-soft mt-6 flex-1 text-base leading-7">
+				<p class="mt-6 flex-1 text-base leading-7 text-gray-soft">
 					{project.description}
 				</p>
 				<div class="flex justify-end rounded-b-lg py-6">
 					<a href={project.repoHref} target="_blank">
-						<GitHubIcon class="text-gray-soft ml-2 h-7 w-7 hover:text-gray-inverse" />
+						<GitHubIcon class="ml-2 h-7 w-7 text-gray-soft hover:text-gray-inverse" />
 						<span class="sr-only">{`Vidstack ${project.name} GitHub Repo`}</span>
 					</a>
 				</div>

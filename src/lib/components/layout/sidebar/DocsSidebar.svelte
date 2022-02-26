@@ -88,7 +88,7 @@
 	</Navbar>
 </div>
 
-<main class="max-w-8xl z-20 mx-auto">
+<main class="max-w-8xl z-20 mx-auto 1200:pr-10">
 	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
 	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">

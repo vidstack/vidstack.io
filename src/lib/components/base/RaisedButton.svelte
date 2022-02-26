@@ -14,6 +14,7 @@
 	$: buttonClass = clsx(
 		'group transform-gpu rounded-md bg-brand bg-gray-900 px-8 py-3 text-lg font-medium text-white',
 		'transition-transform hover:scale-105 hover:bg-gray-500 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
+		'shadow-md hover:shadow-xl',
 		__class
 	);
 

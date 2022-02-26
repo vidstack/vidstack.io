@@ -29,7 +29,7 @@
 	const navLinks = [
 		{
 			title: 'Documentation',
-			slug: '/docs/player/getting-started/installation',
+			slug: '/docs/player/getting-started/quickstart',
 			match: /^\/docs\/player/
 		}
 	];
@@ -148,6 +148,7 @@
 			<div class="hidden: flex items-center">
 				<div class="flex space-x-4">
 					<SocialLink type="twitter" />
+					<SocialLink type="discord" />
 					<SocialLink type="gitHub" />
 				</div>
 

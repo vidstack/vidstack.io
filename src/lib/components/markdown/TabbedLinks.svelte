@@ -12,7 +12,7 @@
 	export let links: Link[] = [];
 </script>
 
-<div class="not-prose -mx-4 mb-6 flex overflow-auto 576:-mx-6">
+<div class="not-prose -mx-4 mt-10 mb-6 flex overflow-auto 576:-mx-6">
 	<div class="min-w-full flex-none px-4 576:px-6">
 		<ul class="flex space-x-6 whitespace-nowrap border-b border-gray-200 dark:border-gray-500">
 			{#each links as link (link.title + link.href)}
