@@ -15,7 +15,7 @@
 	$: buttonClass = clsx(
 		'group transform-gpu rounded-md text-lg font-medium transition-transform hover:scale-105',
 		type === 'raised' &&
-			'bg-gray-900 hover:bg-gray-500 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 text-whit shadow-md hover:shadow-xl px-8 py-3 ',
+			'bg-gray-900 hover:bg-gray-500 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 text-white shadow-md hover:shadow-xl px-8 py-3 ',
 		__class
 	);
 

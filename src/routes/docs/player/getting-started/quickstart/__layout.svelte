@@ -92,9 +92,23 @@
 	>
 		{#if installMethod === 'NPM'}
 			<p>
-				Locally installing the package is best when you're integrating the library with build tools
-				such as Webpack, Rollup, Vite, or Parcel. If possible, we recommend this option over using a
-				CDN because:
+				Locally installing the package via NPM is best when you're integrating the library with
+				build tools such as Parcel, Rollup, Vite, or Webpack. We ship both an unoptimized
+				development bundle that includes logs and a production bundle that is specially minified to
+				get the bundle size as small as possible. Thanks to
+				<a href="https://nodejs.org/api/packages.html#package-entry-points" target="_blank">
+					Node package exports,
+				</a>
+				your bundler will automatically load the correct type based on the Node process environment (<code
+					>NODE_ENV</code
+				>).
+			</p>
+
+			<h4 class="mt-4">Bundle vs. CDN</h4>
+
+			<p>
+				So you can best decide what install method is best for you, we'll quickly look at some good
+				reasons to locally bundle instead of using a CDN.
 			</p>
 
 			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
@@ -125,18 +139,24 @@
 					optimize the loading and evaluating time of JavaScript by grouping code into chunks.
 				</li>
 				<li>
-					You can take advantage of dynamic imports to determine when the browser loads the player
-					code. You don't want the loading of player-related code to block your users from
+					You can easily take advantage of dynamic imports to determine when the browser loads the
+					player code. You don't want the loading of player-related code to block your users from
 					interacting with your application.
 				</li>
 			</ul>
 		{:else}
 			<p>
 				Using a CDN like <a href="https://jsdelivr.com" target="_blank">JSDelivr</a> is the simplest
-				and fastest way to get started using the player library, but as with all things in software,
-				it comes with tradeoffs. So you can best decide what install method is best for you, we'll quickly
-				look at some good reasons to use a CDN. Refer to the NPM option to find good counter reasons
-				using the select menu above.
+				and fastest way to start using the player library. We provide a CDN bundle that includes all
+				package dependencies, and it's specially minified to get the bundle size as small as possible.
+			</p>
+
+			<h4 class="mt-4">Why use a CDN?</h4>
+
+			<p>
+				So you can best decide what install method is best for you, we'll quickly look at some good
+				reasons to use a CDN. Refer to the NPM option to find good counter reasons using the select
+				menu above.
 			</p>
 
 			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
@@ -178,8 +198,8 @@
 		>
 			{#if libType === 'Vanilla'}
 				<p>
-					Select the <code>Vanilla</code> option if you're writing plain HTML or using a JS library
-					such as Angular, Preact, Svelte, or Vue. Native web components have
+					The <code>Vanilla</code> option is best when writing plain HTML or using a JS library such
+					as Angular, Preact, Svelte, or Vue. Native web components have
 					<a href="https://custom-elements-everywhere.com" target="_blank">excellent support</a>
 					in these libraries.
 				</p>
