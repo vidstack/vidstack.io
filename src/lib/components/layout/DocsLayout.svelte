@@ -11,6 +11,7 @@
 	import { page } from '$app/stores';
 	import { activeMarkdownCategory } from '$stores/markdownMeta';
 	import { hideDocumentScrollbar } from '$utils/scroll';
+	import Button from '$components/base/Button.svelte';
 
 	let isSidebarOpen = false;
 	let isNavPopoverOpen = false;
@@ -21,6 +22,9 @@
 	$: allItems = Object.values(nav).flat();
 	$: activeItemIndex = allItems.findIndex((item) => isActiveSidebarItem(item, $page.url.pathname));
 	$: activeItem = allItems[activeItemIndex];
+
+	$: previousItem = allItems[activeItemIndex - 1];
+	$: nextItem = allItems[activeItemIndex + 1];
 
 	$: activeCategory = Object.keys(nav).find((category) =>
 		nav[category].some((item) => item.title === activeItem?.title && item.slug === activeItem?.slug)
@@ -91,11 +95,31 @@
 <main class="max-w-8xl z-20 mx-auto 1200:pr-10">
 	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
-	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">
-		<div class="relative mx-auto mt-[13rem] max-w-3xl 992:mt-32 1200:max-w-none">
+	<div class="px-4 pb-[50vh] 576:px-6 768:px-8 992:pl-[21rem]">
+		<div class="relative mx-auto mt-[13rem] w-full max-w-3xl 992:mt-32">
 			<slot />
 
-			<!--  -->
+			<hr class="my-12 border-gray-200 dark:border-gray-500" />
+
+			<div class="flex items-center text-lg font-semibold text-gray-300 992:text-xl">
+				{#if previousItem}
+					<div class="mb-4 flex flex-col items-start">
+						<span class="ml-3 mb-4 inline-block text-gray-inverse">Previous</span>
+						<Button arrow="left" href={previousItem.slug} class="hover:text-gray-inverse">
+							{previousItem.title}
+						</Button>
+					</div>
+				{/if}
+
+				{#if nextItem}
+					<div class="ml-auto mb-4 flex flex-col items-end">
+						<span class="mr-3 mb-4 inline-block text-gray-inverse">Next</span>
+						<Button arrow="right" href={nextItem.slug} class="hover:text-gray-inverse">
+							{nextItem.title}
+						</Button>
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 </main>

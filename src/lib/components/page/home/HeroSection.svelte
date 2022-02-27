@@ -1,5 +1,5 @@
 <script>
-	import RaisedButton from '$components/base/RaisedButton.svelte';
+	import Button from '$components/base/Button.svelte';
 </script>
 
 <section class="mx-auto w-full max-w-6xl px-4 576:px-8 992:px-14 1200:pt-8 1200:pb-16">
@@ -17,14 +17,15 @@
 				experiences into modern web apps.
 			</p>
 
-			<RaisedButton
+			<Button
 				class="mt-16"
+				type="raised"
+				arrow="right"
 				href="/docs/player/getting-started/quickstart"
-				showArrowOnHover
 				sveltekit:prefetch
 			>
 				Start Building
-			</RaisedButton>
+			</Button>
 		</div>
 	</div>
 </section>

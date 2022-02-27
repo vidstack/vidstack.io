@@ -48,7 +48,7 @@
 </script>
 
 <DocsLayout {nav}>
-	<div class="markdown prose z-10 mx-auto w-full max-w-[768px] pb-[50vh] dark:prose-invert">
+	<div class="markdown prose z-10 dark:prose-invert">
 		<p class="mb-3.5 text-[15px] font-semibold leading-6 text-brand">
 			{$activeMarkdownCategory}
 		</p>
