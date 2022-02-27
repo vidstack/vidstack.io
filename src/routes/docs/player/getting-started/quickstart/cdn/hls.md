@@ -1,5 +1,6 @@
 ---
 title: HLS Player Installation (CDN)
+description: Instructions to get your HLS player up and running through a CDN.
 ---
 
 !!!step :title=Register Element :desc=Add the following `script` tag to register the `vds-hls-player` custom element.

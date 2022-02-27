@@ -1,5 +1,6 @@
 ---
 title: Audio Player Installation (React)
+description: Instructions to get your audio player installed in your React project and on-screen.
 ---
 
 !!!step :title=Install NPM Package :desc=Install `@vidstack/player` and dependencies via NPM.

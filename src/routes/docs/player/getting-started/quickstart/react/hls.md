@@ -1,5 +1,6 @@
 ---
 title: HLS Player Installation (React)
+description: Instructions to get your HLS player installed in your React project and on-screen.
 ---
 
 !!!step :title=Install NPM Package :desc=Install `@vidstack/player` and dependencies via NPM.

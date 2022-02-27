@@ -1,5 +1,6 @@
 ---
 title: Audio Player Installation (CDN)
+description: Instructions to get your audio player up and running through a CDN.
 ---
 
 !!!step :title=Register Element :desc=Add the following `script` tag to register the `vds-audio-player` custom element.

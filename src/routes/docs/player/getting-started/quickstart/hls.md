@@ -1,5 +1,6 @@
 ---
 title: HLS Player Installation
+description: Instructions to get your HLS player installed and on-screen.
 ---
 
 !!!step :title=Install NPM Package :desc=Install `@vidstack/player` and dependencies via NPM.
