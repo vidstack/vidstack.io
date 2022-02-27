@@ -89,7 +89,7 @@
 			role="dialog"
 		>
 			<div
-				class="flex min-h-[60px] flex-col overflow-hidden rounded-md border border-gray-200 bg-white shadow-md dark:border-gray-500 dark:bg-gray-600"
+				class="flex min-h-[60px] flex-col overflow-hidden rounded-md border border-gray-divider bg-white shadow-md dark:bg-gray-600"
 			>
 				<div class="flex items-center">
 					<div class="flex-1" />

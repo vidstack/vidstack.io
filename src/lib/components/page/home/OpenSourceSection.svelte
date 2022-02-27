@@ -44,7 +44,7 @@
 	<div class="mt-16 grid grid-cols-1 gap-12 pb-10 1200:grid-cols-3">
 		{#each openSourceProjects as project (project)}
 			<div
-				class="relative z-10 flex h-[224px] max-w-xs flex-col rounded-md border-2 border-gray-200 p-4 pb-0 shadow-md dark:border-gray-500"
+				class="relative z-10 flex h-[224px] max-w-xs flex-col rounded-md border-2 border-gray-divider p-4 pb-0 shadow-md"
 			>
 				<div class="flex flex-row items-center">
 					<h2 class="text-xl font-medium">{project.name}</h2>

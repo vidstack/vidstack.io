@@ -49,6 +49,7 @@ module.exports = {
 					700: '#222222',
 					800: '#1A1A1A',
 					900: '#121212',
+					divider: 'var(--color-gray-divider)',
 					soft: 'var(--color-gray-soft)',
 					inverse: 'var(--color-gray-inverse)'
 				},
@@ -101,6 +102,7 @@ function typography() {
 				fontSize: '18px',
 				maxWidth: 'none',
 				hr: {
+					borderColor: theme('colors.gray.divider'),
 					marginTop: '3em',
 					marginBottom: '3em'
 				},
@@ -186,16 +188,43 @@ function typography() {
 					flex: 'none',
 					minWidth: '100%'
 				},
-				table: {},
+				table: {
+					margin: 0,
+					width: '100%',
+					borderCollapse: 'collapse'
+				},
+				thead: {
+					color: theme('colors.gray.inverse'),
+					borderBottomColor: theme('colors.gray.divider')
+				},
+				tbody: {
+					verticalAlign: 'baseline'
+				},
 				'thead th': {
 					paddingTop: 0,
 					fontWeight: theme('fontWeight.semibold')
+				},
+				'tbody tr': {
+					fontSize: theme('fontSize.sm')[0],
+					borderBottomColor: theme('colors.gray.divider')
+				},
+				'tbody td': {
+					whiteSpace: 'nowrap'
+				},
+				'tbody tr:nth-child(odd)': {
+					backgroundColor: theme('colors.gray.100')
 				},
 				'tbody tr:last-child': {
 					borderBottomWidth: '1px'
 				},
 				'tbody code': {
 					fontSize: theme('fontSize.sm')[0]
+				},
+				'tbody tr td:first-child code': {
+					color: theme('colors.indigo.500'),
+					paddingLeft: '8px',
+					'&::before': { display: 'none' },
+					'&::after': { display: 'none' }
 				},
 				'figure figcaption': {
 					textAlign: 'center',
@@ -208,6 +237,16 @@ function typography() {
 					color: theme('colors.gray.inverse'),
 					borderRadius: 2,
 					borderColor: 'currentColor'
+				}
+			}
+		},
+		invert: {
+			css: {
+				'tbody tr:nth-child(odd)': {
+					backgroundColor: theme('colors.gray.700')
+				},
+				'tbody tr td:first-child code': {
+					color: theme('colors.indigo.300')
 				}
 			}
 		}

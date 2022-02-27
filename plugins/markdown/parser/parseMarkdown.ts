@@ -68,7 +68,8 @@ const IMPORT_GLOBALS_CODE = [
 	'TableOfContents',
 	'Steps',
 	'Step',
-	'TabbedLinks'
+	'TabbedLinks',
+	'TableWrapper'
 ]
 	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
 	.join('\n');

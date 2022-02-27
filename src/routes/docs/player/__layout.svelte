@@ -15,7 +15,8 @@
 		'Getting Started': [
 			{ title: 'Quickstart', slug: s.gettingStarted('quickstart'), match: true },
 			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') },
-			{ title: 'Tailwind Plugin', slug: s.gettingStarted('tailwind') }
+			{ title: 'Tailwind Plugin', slug: s.gettingStarted('tailwind') },
+			{ title: 'Building Player', slug: s.gettingStarted('building-player') }
 		],
 		'Core Concepts': [
 			{ title: 'Architecture', slug: s.coreConcepts('architecture') },

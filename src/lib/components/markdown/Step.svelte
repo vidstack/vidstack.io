@@ -24,7 +24,7 @@
 		'before:h-[calc(1.375rem+1px)] before:text-[0.7rem] before:font-bold before:text-white dark:before:text-black',
 		'before:rounded-md before:shadow-md before:bg before:bg-gray-inverse before:border before:border-gray-soft',
 		index !== $steps &&
-			'pb-8 after:absolute after:top-[calc(1.875rem+1px)] after:bottom-0 after:left-[0.6875rem] after:w-px after:bg-gray-200 dark:after:bg-gray-500',
+			'pb-8 after:absolute after:top-[calc(1.875rem+1px)] after:bottom-0 after:left-[0.6875rem] after:w-px after:bg-gray-divider',
 		orientation === 'horizontal' ? 'grid-cols-5 gap-10' : 'grid-cols-4 gap-4'
 	)}
 	style="counter-increment: step;"

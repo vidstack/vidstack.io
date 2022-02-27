@@ -13,7 +13,8 @@ import {
 	importCodePlugin,
 	linksPlugin,
 	tocPlugin,
-	stepsPlugin
+	stepsPlugin,
+	responsiveTablePlugin
 } from './plugins';
 import { type MarkdownParser } from './types';
 
@@ -31,6 +32,7 @@ export async function createMarkdownParser(): Promise<MarkdownParser> {
 	parser.use(linksPlugin);
 	parser.use(codePlugin);
 	parser.use(importCodePlugin);
+	parser.use(responsiveTablePlugin);
 	parser.use(await createShikiPlugin());
 	parser.use(admonitionPlugin);
 	parser.use(stepsPlugin);

@@ -23,7 +23,7 @@
 			class={clsx(
 				'relative flex items-center px-4 py-1 border',
 				disabled
-					? 'text-gray-300 border-gray-200 dark:border-gray-500'
+					? 'text-gray-300 border-gray-divider'
 					: 'text-gray-inverse focus-within:ring-2 border-gray-200 dark:border-gray-400'
 			)}
 		>

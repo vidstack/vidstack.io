@@ -35,7 +35,7 @@
 
 <div
 	class={clsx(
-		'border-b border-gray-200 dark:border-gray-500 top-0 z-30 w-full flex-none fixed',
+		'border-b border-gray-divider top-0 z-30 w-full flex-none fixed',
 		isNavPopoverOpen
 			? 'bg-gray-100 dark:bg-gray-800'
 			: 'bg-gray-200/95 dark:bg-gray-800/60 backdrop-blur supports-backdrop-blur:bg-white/60'
@@ -50,7 +50,7 @@
 		}}
 	>
 		<div
-			class="mt-4 flex w-full items-center border-t border-gray-200 pt-4 dark:border-gray-500 992:hidden"
+			class="mt-4 flex w-full items-center border-t border-gray-divider pt-4 992:hidden"
 			slot="bottom"
 		>
 			<button
@@ -99,7 +99,7 @@
 		<div class="relative mx-auto mt-[13rem] w-full max-w-3xl 992:mt-32">
 			<slot />
 
-			<hr class="my-12 border-gray-200 dark:border-gray-500" />
+			<hr class="my-12 border-gray-divider" />
 
 			<div class="flex items-center text-lg font-semibold text-gray-300 992:text-xl">
 				{#if previousItem}

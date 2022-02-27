@@ -14,7 +14,7 @@ import VsCodeAutocomplete from '$img/vscode-autocomplete.png'
 
 We've written the player library with TypeScript, and we distribute all types with the
 `@vidstack/player` package. VSCode will detect them by default, but global event types need to
-be registered separately; otherwise, the following will happen:
+be registered separately; otherwise, the following will happen,
 
 ```js
 // The event type will default to `Event` instead of `MediaPlayEvent`.
@@ -22,7 +22,7 @@ player.addEventListener('vds-play', (event) => {});
 ```
 
 Events are a core part of working with the player library, so we highly recommend you resolve
-this by adding the following to your TypeScript configuration file:
+this by adding the following to your TypeScript configuration file,
 
 ```json:title=tsconfig.json:copy-highlight{3}
 {

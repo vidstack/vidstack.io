@@ -5,6 +5,7 @@
 	--color-brand: #f30c59;
 	--color-gray-soft: #707070;
 	--color-gray-inverse: black;
+	--color-gray-divider: #eaeaea;
 
 	--prose-pre-bg: #1f2937;
 }
@@ -15,6 +16,7 @@
 	--color-brand: #f75a8e;
 	--color-gray-soft: #8d8d8d;
 	--color-gray-inverse: white;
+	--color-gray-divider: #313131;
 }
 
 .js-focus-visible :focus:not([data-focus-visible-added]) {

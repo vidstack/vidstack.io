@@ -143,7 +143,7 @@
 				</ul>
 			</nav>
 
-			<div class="mx-5 h-7 w-2 border-l-[1.5px] border-gray-200 dark:border-gray-500" />
+			<div class="mx-5 h-7 w-2 border-l-[1.5px] border-gray-divider" />
 
 			<div class="hidden: flex items-center">
 				<div class="flex space-x-4">

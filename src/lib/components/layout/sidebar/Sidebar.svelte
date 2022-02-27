@@ -37,7 +37,7 @@
 	id="main-sidebar"
 	class={clsx(
 		'fixed inset-0 z-50 w-96 992:w-72 max-w-[85vw] overflow-y-auto bg-gray-50 dark:bg-gray-800',
-		'border-r border-gray-200 dark:border-gray-500',
+		'border-r border-gray-divider',
 		'transform transition-transform duration-200 ease-out -translate-x-full will-change-transform',
 		open && 'translate-x-0',
 		'992:top-[4.5rem] 992:pb-[5rem] 1200:top-20 1200:pb-24 992:left-0 992:w-[19.5rem] 992:h-full 992:translate-x-0 992:translate-y-px'
@@ -63,7 +63,7 @@
 				{@const items = nav[category]}
 				<li class="mt-12 first:mt-4 992:mt-10">
 					<h5 class="text-gray-strong mb-8 text-lg font-semibold 992:mb-3">{category}</h5>
-					<ul class="space-y-3 border-l border-gray-200 dark:border-gray-500">
+					<ul class="space-y-3 border-l border-gray-divider">
 						{#each items as item (item.title + item.slug)}
 							<li class="first:mt-6">
 								<a
