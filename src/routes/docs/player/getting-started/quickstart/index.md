@@ -19,7 +19,7 @@ import '@vidstack/player/define/vds-video-player.js';
 
 !!!
 
-!!!step :title=Add Player Markup :desc=Let's add the following player HTML boilerplate to get you started.
+!!!step :title=Add Player Markup :desc=Add the following player HTML boilerplate to get started.
 
 ```html:copy
 <vds-video-player

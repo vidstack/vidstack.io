@@ -114,8 +114,7 @@
 			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
 				<li>
 					It provides the greatest control over the library. If you're looking to build your own
-					player elements or modify certain library functionality, then this is the path of least
-					resistance.
+					player elements or modify certain behaviour, then this is the path of least resistance.
 				</li>
 				<li>
 					It provides the optimal development experience working with the library because your IDE
@@ -135,12 +134,12 @@
 				</li>
 				<li>
 					Reduces the number of HTTP requests and round-trips required to load the player.
-					Ultimately, speeding up the time it takes for the player to load because your bundler can
-					optimize the loading and evaluating time of JavaScript by grouping code into chunks.
+					Ultimately, this speeds up the time it takes for the player to load because your bundler
+					can optimize the loading and evaluating time of JavaScript by grouping code into chunks.
 				</li>
 				<li>
 					You can easily take advantage of dynamic imports to determine when the browser loads the
-					player code. You don't want the loading of player-related code to block your users from
+					library. You don't want the loading of player-related code to block your users from
 					interacting with your application.
 				</li>
 			</ul>
@@ -181,9 +180,9 @@
 					they make a request.
 				</li>
 				<li>
-					It'll reduce the load and stress on your servers. If you're already at your server limit
-					computationally or financially, it may be best to delegate some resources to an externally
-					managed CDN.
+					It'll reduce the load and stress on your server. If you're already at your server limit
+					computationally or financially, it may be best to delegate loading of some resources to an
+					externally managed CDN.
 				</li>
 			</ul>
 		{/if}

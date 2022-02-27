@@ -19,7 +19,7 @@ import { AudioPlayer, MediaUi } from '@vidstack/player/react';
 
 !!!
 
-!!!step :title=Add Player Markup :desc=Let's add the following player JSX boilerplate to get you started.
+!!!step :title=Add Player Markup :desc=Add the following player JSX boilerplate to get started.
 
 ```jsx:copy
 <AudioPlayer

@@ -19,7 +19,7 @@ description: Instructions to get your HLS player up and running through a CDN.
 
 !!!
 
-!!!step :title=Add Player Markup :desc=Let's add the following player HTML boilerplate to get you started.
+!!!step :title=Add Player Markup :desc=Add the following player HTML boilerplate to get started.
 
 ```html:copy
 <vds-hls-player

@@ -14,7 +14,8 @@
 	const nav: SidebarNav = {
 		'Getting Started': [
 			{ title: 'Quickstart', slug: s.gettingStarted('quickstart'), match: true },
-			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') }
+			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') },
+			{ title: 'Tailwind Plugin', slug: s.gettingStarted('tailwind') }
 		],
 		'Core Concepts': [
 			{ title: 'Architecture', slug: s.coreConcepts('architecture') },
