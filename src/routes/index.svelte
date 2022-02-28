@@ -1,9 +1,10 @@
 <script>
 	import Navbar from '$components/layout/navbar/Navbar.svelte';
-	import HeroSection from '$components/page/home/HeroSection.svelte';
-	import OpenSourceSection from '$components/page/home/OpenSourceSection.svelte';
 	import Footer from '$components/layout/Footer.svelte';
-	import HowSection from '$components/page/home/HowSection.svelte';
+
+	import HeroSection from './_components/_HeroSection.svelte';
+	import OpenSourceSection from './_components/_OpenSourceSection.svelte';
+	import HowSection from './_components/_HowSection.svelte';
 
 	const title = 'Vidstack - Frontend video tools to build awesome media experiences on the web.';
 </script>

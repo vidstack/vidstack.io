@@ -17,12 +17,13 @@ declare namespace App {
 declare module '*?highlight' {
 	const tokens: string;
 	const code: string;
-	const highlightedCode: string;
-	export { tokens, code, highlightedCode };
+	/** Highlighted code. */
+	const hlCode: string;
+	export { tokens, code, hlCode };
 }
 
 declare module '*.md' {
-	import type { SvelteComponent } from 'svelte';
+	import { SvelteComponent } from 'svelte';
 
 	type MarkdownFrontmatter = Record<string, unknown>;
 

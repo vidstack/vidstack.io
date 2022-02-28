@@ -5,8 +5,15 @@
 	import { navigating, page } from '$app/stores';
 	import Chip from '$components/base/Chip.svelte';
 	import Steps from '$components/markdown/Steps.svelte';
-	import OptionStep from './_OptionStep.svelte';
-	import BrowserSupport from './_BrowserSupport.svelte';
+
+	import OptionStep from './_components/_OptionStep.svelte';
+	import InstallNpm from './_components/_InstallNPM.md';
+	import InstallCdn from './_components/_InstallCDN.md';
+	import LibVanilla from './_components/_LibVanilla.md';
+	import LibReact from './_components/_LibReact.md';
+	import ProviderHls from './_components/_ProviderHls.md';
+	import BrowserSupport from './_components/_BrowserSupport.md';
+	import ImportAll from './_components/_ImportAll.md';
 
 	const basePath = '/docs/player/getting-started/quickstart';
 
@@ -91,100 +98,9 @@
 		on:change={onOptionsChange}
 	>
 		{#if installMethod === 'NPM'}
-			<p>
-				Locally installing the package via NPM is best when you're integrating the library with
-				build tools such as Parcel, Rollup, Vite, or Webpack. We ship both an unoptimized
-				development bundle that includes logs and a production bundle that is specially minified to
-				get the bundle size as small as possible. Thanks to
-				<a href="https://nodejs.org/api/packages.html#package-entry-points" target="_blank">
-					Node package exports,
-				</a>
-				your bundler will automatically load the correct type based on the Node process environment (<code
-					>NODE_ENV</code
-				>).
-			</p>
-
-			<h4 class="mt-4">Bundle vs. CDN</h4>
-
-			<p>
-				So you can best decide what install method is best for you, we'll quickly look at some good
-				reasons to locally bundle instead of using a CDN.
-			</p>
-
-			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
-				<li>
-					It provides the greatest control over the library. If you're looking to build your own
-					player elements or modify certain behaviour, then this is the path of least resistance.
-				</li>
-				<li>
-					It provides the optimal development experience working with the library because your IDE
-					can provide you with type/value validation and documentation. We also ship a helpful
-					integration for VSCode so you can get autocomplete suggestions for our custom elements
-					when writing HTML.
-				</li>
-				<li>
-					It leads to less duplication of code as dependencies of this library (e.g, Lit) will be
-					bundled only once. If you're using a CDN, any dependencies that are used both in your
-					application and the player library will be loaded twice.
-				</li>
-				<li>
-					Reduces the final bundle size as your bundler can perform tree-shaking through static
-					analysis to eliminate dead-code (i.e., unused imports). We've marked side-effect files in
-					the library to improve this process further.
-				</li>
-				<li>
-					Reduces the number of HTTP requests and round-trips required to load the player.
-					Ultimately, this speeds up the time it takes for the player to load because your bundler
-					can optimize the loading and evaluating time of JavaScript by grouping code into chunks.
-				</li>
-				<li>
-					You can easily take advantage of dynamic imports to determine when the browser loads the
-					library. You don't want the loading of player-related code to block your users from
-					interacting with your application.
-				</li>
-			</ul>
+			<InstallNpm />
 		{:else}
-			<p>
-				Using a CDN like <a href="https://jsdelivr.com" target="_blank">JSDelivr</a> is the simplest
-				and fastest way to start using the player library. We provide a CDN bundle that includes all
-				package dependencies, and it's specially minified to get the bundle size as small as possible.
-			</p>
-
-			<h4 class="mt-4">Why use a CDN?</h4>
-
-			<p>
-				So you can best decide what install method is best for you, we'll quickly look at some good
-				reasons to use a CDN. Refer to the NPM option to find good counter reasons using the select
-				menu above.
-			</p>
-
-			<ul class="not-prose ml-4 flex list-disc flex-col space-y-2">
-				<li>
-					It's simple. There's no build step or anything to install. Add a few script tags, and
-					you're ready to start creating a player, making this an ideal option for development,
-					playground, and low-code environments (e.g., WordPress and Shopify).
-				</li>
-				<li>
-					If you aren't importing from the library or building any custom elements, there may be no
-					point in checking it into Git. It's one less dependency to track, version control, and
-					load in your Git repository. Refer to the NPM install option to find good reasons why you
-					should still bundle it locally (if possible).
-				</li>
-				<li>
-					You'll get much faster load times because JSDelivr uses a
-					<a href="https://www.jsdelivr.com/network/infographic" target="_blank">
-						multi-CDN architecture
-					</a>
-					and has more than 750 points of presence (PoPs). All other users of our library who are also
-					using the CDN will pull the code closer to all PoPs while keeping the cache warm every time
-					they make a request.
-				</li>
-				<li>
-					It'll reduce the load and stress on your server. If you're already at your server limit
-					computationally or financially, it may be best to delegate loading of some resources to an
-					externally managed CDN.
-				</li>
-			</ul>
+			<InstallCdn />
 		{/if}
 	</OptionStep>
 
@@ -196,22 +112,9 @@
 			on:change={onOptionsChange}
 		>
 			{#if libType === 'Vanilla'}
-				<p>
-					The <code>Vanilla</code> option is best when writing plain HTML or using a JS library such
-					as Angular, Preact, Svelte, or Vue. Native web components have
-					<a href="https://custom-elements-everywhere.com" target="_blank">excellent support</a>
-					in these libraries.
-				</p>
+				<LibVanilla />
 			{:else}
-				<p>
-					We ship a separate distribution for React due to it's lack of support for custom elements.
-					This will most likely be changing in the
-					<a href="https://github.com/facebook/react/issues/11347" target="_blank">
-						upcoming React 18 release
-					</a>
-					🤞 Either way, this may provide you a better development experience since React components
-					will feel more natural to use and interact with in your environment.
-				</p>
+				<LibReact />
 			{/if}
 		</OptionStep>
 	{/if}
@@ -231,22 +134,16 @@
 				Embed video content into documents via the native <code>&lt;video&gt;</code> element.
 			</p>
 		{:else if providerType === 'HLS'}
-			<p>
-				Embed video content into documents via the native <code>&lt;video&gt;</code> element. This
-				provider also enables streaming video using the HTTP Live Streaming (HLS) protocol.
-				<a href="https://caniuse.com/?search=hls" target="_blank">HLS isn't widely supported </a>
-				yet, but we use the popular
-				<a href="https://github.com/video-dev/hls.js/" target="_blank">hls.js</a>
-				library to ensure it works anywhere
-				<a href="https://caniuse.com/mediasource" target="_blank">
-					Media Source Extensions (MSE) are supported
-				</a>
-				, which accounts for ~96.42% of users tracked on caniuse.
-			</p>
+			<ProviderHls />
 		{/if}
 	</OptionStep>
 
 	<slot />
 </Steps>
 
-Congratulations, you're done! You should now see the media player rendered on your site.
+<p>Congratulations, you're done! You should now see the media player rendered on your site.</p>
+
+{#if libType !== 'React'}
+	<h2>Importing Everything</h2>
+	<ImportAll {installMethod} />
+{/if}

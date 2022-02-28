@@ -117,7 +117,7 @@ function typography() {
 					lineHeight: '1.4'
 				},
 				h4: {
-					marginTop: '2em',
+					marginTop: '1.75em',
 					fontSize: '1.125em'
 				},
 				'h2 small, h3 small, h4 small': {
@@ -154,6 +154,9 @@ function typography() {
 					top: 'calc(0.875em - 0.0625em)',
 					left: 0,
 					borderRadius: '999px'
+				},
+				'li > p': {
+					margin: 0
 				},
 				a: {
 					fontWeight: theme('fontWeight.semibold'),

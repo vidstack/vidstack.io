@@ -3,7 +3,7 @@
 		Frontend + Video = Hard
 	</h1>
 
-	<div class="text-gray-soft mt-12 max-w-[60ch] text-lg">
+	<div class="mt-12 max-w-[60ch] text-lg text-gray-soft">
 		<p>
 			Since 2017, services that provide media encoding and delivery web APIs have been exploding. In
 			contrast, frontend video tooling... *crickets*. Most current tools are from the stone age and

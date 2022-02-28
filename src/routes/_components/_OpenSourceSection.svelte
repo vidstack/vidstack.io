@@ -1,6 +1,8 @@
 <script lang="ts">
 	import clsx from 'clsx';
+
 	import GitHubIcon from '~icons/ri/github-fill';
+
 	import Chip from '$components/base/Chip.svelte';
 
 	const openSourceProjects = [

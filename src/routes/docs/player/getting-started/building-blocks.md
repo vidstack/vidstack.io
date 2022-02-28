@@ -178,7 +178,8 @@ element contains comprehensive documentation on what it does and how to use it.
 ## Media Styling
 
 :::tip
-Remove the `controls` attribute on the player if you're building a custom UI.
+Remove the `controls` attribute on the player if you're building a custom UI to avoid
+double controls (i.e., native and custom).
 :::
 
 All UI elements in the library are headless meaning they contain no styling out of the box. It's

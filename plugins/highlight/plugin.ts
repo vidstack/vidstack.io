@@ -35,7 +35,7 @@ export const highlightCodePlugin = (): Plugin => {
 			return `
 				export const tokens = ${JSON.stringify(tokens)}
 				export const code = ${JSON.stringify(code)}
-				export const highlightedCode = ${JSON.stringify(html)}
+				export const hlCode = ${JSON.stringify(html)}
 			`;
 		}
 	};
