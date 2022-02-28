@@ -204,8 +204,8 @@
 				</p>
 			{:else}
 				<p>
-					We ship a separate package for React due to it's lack of support for custom elements. This
-					will most likely be changing in the
+					We ship a separate distribution for React due to it's lack of support for custom elements.
+					This will most likely be changing in the
 					<a href="https://github.com/facebook/react/issues/11347" target="_blank">
 						upcoming React 18 release
 					</a>
