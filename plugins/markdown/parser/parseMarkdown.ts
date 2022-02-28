@@ -65,11 +65,13 @@ const CLOSING_STYLE_TAG_RE = /<\/style>/;
 const IMPORT_GLOBALS_CODE = [
 	'Admonition',
 	'CodeFence',
-	'TableOfContents',
 	'Steps',
 	'Step',
 	'TabbedLinks',
-	'TableWrapper'
+	'TableOfContents',
+	'TableWrapper',
+	'Yes',
+	'No'
 ]
 	.map((component) => `import ${component} from '$components/markdown/${component}.svelte';`)
 	.join('\n');

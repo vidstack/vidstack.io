@@ -12,3 +12,4 @@ export * from './tocPlugin';
 export * from './responsiveTablePlugin';
 export * from './shikiPlugin';
 export * from './stepsPlugin';
+export * from './yesNoPlugin';

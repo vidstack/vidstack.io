@@ -14,7 +14,8 @@ import {
 	linksPlugin,
 	tocPlugin,
 	stepsPlugin,
-	responsiveTablePlugin
+	responsiveTablePlugin,
+	yesNoPlugin
 } from './plugins';
 import { type MarkdownParser } from './types';
 
@@ -31,6 +32,7 @@ export async function createMarkdownParser(): Promise<MarkdownParser> {
 	parser.use(customComponentPlugin);
 	parser.use(linksPlugin);
 	parser.use(codePlugin);
+	parser.use(yesNoPlugin);
 	parser.use(importCodePlugin);
 	parser.use(responsiveTablePlugin);
 	parser.use(await createShikiPlugin());

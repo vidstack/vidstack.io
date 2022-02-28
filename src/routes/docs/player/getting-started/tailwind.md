@@ -15,7 +15,7 @@ but it also goes against all the
 
 ## Installation
 
-You can register the plugin by adding the following to `tailwind.config.js`,
+You can register the plugin by adding the following to `tailwind.config.js`:
 
 ```js:title=tailwind.config.js:copy-highlight{3}
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 
 ## Usage
 
-The Vidstack Player exposes media state on the `vds-media-ui` element. For example,
+The player exposes media state on the `vds-media-ui` element. For example:
 
 ```html
 <vds-video-player src="...">
@@ -43,9 +43,13 @@ The Vidstack Player exposes media state on the `vds-media-ui` element. For examp
 </vds-video-player>
 ```
 
-This state is exposed as attributes and CSS properties on `vds-media-ui` so you can style your
-player elements without being forced to write JS. If we were to write vanilla CSS to show and
-hide icons inside a play button, it might look something like this,
+Media state is exposed as attributes and CSS properties on `vds-media-ui` so you can style your
+player elements without being forced to write JS.
+
+:::no
+If we were to write vanilla CSS to show and hide icons inside a play button, it might look
+something like this:
+:::
 
 ```css
 .media-play-icon,
@@ -59,7 +63,9 @@ hide icons inside a play button, it might look something like this,
 }
 ```
 
-Using the Tailwind plugin we could rewrite it like so,
+:::yes
+Using the Tailwind plugin, we could rewrite it like so:
+:::
 
 ```html{4-7}
 <vds-video-player src="...">

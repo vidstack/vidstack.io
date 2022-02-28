@@ -137,12 +137,14 @@ function typography() {
 					...theme('fontSize.sm')[1]
 				},
 				ul: {
-					listStyleType: 'none',
-					paddingLeft: 0
+					paddingLeft: '1rem'
 				},
 				'ul > li': {
 					position: 'relative',
-					paddingLeft: '0.75rem'
+					paddingLeft: '0.25rem'
+				},
+				'ul > li::marker': {
+					color: theme('colors.gray.inverse')
 				},
 				'ul > li::before': {
 					content: '""',
