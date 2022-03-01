@@ -48,7 +48,7 @@ hide it based on some media state:
 ```css:title=player.css
 .controls {
 	display: flex;
-	opacity: 0;
+	opacity: 1;
 	width: 100%;
 	transition: opacity ease 300ms;
 }
