@@ -24,13 +24,14 @@
 	import { wasEnterKeyPressed } from '$utils/keyboard';
 	import { isLargeScreen } from '$stores/isLargeScreen';
 	import Overlay from '$components/base/Overlay.svelte';
+	import DocSearch from '$components/markdown/DocSearch.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	// Only valid on small screen (<992px).
 	export let open = false;
 
-	export let nav: SidebarNav = [];
+	export let nav: SidebarNav = {};
 </script>
 
 <aside
@@ -57,11 +58,19 @@
 		</button>
 	</div>
 
-	<nav class="p-6 pt-0 pl-8 992:pt-6">
+	<nav class="p-6 pt-0 pl-8">
+		<div class="pointer-events-none sticky top-0 -ml-0.5 min-h-[80px]">
+			<div class="h-6 bg-white dark:bg-gray-800" />
+			<div class="pointer-events-auto relative bg-white dark:bg-gray-800">
+				<DocSearch />
+			</div>
+			<div class="h-8 bg-gradient-to-b from-white dark:from-gray-800" />
+		</div>
+
 		<ul>
 			{#each Object.keys(nav) as category (category)}
 				{@const items = nav[category]}
-				<li class="mt-12 first:mt-4 992:mt-10">
+				<li class="mt-12 first:mt-0 992:mt-10">
 					<h5 class="text-gray-strong mb-8 text-lg font-semibold 992:mb-3">{category}</h5>
 					<ul class="space-y-3 border-l border-gray-divider">
 						{#each items as item (item.title + item.slug)}

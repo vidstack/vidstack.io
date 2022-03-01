@@ -16,6 +16,7 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
+		"@docsearch/js": "^3.0.0",
 		"@tailwindcss/forms": "^0.4.0",
 		"clsx": "^1.1.1",
 		"svelte-class-transition": "^1.0.4"
