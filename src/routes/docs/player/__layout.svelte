@@ -4,48 +4,48 @@
 	import { activeMarkdownCategory } from '$stores/markdownMeta';
 
 	const baseUrl = '/docs/player/';
-	const s: Record<string, (slug: string) => string> = {
-		gettingStarted: (s) => `${baseUrl}getting-started/${s}`,
-		coreConcepts: (s) => `${baseUrl}core-concepts/${s}`,
-		providers: (s) => `${baseUrl}providers/${s}`,
-		ui: (s) => `${baseUrl}ui/${s}`
-	};
+	const start = (s) => `${baseUrl}getting-started/${s}`;
+	const core = (s) => `${baseUrl}core-concepts/${s}`;
+	const providers = (s) => `${baseUrl}providers/${s}`;
+	const ui = (s) => `${baseUrl}ui/${s}`;
+
+	const item = (title, slug, options = {}) => ({ title, slug, ...options });
 
 	const nav: SidebarNav = {
 		'Getting Started': [
-			{ title: 'Quickstart', slug: s.gettingStarted('quickstart'), match: true },
-			{ title: 'Editor Setup', slug: s.gettingStarted('editor-setup') },
-			{ title: 'React Integration', slug: s.gettingStarted('react') },
-			{ title: 'Tailwind Plugin', slug: s.gettingStarted('tailwind') },
-			{ title: 'Player Foundation', slug: s.gettingStarted('player-foundation') }
+			item('Quickstart', start('quickstart'), { match: true }),
+			item('Editor Setup', start('editor-setup')),
+			item('React Integration', start('react')),
+			item('Tailwind Plugin', start('tailwind')),
+			item('Foundation', start('foundation')),
+			item('Styling', start('styling'))
 		],
 		'Core Concepts': [
-			{ title: 'Architecture', slug: s.coreConcepts('architecture') },
-			{ title: 'Lifecycle', slug: s.coreConcepts('lifecycle') },
-			{ title: 'Events', slug: s.coreConcepts('events') },
-			{ title: 'Styling', slug: s.coreConcepts('styling') },
-			{ title: 'Skins', slug: s.coreConcepts('skins') },
-			{ title: 'Autoplay', slug: s.coreConcepts('autoplay') },
-			{ title: 'Fullscreen', slug: s.coreConcepts('fullscreen') },
-			{ title: 'Custom Elements', slug: s.coreConcepts('custom-elements') }
+			item('Architecture', core('architecture')),
+			item('Lifecycle', core('lifecycle')),
+			item('Events', core('events')),
+			item('Skins', core('skins')),
+			item('Autoplay', core('autoplay')),
+			item('Fullscreen', core('fullscreen')),
+			item('Custom Elements', core('custom-elements'))
 		],
 		Providers: [
-			{ title: 'Audio', slug: s.providers('audio') },
-			{ title: 'Video', slug: s.providers('video') },
-			{ title: 'HLS', slug: s.providers('hls') }
+			item('Audio', providers('audio')),
+			item('Video', providers('video')),
+			item('HLS', providers('hls'))
 		],
 		UI: [
-			{ title: 'Aspect Ratio', slug: s.ui('aspect-ratio') },
-			{ title: 'Poster', slug: s.ui('poster') },
-			{ title: 'Gesture', slug: s.ui('gesture') },
-			{ title: 'Toggle Button', slug: s.ui('toggle-button') },
-			{ title: 'Play Button', slug: s.ui('play-button') },
-			{ title: 'Mute Button', slug: s.ui('mute-button') },
-			{ title: 'Fullscreen Button', slug: s.ui('fullscreen-button') },
-			{ title: 'Slider', slug: s.ui('slider') },
-			{ title: 'Time Slider', slug: s.ui('time-slider') },
-			{ title: 'Volume Slider', slug: s.ui('volume-slider') },
-			{ title: 'Time', slug: s.ui('time') }
+			item('Aspect Ratio', ui('aspect-ratio')),
+			item('Poster', ui('poster')),
+			item('Gesture', ui('gesture')),
+			item('Toggle Button', ui('toggle-button')),
+			item('Play Button', ui('play-button')),
+			item('Mute Button', ui('mute-button')),
+			item('Fullscreen Button', ui('fullscreen-button')),
+			item('Slider', ui('slider')),
+			item('Time Slider', ui('time-slider')),
+			item('Volume Slider', ui('volume-slider')),
+			item('Time', ui('time'))
 		]
 	};
 </script>

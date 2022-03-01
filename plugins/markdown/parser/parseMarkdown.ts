@@ -39,8 +39,13 @@ export function parseMarkdownToSvelte(
 
 	const { hoistedTags = [] } = parserEnv as MarkdownParserEnv;
 
-	addMarkdownMetaStore(hoistedTags);
-	addSlug(options.baseUrl ?? '/', filePath, hoistedTags);
+	const fileName = path.basename(filePath, path.extname(filePath));
+	const privatePath = fileName.startsWith('_');
+
+	if (!privatePath) {
+		addMarkdownMetaStore(hoistedTags);
+		addSlug(options.baseUrl ?? '/', filePath, hoistedTags);
+	}
 
 	const component =
 		buildMetaExport(dedupeHoistedTags(hoistedTags), meta).join('\n') +

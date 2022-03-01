@@ -1,4 +1,5 @@
 ---
+title: Editor Setup
 description: IDE configuration settings to improve the experience of working with Vidstack Player.
 ---
 

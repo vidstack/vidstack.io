@@ -13,7 +13,7 @@
 	import LibReact from './_components/_LibReact.md';
 	import ProviderHls from './_components/_ProviderHls.md';
 	import BrowserSupport from './_components/_BrowserSupport.md';
-	import ImportAll from './_components/_ImportAll.md';
+	import DangerouslyAll from './_components/_DangerouslyAll.md';
 	import Admonition from '$components/markdown/Admonition.svelte';
 
 	const basePath = '/docs/player/getting-started/quickstart';
@@ -150,6 +150,5 @@
 <p>Congratulations, you're done! You should now see the media player rendered on your site.</p>
 
 {#if libType !== 'React'}
-	<h2>Importing Everything</h2>
-	<ImportAll {installMethod} />
+	<DangerouslyAll {installMethod} />
 {/if}
