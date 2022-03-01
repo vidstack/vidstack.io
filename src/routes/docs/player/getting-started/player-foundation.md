@@ -1,12 +1,12 @@
 ---
-description: Introduction to the player building blocks.
+description: Brief introduction to Vidstack Player.
 ---
 
-# Building Your Player
+# Player Foundation
 
-In this section, we'll take a quick look at all the foundational building blocks so you can
-start putting your player together. The 'Core Concepts' section dives deeper into what we'll be
-covering here; this page only contains a high-level overview.
+In this section, we'll go through some of the basics of working with the Vidstack Player.
+The 'Core Concepts' section dives deeper into what we'll be covering here; this page only
+contains a high-level overview.
 
 ## Player Reference
 
