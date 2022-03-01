@@ -4,7 +4,7 @@ description: Brief introduction to Vidstack Player.
 
 # Player Foundation
 
-In this section, we'll go through some of the basics of working with the Vidstack Player.
+In this section, we'll go through some of the basics of working with Vidstack Player.
 The 'Core Concepts' section dives deeper into what we'll be covering here; this page only
 contains a high-level overview.
 
