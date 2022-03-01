@@ -1,6 +1,6 @@
 .DocSearch-Button {
-	@apply flex w-full items-center rounded-sm bg-[#f0f0f0] py-2.5 pl-3 pr-4 shadow-sm dark:bg-[#2d2d2d];
-	@apply text-[15px] hover:bg-[#e3e3e3] hover:text-gray-inverse dark:hover:bg-[#343434];
+	@apply flex w-full items-center rounded-sm py-2.5 px-3 shadow-sm hover:bg-[#fafafa] dark:bg-[#2d2d2d];
+	@apply border border-gray-divider text-[15px] hover:text-gray-inverse dark:hover:bg-[#343434];
 }
 
 .DocSearch-Button-Container {
@@ -16,7 +16,7 @@
 }
 
 .DocSearch-Button-Keys {
-	@apply font-semibold;
+	@apply flex space-x-0.5 font-semibold;
 }
 
 .DocSearch--active {
