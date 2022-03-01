@@ -14,7 +14,6 @@
 	import ProviderHls from './_components/_ProviderHls.md';
 	import BrowserSupport from './_components/_BrowserSupport.md';
 	import DangerouslyAll from './_components/_DangerouslyAll.md';
-	import Admonition from '$components/markdown/Admonition.svelte';
 
 	const basePath = '/docs/player/getting-started/quickstart';
 
@@ -141,11 +140,6 @@
 
 	<slot />
 </Steps>
-
-<Admonition type="tip">
-	You should remove the <code>controls</code> attribute if you're building a custom UI to avoid clashing
-	with the native controls.
-</Admonition>
 
 <p>Congratulations, you're done! You should now see the media player rendered on your site.</p>
 
