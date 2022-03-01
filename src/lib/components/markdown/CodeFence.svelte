@@ -23,15 +23,20 @@
 
 	let showCopiedCodePrompt = false;
 	async function copyCodeToClipboard() {
-		const copiedCode =
-			highlightLines.length > 0 && copyHighlightOnly
-				? rawCode
-						.split('\n')
-						.filter((_, i) => isHighlightLine(i + 1))
-						.join('\n')
-				: rawCode;
+		try {
+			const copiedCode =
+				highlightLines.length > 0 && copyHighlightOnly
+					? rawCode
+							.split('\n')
+							.filter((_, i) => isHighlightLine(i + 1))
+							.join('\n')
+					: rawCode;
 
-		await navigator.clipboard.writeText(copiedCode);
+			await navigator.clipboard.writeText(copiedCode);
+		} catch (e) {
+			// no-op
+		}
+
 		showCopiedCodePrompt = true;
 	}
 
