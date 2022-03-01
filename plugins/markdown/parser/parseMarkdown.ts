@@ -40,9 +40,9 @@ export function parseMarkdownToSvelte(
 	const { hoistedTags = [] } = parserEnv as MarkdownParserEnv;
 
 	const fileName = path.basename(filePath, path.extname(filePath));
-	const privatePath = fileName.startsWith('_');
+	const isRoute = filePath.includes('src/routes/') && !fileName.startsWith('_');
 
-	if (!privatePath) {
+	if (isRoute) {
 		addMarkdownMetaStore(hoistedTags);
 		addSlug(options.baseUrl ?? '/', filePath, hoistedTags);
 	}
