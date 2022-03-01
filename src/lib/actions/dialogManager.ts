@@ -78,7 +78,7 @@ export function dialogManager(
 
 						let pointerTimer;
 						dialogDisposal.add(
-							listen(element, 'pointerdown', () => {
+							listen(element, 'pointerup', () => {
 								window.clearTimeout(pointerTimer);
 								// Prevent user scrolling triggering close.
 								const y = dialogEl.scrollTop;
