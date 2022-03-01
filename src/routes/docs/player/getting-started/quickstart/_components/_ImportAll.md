@@ -3,8 +3,8 @@
 </script>
 
 :::danger
-We _do not_ recommend importing everything. By importing `all.js`, you're importing all providers
-and elements in the library which will bloat your final application bundle size.
+We _do not_ recommend importing everything. By importing `dangerously-all.js`, you're importing
+all providers and elements in the library which will bloat your final application bundle size.
 :::
 
 We generally recommend only registering what you'll be using. Each element's respective docs
