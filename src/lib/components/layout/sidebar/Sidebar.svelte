@@ -1,4 +1,7 @@
 <script lang="ts" context="module">
+	import { isString } from '$utils/unit';
+	import { kebabToCamelCase } from '$utils/string';
+
 	export type SidebarItem = {
 		title: string;
 		slug: string;
@@ -11,6 +14,20 @@
 		const isMatch = match && currentPath.startsWith(slug);
 		return match ? isMatch : currentPath === slug;
 	}
+
+	function buildItem(
+		[slug, options]: [string, Omit<Partial<SidebarItem>, 'slug'>],
+		slugFn: (path: string) => string
+	): SidebarItem {
+		return {
+			...options,
+			title: options.title ?? kebabToCamelCase(slug),
+			slug: slugFn(slug)
+		};
+	}
+
+	export const toItems = (slugFn: (path: string) => string) => (s: any) =>
+		buildItem(isString(s) ? [s, {}] : s, slugFn);
 </script>
 
 <script lang="ts">

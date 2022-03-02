@@ -42,7 +42,7 @@ documentation and type data.
 
 <img
 	src={VsCodeAutocomplete}
-	aria-label="Before and after screenshot difference of using the VsCode custom data extension."
+	alt="Before and after screenshot difference of using the VsCode custom data extension."
 />
 
 :::steps
