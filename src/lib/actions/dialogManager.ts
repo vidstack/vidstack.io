@@ -60,6 +60,17 @@ export function dialogManager(
 				listen(dialogEl, 'vds-close-dialog', (e: CustomEvent<boolean>) => onCloseDialog(e.detail))
 			);
 
+			// Prevent dialog opening triggering any of these by accident on touch.
+			for (const selector of FOCUSABLE_DIALOG_ELEMENTS) {
+				const elements = Array.from(dialogEl.querySelectorAll(selector)) as HTMLElement[];
+				for (const element of elements) {
+					element.style.pointerEvents = 'none';
+					setTimeout(() => {
+						element.style.pointerEvents = 'auto';
+					}, 500);
+				}
+			}
+
 			if (options.closeOnPointerLeave) {
 				dialogDisposal.add(listen(dialogEl, 'pointerleave', () => onCloseDialog()));
 			}
@@ -95,11 +106,6 @@ export function dialogManager(
 		}
 
 		options.onOpen?.();
-
-		// Prevent dialog button click triggering a click inside dialog.
-		setTimeout(() => {
-			(dialogEl as HTMLElement).style.pointerEvents = 'auto';
-		}, 300);
 
 		return dialogEl;
 	}
