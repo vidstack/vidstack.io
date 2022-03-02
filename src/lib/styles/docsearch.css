@@ -1,6 +1,6 @@
 .DocSearch-Button {
 	@apply flex w-full items-center rounded-sm py-2.5 px-3 shadow-sm hover:bg-[#fafafa] dark:bg-[#2d2d2d];
-	@apply border border-gray-divider text-[15px] hover:text-gray-inverse dark:hover:bg-[#343434];
+	@apply transform border border-gray-divider text-[15px] transition-transform duration-300 ease-out hover:scale-105 hover:text-gray-inverse dark:hover:bg-[#343434];
 }
 
 .DocSearch-Button-Container {
