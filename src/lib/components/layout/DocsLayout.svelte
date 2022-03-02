@@ -95,13 +95,15 @@
 <main class="max-w-8xl z-20 mx-auto 1200:pr-10">
 	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
-	<div class="px-4 pb-[50vh] 576:px-6 768:px-8 992:pl-[21rem]">
+	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">
 		<div class="relative mx-auto mt-[13rem] w-full max-w-3xl 992:mt-32">
 			<slot />
 
-			<hr class="my-12 border-gray-divider" />
+			{#if previousItem || nextItem}
+				<hr class="mt-20 border-gray-divider" />
+			{/if}
 
-			<div class="flex items-center text-lg font-semibold text-gray-300 992:text-xl">
+			<div class="flex items-center pt-12 pb-20 text-lg font-semibold text-gray-300 992:text-xl">
 				{#if previousItem}
 					<div class="mb-4 flex flex-col items-start">
 						<span class="ml-3 mb-4 inline-block text-gray-inverse">Previous</span>
