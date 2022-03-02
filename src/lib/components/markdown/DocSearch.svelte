@@ -15,7 +15,7 @@
 			container,
 			placeholder: 'Search documentation',
 			appId: 'JV3QY1UI79',
-			indexName: 'player',
+			indexName: 'vidstack',
 			apiKey: '02e4cd4273f4f6762d8f8d71a32d53d6'
 			// Testing
 			// appId: 'R2IYF7ETH7',
