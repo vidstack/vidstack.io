@@ -134,18 +134,6 @@
 
 			{#if filterHasDesc(api[part]).length > 3}
 				<div class="mt-4 flex items-center justify-end text-sm text-gray-soft">
-					{#if isAllOpen[part] || filterHasDesc(api[part]).length > 10}
-						<button
-							class="rounded-sm px-2.5 py-1 font-medium hover:text-gray-inverse"
-							aria-checked={ariaBool(showAll)}
-							on:click={() => {
-								_showAll[part] = !_showAll[part];
-							}}
-						>
-							{showAll ? 'Show Less' : 'Show All'}
-						</button>
-					{/if}
-
 					<button
 						class="rounded-sm px-2.5 py-1 font-medium hover:text-gray-inverse"
 						aria-checked={ariaBool(isAllOpen[part])}
@@ -160,6 +148,18 @@
 					>
 						{!isAllOpen[part] ? 'Open All' : 'Close All'}
 					</button>
+
+					{#if isAllOpen[part] || filterHasDesc(api[part]).length > 10}
+						<button
+							class="rounded-sm px-2.5 py-1 font-medium hover:text-gray-inverse"
+							aria-checked={ariaBool(showAll)}
+							on:click={() => {
+								_showAll[part] = !_showAll[part];
+							}}
+						>
+							{showAll ? 'Show Less' : 'Show All'}
+						</button>
+					{/if}
 				</div>
 			{/if}
 		</section>
