@@ -1,3 +1,0 @@
-# Time Slider
-
-Coming soon.

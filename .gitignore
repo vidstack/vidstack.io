@@ -6,4 +6,4 @@ node_modules
 .env
 .env.*
 !.env.example
-/plugins/dist
+/node-lib/dist

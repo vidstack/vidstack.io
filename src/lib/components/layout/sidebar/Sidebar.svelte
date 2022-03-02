@@ -5,13 +5,17 @@
 	export type SidebarItem = {
 		title: string;
 		slug: string;
+		experimental?: boolean;
 		match?: boolean;
 	};
 
 	export type SidebarNav = Record<string, SidebarItem[]>;
 
 	export function isActiveSidebarItem({ match, slug }: SidebarItem, currentPath: string) {
-		const isMatch = match && currentPath.startsWith(slug);
+		const isMatch =
+			match &&
+			(currentPath === slug || (currentPath.startsWith(slug) && currentPath[slug.length] === '/'));
+
 		return match ? isMatch : currentPath === slug;
 	}
 
@@ -26,8 +30,14 @@
 		};
 	}
 
-	export const toItems = (slugFn: (path: string) => string) => (s: any) =>
-		buildItem(isString(s) ? [s, {}] : s, slugFn);
+	export function toItems(slugFn: (path: string) => string, matchAll = false) {
+		return (s: any) => {
+			const slug = isString(s) ? s : s[0];
+			const options = isString(s) ? {} : s[1];
+			options.match = options.match ?? matchAll;
+			return buildItem([slug, options], slugFn);
+		};
+	}
 </script>
 
 <script lang="ts">
@@ -35,6 +45,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { page } from '$app/stores';
 
+	import ExperimentalIcon from '~icons/ri/test-tube-fill';
 	import CloseIcon from '~icons/ri/close-fill';
 
 	import { ariaBool } from '$utils/aria';
@@ -94,7 +105,7 @@
 							<li class="first:mt-6">
 								<a
 									class={clsx(
-										'border-l-2 -ml-px pl-4 py-2 992:py-1.5 block',
+										'border-l-2 -ml-px pl-4 py-2 992:py-1.5 flex items-center',
 										isActiveSidebarItem(item, $page.url.pathname)
 											? 'border-brand-200 dark:border-brand font-semibold text-brand'
 											: 'border-transparent font-normal hover:border-gray-inverse text-gray-soft hover:text-gray-inverse'
@@ -103,6 +114,9 @@
 									sveltekit:prefetch
 								>
 									{item.title}
+									{#if item.experimental}
+										<ExperimentalIcon class="ml-1" width="24" height="24" />
+									{/if}
 								</a>
 							</li>
 						{/each}

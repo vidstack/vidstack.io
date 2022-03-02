@@ -1,3 +1,0 @@
-# Aspect Ratio
-
-Coming soon.

@@ -1,3 +1,0 @@
-# Volume Slider
-
-Coming soon.

@@ -1,3 +1,0 @@
-# Mute Button
-
-Coming soon.

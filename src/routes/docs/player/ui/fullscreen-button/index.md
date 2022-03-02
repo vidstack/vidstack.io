@@ -1,3 +1,0 @@
-# Fullscreen Button
-
-Coming soon.

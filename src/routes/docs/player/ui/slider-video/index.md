@@ -1,3 +1,0 @@
-# Slider Video
-
-Coming Soon.

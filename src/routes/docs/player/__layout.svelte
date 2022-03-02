@@ -6,8 +6,9 @@
 	const baseUrl = '/docs/player/';
 	const gettingStarted = (s) => `${baseUrl}getting-started/${s}`;
 	const coreConcepts = (s) => `${baseUrl}core-concepts/${s}`;
-	const providers = (s) => `${baseUrl}providers/${s}`;
-	const ui = (s) => `${baseUrl}ui/${s}`;
+	const providerElements = (s) => `${baseUrl}elements/providers/${s}`;
+	const mediaElements = (s) => `${baseUrl}elements/media/${s}`;
+	const uiElements = (s) => `${baseUrl}elements/ui/${s}`;
 
 	const nav: SidebarNav = {
 		'Getting Started': [
@@ -27,11 +28,12 @@
 			'fullscreen',
 			'custom-elements'
 		].map(toItems(coreConcepts)),
-		Providers: ['audio', 'video', 'hls'].map(toItems(providers)),
+		Providers: ['audio', 'video', 'hls'].map(toItems(providerElements, true)),
+		Media: ['media-sync', 'media-visibility'].map(toItems(mediaElements, true)),
 		UI: [
 			'aspect-ratio',
 			'poster',
-			'gesture',
+			['gesture', { experimental: true }],
 			'toggle-button',
 			'play-button',
 			'mute-button',
@@ -42,7 +44,7 @@
 			'time-slider',
 			'volume-slider',
 			'time'
-		].map(toItems(ui))
+		].map(toItems(uiElements, true))
 	};
 </script>
 

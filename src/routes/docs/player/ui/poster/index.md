@@ -1,3 +1,0 @@
-# Poster
-
-Coming soon.
