@@ -27,6 +27,7 @@
 									: 'text-gray-soft hover:text-gray-inverse'
 							)}
 							href={link.href}
+							sveltekit:prefetch
 						>
 							{link.title}
 						</a>
