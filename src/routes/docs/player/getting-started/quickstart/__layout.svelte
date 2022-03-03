@@ -28,6 +28,9 @@
 
 	let isLibraryTypesDisabled = installMethod === 'CDN';
 
+	$: providerLink = `/docs/player/elements/providers/${providerType.toLowerCase()}`;
+	$: providerApiLink = `${providerLink}/api`;
+
 	$: if ($navigating?.to.pathname === basePath) {
 		installMethod = 'NPM';
 		libType = 'Vanilla';
@@ -155,7 +158,11 @@
 </Steps>
 
 <p class="mt-10">
-	Congratulations, you're done! You should now see the media player rendered on your site.
+	Congratulations, you're done! You should now see the media player rendered on your site. For more
+	information on loading media or interacting with the player, you can dig around the provider
+	<a href={providerLink} target="_blank">docs</a>
+	and
+	<a href={providerApiLink} target="_blank">API</a> pages.
 </p>
 
 {#if libType !== 'React'}
