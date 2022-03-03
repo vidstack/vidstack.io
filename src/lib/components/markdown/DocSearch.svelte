@@ -3,9 +3,10 @@
 
 	// @ts-expect-error - no types.
 	import docsearch from '@docsearch/js';
-	import clsx from 'clsx';
 
+	import clsx from 'clsx';
 	import { onMount } from 'svelte';
+	import DocSearchSkeleton from './DocSearchSkeleton.svelte';
 
 	let container;
 	let mounted = false;
@@ -24,6 +25,9 @@
 		});
 
 		mounted = true;
+		return () => {
+			mounted = false;
+		};
 	});
 </script>
 
@@ -31,19 +35,8 @@
 	<link rel="preconnect" href="https://JV3QY1UI79-dsn.algolia.net" crossorigin="" />
 </svelte:head>
 
-<div bind:this={container} />
+<div class="contents" bind:this={container} />
 
-<!-- For SSR to prevent sidebar jumping on initial render. -->
-<div
-	class={clsx(
-		mounted ? 'hidden' : 'flex',
-		'w-full items-center rounded-sm py-2.5 px-3 shadow-sm dark:bg-[#2d2d2d] text-[15px]',
-		'border border-gray-divider'
-	)}
->
-	<span class="flex-1">Search</span>
-	<span class="flex space-x-0.5 font-semibold">
-		<span>⌘</span>
-		<span>K</span>
-	</span>
+<div class={clsx(mounted ? 'hidden' : 'contents')}>
+	<DocSearchSkeleton />
 </div>

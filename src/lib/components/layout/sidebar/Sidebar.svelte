@@ -52,7 +52,7 @@
 	import { wasEnterKeyPressed } from '$utils/keyboard';
 	import { isLargeScreen } from '$stores/isLargeScreen';
 	import Overlay from '$components/base/Overlay.svelte';
-	import DocSearch from '$components/markdown/DocSearch.svelte';
+	import LazyDocSearch from '$components/markdown/LazyDocSearch.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -87,10 +87,10 @@
 	</div>
 
 	<nav class="p-6 pt-0 pl-8">
-		<div class="pointer-events-none sticky top-0 -ml-0.5 min-h-[80px]">
+		<div class="pointer-events-none sticky top-0 -ml-0.5 hidden min-h-[80px] 992:block">
 			<div class="h-6 bg-white dark:bg-gray-800" />
 			<div class="pointer-events-auto relative bg-white dark:bg-gray-800">
-				<DocSearch />
+				<LazyDocSearch />
 			</div>
 			<div class="h-8 bg-gradient-to-b from-white dark:from-gray-800" />
 		</div>

@@ -51,8 +51,6 @@ export function dialogManager(
 		const dialogEl = document.querySelector(`#${dialogId}`);
 
 		if (dialogEl) {
-			(dialogEl as HTMLElement).style.pointerEvents = 'none';
-
 			// Prevent it bubbling up to document body so we can determine when to close dialog.
 			dialogDisposal.add(listen(dialogEl, 'pointerdown', (e) => e.stopPropagation()));
 

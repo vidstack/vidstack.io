@@ -267,3 +267,32 @@
 .DocSearch-NoResults-Prefill-List button {
 	@apply w-full p-2 text-left text-gray-soft hover:bg-gray-200 hover:text-gray-inverse dark:hover:bg-gray-500;
 }
+
+@media only screen and (max-width: 991px) {
+	.DocSearch-Button {
+		@apply m-0 h-9 w-14 justify-center border-0 bg-transparent p-0 shadow-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=%23707070&width=28&height=28');
+	}
+
+	.DocSearch-Button:hover {
+		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=black&width=28&height=28');
+	}
+
+	.dark .DocSearch-Button {
+		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=%238d8d8d&width=28&height=28');
+	}
+
+	.dark .DocSearch-Button:hover {
+		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=white&width=28&height=28');
+	}
+
+	.DocSearch-Button-Placeholder {
+		@apply hidden;
+	}
+
+	.DocSearch-Button-Keys {
+		@apply hidden;
+	}
+}

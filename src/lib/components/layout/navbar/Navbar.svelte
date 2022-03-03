@@ -13,6 +13,7 @@
 	import { uppercaseFirstLetter } from '$utils/string';
 	import Popover from '$components/base/Popover.svelte';
 	import SocialLink from '$components/social/SocialLink.svelte';
+	import LazyDocSearch from '$components/markdown/LazyDocSearch.svelte';
 
 	export let contain = false;
 
@@ -53,6 +54,8 @@
 		<div class="flex-1" />
 
 		<div class="-mr-2 flex items-center 992:hidden">
+			<LazyDocSearch />
+
 			<Popover overlay on:open={onOpenPopover} on:close={onClosePopover}>
 				<svelte:fragment slot="button">
 					<MenuIcon width="30" height="30" />
