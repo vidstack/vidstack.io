@@ -58,7 +58,10 @@
 
 	{#if filterHasDesc(api[part]).length > 0}
 		<section>
-			<h2>{camelToTitleCase(part).replace('Css', 'CSS')}</h2>
+			<h2 id={part}>
+				<a class="header-anchor" href={`#${part}`} aria-hidden="true">#</a>
+				{camelToTitleCase(part).replace('Css', 'CSS')}
+			</h2>
 
 			<div
 				class={clsx(
