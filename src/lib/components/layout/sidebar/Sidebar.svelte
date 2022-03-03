@@ -69,9 +69,10 @@
 		if (!activeItem) return;
 		const activeEl = sidebar.querySelector(`a[href="${activeItem.slug}"]`);
 		if (activeEl) {
-			const { top: sidebarTop } = sidebar.getBoundingClientRect();
+			const { height: sidebarHeight } = sidebar.getBoundingClientRect();
 			const { top } = activeEl.getBoundingClientRect();
-			sidebar.scrollTo({ top: Math.abs(sidebarTop - top) - 400, behavior: 'smooth' });
+			const scrollTop = top - sidebarHeight / 2 + 40; // Slightly off center.
+			sidebar.scrollTo({ top: scrollTop, behavior: 'smooth' });
 		}
 	}
 
