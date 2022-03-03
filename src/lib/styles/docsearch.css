@@ -270,7 +270,7 @@
 
 @media only screen and (max-width: 991px) {
 	.DocSearch-Button {
-		@apply m-0 h-9 w-14 justify-center border-0 bg-transparent p-0 shadow-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent;
+		@apply m-0 -mr-2 h-9 w-14 justify-center border-0 bg-transparent p-0 shadow-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent;
 		background-position: center;
 		background-repeat: no-repeat;
 		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=%23707070&width=28&height=28');

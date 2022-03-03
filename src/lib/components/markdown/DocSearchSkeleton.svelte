@@ -13,6 +13,6 @@
 	</span>
 </div>
 
-<div class="flex h-9 w-14 items-center justify-center rounded-sm border-0 992:hidden">
+<div class="-mr-2 flex h-9 w-14 items-center justify-center rounded-sm border-0 992:hidden">
 	<SearchIcon class=" text-gray-soft" width="28" height="28" />
 </div>
