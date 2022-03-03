@@ -22,17 +22,11 @@ contain one or more audio sources, represented using the `src` attribute or the 
 the browser will choose the most suitable one.
 
 ```html:copy
-<vds-audio controls src="https://media-files.vidstack.io/audio.mp3">
-	Your browser doesn't support the HTML5 <code>audio</code> tag.
-</vds-audio>
-```
-
-## Multiple Sources
-
-```html:copy
-<vds-audio controls>
-	<source src="https://media-files.vidstack.io/audio.mp3" type="audio/mpeg" />
-	<source src="https://media-files.vidstack.io/audio.ogg" type="audio/ogg" />
+<vds-audio
+	controls
+	loading="lazy"
+	src="https://media-files.vidstack.io/audio.mp3"
+>
 	Your browser doesn't support the HTML5 <code>audio</code> tag.
 </vds-audio>
 ```
@@ -51,4 +45,14 @@ interacting with the `<vds-audio-player>` element.
 		<!-- ... -->
 	</vds-media-ui>
 </vds-audio-player>
+```
+
+## Multiple Sources
+
+```html:copy
+<vds-audio controls>
+	<source src="https://media-files.vidstack.io/audio.mp3" type="audio/mpeg" />
+	<source src="https://media-files.vidstack.io/audio.ogg" type="audio/ogg" />
+	Your browser doesn't support the HTML5 <code>audio</code> tag.
+</vds-audio>
 ```

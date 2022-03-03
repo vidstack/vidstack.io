@@ -16,6 +16,11 @@ const elements = getJson(elementsPath);
 
 const components: ComponentMeta[] = elements.components;
 
+function formatHeading(name: string) {
+	if (name === 'Hls') return 'HLS';
+	return null;
+}
+
 export const apiDocsPlugin = (): Plugin => {
 	let parser;
 
@@ -63,7 +68,7 @@ export const apiDocsPlugin = (): Plugin => {
 					`  const __api = ${component ? serializeApi(component) : '{}'};`,
 					'</script>',
 					'',
-					`# ${name} API`,
+					`# ${formatHeading(name) ?? name} API`,
 					'',
 					'<ComponentTabbedLinks slug={__slug} api />',
 					'',
