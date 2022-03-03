@@ -55,3 +55,7 @@ export function isArray(value: unknown): value is unknown[] {
 export function createRegex(regex: string | RegExp) {
 	return isString(regex) ? new RegExp(regex) : regex;
 }
+
+export function isWindow(value: unknown): value is Window {
+	return value === window;
+}

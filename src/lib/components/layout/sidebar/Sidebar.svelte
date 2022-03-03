@@ -53,6 +53,7 @@
 	import { isLargeScreen } from '$stores/isLargeScreen';
 	import Overlay from '$components/base/Overlay.svelte';
 	import LazyDocSearch from '$components/markdown/LazyDocSearch.svelte';
+	import { scrollIntoCenter } from '$utils/scroll';
 
 	const dispatch = createEventDispatcher();
 
@@ -69,10 +70,7 @@
 		if (!activeItem) return;
 		const activeEl = sidebar.querySelector(`a[href="${activeItem.slug}"]`);
 		if (activeEl) {
-			const { height: sidebarHeight } = sidebar.getBoundingClientRect();
-			const { top } = activeEl.getBoundingClientRect();
-			const scrollTop = top - sidebarHeight / 2 + 40; // Slightly off center.
-			sidebar.scrollTo({ top: scrollTop, behavior: 'smooth' });
+			scrollIntoCenter(sidebar, activeEl, { behaviour: 'smooth' });
 		}
 	}
 
