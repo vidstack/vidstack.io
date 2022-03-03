@@ -70,6 +70,7 @@ const CLOSING_STYLE_TAG_RE = /<\/style>/;
 const IMPORT_GLOBALS_CODE = [
 	'Admonition',
 	'ComponentTabbedLinks',
+	'ComponentImport',
 	'CodeFence',
 	'Steps',
 	'Step',

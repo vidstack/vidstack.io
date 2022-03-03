@@ -4,9 +4,10 @@
 	import { goto } from '$app/navigation';
 	import { navigating, page } from '$app/stores';
 	import Chip from '$components/base/Chip.svelte';
+	import Select from '$components/base/Select.svelte';
 	import Steps from '$components/markdown/Steps.svelte';
+	import Step from '$components/markdown/Step.svelte';
 
-	import OptionStep from './_components/_OptionStep.svelte';
 	import InstallNpm from './_components/_InstallNPM.md';
 	import InstallCdn from './_components/_InstallCDN.md';
 	import LibVanilla from './_components/_LibVanilla.md';
@@ -75,9 +76,9 @@
 
 <BrowserSupport />
 
-<h2 class="mb-8 flex flex-col 992:mb-6 992:flex-row 992:items-center">
+<h2 class="mb-10 flex flex-col 992:flex-row 992:items-center">
 	Player Installation
-	<div class="mt-4 inline-flex space-x-1.5 text-white dark:text-black 992:ml-2 992:mt-0">
+	<div class="mt-4 -ml-2 inline-flex space-x-1.5 text-white dark:text-black 992:ml-2 992:mt-0">
 		<Chip class={clsx(installMethod === 'CDN' ? 'bg-lime-600 dark:bg-lime-300' : 'hidden')}>
 			{installMethod}
 		</Chip>
@@ -91,40 +92,52 @@
 </h2>
 
 <Steps>
-	<OptionStep
-		title="Select Installation Method"
-		options={installOptions}
-		bind:value={installMethod}
-		on:change={onOptionsChange}
-	>
+	<Step orientation="vertical">
+		<h3 slot="title">Select Installation Method</h3>
+
+		<Select
+			title="Select Installation Method"
+			options={installOptions}
+			bind:value={installMethod}
+			on:change={onOptionsChange}
+		/>
+
 		{#if installMethod === 'NPM'}
 			<InstallNpm />
 		{:else}
 			<InstallCdn />
 		{/if}
-	</OptionStep>
+	</Step>
 
 	{#if !isLibraryTypesDisabled}
-		<OptionStep
-			title="Select JS Library"
-			options={libOptions}
-			bind:value={libType}
-			on:change={onOptionsChange}
-		>
+		<Step orientation="vertical">
+			<h3 slot="title">Select JS Library</h3>
+
+			<Select
+				title="Select JS Library"
+				options={libOptions}
+				bind:value={libType}
+				on:change={onOptionsChange}
+			/>
+
 			{#if libType === 'Vanilla'}
 				<LibVanilla />
 			{:else}
 				<LibReact />
 			{/if}
-		</OptionStep>
+		</Step>
 	{/if}
 
-	<OptionStep
-		title="Select Media Provider"
-		options={providerOptions}
-		bind:value={providerType}
-		on:change={onOptionsChange}
-	>
+	<Step orientation="vertical">
+		<h3 slot="title">Select Media Provider</h3>
+
+		<Select
+			title="Select Media Provider"
+			options={providerOptions}
+			bind:value={providerType}
+			on:change={onOptionsChange}
+		/>
+
 		{#if providerType === 'Audio'}
 			<p>
 				Embed sound content into documents via the native <code>&lt;audio&gt;</code> element.
@@ -136,12 +149,14 @@
 		{:else if providerType === 'HLS'}
 			<ProviderHls />
 		{/if}
-	</OptionStep>
+	</Step>
 
 	<slot />
 </Steps>
 
-<p>Congratulations, you're done! You should now see the media player rendered on your site.</p>
+<p class="mt-10">
+	Congratulations, you're done! You should now see the media player rendered on your site.
+</p>
 
 {#if libType !== 'React'}
 	<DangerouslyAll {installMethod} />

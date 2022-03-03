@@ -2,4 +2,8 @@
 
 <ComponentTabbedLinks slug={__slug} />
 
+## Import
+
+<ComponentImport tagName="vds-aspect-ratio" />
+
 Coming Soon.

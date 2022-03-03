@@ -30,7 +30,7 @@ for (const component of components) {
 	if (shouldIgnore) continue;
 
 	const baseTagName = component.tagName.slice('vds-'.length);
-	const name = kebabToCamelCase(baseTagName);
+	const name = kebabToTitleCase(baseTagName);
 
 	const dirPath = resolve(PLAYER_DOCS_DIR, category, baseTagName);
 	const indexFilePath = resolve(dirPath, 'index.md');
@@ -42,7 +42,18 @@ for (const component of components) {
 	if (!exists) {
 		writeFileSync(
 			indexFilePath,
-			[`# ${name}`, '', '<ComponentTabbedLinks slug={__slug} />', '', 'Coming Soon.', ''].join('\n')
+			[
+				`# ${name}`,
+				'',
+				'<ComponentTabbedLinks slug={__slug} />',
+				'',
+				'## Import',
+				'',
+				`<ComponentImport tagName="${component.tagName}" />`,
+				'',
+				'Coming Soon.',
+				''
+			].join('\n')
 		);
 		writeFileSync(
 			apiFilePath,
@@ -61,7 +72,7 @@ function getJson(filePath) {
 	return JSON.parse(readFileSync(filePath).toString());
 }
 
-function kebabToCamelCase(str) {
+function kebabToTitleCase(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1).replace(/-./g, (x) => ' ' + x[1].toUpperCase());
 }
 

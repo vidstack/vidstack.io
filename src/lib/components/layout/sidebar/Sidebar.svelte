@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import { isString } from '$utils/unit';
-	import { kebabToCamelCase } from '$utils/string';
+	import { kebabToTitleCase } from '$utils/string';
 
 	export type SidebarItem = {
 		title: string;
@@ -25,7 +25,7 @@
 	): SidebarItem {
 		return {
 			...options,
-			title: options.title ?? kebabToCamelCase(slug),
+			title: options.title ?? kebabToTitleCase(slug),
 			slug: slugFn(slug)
 		};
 	}
