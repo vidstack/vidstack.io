@@ -28,7 +28,7 @@
 			'fullscreen',
 			'custom-elements'
 		].map(toItems(coreConcepts)),
-		Providers: ['audio', 'video', 'hls'].map(toItems(providerElements, true)),
+		Providers: ['audio', 'video', ['hls', { title: 'HLS' }]].map(toItems(providerElements, true)),
 		Media: ['media-sync', 'media-visibility'].map(toItems(mediaElements, true)),
 		UI: [
 			'aspect-ratio',

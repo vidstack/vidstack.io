@@ -42,7 +42,7 @@
 
 <script lang="ts">
 	import clsx from 'clsx';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { page } from '$app/stores';
 
 	import ExperimentalIcon from '~icons/ri/test-tube-fill';
@@ -56,10 +56,28 @@
 
 	const dispatch = createEventDispatcher();
 
+	let sidebar: HTMLElement;
+
 	// Only valid on small screen (<992px).
 	export let open = false;
 
 	export let nav: SidebarNav = {};
+
+	function scrollToActiveItem() {
+		const allItems = Object.values(nav).flat();
+		const activeItem = allItems.find((item) => isActiveSidebarItem(item, $page.url.pathname));
+		if (!activeItem) return;
+		const activeEl = sidebar.querySelector(`a[href="${activeItem.slug}"]`);
+		if (activeEl) {
+			const { top: sidebarTop } = sidebar.getBoundingClientRect();
+			const { top } = activeEl.getBoundingClientRect();
+			sidebar.scrollTo({ top: Math.abs(sidebarTop - top) - 400, behavior: 'smooth' });
+		}
+	}
+
+	onMount(() => {
+		scrollToActiveItem();
+	});
 </script>
 
 <aside
@@ -73,6 +91,7 @@
 	)}
 	role={!$isLargeScreen ? 'dialog' : null}
 	aria-modal={ariaBool(!$isLargeScreen)}
+	bind:this={sidebar}
 >
 	<div class="sticky top-0 left-0 flex items-center 992:hidden">
 		<div class="flex-1" />
