@@ -17,7 +17,7 @@
 			placeholder: 'Search documentation',
 			appId: 'JV3QY1UI79',
 			indexName: 'vidstack',
-			apiKey: '02e4cd4273f4f6762d8f8d71a32d53d6'
+			apiKey: '03b81ed3b7849b33599967cec76734fe'
 			// Testing
 			// appId: 'R2IYF7ETH7',
 			// apiKey: '599cec31baffa4868cae4e79f180729b',
