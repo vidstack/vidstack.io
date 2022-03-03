@@ -88,6 +88,14 @@
 									}}
 								>
 									<code>{prop.name}</code>
+
+									{#if hasReadonly && prop.readonly}
+										<span
+											class="ml-1.5 rounded-md bg-gray-200 py-px px-2 font-mono text-xs dark:bg-gray-600"
+										>
+											readonly
+										</span>
+									{/if}
 								</button>
 							</h3>
 							<ArrowDropDownIcon
@@ -107,20 +115,11 @@
 							class={clsx(!isOpen && 'hidden', 'p-4 pb-0 prose dark:prose-invert')}
 						>
 							{#if hasTypes}
-								<div class="flex space-x-4 pt-2 font-mono text-sm">
+								<div class="flex pt-2 font-mono text-sm">
 									<span>
 										Type:
 										<code class="-ml-1 text-indigo-500 dark:text-indigo-300">{prop.type}</code>
 									</span>
-
-									{#if hasReadonly}
-										<span>
-											Readonly:
-											<code class="-ml-1 text-indigo-500 dark:text-indigo-300">
-												{prop.readonly ? 'true' : 'false'}
-											</code>
-										</span>
-									{/if}
 								</div>
 							{/if}
 
