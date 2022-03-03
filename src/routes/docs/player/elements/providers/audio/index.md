@@ -22,31 +22,31 @@ contain one or more audio sources, represented using the `src` attribute or the 
 the browser will choose the most suitable one.
 
 ```html:copy
+<vds-audio controls src="https://media-files.vidstack.io/audio.mp3">
+	Your browser doesn't support the HTML5 <code>audio</code> tag.
+</vds-audio>
+```
+
+## Multiple Sources
+
+```html:copy
 <vds-audio controls>
-	<source src="myAudio.mp3" type="audio/mpeg" />
-	<source src="myAudio.ogg" type="audio/ogg" />
-	<p>
-		Your browser doesn't support HTML5 audio. Here is a
-		<a href="myAudio.mp3">link to the audio</a> instead.
-	</p>
+	<source src="https://media-files.vidstack.io/audio.mp3" type="audio/mpeg" />
+	<source src="https://media-files.vidstack.io/audio.ogg" type="audio/ogg" />
+	Your browser doesn't support the HTML5 <code>audio</code> tag.
 </vds-audio>
 ```
 
 ## Player
 
-The `<vds-audio-player>` is a light extension ontop of `<vds-audio>` to enable a custom player UI
+The `<vds-audio-player>` is a light extension on top of `<vds-audio>` to enable a custom player UI
 to be built by exposing the `ui` slot. Thus, the entire audio provider's API is available when
 interacting with the `<vds-audio-player>` element.
 
 ```html:copy
 <vds-audio-player>
-	<source src="myAudio.mp3" type="audio/mpeg" />
-	<source src="myAudio.ogg" type="audio/ogg" />
-	<p>
-		Your browser doesn't support HTML5 audio. Here is a
-		<a href="myAudio.mp3">link to the audio</a> instead.
-	</p>
-
+	<source src="https://media-files.vidstack.io/audio.mp3" type="audio/mpeg" />
+	<source src="https://media-files.vidstack.io/audio.ogg" type="audio/ogg" />
 	<vds-media-ui slot="ui">
 		<!-- ... -->
 	</vds-media-ui>
