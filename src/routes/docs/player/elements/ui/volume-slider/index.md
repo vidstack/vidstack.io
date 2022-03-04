@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-volume-slider" />
 
+## Usage
+
 Coming Soon.

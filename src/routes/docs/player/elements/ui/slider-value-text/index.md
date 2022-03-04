@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-slider-value-text" />
 
+## Usage
+
 Coming Soon.

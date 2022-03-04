@@ -51,6 +51,8 @@ for (const component of components) {
 				'',
 				`<ComponentImport tagName="${component.tagName}" />`,
 				'',
+				'## Usage',
+				'',
 				'Coming Soon.',
 				''
 			].join('\n')

@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-fullscreen-button" />
 
+## Usage
+
 Coming Soon.

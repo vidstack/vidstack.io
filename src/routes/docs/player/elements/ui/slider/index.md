@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-slider" />
 
+## Usage
+
 Coming Soon.

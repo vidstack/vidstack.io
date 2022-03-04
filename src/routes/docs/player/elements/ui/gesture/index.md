@@ -8,4 +8,6 @@
 
 <ComponentImport tagName="vds-gesture" />
 
+## Usage
+
 Coming Soon.

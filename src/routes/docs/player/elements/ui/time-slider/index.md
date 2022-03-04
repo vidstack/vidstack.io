@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-time-slider" />
 
+## Usage
+
 Coming Soon.

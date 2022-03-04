@@ -6,4 +6,6 @@
 
 <ComponentImport tagName="vds-mute-button" />
 
+## Usage
+
 Coming Soon.
