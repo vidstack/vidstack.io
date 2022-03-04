@@ -39,10 +39,13 @@
 
 <script lang="ts">
 	import clsx from 'clsx';
+	import { onMount, tick } from 'svelte';
+
+	import QuestionIcon from '~icons/ri/question-fill';
 	import ArrowDropDownIcon from '~icons/ri/arrow-drop-down-fill';
+
 	import { ariaBool } from '$utils/aria';
 	import { camelToKebabCase, camelToTitleCase } from '$utils/string';
-	import { onMount, tick } from 'svelte';
 
 	export let api: ComponentApi;
 
@@ -52,6 +55,13 @@
 
 	const categories = Object.keys(api); // ['properties', 'methods', 'events', ...]
 	const noTypes = new Set(['slots', 'cssProps', 'cssParts']);
+
+	const categoryLinks = {
+		slots:
+			'https://developers.google.com/web/fundamentals/web-components/shadowdom#composition_slot',
+		cssProps: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties',
+		cssParts: 'https://developer.mozilla.org/en-US/docs/Web/CSS/::part'
+	};
 
 	function isMDNLink(link: string) {
 		return /(mdn|mozilla)/.test(link);
@@ -107,10 +117,22 @@
 
 	{#if filterHasDesc(api[category]).length > 0}
 		<div>
-			<h2 id={category}>
-				<a class="header-anchor" href={`#${category}`} aria-hidden="true">#</a>
-				{camelToTitleCase(category).replace('Css', 'CSS')}
-			</h2>
+			<div class="mt-[2em] mb-[0.666em] flex items-center">
+				<h2 id={category} class="m-0">
+					<a class="header-anchor" href={`#${category}`} aria-hidden="true">#</a>
+					{camelToTitleCase(category).replace('Css', 'CSS')}
+				</h2>
+				{#if categoryLinks[category]}
+					<a
+						href={categoryLinks[category]}
+						target="_blank"
+						class="flex h-full items-center border-0 px-2.5 text-gray-300 hover:text-gray-inverse"
+					>
+						<span class="sr-only">Learn more about {category}</span>
+						<QuestionIcon width="24" height="24" />
+					</a>
+				{/if}
+			</div>
 
 			<div
 				id={`scroll-${category}`}
