@@ -71,6 +71,7 @@ const IMPORT_GLOBALS_CODE = [
 	'Admonition',
 	'ComponentTabbedLinks',
 	'ComponentImport',
+	'ExperimentalWarning',
 	'CodeFence',
 	'Steps',
 	'Step',

@@ -4,6 +4,8 @@
 
 ## Import
 
+<ExperimentalWarning />
+
 <ComponentImport tagName="vds-gesture" />
 
 Coming Soon.

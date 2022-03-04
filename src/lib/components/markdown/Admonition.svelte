@@ -5,8 +5,9 @@
 	import TipIcon from '~icons/ri/lightbulb-flash-fill';
 	import WarningIcon from '~icons/ri/error-warning-fill';
 	import DangerIcon from '~icons/ri/skull-2-fill';
+	import ExperimentalIcon from '~icons/ri/test-tube-fill';
 
-	export let type: 'note' | 'info' | 'tip' | 'warning' | 'danger';
+	export let type: 'note' | 'info' | 'tip' | 'warning' | 'danger' | 'experimental';
 	export let title: string | null = null;
 
 	const icons = {
@@ -14,7 +15,8 @@
 		info: InfoIcon,
 		tip: TipIcon,
 		warning: WarningIcon,
-		danger: DangerIcon
+		danger: DangerIcon,
+		experimental: ExperimentalIcon
 	};
 
 	$: heading = title ?? type.toUpperCase();
@@ -27,7 +29,8 @@
 		type === 'info' && 'border-blue-400 bg-blue-300/10',
 		type === 'tip' && 'border-green-400 bg-green-300/10',
 		type === 'warning' && 'border-yellow-400 bg-yellow-400/10',
-		type === 'danger' && 'border-red-400 bg-red-300/10'
+		type === 'danger' && 'border-red-400 bg-red-300/10',
+		type === 'experimental' && 'border-indigo-400 bg-indigo-300/10'
 	)}
 >
 	<div
@@ -37,7 +40,8 @@
 			type === 'info' && 'text-blue-400',
 			type === 'tip' && 'text-green-400',
 			type === 'warning' && 'text-yellow-400',
-			type === 'danger' && 'text-red-400'
+			type === 'danger' && 'text-red-400',
+			type === 'experimental' && 'text-indigo-400'
 		)}
 	>
 		<svelte:component this={icons[type]} class="mr-1.5 text-xl" />

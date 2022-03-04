@@ -29,7 +29,10 @@
 			'custom-elements'
 		].map(toItems(coreConcepts)),
 		Providers: ['audio', 'video', ['hls', { title: 'HLS' }]].map(toItems(providerElements, true)),
-		Media: ['media-sync', 'media-visibility'].map(toItems(mediaElements, true)),
+		Media: [
+			['media-sync', { experimental: true }],
+			['media-visibility', { experimental: true }]
+		].map(toItems(mediaElements, true)),
 		UI: [
 			'aspect-ratio',
 			'poster',
