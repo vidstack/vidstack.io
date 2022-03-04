@@ -144,8 +144,13 @@ function extractEvents(component: ComponentMeta) {
 			name: event.name,
 			description: event.documentation,
 			type: event.typeInfo.original,
-			link: findLink(event)
+			link: findLink(event),
+			detail: getEventDetail(event)
 		}));
+}
+
+function getEventDetail(event: EventMeta) {
+	return event.typeInfo.resolved?.match(/<(.*?)>/)?.[1];
 }
 
 function extractSlots(component: ComponentMeta) {

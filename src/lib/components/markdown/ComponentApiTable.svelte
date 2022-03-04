@@ -20,6 +20,7 @@
 			description?: string;
 			type: string;
 			link?: string;
+			detail?: string;
 		}[];
 		slots: {
 			name: string;
@@ -41,7 +42,7 @@
 	import ArrowDropDownIcon from '~icons/ri/arrow-drop-down-fill';
 	import { ariaBool } from '$utils/aria';
 	import { camelToKebabCase, camelToTitleCase } from '$utils/string';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	export let api: ComponentApi;
 
@@ -64,20 +65,37 @@
 		return `${category}--${propName.toLowerCase()}`;
 	}
 
+	function getInfo(category: string, prop: any) {
+		return [
+			category === 'properties' &&
+				!prop.readonly && ['Attribute', prop.attr ?? camelToKebabCase(prop.name)],
+			[category === 'methods' ? 'Signature' : 'Type', prop.type],
+			category === 'events' && ['Detail', prop.detail]
+		].filter(Boolean);
+	}
+
 	onMount(() => {
 		const hash = new URL(location.href).hash;
 		const key = hash.slice(1);
 		const category = key.split('--')[0];
 		const heading = document.getElementById(category);
+		const scroll = document.getElementById(`scroll-${category}`);
 		const container = document.getElementById(`container-${key}`);
 
-		if (container) {
-			_isOpen[key] = true;
-			container.scrollIntoView({ block: 'start' });
+		if (heading) {
+			tick().then(() => {
+				// 128 padding for navbar.
+				window.scrollTo({
+					top: window.pageYOffset + heading.getBoundingClientRect().top - 128
+				});
+			});
 		}
 
-		if (heading) {
-			heading.scrollIntoView();
+		if (scroll && container) {
+			_isOpen[key] = true;
+			tick().then(() => {
+				scroll.scrollTo({ top: container.offsetTop });
+			});
 		}
 	});
 </script>
@@ -95,6 +113,7 @@
 			</h2>
 
 			<div
+				id={`scroll-${category}`}
 				class={clsx(
 					'flex flex-col border border-gray-divider relative',
 					'overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent',
@@ -126,7 +145,7 @@
 										location.hash = key;
 									}}
 								>
-									<code>{prop.name}</code>
+									<code class="font-medium">{prop.name}</code>
 
 									{#if hasReadonly && prop.readonly}
 										<span
@@ -154,26 +173,20 @@
 							class={clsx(!isOpen && 'hidden', 'p-4 pb-0 prose dark:prose-invert relative')}
 						>
 							{#if hasTypes}
-								<div
-									class="flex flex-col space-y-4 pt-2 font-mono text-sm 992:flex-row 992:space-x-4 992:space-y-0"
-								>
-									{#if category === 'properties' && !prop.readonly}
-										<span>
-											Attribute:
+								<div class="flex flex-col space-y-4 pt-2 font-mono text-sm">
+									{#each getInfo(category, prop) as [title, code] (title)}
+										<div>
+											<span class="text-gray-inverse">{title}:</span>
 											<code class="-ml-1 text-indigo-500 dark:text-indigo-300">
-												{prop.attr ?? camelToKebabCase(prop.name)}
+												{code}
 											</code>
-										</span>
-									{/if}
-									<span>
-										Type:
-										<code class="-ml-1 text-indigo-500 dark:text-indigo-300">{prop.type}</code>
-									</span>
+										</div>
+									{/each}
 								</div>
 							{/if}
 
 							{#if hasLink}
-								<a class="absolute top-6 right-4 text-xs" href={prop.link} target="_blank">
+								<a class="absolute top-5 right-5 text-sm" href={prop.link} target="_blank">
 									{isMDNLink(prop.link) ? 'MDN' : 'Reference'}
 								</a>
 							{/if}
