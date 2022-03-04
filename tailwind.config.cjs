@@ -11,8 +11,14 @@ module.exports = {
 			sans: ['Inter VF', ...defaultTheme.fontFamily.sans],
 			mono: [
 				'ui-monospace',
+				'SFMono-Regular',
+				'SF Mono',
+				'Menlo',
+				'Consolas',
+				'Liberation',
+				'Mono',
 				'Fira Code VF',
-				...defaultTheme.fontFamily.mono.filter((f) => f !== 'ui-monospace')
+				'monospace'
 			]
 		},
 		screens: {
