@@ -4,7 +4,7 @@ import { resolve, dirname, basename } from 'path';
 import { createMarkdownParser } from '../markdown-plugin';
 
 import type { Plugin } from 'vite';
-import type { ComponentMeta } from '@celement/cli';
+import type { ComponentMeta, EventMeta, MethodMeta, PropMeta } from '@celement/cli';
 
 export const PLUGIN_NAME = '@vidstack/api-docs' as const;
 
@@ -108,7 +108,8 @@ function extractProps(component: ComponentMeta) {
 			name: prop.name,
 			description: prop.documentation,
 			readonly: prop.readonly,
-			type: prop.typeInfo.original
+			type: prop.typeInfo.original,
+			link: findLink(prop)
 		}));
 }
 
@@ -119,7 +120,8 @@ function extractMethods(component: ComponentMeta) {
 			name: method.name,
 			static: method.static,
 			description: method.documentation,
-			type: method.typeInfo.signatureText
+			type: method.typeInfo.signatureText,
+			link: findLink(method)
 		}));
 }
 function extractEvents(component: ComponentMeta) {
@@ -128,7 +130,8 @@ function extractEvents(component: ComponentMeta) {
 		.map((event) => ({
 			name: event.name,
 			description: event.documentation,
-			type: event.typeInfo.original
+			type: event.typeInfo.original,
+			link: findLink(event)
 		}));
 }
 
@@ -151,4 +154,12 @@ function extractCssProps(component: ComponentMeta) {
 		name: cssProp.name,
 		description: cssProp.description
 	}));
+}
+
+function findLink(prop: PropMeta | MethodMeta | EventMeta) {
+	return (
+		// Prioritize MDN links.
+		prop.docTags.find((tag) => tag.name === 'link' && /(mozilla|mdn)/.test(tag.text ?? ''))?.text ??
+		prop.docTags.find((tag) => tag.name === 'link')?.text
+	);
 }

@@ -5,17 +5,20 @@
 			description?: string;
 			readonly: boolean;
 			type: string;
+			link?: string;
 		}[];
 		methods: {
 			name: string;
 			static: boolean;
 			description?: string;
 			type: string;
+			link?: string;
 		}[];
 		events: {
 			name: string;
 			description?: string;
 			type: string;
+			link?: string;
 		}[];
 		slots: {
 			name: string;
@@ -47,6 +50,10 @@
 
 	const categories = Object.keys(api); // ['properties', 'methods', 'events', ...]
 	const noTypes = new Set(['slots', 'cssProps', 'cssParts']);
+
+	function isMDNLink(link: string) {
+		return /(mdn|mozilla)/.test(link);
+	}
 
 	function filterHasDesc(category) {
 		return category.filter((prop) => prop.description);
@@ -101,6 +108,7 @@
 				{#each filterHasDesc(api[category]) as prop (prop)}
 					{@const key = propToKey(category, prop.name)}
 					{@const isOpen = _isOpen[key]}
+					{@const hasLink = 'link' in prop}
 
 					<div
 						id={`container-${key}`}
@@ -145,7 +153,7 @@
 						<div
 							id={`accordion-${key}`}
 							aria-labelledby={`accordion-btn-${key}`}
-							class={clsx(!isOpen && 'hidden', 'p-4 pb-0 prose dark:prose-invert')}
+							class={clsx(!isOpen && 'hidden', 'p-4 pb-0 prose dark:prose-invert relative')}
 						>
 							{#if hasTypes}
 								<div class="flex pt-2 font-mono text-sm">
@@ -154,6 +162,12 @@
 										<code class="-ml-1 text-indigo-500 dark:text-indigo-300">{prop.type}</code>
 									</span>
 								</div>
+							{/if}
+
+							{#if hasLink}
+								<a class="absolute top-6 right-4 text-xs" href={prop.link} target="_blank">
+									{isMDNLink(prop.link) ? 'MDN' : 'Reference'}
+								</a>
 							{/if}
 
 							<div class={clsx('pb-3 text-sm', hasTypes && 'mt-6')}>
