@@ -48,6 +48,8 @@ interacting with the `<vds-hls-player>` element.
 
 ```html:copy
 <vds-hls-player
+	width="1280"
+	height="720"
 	loading="lazy"
 	src="https://media-files.vidstack.io/hls/index.m3u8"
 	poster="https://media-files.vidstack.io/poster.png"

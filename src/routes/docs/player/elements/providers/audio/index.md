@@ -38,9 +38,10 @@ to be built by exposing the `ui` slot. Thus, the entire audio provider's API is 
 interacting with the `<vds-audio-player>` element.
 
 ```html:copy
-<vds-audio-player>
-	<source src="https://media-files.vidstack.io/audio.mp3" type="audio/mpeg" />
-	<source src="https://media-files.vidstack.io/audio.ogg" type="audio/ogg" />
+<vds-audio-player
+	loading="lazy"
+	src="https://media-files.vidstack.io/audio.mp3"
+>
 	<vds-media-ui slot="ui">
 		<!-- ... -->
 	</vds-media-ui>
