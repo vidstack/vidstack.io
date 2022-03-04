@@ -6,6 +6,7 @@
 			readonly: boolean;
 			type: string;
 			link?: string;
+			attr?: string;
 		}[];
 		methods: {
 			name: string;
@@ -39,7 +40,7 @@
 	import clsx from 'clsx';
 	import ArrowDropDownIcon from '~icons/ri/arrow-drop-down-fill';
 	import { ariaBool } from '$utils/aria';
-	import { camelToTitleCase } from '$utils/string';
+	import { camelToKebabCase, camelToTitleCase } from '$utils/string';
 	import { onMount } from 'svelte';
 
 	export let api: ComponentApi;
@@ -68,13 +69,11 @@
 		const key = hash.slice(1);
 		const category = key.split('--')[0];
 		const heading = document.getElementById(category);
-		const scroll = document.getElementById(`scroll-container-${category}`);
 		const container = document.getElementById(`container-${key}`);
 
 		if (container) {
 			_isOpen[key] = true;
-			container.scrollIntoView({ block: 'center' });
-			scroll.scrollBy(0, container.getBoundingClientRect().height);
+			container.scrollIntoView({ block: 'start' });
 		}
 
 		if (heading) {
@@ -89,14 +88,13 @@
 	{@const hasReadonly = category === 'properties'}
 
 	{#if filterHasDesc(api[category]).length > 0}
-		<section>
+		<div>
 			<h2 id={category}>
 				<a class="header-anchor" href={`#${category}`} aria-hidden="true">#</a>
 				{camelToTitleCase(category).replace('Css', 'CSS')}
 			</h2>
 
 			<div
-				id={`scroll-container-${category}`}
 				class={clsx(
 					'flex flex-col border border-gray-divider relative',
 					'overflow-auto scrollbar:!w-1.5 scrollbar:!h-1.5 scrollbar:bg-transparent',
@@ -156,7 +154,17 @@
 							class={clsx(!isOpen && 'hidden', 'p-4 pb-0 prose dark:prose-invert relative')}
 						>
 							{#if hasTypes}
-								<div class="flex pt-2 font-mono text-sm">
+								<div
+									class="flex flex-col space-y-4 pt-2 font-mono text-sm 992:flex-row 992:space-x-4 992:space-y-0"
+								>
+									{#if category === 'properties' && !prop.readonly}
+										<span>
+											Attribute:
+											<code class="-ml-1 text-indigo-500 dark:text-indigo-300">
+												{prop.attr ?? camelToKebabCase(prop.name)}
+											</code>
+										</span>
+									{/if}
 									<span>
 										Type:
 										<code class="-ml-1 text-indigo-500 dark:text-indigo-300">{prop.type}</code>
@@ -208,6 +216,6 @@
 					{/if}
 				</div>
 			{/if}
-		</section>
+		</div>
 	{/if}
 {/each}

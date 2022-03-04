@@ -86,8 +86,20 @@ function getJson(filePath) {
 	return JSON.parse(readFileSync(filePath).toString());
 }
 
+function uppercaseFirstLetter(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function lowercaseFirstLetter(str: string) {
+	return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
 function kebabToCamelCase(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1).replace(/-./g, (x) => ' ' + x[1].toUpperCase());
+	return uppercaseFirstLetter(str.replace(/-./g, (x) => ' ' + x[1].toUpperCase()));
+}
+
+export function camelToKebabCase(str: string) {
+	return lowercaseFirstLetter(str.replace(/[A-Z]/g, (x) => '-' + x[0].toLowerCase()));
 }
 
 function serializeApi(component: ComponentMeta) {
@@ -105,6 +117,7 @@ function extractProps(component: ComponentMeta) {
 	return component.props
 		.filter((prop) => !prop.internal)
 		.map((prop) => ({
+			attr: camelToKebabCase(prop.name) !== prop.attribute ? prop.attribute : undefined,
 			name: prop.name,
 			description: prop.documentation,
 			readonly: prop.readonly,
