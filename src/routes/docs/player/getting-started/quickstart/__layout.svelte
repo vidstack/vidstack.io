@@ -16,6 +16,9 @@
 	import BrowserSupport from './_components/_BrowserSupport.md';
 	import DangerouslyAll from './_components/_DangerouslyAll.md';
 
+	import { installMethod as _installMethod, type InstallMethodType } from '$stores/installMethod';
+	import { jsFramework as _jsFramework, type JsFrameworkType } from '$stores/jsFramework';
+
 	const basePath = '/docs/player/getting-started/quickstart';
 
 	const installOptions = ['NPM', 'CDN'];
@@ -28,7 +31,9 @@
 
 	let isLibraryTypesDisabled = installMethod === 'CDN';
 
-	$: providerLink = `/docs/player/elements/providers/${providerType.toLowerCase()}`;
+	$: providerLink = `/docs/player/components/providers/${providerType.toLowerCase()}${
+		libType === 'React' ? '/react' : ''
+	}`;
 	$: providerApiLink = `${providerLink}/api`;
 
 	$: if ($navigating?.to.pathname === basePath) {
@@ -66,6 +71,9 @@
 		if ($page.url.pathname !== slug) {
 			goto(slug, { noscroll: true });
 		}
+
+		$_installMethod = installMethod.toLowerCase() as InstallMethodType;
+		$_jsFramework = libType.toLowerCase() as JsFrameworkType;
 	}
 </script>
 

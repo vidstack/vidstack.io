@@ -3,7 +3,7 @@ import adapter from '@sveltejs/adapter-auto';
 import * as preprocess from 'svelte-preprocess';
 import Icons from 'unplugin-icons/vite';
 
-import { apiDocsPlugin } from './node-lib/dist/api-docs-plugin/index.js';
+import { componentsPlugin } from './node-lib/dist/components-plugin/index.js';
 import { svelteMarkdownPlugin } from './node-lib/dist/markdown-plugin/index.js';
 import { highlightCodePlugin } from './node-lib/dist/highlight-plugin/index.js';
 
@@ -31,7 +31,7 @@ const config = {
 				}
 			},
 			plugins: [
-				apiDocsPlugin(),
+				componentsPlugin(),
 				svelteMarkdownPlugin({ baseUrl: '/' }),
 				highlightCodePlugin(),
 				Icons({ compiler: 'svelte' })

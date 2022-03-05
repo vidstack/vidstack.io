@@ -9,7 +9,7 @@
 	import { ariaBool } from '$utils/aria';
 	import { type CloseDialogCallback, dialogManager } from '$actions/dialogManager';
 	import { page } from '$app/stores';
-	import { activeMarkdownCategory } from '$stores/markdownMeta';
+	import { activeMarkdownCategory } from '$stores/markdown';
 	import { hideDocumentScrollbar } from '$utils/scroll';
 	import Button from '$components/base/Button.svelte';
 

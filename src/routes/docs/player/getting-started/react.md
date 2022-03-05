@@ -9,7 +9,7 @@ In this section, you'll find a simple overview of how to use the React version o
 ## Import
 
 You can import all components from the path `@vidstack/player/react`. Component names mirror
-the element tag name except they're in TitleCase without the `vds` prefix.
+the element tag name except they're in PascalCase without the `vds` prefix.
 
 - `vds-play-button` -> `PlayButton`
 - `vds-slider-value-text` -> `SliderValueText`
@@ -50,7 +50,7 @@ function Example() {
 ## Events
 
 All custom events are forwarded to a callback whose name mirrors the event name without the `vds` prefix
-and in TitleCase.
+and in PascalCase.
 
 - `vds-play` -> `onPlay`
 - `vds-can-play` -> `onCanPlay`

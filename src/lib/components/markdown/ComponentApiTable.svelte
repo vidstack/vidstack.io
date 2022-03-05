@@ -46,6 +46,7 @@
 
 	import { ariaBool } from '$utils/aria';
 	import { camelToKebabCase, camelToTitleCase } from '$utils/string';
+	import { isReactPath } from '$stores/path';
 
 	export let api: ComponentApi;
 
@@ -78,7 +79,8 @@
 	function getInfo(category: string, prop: any) {
 		return [
 			category === 'properties' &&
-				!prop.readonly && ['Attribute', prop.attr ?? camelToKebabCase(prop.name)],
+				!prop.readonly &&
+				!$isReactPath && ['Attribute', prop.attr ?? camelToKebabCase(prop.name)],
 			[category === 'methods' ? 'Signature' : 'Type', prop.type],
 			category === 'events' && ['Detail', prop.detail]
 		].filter(Boolean);

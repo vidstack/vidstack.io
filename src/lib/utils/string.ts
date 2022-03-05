@@ -14,6 +14,10 @@ export function camelToKebabCase(str: string) {
 	return lowercaseFirstLetter(str.replace(/[A-Z]/g, (x) => '-' + x[0].toLowerCase()));
 }
 
+export function kebabToCamelCase(str: string) {
+	return lowercaseFirstLetter(kebabToPascalCase(str));
+}
+
 export function kebabToPascalCase(str: string) {
 	return kebabToTitleCase(str).replace(/\s/g, '');
 }

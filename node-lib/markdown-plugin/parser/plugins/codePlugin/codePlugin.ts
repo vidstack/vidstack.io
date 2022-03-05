@@ -6,6 +6,11 @@ import { resolveLanguage } from './resolveLanguage';
  * Plugin to enable styled code fences with line numbers, syntax highlighting, etc.
  */
 export const codePlugin: PluginSimple = (parser) => {
+	parser.renderer.rules.code_inline = (tokens, idx) => {
+		const token = tokens[idx];
+		return `<CodeInline code={${JSON.stringify(token.content)}} />`;
+	};
+
 	// Override default fence renderer.
 	parser.renderer.rules.fence = (tokens, idx, options) => {
 		const token = tokens[idx];
@@ -36,6 +41,7 @@ export const codePlugin: PluginSimple = (parser) => {
 		const useLineNumbers = /:line-numbers/.test(info);
 		const showCopyCode = /:copy(-highlight)?/.test(info);
 		const copyHighlightOnly = /:copy-highlight/.test(info);
+		const slot = info.match(/:slot=(.*?)(:|{|$)/)?.[1] ?? (/:slot/.test(info) && language.ext);
 
 		const props = [
 			title && `title="${title}"`,
@@ -47,7 +53,8 @@ export const codePlugin: PluginSimple = (parser) => {
 			showCopyCode && `rawCode={${JSON.stringify(token.content)}}`,
 			showCopyCode && 'showCopyCode',
 			copyHighlightOnly && `copyHighlightOnly`,
-			`code={${JSON.stringify(html)}}`
+			`code={${JSON.stringify(html)}}`,
+			slot && `slot=${slot}`
 		]
 			.filter(Boolean)
 			.join(' ');

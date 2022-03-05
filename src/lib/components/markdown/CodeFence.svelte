@@ -119,7 +119,7 @@
 
 		{#each highlightedLines as lineNumber}
 			<div
-				class="absolute top-2.5 left-0 w-full border-l-[5px] border-l-brand-300 bg-brand-200/10 font-mono text-[0.875em] text-transparent"
+				class="absolute top-2.5 left-0 w-full border-l-[5px] border-l-brand-300 bg-brand-200/5 font-mono text-[0.875em] text-transparent"
 				style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
 				aria-hidden="true"
 			>
