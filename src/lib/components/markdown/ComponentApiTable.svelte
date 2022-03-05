@@ -92,7 +92,7 @@
 		const category = key.split('--')[0];
 		const heading = document.getElementById(category);
 		const scroll = document.getElementById(`scroll-${category}`);
-		const container = document.getElementById(`container-${key}`);
+		const container = document.getElementById(key);
 
 		if (heading) {
 			tick().then(() => {
@@ -151,10 +151,7 @@
 					{@const isOpen = _isOpen[key]}
 					{@const hasLink = 'link' in prop}
 
-					<div
-						id={`container-${key}`}
-						class="flex flex-col border-t border-gray-divider first:border-0"
-					>
+					<div id={key} class="flex flex-col border-t border-gray-divider first:border-0">
 						<div
 							class="not-prose relative w-full border-b border-gray-divider hover:bg-[#fafafa] dark:hover:bg-[#343434]"
 						>
@@ -166,7 +163,7 @@
 									aria-expanded={ariaBool(isOpen)}
 									on:click={() => {
 										_isOpen[key] = !_isOpen[key];
-										location.hash = key;
+										window.history.pushState({}, '', `#${key}`);
 									}}
 								>
 									<code class="font-medium">{prop.name}</code>
