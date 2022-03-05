@@ -4,7 +4,7 @@
 
 <Admonition type="experimental">
 	<p>
-		This element is marked as <string>experimental</string>, meaning its API might change based on
+		This component is marked as <string>experimental</string>, meaning its API might change based on
 		user feedback. We recommend waiting for a stable release; however if you decide to use this in
 		production, ensure you follow release notes closely and don't blindly upgrade.
 	</p>
