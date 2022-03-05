@@ -13,7 +13,9 @@
 	<label
 		class={clsx(
 			'relative flex items-center px-4 py-1 border border-gray-divider',
-			disabled ? 'text-gray-300' : 'text-black focus-within:ring-2 bg-white shadow-sm'
+			disabled
+				? 'text-gray-300'
+				: 'text-black focus-within:ring-2 bg-white dark:bg-gray-600 dark:text-white shadow-sm'
 		)}
 	>
 		<slot name="before-title" />
