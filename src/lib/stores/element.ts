@@ -1,4 +1,5 @@
 import { page } from '$app/stores';
+import { kebabToTitleCase } from '$utils/string';
 import { derived } from 'svelte/store';
 
 const elementNameRe = /\/components\/.*?\/(.*?)(\/|$)/;
@@ -18,3 +19,14 @@ export const EXPERIMENTAL_TAG_NAMES = new Set([
 export const isElementExperimental = derived(elementTagName, ($tagName) =>
 	EXPERIMENTAL_TAG_NAMES.has($tagName)
 );
+
+export const elementHeading = derived(
+	elementTagName,
+	($elementTagName) =>
+		`${formatElementHeading(kebabToTitleCase($elementTagName.replace('vds-', '')))}`
+);
+
+function formatElementHeading(name: string) {
+	if (name === 'Hls') return 'HLS';
+	return name;
+}
