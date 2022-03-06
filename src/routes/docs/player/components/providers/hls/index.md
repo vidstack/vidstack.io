@@ -40,29 +40,83 @@ import Docs from './_Docs.md';
 />
 ```
 
-```js:slot=importing-hls{1,4}
+<svelte:fragment slot="importing-hls">
+
+```js:slot{1,4}
 import Hls from 'hls.js';
 
 const element = document.createElement('vds-hls');
 element.hlsLibrary = Hls;
 ```
 
-```js:slot=dynamically-import-hls{2}
+```svelte:copy-highlight{6}
+<script>
+  import Hls from 'hls.js';
+</script>
+
+<vds-hls
+  hls-library={Hls}
+/>
+```
+
+</svelte:fragment>
+
+<svelte:fragment slot="dynamically-import-hls">
+
+```js{2}
 const element = document.createElement('vds-hls');
 element.hlsLibrary = () => import('hls.js');
 ```
 
-```js:slot=configuring-hls{2}
+```svelte:copy-highlight{2}
+<vds-hls
+  hls-library={() => import('hls.js')}
+/>
+```
+
+</svelte:fragment>
+
+<svelte:fragment slot="configuring-hls">
+
+```js{2}
 const element = document.createElement('vds-hls');
 element.hlsConfig = { lowLatencyMode: true };
 ```
 
-```js:slot=hls-engine{2}
+```svelte:copy-highlight{2}
+<vds-hls
+  hls-config={{ lowLatencyMode: true }}
+/>
+```
+
+</svelte:fragment>
+
+<svelte:fragment slot="hls-engine">
+
+```js{2}
 const element = document.createElement('vds-hls');
 const hlsjs = element.hlsEngine;
 ```
 
-```js:slot=hls-engine-events{3-10}
+```svelte:copy
+<script lang="ts">
+  import { type HlsElement } from '@vidstack/player';
+
+  let hlsProvider: HlsElement;
+
+  $: hlsEngine = hlsProvider?.hlsEngine;
+</script>
+
+<vds-hls
+	bind:this={hlsProvider}
+/>
+```
+
+</svelte:fragment>
+
+<svelte:fragment slot="hls-engine-events">
+
+```js{3-10}
 const element = document.createElement('vds-hls');
 
 element.addEventListener('vds-hls-instance', (event) => {
@@ -75,9 +129,32 @@ element.addEventListener('vds-hls-destroying', (event) => {
 });
 ```
 
-```js:slot=hls-events{2-3}
+</svelte:fragment>
+
+<svelte:fragment slot="hls-events">
+
+```js{3-6}
 const element = document.createElement('vds-hls');
-element.addEventListener('vds-hls-manifest-loaded', (event) => /** ... **/);
+
+element.addEventListener('vds-hls-manifest-loaded', (event) => {
+  const levelLoadedData = event.detail;
+  // ...
+});
 ```
+
+```svelte:copy
+<script>
+  function onHlsManifestLoaded(event) {
+		const levelLoadedData = event.detail;
+	  // ...
+  }
+</script>
+
+<vds-hls
+  on:vds-hls-manifest-loaded={onHlsManifestLoaded}
+/>
+```
+
+</svelte:fragment>
 
 </Docs>

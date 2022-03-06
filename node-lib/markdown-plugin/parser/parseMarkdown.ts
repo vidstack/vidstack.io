@@ -64,6 +64,7 @@ export function parseMarkdownToSvelte(
 function addGlobalImports(tags: string[]) {
 	const globalImports = [
 		'Admonition',
+		'ApiLink',
 		'ExperimentalWarning',
 		'CodeInline',
 		'CodeFence',

@@ -88,5 +88,4 @@ can be listened to directly off the `<vds-hls>` component. Some examples include
 
 <slot name="hls-events"  />
 
-You can find a [list of all provider events](/docs/player/components/providers/hls/api#events) in
-the API reference.
+You can find a <ApiLink hash="events">list of all provider events</ApiLink> in the API reference.
