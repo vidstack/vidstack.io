@@ -55,7 +55,7 @@
 	>
 		<ul
 			id={menuId}
-			class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md border border-gray-200 bg-white shadow-md dark:border-gray-500 dark:bg-gray-600"
+			class="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md border border-gray-divider bg-gray-elevate shadow-md"
 			role="menu"
 			aria-orientation="vertical"
 			aria-labelledby={menuButtonId}

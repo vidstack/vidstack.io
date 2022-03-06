@@ -1,6 +1,6 @@
 .DocSearch-Button {
-	@apply flex w-full items-center rounded-sm py-2.5 px-3 shadow-sm hover:bg-[#fafafa] dark:bg-[#2d2d2d];
-	@apply transform border border-gray-divider text-[15px] transition-transform duration-300 ease-out hover:scale-105 hover:text-gray-inverse dark:hover:bg-[#343434];
+	@apply flex w-full items-center rounded-sm bg-gray-elevate py-2.5 px-3 shadow-sm hover:bg-gray-hover;
+	@apply transform border border-gray-divider text-[15px] transition-transform duration-300 ease-out hover:scale-105;
 }
 
 .DocSearch-Button-Container {
@@ -37,7 +37,7 @@
 }
 
 .DocSearch-Modal {
-	@apply mx-auto flex min-h-0 w-full max-w-[47.375rem] flex-col rounded-lg border-gray-soft bg-white shadow-lg dark:bg-gray-600;
+	@apply mx-auto flex min-h-0 w-full max-w-[47.375rem] flex-col rounded-lg border-gray-soft bg-gray-elevate shadow-lg;
 }
 
 .DocSearch-Modal *:focus {
@@ -66,7 +66,7 @@
 }
 
 .DocSearch-Hit {
-	@apply hover:bg-[#f2f2f2] dark:hover:bg-gray-500;
+	@apply hover:bg-gray-hover;
 }
 
 .DocSearch-Hit--Result {
@@ -138,7 +138,11 @@
 }
 
 .DocSearch-Hit-path {
-	@apply self-start rounded-full bg-gray-200 px-2.5 text-xs font-semibold leading-6 text-gray-soft dark:bg-gray-700;
+	@apply self-start rounded-full bg-gray-500 px-2.5 text-xs font-semibold leading-6 text-gray-current dark:bg-gray-200;
+}
+
+.DocSearch-Hit-path > mark {
+	@apply !text-gray-current;
 }
 
 .DocSearch-Hit-title {
@@ -170,7 +174,7 @@
 }
 
 .DocSearch-Hit {
-	@apply relative;
+	@apply relative cursor-pointer;
 }
 
 .DocSearch-Hit:first-child > a {
@@ -199,7 +203,7 @@
 
 .DocSearch-Hits mark {
 	background: none;
-	@apply border-b border-brand font-semibold text-gray-inverse;
+	@apply border-b-2 border-brand font-semibold text-gray-inverse;
 }
 
 .DocSearch-Footer {
@@ -265,7 +269,7 @@
 }
 
 .DocSearch-NoResults-Prefill-List button {
-	@apply w-full p-2 text-left text-gray-soft hover:bg-gray-200 hover:text-gray-inverse dark:hover:bg-gray-500;
+	@apply w-full cursor-pointer p-2 text-left text-gray-soft hover:bg-gray-hover hover:text-gray-inverse;
 }
 
 @media only screen and (max-width: 991px) {

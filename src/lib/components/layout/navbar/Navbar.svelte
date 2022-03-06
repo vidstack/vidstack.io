@@ -44,7 +44,7 @@
 			sveltekit:prefetch
 		>
 			<span class="sr-only">Go home</span>
-			<div class="svg-responsive h-7 w-32 overflow-hidden text-gray-900 dark:text-gray-50">
+			<div class="svg-responsive h-7 w-32 overflow-hidden text-gray-inverse">
 				{@html VidstackLogoIcon}
 			</div>
 		</a>
@@ -68,11 +68,12 @@
 						<ul>
 							{#each navLinks as { title, slug, match } (title + slug)}
 								{@const isActive = match.test($page.url.pathname)}
-								<li>
+								<li class="mt-4 first:mt-0">
 									<a
 										class={clsx(
-											'text-gray-soft hover:text-gray-inverse',
-											isActive && 'border-b-2 border-current'
+											isActive
+												? 'border-b-2 border-brand text-gray-inverse'
+												: 'text-gray-soft hover:text-gray-inverse'
 										)}
 										href={slug}
 										sveltekit:prefetch
@@ -133,8 +134,9 @@
 						<li>
 							<a
 								class={clsx(
-									'border-current hover:border-b-2 focus-visible:border-b-2',
-									isActive && 'border-b-2'
+									isActive
+										? 'border-brand border-b hover:border-b-2 focus-visible:border-b-2'
+										: 'text-gray-inverse hover:border-b-2 border-current'
 								)}
 								href={slug}
 								sveltekit:prefetch

@@ -15,7 +15,7 @@
 			'relative flex items-center px-4 py-1 border border-gray-divider',
 			disabled
 				? 'text-gray-300'
-				: 'text-black focus-within:ring-2 bg-white dark:bg-gray-600 dark:text-white shadow-sm'
+				: 'text-gray-inverse focus-within:ring-2 bg-gray-elevate hover:bg-gray-hover shadow-sm'
 		)}
 	>
 		<slot name="before-title" />

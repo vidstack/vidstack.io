@@ -16,7 +16,7 @@
 	aria-hidden={ariaBool(!visible)}
 >
 	<span
-		class="flex items-center justify-center rounded-sm bg-gray-50 py-1.5 px-2 text-sm font-medium tracking-wider shadow-sm dark:border-2"
+		class="flex items-center justify-center rounded-sm bg-gray-elevate py-1.5 px-2 text-sm font-medium tracking-wider shadow-sm dark:border-2"
 	>
 		<slot />
 	</span>

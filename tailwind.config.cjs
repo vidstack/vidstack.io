@@ -57,7 +57,12 @@ module.exports = {
 					900: '#121212',
 					divider: 'var(--color-gray-divider)',
 					soft: 'var(--color-gray-soft)',
-					inverse: 'var(--color-gray-inverse)'
+					inverse: 'var(--color-gray-inverse)',
+					current: 'var(--color-gray-current)',
+					hover: 'var(--color-gray-hover)',
+					'hover-inverse': 'var(--color-gray-hover-inverse)',
+					elevate: 'var(--color-gray-elevate)',
+					body: 'var(--color-gray-body)'
 				},
 				code: {
 					highlight: 'rgb(125 211 252 / 0.1)'

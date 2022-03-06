@@ -4,7 +4,7 @@
 
 <!-- For SSR to prevent sidebar jumping on initial render. -->
 <div
-	class="hidden w-full items-center rounded-sm border border-gray-divider py-2.5 px-3 text-[15px] shadow-sm dark:bg-[#2d2d2d] 992:flex"
+	class="hidden w-full items-center rounded-sm border border-gray-divider bg-gray-elevate py-2.5 px-3 text-[15px] shadow-sm 992:flex"
 >
 	<span class="flex-1">Search</span>
 	<span class="flex space-x-0.5 font-semibold">

@@ -82,7 +82,7 @@
 <aside
 	id="main-sidebar"
 	class={clsx(
-		'fixed inset-0 z-50 w-96 992:w-72 max-w-[85vw] overflow-y-auto bg-gray-50 dark:bg-gray-800',
+		'fixed inset-0 z-50 w-96 992:w-72 max-w-[85vw] overflow-y-auto bg-gray-body',
 		'border-r border-gray-divider',
 		'transform transition-transform duration-200 ease-out -translate-x-full will-change-transform',
 		open && 'translate-x-0',
