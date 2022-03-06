@@ -11,7 +11,7 @@
 
 	const gettingStartedSlug = (s) => baseSlug(`getting-started/${s}`);
 	const coreConceptsSlug = (s) => baseSlug(`core-concepts/${s}`);
-	const frameworksSlug = (s) => baseSlug(`frameworks/${s}`);
+	const librariesSlug = (s) => baseSlug(`libraries/${s}`);
 
 	const ext = () => ($isReactPath ? '/react' : '');
 	const componentsSlug = (path: string) => `${baseUrl}components/${path}${ext()}`;
@@ -32,11 +32,10 @@
 			'Getting Started': [
 				['quickstart', { match: true }],
 				'editor-setup',
-				['tailwind', { title: 'Tailwind Plugin' }],
 				'foundation',
 				'styling'
 			].map(toItems(gettingStartedSlug)),
-			Frameworks: ['react', 'svelte', 'vue'].map(toItems(frameworksSlug)),
+			Libraries: ['react', 'svelte', 'vue', 'tailwind'].map(toItems(librariesSlug)),
 			'Core Concepts': [
 				'architecture',
 				'lifecycle',

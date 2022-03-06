@@ -173,6 +173,17 @@
 	<a href={providerApiLink} target="_blank">API</a> pages.
 </p>
 
+<h2>Player Skins</h2>
+
+<p>
+	You might not be interested in designing your player and rather a quick, beautiful default look.
+	Skins which provide what you're looking for are not available just yet but on our roadmap. We'll
+	announce it on our channels once it's ready. Follow us on
+	<a href="https://twitter.com/vidstackjs?lang=en" target="_blank">Twitter</a> or
+	<a href="https://discord.com/invite/7RGU7wvsu9" target="_blank">Discord</a>
+	to be notified when it's ready.
+</p>
+
 {#if frameworkType !== 'React'}
 	<DangerouslyAll {installMethod} />
 {/if}

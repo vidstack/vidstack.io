@@ -2,7 +2,7 @@
 description: Register player plugin to add `media-*` variants to Tailwind CSS.
 ---
 
-# Tailwind Plugin
+# Tailwind
 
 In this section you'll learn how to install our Tailwind CSS plugin and how to use it.
 
@@ -121,48 +121,4 @@ we change the fill background color.
 		"
 	></div>
 </div>
-```
-
-## Slider Variants
-
-| Variant       | Description                                           |
-| ------------- | ----------------------------------------------------- |
-| `dragging`    | Slider thumb is currently being dragged.              |
-| `pointing`    | Device pointer (mouse/touch) is within slider bounds. |
-| `interactive` | Either dragging or pointing is true.                  |
-
-## Slider CSS Variables
-
-If you're using Tailwind CSS v3+ you can take advantage of
-[arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) and
-use the following CSS slider variables.
-
-| Variable                 | Description                                                |
-| ------------------------ | ---------------------------------------------------------- |
-| `slider-fill-value`      | Slider fill amount (e.g., `30`).                           |
-| `slider-fill-rate`       | The fill value expressed as a ratio (e.g., `0.3`).         |
-| `slider-fill-percent`    | The fill rate expressed as a percentage (e.g., `30%`).     |
-| `slider-pointer-value`   | Fill amount up to the device pointer (e.g., `30`).         |
-| `slider-pointer-rate`    | The pointer value expressed as a ratio (e.g., `0.3`).      |
-| `slider-pointer-percent` | The pointer rate expressed as a percentage. (e.g., `30%`). |
-
-## Slider Example
-
-The following example showcases a time slider with a thumb inside positioned at the current
-time (indicated by the `--slider-fill-percent` variable ). When the device pointer enters the slider,
-or the thumb begins to be dragged (indicated by the `interactive` variant), we pin the thumb to the
-device pointer position.
-
-```html
-<vds-time-slider class="relative h-6 w-full bg-gray-200">
-	<!-- Slider Thumb. -->
-	<div
-		class="
-			position interactive:left-[var(--slider-pointer-percent)]
-			absolute top-0 left-[var(--slider-fill-percent)]
-			h-4 w-4 -translate-x-1/2 transform bg-gray-400
-			will-change-[left]
-		"
-	></div>
-</vds-time-slider>
 ```

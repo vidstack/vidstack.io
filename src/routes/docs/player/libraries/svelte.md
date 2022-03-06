@@ -52,7 +52,11 @@ the value as a DOM property if the key is present; therefore, you can pass in co
 such as objects and arrays without any issues.
 
 ```svelte
-<vds-hls hls-config={{ lowLatencyMode: true }} />
+<script>
+	let paused = false;
+</script>
+
+<vds-hls {paused} hls-config={{ lowLatencyMode: true }} />
 ```
 
 Typically this would fail since `hls-config` is _not_ a property on `HlsElement`, but we define

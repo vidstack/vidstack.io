@@ -8,71 +8,87 @@ In this section, we'll go through some of the basics of working with Vidstack Pl
 The 'Core Concepts' section dives deeper into what we'll be covering here; this page only
 contains a high-level overview.
 
-## Player Reference
+## Elements
 
-You can use the query selector API if you're writing vanilla JS:
+We provide a variety of elements out of the box that help enhance the player. Some provide visual
+controls such as `vds-play-button` or `vds-time-slider`, and others manage one or many player
+instances such as `vds-media-sync` or `vds-media-visibility`. We recommend either searching
+(`cmd + k`) for what you're looking for or browsing the sidebar. Each element contains
+documentation on how to register it, how to use it, and an API reference.
 
-```js
-const player = document.querySelector('vds-video-player');
+You can register an element by importing it from the `@vidstack/player/define/*` path. When the
+import is loaded it will safely register the element and any dependencies in
+the [custom elements registry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry).
+By 'safely' we mean that the register function will check if it's being called server-side, or
+if the element has already been registered to avoid throwing an error. In short, this means that the
+import is safe to use on both client-side and server-side.
+
+Firstly, we register the elements we're using by grabbing the import code snippet from the component's
+respective docs, or letting autocomplete help us out in our IDE:
+
+```js:copy-highlight{2}
+// Discover elements by typing this in your IDE.
+import '@vidstack/player/define/';
+import '@vidstack/player/define/vds-video-player.js';
+import '@vidstack/player/define/vds-play-button.js';
 ```
 
-You can check out any of these links if you're using a JS library or framework:
+:::info
+The `.js` extension in the import path is required for [Node exports](https://nodejs.org/api/packages.html#package-entry-points)
+to work. This feature is used so your bundler can import the development or production distribution
+automatically based on your Node environment setting (`NODE_ENV`).
+:::
 
-- [Angular Refs](https://ultimatecourses.com/blog/element-refs-in-angular-templates)
-- [Lit `ref`](https://lit.dev/docs/templates/directives/#ref)
-- [Preact `createRef`](https://preactjs.com/guide/v10/refs/)
-- [React `useRef`](https://reactjs.org/docs/hooks-reference.html#useref)
-- [Svelte Instance Bindings](https://svelte.dev/tutorial/component-this)
-- [Vue Template Refs](https://vuejs.org/guide/essentials/template-refs.html)
+Next, we can use the defined elements, and the browser will "upgrade" them once the script
+above has run. Progressive enhancement is one of the best parts of custom elements because they
+can be used before they're defined!
 
-## Player Types
+```html
+<!-- Browser will upgrade elements once the script above has run. -->
+<vds-video-player>
+	<vds-media-ui>
+		<vds-play-button />
+	</vds-media-ui>
+</vds-video-player>
+```
 
-You can obtain the player type from the package if you're using TypeScript:
+## Typescript
+
+### Element Types
+
+You can import element types directly from the package if you're using TypeScript like so:
 
 ```ts:copy
-import { type VideoPlayerElement } from '@vidstack/player';
+import {
+	type VideoPlayerElement,
+	type PlayButtonElement
+} from '@vidstack/player';
 
 let player: VideoPlayerElement;
 ```
 
-## Media Store
-
-The player has a media store that keeps track of the running state of the player. A store in
-the player is a simple pub/sub mechanism for creating reactive state, updating the value,
-and subscribing to state changes. The implementation was derived
-from [Svelte Stores](https://svelte.dev/docs#run-time-svelte-store).
-
-The store enables you to subscribe directly to specific media state changes, rather than
-listening to potentially multiple DOM events and binding it yourself. You can access it off
-the `store` property on the player.
-
-:::no
-Tracking media state via events:
+:::tip
+All element types are classes named using _PascalCase_ and _suffixed_ with the word `Element`
+(e.g., `AudioElement`).
 :::
 
-```js
-let paused = true;
+### Event Types
 
-player.addEventListener('vds-pause', () => {
-	paused = true;
-});
+Event types can be imported directly from the package if you're using TypeScript like so:
 
-player.addEventListener('vds-play', () => {
-	paused = false;
-});
+```ts:copy
+import {
+	type MediaPlayEvent,
+	type MediaCanPlayEvent,
+	type MediaTimeUpdateEvent,
+} from '@vidstack/player';
 ```
 
-:::yes
-Tracking media state via store subscription:
+:::tip
+All event types are named using _PascalCase_ and _suffixed_ with the word `Event`
+(e.g., `SliderDragStartEvent`). Furthermore, media events are all _prefixed_ with the word `Media` as
+seen in the example above.
 :::
-
-```js
-const unsubscribe = player.store.paused.subscribe(($paused) => {
-	console.log('Is Paused:', $paused);
-});
-
-unsubscribe();
-```
 
 ## Media State
 
@@ -86,7 +102,13 @@ last change is executed if it's applied more than once before media is ready for
 Therefore, we always recommend updating state through attributes or properties unless you
 explicitly want to handle the result of some method.
 
-**Attribute**
+:::tip
+You might decide to call the `play()` method instead of using the `paused` property to be
+notified of when an error is thrown to handle failure. The player already handles cases like
+this and will fire a `vds-play-fail` event, and in the case of autoplay a `vds-autoplay-fail` event.
+:::
+
+### Attribute
 
 ```html
 <!-- Paused. -->
@@ -97,7 +119,7 @@ explicitly want to handle the result of some method.
 <vds-video-player />
 ```
 
-**Property**
+### Property
 
 ```js
 // Safely queued and executed after player is ready.
@@ -146,6 +168,10 @@ player.addEventListener('vds-play', (event) => {
 playButton.dispatchEvent('vds-play-request', { bubbles: true });
 ```
 
+Request events are fired by child elements of the player. For example, the
+`<vds-play-button>` element will fire a `vds-play-request` and `vds-pause-request` based on it's
+pressed state.
+
 ### Event Triggers
 
 All events in the player keep a history of **trigger** events. They are stored as a
@@ -171,11 +197,41 @@ Here's an example chain (each <- represents a call to `triggerEvent`):
 `vds-playing` <- `playing` (native) <- `vds-play` <- `play` (native) <- `vds-play-request`
 <- `pointerdown` (origin event) <- `null`.
 
-## Media Elements
+## Media Store
 
-We provide a variety of elements out of the box that help enhance the player. Some provide visual
-controls such as `vds-play-button` or `vds-time-slider`, and others manage one or many player
-instances such as `vds-media-sync` or `vds-media-visibility`.
+The player has a media store that keeps track of the running state of the player. A store in
+the player is a simple pub/sub mechanism for creating reactive state, updating the value,
+and subscribing to state changes. The implementation was derived
+from [Svelte Stores](https://svelte.dev/docs#run-time-svelte-store).
 
-We recommend either searching (`cmd + k`) for what you're looking for or browsing the sidebar. Each
-element contains comprehensive documentation on what it does and how to use it.
+The store enables you to subscribe directly to specific media state changes, rather than
+listening to potentially multiple DOM events and binding it yourself. You can access it off
+the `store` property on the player.
+
+:::no
+Tracking media state via events:
+:::
+
+```js
+let paused = true;
+
+player.addEventListener('vds-pause', () => {
+	paused = true;
+});
+
+player.addEventListener('vds-play', () => {
+	paused = false;
+});
+```
+
+:::yes
+Tracking media state via store subscription:
+:::
+
+```js
+const unsubscribe = player.store.paused.subscribe(($paused) => {
+	console.log('Is Paused:', $paused);
+});
+
+unsubscribe();
+```

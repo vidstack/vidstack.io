@@ -94,8 +94,14 @@ the value as a DOM property if the key is present; therefore, you can pass in co
 such as objects and arrays without any issues.
 
 ```vue
+<script setup>
+import { ref } from 'vue';
+
+const paused = ref(false);
+</script>
+
 <template>
-	<vds-hls :hls-config="{ lowLatencyMode: true }" />
+	<vds-hls :paused="paused" :hls-config="{ lowLatencyMode: true }" />
 </template>
 ```
 
