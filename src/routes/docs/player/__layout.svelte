@@ -9,8 +9,9 @@
 	const baseUrl = '/docs/player/';
 	const baseSlug = (path: string) => `${baseUrl}${path}`;
 
-	const gettingStarted = (s) => baseSlug(`getting-started/${s}`);
-	const coreConcepts = (s) => baseSlug(`core-concepts/${s}`);
+	const gettingStartedSlug = (s) => baseSlug(`getting-started/${s}`);
+	const coreConceptsSlug = (s) => baseSlug(`core-concepts/${s}`);
+	const frameworksSlug = (s) => baseSlug(`frameworks/${s}`);
 
 	const ext = () => ($isReactPath ? '/react' : '');
 	const componentsSlug = (path: string) => `${baseUrl}components/${path}${ext()}`;
@@ -31,11 +32,11 @@
 			'Getting Started': [
 				['quickstart', { match: true }],
 				'editor-setup',
-				['react', { title: 'React Integration' }],
 				['tailwind', { title: 'Tailwind Plugin' }],
 				'foundation',
 				'styling'
-			].map(toItems(gettingStarted)),
+			].map(toItems(gettingStartedSlug)),
+			Frameworks: ['react', 'svelte', 'vue'].map(toItems(frameworksSlug)),
 			'Core Concepts': [
 				'architecture',
 				'lifecycle',
@@ -44,7 +45,7 @@
 				'autoplay',
 				'fullscreen',
 				'custom-elements'
-			].map(toItems(coreConcepts)),
+			].map(toItems(coreConceptsSlug)),
 			Providers: ['audio', 'video', ['hls', { title: 'HLS' }]]
 				.map(markAsExperimental)
 				.map(toItems(providers, true)),
