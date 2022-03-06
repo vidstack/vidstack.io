@@ -53,7 +53,7 @@ such as objects and arrays without any issues.
 
 ```svelte
 <script>
-	let paused = false;
+	let paused = true;
 </script>
 
 <vds-hls {paused} hls-config={{ lowLatencyMode: true }} />

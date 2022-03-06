@@ -20,37 +20,8 @@ import { VideoPlayer, PlayButton } from '@vidstack/player/react';
 
 ## Element References
 
-All components forward the underlying custom element reference.
-
-```tsx
-import { useRef } from 'React';
-import { type VideoPlayerElement } from '@vidstack/player';
-import { VideoPlayer } from '@vidstack/player/react';
-
-function MyPlayer() {
-	const playerRef = useRef<VideoPlayerElement>(null);
-	// ...
-	return <VideoPlayer ref={playerRef} />;
-}
-```
-
-## Properties
-
-We expose all custom element properties on the React wrapper, which gets forwarded to the
-element itself.
-
-```tsx
-import { HlsPlayer } from '@vidstack/player/react';
-
-function MyPlayer() {
-	return <HlsPlayer paused hlsConfig={{ lowLatencyMode: true }} />;
-}
-```
-
-## Methods
-
-You can call methods by first getting a reference to the underlying custom element, and then
-calling the desired method:
+All components forward the underlying custom element reference, so you can use the familiar
+`useRef` hook to get a hold of it. This is _generally_ only required when calling a method.
 
 ```tsx
 import { useRef, useEffect } from 'React';
@@ -69,10 +40,25 @@ function MyPlayer() {
 }
 ```
 
+## Properties
+
+We expose all custom element properties on the React wrapper, which gets forwarded to the
+element itself.
+
+```tsx
+import { useState } from 'React';
+import { HlsPlayer } from '@vidstack/player/react';
+
+function MyPlayer() {
+	const [paused, setPaused] = useState(true);
+	return <HlsPlayer paused={paused} hlsConfig={{ lowLatencyMode: true }} />;
+}
+```
+
 ## Events
 
-All custom events are forwarded to a callback whose name mirrors the event name without the `vds`
-prefix and in PascalCase.
+All custom events are forwarded to a callback whose name mirrors the original event name but in
+PascalCase, and without the `vds` prefix.
 
 - `vds-play` -> `onPlay`
 - `vds-can-play` -> `onCanPlay`

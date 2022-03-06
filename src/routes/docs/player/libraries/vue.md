@@ -97,7 +97,7 @@ such as objects and arrays without any issues.
 <script setup>
 import { ref } from 'vue';
 
-const paused = ref(false);
+const paused = ref(true);
 </script>
 
 <template>
