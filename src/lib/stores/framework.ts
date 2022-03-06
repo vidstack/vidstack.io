@@ -1,20 +1,20 @@
 import { browser } from '$app/env';
 import { writable } from 'svelte/store';
 
-const LOCAL_STORAGE_KEY = 'vidstack::js-framework';
+const LOCAL_STORAGE_KEY = 'vidstack::framework';
 
 const initValue = () => {
 	const savedValue = browser && localStorage[LOCAL_STORAGE_KEY];
-	return savedValue ? savedValue : 'js';
+	return savedValue ? savedValue : 'html';
 };
 
-export type JsFrameworkType = 'vanilla' | 'react';
+export type FrameworkType = 'html' | 'react';
 
-const store = writable<JsFrameworkType>(initValue());
+const store = writable<FrameworkType>(initValue());
 
-export const jsFramework = {
+export const framework = {
 	...store,
-	set(value: JsFrameworkType) {
+	set(value: FrameworkType) {
 		if (browser) {
 			localStorage[LOCAL_STORAGE_KEY] = value;
 		}

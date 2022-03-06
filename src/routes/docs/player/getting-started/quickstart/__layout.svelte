@@ -10,43 +10,43 @@
 
 	import InstallNpm from './_components/_InstallNPM.md';
 	import InstallCdn from './_components/_InstallCDN.md';
-	import LibVanilla from './_components/_LibVanilla.md';
+	import LibHtml from './_components/_LibHTML.md';
 	import LibReact from './_components/_LibReact.md';
 	import ProviderHls from './_components/_ProviderHls.md';
 	import BrowserSupport from './_components/_BrowserSupport.md';
 	import DangerouslyAll from './_components/_DangerouslyAll.md';
 
 	import { installMethod as _installMethod, type InstallMethodType } from '$stores/installMethod';
-	import { jsFramework as _jsFramework, type JsFrameworkType } from '$stores/jsFramework';
+	import { framework as _framework, type FrameworkType } from '$stores/framework';
 
 	const basePath = '/docs/player/getting-started/quickstart';
 
 	const installOptions = ['NPM', 'CDN'];
-	const libOptions = ['Vanilla', 'React'];
+	const frameworkOptions = ['HTML', 'React'];
 	const providerOptions = ['Audio', 'Video', 'HLS'];
 
 	let installMethod = getSelectionFromPath(installOptions) ?? 'NPM';
-	let libType = getSelectionFromPath(libOptions) ?? 'Vanilla';
+	let frameworkType = getSelectionFromPath(frameworkOptions) ?? 'HTML';
 	let providerType = getSelectionFromPath(providerOptions) ?? 'Video';
 
-	let isLibraryTypesDisabled = installMethod === 'CDN';
+	let isFrameworkDisabled = installMethod === 'CDN';
 
 	$: providerLink = `/docs/player/components/providers/${providerType.toLowerCase()}${
-		libType === 'React' ? '/react' : ''
+		frameworkType === 'React' ? '/react' : ''
 	}`;
 	$: providerApiLink = `${providerLink}/api`;
 
 	$: if ($navigating?.to.pathname === basePath) {
 		installMethod = 'NPM';
-		libType = 'Vanilla';
+		frameworkType = 'HTML';
 		providerType = 'Video';
 	}
 
 	$: if (installMethod === 'CDN') {
-		libType = 'Vanilla';
-		isLibraryTypesDisabled = true;
+		frameworkType = 'HTML';
+		isFrameworkDisabled = true;
 	} else {
-		isLibraryTypesDisabled = false;
+		isFrameworkDisabled = false;
 	}
 
 	function getSelectionFromPath(values: string[]) {
@@ -60,20 +60,20 @@
 	function onOptionsChange() {
 		const isCDNInstallMethod = installMethod === 'CDN';
 		const isVideoProvider = providerType === 'Video';
-		const isReact = libType === 'React';
+		const isReact = frameworkType === 'React';
 		const isDefault = isVideoProvider && !isReact;
 
 		let installPath = isCDNInstallMethod ? '/cdn' : '';
-		let libPath = isReact && !isCDNInstallMethod ? '/react' : '';
+		let frameworkPath = isReact && !isCDNInstallMethod ? '/react' : '';
 		let providerPath = !isCDNInstallMethod && isDefault ? '' : `/${providerType}`;
-		let slug = `${basePath}${installPath}${libPath}${providerPath}`.toLowerCase();
+		let slug = `${basePath}${installPath}${frameworkPath}${providerPath}`.toLowerCase();
 
 		if ($page.url.pathname !== slug) {
 			goto(slug, { noscroll: true });
 		}
 
 		$_installMethod = installMethod.toLowerCase() as InstallMethodType;
-		$_jsFramework = libType.toLowerCase() as JsFrameworkType;
+		$_framework = frameworkType.toLowerCase() as FrameworkType;
 	}
 </script>
 
@@ -81,7 +81,7 @@
 
 <p>
 	This section will get you up and running with the player. You'll find specific instructions below
-	depending on the type of installation method (NPM/CDN), library (Vanilla/React), and provider
+	depending on the type of installation method (NPM/CDN), framework (HTML/React), and provider
 	(Audio/Video/HLS) you opt to use.
 </p>
 
@@ -93,8 +93,8 @@
 		<Chip class={clsx(installMethod === 'CDN' ? 'bg-lime-600 dark:bg-lime-300' : 'hidden')}>
 			{installMethod}
 		</Chip>
-		<Chip class={clsx(libType === 'Vanilla' ? 'hidden' : 'bg-sky-600 dark:bg-sky-300')}>
-			{libType}
+		<Chip class={clsx(frameworkType === 'HTML' ? 'hidden' : 'bg-sky-600 dark:bg-sky-300')}>
+			{frameworkType}
 		</Chip>
 		<Chip class="bg-indigo-600 dark:bg-indigo-300">
 			{providerType}
@@ -120,19 +120,19 @@
 		{/if}
 	</Step>
 
-	{#if !isLibraryTypesDisabled}
+	{#if !isFrameworkDisabled}
 		<Step orientation="vertical">
-			<h3 slot="title">Select JS Library</h3>
+			<h3 slot="title">Select Framework</h3>
 
 			<Select
-				title="Select JS Library"
-				options={libOptions}
-				bind:value={libType}
+				title="Select Framework"
+				options={frameworkOptions}
+				bind:value={frameworkType}
 				on:change={onOptionsChange}
 			/>
 
-			{#if libType === 'Vanilla'}
-				<LibVanilla />
+			{#if frameworkType === 'HTML'}
+				<LibHtml />
 			{:else}
 				<LibReact />
 			{/if}
@@ -173,6 +173,6 @@
 	<a href={providerApiLink} target="_blank">API</a> pages.
 </p>
 
-{#if libType !== 'React'}
+{#if frameworkType !== 'React'}
 	<DangerouslyAll {installMethod} />
 {/if}

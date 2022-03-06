@@ -7,7 +7,7 @@
 	--color-gray-inverse: black;
 	--color-gray-current: white;
 	--color-gray-divider: #eaeaea;
-	--color-gray-hover: #eeeeee;
+	--color-gray-hover: #f5f5f5;
 	--color-gray-hover-inverse: #353535;
 	--color-gray-elevate: white;
 	--color-gray-body: white;
@@ -24,7 +24,7 @@
 	--color-gray-current: black;
 	--color-gray-divider: #313131;
 	--color-gray-hover: #353535;
-	--color-gray-hover-inverse: #eeeeee;
+	--color-gray-hover-inverse: #f5f5f5;
 	--color-gray-elevate: #2d2d2d;
 	--color-gray-body: #1a1a1a;
 }

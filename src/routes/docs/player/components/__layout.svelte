@@ -8,11 +8,11 @@
 	import ComponentHeading from './_components/_ComponentHeading.svelte';
 	import ComponentImport from './_components/_ComponentImport.svelte';
 	import ComponentTabbedLinks from './_components/_ComponentTabbedLinks.svelte';
-	import JSLibraryDropdown from './_components/_JSLibraryDropdown.svelte';
+	import FrameworkSelect from './_components/_FrameworkSelect.svelte';
 </script>
 
 <ComponentHeading />
-<JSLibraryDropdown />
+<FrameworkSelect />
 <ComponentTabbedLinks />
 
 {#if $isElementExperimental}
