@@ -1,8 +1,8 @@
 <script>
-import Layout from './_Layout.md'
+import Docs from './_Docs.md';
 </script>
 
-<Layout>
+<Docs>
 
 ```html:copy:slot=usage
 <vds-hls
@@ -80,4 +80,4 @@ const element = document.createElement('vds-hls');
 element.addEventListener('vds-hls-manifest-loaded', (event) => /** ... **/);
 ```
 
-</Layout>
+</Docs>

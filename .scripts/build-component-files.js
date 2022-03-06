@@ -37,7 +37,7 @@ for (const component of components) {
 
 	const indexFilePath = resolve(dirPath, 'index.md');
 	const apiFilePath = resolve(dirPath, 'api.md');
-	const layoutFilePath = resolve(dirPath, '_Layout.md');
+	const docsFilePath = resolve(dirPath, '_Docs.md');
 	const reactFilePath = resolve(reactDirPath, 'index.md');
 	const reactApiFilePath = resolve(reactDirPath, 'api.md');
 
@@ -45,25 +45,25 @@ for (const component of components) {
 	const routePath = relative(ROUTES_DIR, apiFilePath);
 
 	const apiComment =
-		'<!-- Built on demand by the `api-docs-plugin`. See `ComponentApiTable.svelte` for styling. -->\n';
+		'<!-- Built on demand in `apiDocsPlugin.ts`, and for styling see `ComponentApiTable.svelte`. -->\n';
 
 	const indexContent = [
 		'<script>',
-		"import Layout from './_Layout.md'",
+		"import Docs from './_Docs.md';",
 		'</script>',
 		'',
-		'<Layout>',
+		'<Docs>',
 		'  <!-- ... -->',
-		'</Layout>',
+		'</Docs>',
 		''
 	].join('\n');
 
 	if (!exists) {
 		ensureDirSync(dirPath);
 		ensureDirSync(reactDirPath);
-		writeFileSync(layoutFilePath, ['## Usage', '', 'Coming Soon.', ''].join('\n'));
+		writeFileSync(docsFilePath, ['## Usage', '', 'Coming Soon.', ''].join('\n'));
 		writeFileSync(indexFilePath, indexContent);
-		writeFileSync(reactFilePath, indexContent.replace('./_Layout', '../_Layout'));
+		writeFileSync(reactFilePath, indexContent.replace('./_Docs', '../_Docs'));
 		writeFileSync(apiFilePath, apiComment);
 		writeFileSync(reactApiFilePath, apiComment);
 		console.log(kleur.bold(`- routes/${routePath}`));

@@ -1,8 +1,8 @@
 <script>
-import Layout from '../_Layout.md'
+import Docs from '../_Docs.md'
 </script>
 
-<Layout>
+<Docs>
 
 ```jsx:copy:slot=usage
 <Video
@@ -43,4 +43,4 @@ import Layout from '../_Layout.md'
 </Video>
 ```
 
-</Layout>
+</Docs>

@@ -1,1 +1,1 @@
-<!-- Built on demand by the `api-docs-plugin`. See `ComponentApiTable.svelte` for styling. -->
+<!-- Built on demand in `apiDocsPlugin.ts`, and for styling see `ComponentApiTable.svelte`. -->

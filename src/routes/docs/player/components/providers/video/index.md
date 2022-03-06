@@ -1,8 +1,8 @@
 <script>
-import Layout from './_Layout.md'
+import Docs from './_Docs.md'
 </script>
 
-<Layout>
+<Docs>
 
 ```html:copy:slot=usage
 <vds-video
@@ -45,4 +45,4 @@ import Layout from './_Layout.md'
 </vds-video>
 ```
 
-</Layout>
+</Docs>
