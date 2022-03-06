@@ -122,10 +122,10 @@
 
 	{#if !isFrameworkDisabled}
 		<Step orientation="vertical">
-			<h3 slot="title">Select Framework</h3>
+			<h3 slot="title">Select Library</h3>
 
 			<Select
-				title="Select Framework"
+				title="Select Library"
 				options={frameworkOptions}
 				bind:value={frameworkType}
 				on:change={onOptionsChange}
