@@ -7,14 +7,16 @@
 	import { isString } from '$utils/unit';
 
 	const baseUrl = '/docs/player/';
+	const baseSlug = (path: string) => `${baseUrl}${path}`;
+
+	const gettingStarted = (s) => baseSlug(`getting-started/${s}`);
+	const coreConcepts = (s) => baseSlug(`core-concepts/${s}`);
+
 	const ext = () => ($isReactPath ? '/react' : '');
-	const slug = (path: string) => `${baseUrl}${path}`;
-	const componentsSlug = (path: string) => `${baseUrl}${path}${ext()}`;
-	const gettingStarted = (s) => slug(`getting-started/${s}`);
-	const coreConcepts = (s) => slug(`core-concepts/${s}`);
-	const providers = (s) => componentsSlug(`components/providers/${s}`);
-	const media = (s) => componentsSlug(`components/media/${s}`);
-	const ui = (s) => componentsSlug(`components/ui/${s}`);
+	const componentsSlug = (path: string) => `${baseUrl}components/${path}${ext()}`;
+	const providers = (s) => componentsSlug(`providers/${s}`);
+	const media = (s) => componentsSlug(`media/${s}`);
+	const ui = (s) => componentsSlug(`ui/${s}`);
 
 	const markAsExperimental = (s) => {
 		const name = isString(s) ? s : s[0];
