@@ -25,6 +25,9 @@ register the custom element and any dependencies so you can start using it.
 </vds-video-player>
 ```
 
+You can read more about [importing elements](../getting-started/foundation.md#elements) in the
+'Foundation' walkthrough.
+
 ## Element References
 
 You can use [instance bindings](https://svelte.dev/tutorial/component-this) to obtain a
