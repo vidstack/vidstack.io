@@ -17,6 +17,11 @@ export const apiDocsPlugin = (components: ComponentMeta[]): Plugin => {
 		enforce: 'pre',
 		async configResolved() {
 			parser = await createMarkdownParser();
+			// Put back default inline code render function.
+			parser.renderer.rules.code_inline = (tokens, idx) => {
+				const token = tokens[idx];
+				return `<code>${token.content}</code>`;
+			};
 		},
 		transform(_, id) {
 			if (id.endsWith('api.md')) {

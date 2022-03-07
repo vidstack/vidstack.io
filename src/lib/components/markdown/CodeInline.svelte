@@ -3,6 +3,7 @@
 	import { kebabToCamelCase, kebabToPascalCase } from '$utils/string';
 
 	export let code: string;
+	export let noTranslate = false;
 
 	function jsxComponentName(code: string) {
 		return code.replace(/<vds-(.*?)>/, (...x) => `<${kebabToPascalCase(x[1])}>`);
@@ -22,5 +23,5 @@
 </script>
 
 <code>
-	{translatedCode}
+	{noTranslate ? code : translatedCode}
 </code>

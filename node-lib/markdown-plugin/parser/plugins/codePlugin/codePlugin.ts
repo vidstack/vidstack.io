@@ -8,7 +8,15 @@ import { resolveLanguage } from './resolveLanguage';
 export const codePlugin: PluginSimple = (parser) => {
 	parser.renderer.rules.code_inline = (tokens, idx) => {
 		const token = tokens[idx];
-		return `<CodeInline code={${JSON.stringify(token.content)}} />`;
+
+		const code = token.content.replace(/:css$/, '');
+		const noTranslate = token.content.endsWith(':css');
+
+		const props = [`code={${JSON.stringify(code)}}`, noTranslate && 'noTranslate']
+			.filter(Boolean)
+			.join(' ');
+
+		return `<CodeInline ${props} />`;
 	};
 
 	// Override default fence renderer.

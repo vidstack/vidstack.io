@@ -19,7 +19,6 @@
 	"dependencies": {
 		"@docsearch/js": "^3.0.0",
 		"@tailwindcss/forms": "^0.4.0",
-		"@vidstack/player": "^0.12.1",
 		"clsx": "^1.1.1",
 		"svelte-class-transition": "^1.0.4"
 	},
@@ -33,6 +32,7 @@
 		"@types/markdown-it": "^12.2.3",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
+		"@vidstack/player": "^0.12.2",
 		"autoprefixer": "^10.4.2",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
