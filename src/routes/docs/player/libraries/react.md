@@ -79,48 +79,8 @@ function MyPlayer() {
 ## Media Store
 
 The media store enables you to subscribe directly to specific media state changes, rather than
-listening to potentially multiple DOM events and binding it yourself. Here's an example of
-creating a custom `useMediaStore` hook so you can easily bind to reactive media state:
+listening to potentially multiple DOM events and binding it yourself.
 
-```ts:title=useMediaStore.ts:copy
-import { useRef, useState } from 'React';
-import {
-	get,
-	createMediaStore,
-	type MediaContext,
-	type MediaProviderElement
-} from '@vidstack/player';
-
-const defaults = createMediaStore();
-
-export function useMediaStore<T extends keyof MediaContext>(prop: T) {
-	const providerRef = useRef<MediaProviderElement>(null);
-
-	const [value, setValue] = useState<MediaContext[T]>(
-		get(defaults[prop]) as any
-	);
-
-	useEffect(() => {
-		const store = providerRef.current?.store[prop];
-		return store?.subscribe(setValue);
-	}, []);
-
-	return [providerRef, value] as const;
-}
-```
-
-```tsx:title=MyPlayer.tsx:copy
-import { useEffect } from 'React';
-import { useMediaStore } from './useMediaStore';
-import { VideoPlayer } from '@vidstack/player/react';
-
-function MyPlayer() {
-	const [providerRef, paused] = useMediaStore('paused');
-
-	useEffect(() => {
-		console.log(paused);
-	}, [paused]);
-
-	return <VideoPlayer src="..." ref={providerRef} />
-}
-```
+We're working on a `useMediaStore` hook so you can easily two-way bind to media state. Follow
+us on [Twitter](https://twitter.com/vidstackjs?lang=en) or [Discord](https://discord.com/invite/7RGU7wvsu9)
+to be notified of when it's ready.

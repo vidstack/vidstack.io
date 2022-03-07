@@ -82,40 +82,8 @@ can be imported from the `@vidstack/player` module.
 ## Media Store
 
 The media store enables you to subscribe directly to specific media state changes, rather than
-listening to potentially multiple DOM events and binding it yourself. Here's an example of
-creating a custom `mediaStore` helper function so you can easily bind to reactive media state on
-the player:
+listening to potentially multiple DOM events and binding it yourself.
 
-```ts:title=mediaStore.ts:copy
-import { derived, get, type Readable, writable } from 'svelte/store';
-import {
-	createMediaStore,
-	type MediaContext,
-	type MediaProviderElement
-} from '@vidstack/player';
-
-const defaults = createMediaStore();
-
-export function mediaStore<T extends keyof MediaContext>(prop: T) {
-  const provider = writable<MediaProviderElement | null>(null);
-
-  const value = derived(provider, ($provider, set) => {
-    if (!$provider) set(get(defaults[prop] as any));
-    return $provider?.store[prop]?.subscribe(set);
-  });
-
-  return [provider, value as Readable<MediaContext[T]>] as const;
-}
-```
-
-```svelte:title=MyPlayer.svelte:copy
-<script lang="ts">
-	import { mediaStore } from './mediaStore';
-
-	const [provider, paused] = mediaStore('paused');
-
-	$: console.log($paused);
-</script>
-
-<vds-video-player bind:this={$provider} />
-```
+We're working on a `useMediaStore` helper so you can easily two-way bind to media state. Follow
+us on [Twitter](https://twitter.com/vidstackjs?lang=en) or [Discord](https://discord.com/invite/7RGU7wvsu9)
+to be notified of when it's ready.

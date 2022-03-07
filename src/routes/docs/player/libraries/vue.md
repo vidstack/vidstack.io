@@ -152,52 +152,8 @@ function onPlaying(event: MediaPlayingEvent) {
 ## Media Store
 
 The media store enables you to subscribe directly to specific media state changes, rather than
-listening to potentially multiple DOM events and binding it yourself. Here's an example of
-creating a custom `useMediaStore` composable so you can easily bind to reactive media state on
-the player:
+listening to potentially multiple DOM events and binding it yourself.
 
-```ts:title=useMediaStore.ts:copy
-import { ref, watchEffect } from 'vue';
-import {
-	get,
-	createMediaStore,
-	type MediaContext,
-	type MediaProviderElement
-} from '@vidstack/player';
-
-const defaults = createMediaStore();
-
-export function useMediaStore<T extends keyof MediaContext>(prop: T) {
-  const provider = ref<MediaProviderElement | null>(null);
-	const state = ref<MediaContext[T]>(get(defaults[prop]) as any);
-
-	watchEffect((onCleanup) => {
-		const store = provider.value?.store[prop];
-
-		const unsubscribe = store?.subscribe(($value) => {
-			state.value = $value;
-		});
-
-		onCleanup(unsubscribe);
-	});
-
-  return [provider, state] as const;
-}
-```
-
-```vue:title=MyPlayer.vue:copy
-<script setup lang="ts">
-import { watchEffect } from 'vue';
-import { useMediaStore } from './useMediaStore';
-
-const [provider, paused] = useMediaStore('paused');
-
-watchEffect(() => {
-	console.log(paused.value);
-});
-</script>
-
-<template>
-	<vds-video-player ref="provider" />
-</template>
-```
+We're working on a `useMediaStore` composable so you can easily two-way bind to media state. Follow
+us on [Twitter](https://twitter.com/vidstackjs?lang=en) or [Discord](https://discord.com/invite/7RGU7wvsu9)
+to be notified of when it's ready.
