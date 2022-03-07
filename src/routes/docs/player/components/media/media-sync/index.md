@@ -24,21 +24,15 @@ import Docs from './_Docs.md';
 ```
 
 ```html:copy:slot=sync-playback
-<vds-media-sync shared-playback>
-  <!-- ... -->
-</vds-media-sync>
+<vds-media-sync shared-playback />
 ```
 
 ```html:copy:slot=sync-volume
-<vds-media-sync shared-volume>
-  <!-- ... -->
-</vds-media-sync>
+<vds-media-sync shared-volume />
 ```
 
 ```html:slot=volume-storage
-<vds-media-sync shared-volume volume-storage-key="my-storage-key">
-  <!-- ... -->
-</vds-media-sync>
+<vds-media-sync shared-volume volume-storage-key="my-storage-key" />
 ```
 
 ```js:copy-highlight:slot=volume-sync-event{3-6}

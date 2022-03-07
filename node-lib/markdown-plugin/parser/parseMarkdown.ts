@@ -66,6 +66,7 @@ function addGlobalImports(tags: string[]) {
 		'Admonition',
 		'ApiLink',
 		'Translate',
+		'AttrWord',
 		'ExperimentalWarning',
 		'CodeInline',
 		'CodeFence',

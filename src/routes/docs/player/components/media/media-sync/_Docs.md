@@ -12,7 +12,7 @@ be managed together:
 
 ### Sync Playback
 
-The `shared-playback` <Translate word="attribute" /> will ensure that only one media provider is
+The `shared-playback` <AttrWord /> will ensure that only one media provider is
 playing at any given moment. All providers that are registered with `<vds-media-sync>` and playing
 will be paused if a new provider begins to play:
 
@@ -20,13 +20,13 @@ will be paused if a new provider begins to play:
 
 ### Sync Volume
 
-The `shared-volume` <Translate word="attribute" /> will synchronize the `muted` and `volume`
+The `shared-volume` <AttrWord /> will synchronize the `muted` and `volume`
 state between all providers that are registered with `<vds-media-sync>`:
 
 <slot name="sync-volume" />
 
 You can save the volume level to local storage, so it persists across page refreshes by using the
-`volume-storage-key` <Translate word="attribute" /> and giving it a storage key name like so:
+`volume-storage-key` <AttrWord /> and giving it a storage key name like so:
 
 <slot name="volume-storage" />
 
