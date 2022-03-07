@@ -65,6 +65,7 @@ function addGlobalImports(tags: string[]) {
 	const globalImports = [
 		'Admonition',
 		'ApiLink',
+		'Translate',
 		'ExperimentalWarning',
 		'CodeInline',
 		'CodeFence',
