@@ -43,15 +43,14 @@ function MyPlayer() {
 ## Properties
 
 We expose all custom element properties on the React wrapper, which gets forwarded to the
-element itself.
+element itself; therefore, you can pass in complex data types such as objects and arrays without
+any issues.
 
 ```tsx
-import { useState } from 'React';
 import { HlsPlayer } from '@vidstack/player/react';
 
 function MyPlayer() {
-	const [paused, setPaused] = useState(true);
-	return <HlsPlayer paused={paused} hlsConfig={{ lowLatencyMode: true }} />;
+	return <HlsPlayer hlsConfig={{ lowLatencyMode: true }} />;
 }
 ```
 
