@@ -1,5 +1,9 @@
+import { lstatSync } from 'fs-extra';
 import type { PluginSimple } from 'markdown-it';
+import { dirname, relative, resolve } from 'path';
 import { isLinkExternal } from '../utils/isLink';
+
+const ROUTES_DIR = resolve(process.cwd(), 'src/routes');
 
 /**
  * Resolves link URLs.
@@ -29,8 +33,18 @@ export const linksPlugin: PluginSimple = (parser) => {
 				const rawPath = internalLinkMatch?.[1];
 				const rawHash = internalLinkMatch?.[2] ?? '';
 
+				const { filePath } = env;
+
+				const absolutePath = rawPath?.startsWith('/')
+					? '.' + rawPath
+					: resolve(lstatSync(filePath).isDirectory() ? filePath : dirname(filePath), rawPath);
+
+				const route = relative(ROUTES_DIR, absolutePath)
+					.replace(/\/index/, '')
+					.replace(/\.(md|html)/, '');
+
 				// Set new path.
-				hrefAttr[1] = rawPath.replace(/\.(md|html)/, '') + rawHash;
+				hrefAttr[1] = '/' + route + rawHash;
 
 				const links = env.links || (env.links = []);
 				links.push(hrefAttr[1]);

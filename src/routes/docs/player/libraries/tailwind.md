@@ -36,7 +36,7 @@ The player exposes media state on the `vds-media-ui` element. For example:
 		media-waiting
 		media-can-play
 		...
-		style="--media-current-time: 500; --media-duration: 1000; ..."
+		style="--vds-media-current-time: 500; --vds-media-duration: 1000; ..."
 	>
 		<!-- ... -->
 	</vds-media-ui>
@@ -94,9 +94,8 @@ import MediaAttrsTable from '$components/reference/MediaAttrsTable.md';
 
 ## Media CSS Variables
 
-If you're using Tailwind CSS v3+ you can take advantage of
-[arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) and
-use the following CSS media variables.
+You can take advantage of [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values)
+if you're using Tailwind CSS v3+ and use the following CSS media variables.
 
 <script>
 import MediaVarsTable from '$components/reference/MediaVarsTable.md';
@@ -116,7 +115,7 @@ we change the fill background color.
 		class="
 			media-waiting:bg-sky-500 absolute top-0 left-0 h-full w-full
 			origin-left
-			scale-x-[calc(var(--media-current-time)/var(--media-duration))]
+			scale-x-[calc(var(--vds-media-current-time)/var(--vds-media-duration))]
 			transform bg-gray-400 will-change-transform
 		"
 	></div>
