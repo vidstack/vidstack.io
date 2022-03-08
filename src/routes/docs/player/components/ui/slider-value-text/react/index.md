@@ -27,7 +27,7 @@ import Docs from '../_Docs.md';
 
 ```jsx:copy-highlight:slot=styling{3}
 <Slider>
-	<!-- ... -->
+	{/* ... */}
 	<SliderValueText type="pointer" />
 </Slider>
 ```

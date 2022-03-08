@@ -23,7 +23,7 @@ Or, with the `<vds-volume-slider>` to display the current volume:
 
 ## Styling
 
-In the following snippet, we extend the work we started in the [slider example](../slider/index.md#example),
+In the following code snippets, we extend the work we started in the [slider example](../slider/index.md#example),
 by adding a small tooltip that displays the current slider value at the position the user is
 hovering over.
 
@@ -33,7 +33,7 @@ Start by adding the following highlighted markup inside the slider:
 
 Next, we extend the CSS in the slider example with the following:
 
-```css
+```css:copy
 vds-slider-value-text {
 	display: flex;
 	align-items: center;
@@ -43,7 +43,7 @@ vds-slider-value-text {
 	top: -32px;
 	left: 0;
 	/* fixed width so value updates don't re-size. */
-	width: calc(var(--slider-thumb-width) + 8px);
+	width: calc(var(--thumb-width) + 8px);
 	opacity: 0;
 	transition: opacity ease 150ms;
 	/* re-position to center. */

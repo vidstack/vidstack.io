@@ -51,24 +51,24 @@ The following example showcases how to build a conventional-looking slider with 
 
 ```css:copy
 vds-slider {
-	--slider-height: 48px;
-	--slider-thumb-width: 24px;
-	--slider-track-height: 4px;
+	--height: 48px;
+	--thumb-width: 24px;
+	--track-height: 4px;
 
 	display: flex;
 	align-items: center;
 	position: relative;
 	width: 100%;
-	height: var(--slider-height);
+	height: var(--height);
 	/** Prevent thumb flowing out of slider. */
-	margin: 0 calc(var(--slider-thumb-width) / 2);
+	margin: 0 calc(var(--thumb-width) / 2);
 	cursor: pointer;
 }
 
 .slider-track {
 	background-color: #6366f1;
 	width: 100%;
-	height: var(--slider-track-height);
+	height: var(--track-height);
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -88,7 +88,7 @@ vds-slider {
 	position: absolute;
 	top: 0;
 	left: var(--vds-slider-fill-percent);
-	width: var(--slider-thumb-width);
+	width: var(--thumb-width);
 	height: 100%;
 	transform: translateX(-50%); /** re-center along x-axis. */
 	z-index: 2; /** above track fill. */
@@ -103,8 +103,8 @@ vds-slider {
 	position: absolute;
 	top: 50%;
 	left: 0;
-	width: var(--slider-thumb-width);
-	height: var(--slider-thumb-width);
+	width: var(--thumb-width);
+	height: var(--thumb-width);
 	border-radius: 9999px;
 	background-color: #fff;
 	transform: translateY(-50%);
