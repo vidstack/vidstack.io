@@ -7,13 +7,13 @@ controller.
 <slot name="usage" />
 
 ```css:copy
-/* Hide play text when media is not paused. */
-:not([media-paused]) .play {
+/* Hide pause text when media _is_ paused. */
+[media-paused] .pause {
 	display: none;
 }
 
-/* Hide pause text when media is paused. */
-[media-paused] .pause {
+/* Hide play text when media _is not_ paused. */
+:not([media-paused]) .play {
 	display: none;
 }
 ```
@@ -44,11 +44,11 @@ vds-play-button > svg {
 	transition: opacity ease 150ms;
 }
 
-:not([media-paused]) .play-icon {
+[media-paused] .pause-icon {
 	opacity: 0;
 }
 
-[media-paused] .pause-icon {
+:not([media-paused]) .play-icon {
 	opacity: 0;
 }
 ```
