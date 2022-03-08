@@ -70,11 +70,11 @@ Declaring a loading strategy on both the media player and poster is unnecessary:
 
 ### Loading Attributes
 
-The following loading attributes are applied to the `vds-poster:css` element:
+The following loading attributes are applied to the `vds-poster:ignore` element:
 
-- `img-loading:css`: Present when poster image is being downloaded by the browser.
-- `img-loaded:css`: Present when the poster image has successfully loaded.
-- `img-error:css`: Present when the poster image has failed to load.
+- `img-loading:ignore`: Present when poster image is being downloaded by the browser.
+- `img-loaded:ignore`: Present when the poster image has successfully loaded.
+- `img-error:ignore`: Present when the poster image has failed to load.
 
 ```html
 <!-- Example. -->

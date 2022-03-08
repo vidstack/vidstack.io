@@ -8,7 +8,7 @@ or avoiding layout shifts while media loads over the network.
 
 ### `aspect-ratio`
 
-You can skip using this component, and use the [`aspect-ratio:css`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)
+You can skip using this component, and use the [`aspect-ratio:ignore`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio)
 CSS property if [browser support](https://caniuse.com/mdn-css_properties_aspect-ratio) for it is
 suitable to your application.
 

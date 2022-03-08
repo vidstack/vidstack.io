@@ -9,8 +9,8 @@ export const codePlugin: PluginSimple = (parser) => {
 	parser.renderer.rules.code_inline = (tokens, idx) => {
 		const token = tokens[idx];
 
-		const code = token.content.replace(/:css$/, '');
-		const noTranslate = token.content.endsWith(':css');
+		const code = token.content.replace(/:ignore$/, '');
+		const noTranslate = token.content.endsWith(':ignore');
 
 		const props = [`code={${JSON.stringify(code)}}`, noTranslate && 'noTranslate']
 			.filter(Boolean)

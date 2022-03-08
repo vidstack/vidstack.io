@@ -14,7 +14,7 @@ import Docs from '../_Docs.md';
 			alt="Large alien ship hovering over New York."
 		/>
 
-		<div class="big-play-button">
+		<div className="big-play-button">
 			<PlayButton>
 				{/* Icons here. */}
 			</PlayButton>
