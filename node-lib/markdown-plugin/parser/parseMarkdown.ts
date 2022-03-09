@@ -71,6 +71,7 @@ function addGlobalImports(tags: string[]) {
 		'CodeFence',
 		'Steps',
 		'Step',
+		'Link',
 		'TabbedLinks',
 		'TableOfContents',
 		'TableWrapper',

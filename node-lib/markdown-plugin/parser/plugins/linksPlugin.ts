@@ -15,9 +15,11 @@ export const linksPlugin: PluginSimple = (parser) => {
 		rel: 'noopener noreferrer'
 	};
 
-	parser.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+	parser.renderer.rules.link_open = (tokens, idx, _, env) => {
 		const token = tokens[idx];
 		const hrefIndex = token.attrIndex('href');
+
+		const props = [];
 
 		if (hrefIndex >= 0) {
 			const hrefAttr = token.attrs?.[hrefIndex];
@@ -49,8 +51,18 @@ export const linksPlugin: PluginSimple = (parser) => {
 				const links = env.links || (env.links = []);
 				links.push(hrefAttr[1]);
 			}
+
+			if (token.attrs) {
+				for (const [name, value] of token.attrs) {
+					props.push(`${name}="${value}"`);
+				}
+			}
 		}
 
-		return self.renderToken(tokens, idx, options);
+		return `<Link ${props.filter(Boolean).join(' ')}>${token.content}`;
+	};
+
+	parser.renderer.rules.link_close = () => {
+		return '</Link>';
 	};
 };
