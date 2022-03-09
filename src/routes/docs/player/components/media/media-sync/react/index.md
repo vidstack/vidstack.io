@@ -24,7 +24,7 @@ import Docs from '../_Docs.md';
 ```
 
 ```jsx:copy:slot=sync-playback
-<MediaSync sharedPlayback>
+<MediaSync singlePlayback>
   {/* ... */}
 </MediaSync>
 ```

@@ -24,7 +24,7 @@ import Docs from './_Docs.md';
 ```
 
 ```html:copy:slot=sync-playback
-<vds-media-sync shared-playback />
+<vds-media-sync single-playback />
 ```
 
 ```html:copy:slot=sync-volume

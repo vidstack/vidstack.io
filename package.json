@@ -32,7 +32,7 @@
 		"@types/markdown-it": "^12.2.3",
 		"@typescript-eslint/eslint-plugin": "^5.10.1",
 		"@typescript-eslint/parser": "^5.10.1",
-		"@vidstack/player": "^0.12.2",
+		"@vidstack/player": "^0.12.3",
 		"autoprefixer": "^10.4.2",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
