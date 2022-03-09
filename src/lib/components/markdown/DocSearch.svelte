@@ -1,4 +1,5 @@
 <script>
+	import '@docsearch/css';
 	import '$styles/docsearch.css';
 
 	// @ts-expect-error - no types.

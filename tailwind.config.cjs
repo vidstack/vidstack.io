@@ -90,7 +90,9 @@ module.exports = {
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
-		require('@tailwindcss/forms'),
+		// require('@tailwindcss/forms')({
+		// 	strategy: 'class'
+		// }),
 		function ({ addVariant }) {
 			addVariant(
 				'supports-backdrop-blur',

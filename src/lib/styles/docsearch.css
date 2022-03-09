@@ -1,6 +1,38 @@
+:root {
+	--docsearch-primary-color: #282828;
+	--docsearch-highlight-color: var(--docsearch-primary-color);
+	--docsearch-text-color: var(--color-gray-inverse);
+	--docsearch-searchbox-shadow: none;
+	--docsearch-searchbox-focus-background: transparent;
+	--docsearch-key-gradient: transparent;
+	--docsearch-key-shadow: none;
+	--docsearch-modal-background: #fafafa;
+	--docsearch-footer-background: #ededed;
+	--docsearch-muted-color: #414141;
+	--docsearch-logo-color: #414141;
+	--docsearch-hit-color: #949494;
+	--docsearch-hit-active-color: white;
+}
+
+:root.dark {
+	--docsearch-primary-color: #f5f5f5;
+	--docsearch-text-color: var(--color-gray-inverse);
+	--docsearch-modal-shadow: none;
+	--docsearch-footer-shadow: none;
+	--docsearch-hit-background: #292929;
+	--docsearch-hit-color: #919191;
+	--docsearch-hit-active-color: black;
+	--docsearch-modal-background: #2d2d2d;
+	--docsearch-hit-shadow: none;
+	--docsearch-footer-background: #242424;
+	--docsearch-muted-color: #c1c1c1;
+	--docsearch-logo-color: #c1c1c1;
+}
+
 .DocSearch-Button {
-	@apply flex w-full items-center rounded-sm bg-gray-elevate py-2.5 px-3 shadow-sm hover:bg-gray-hover;
-	@apply transform border border-gray-divider text-[15px] transition-transform duration-300 ease-out hover:scale-105;
+	@apply flex h-auto w-full items-center rounded-sm bg-gray-elevate py-2.5 px-3 shadow-sm hover:bg-gray-hover;
+	@apply m-0 transform text-[15px] transition-transform duration-300 ease-out hover:scale-105;
+	border: 1px solid var(--color-gray-divider);
 }
 
 .DocSearch-Button-Container {
@@ -12,291 +44,29 @@
 }
 
 .DocSearch-Button-Placeholder {
-	@apply text-gray-inverse;
+	@apply m-0 h-auto p-0 text-[15px] font-normal text-gray-inverse;
 }
 
 .DocSearch-Button-Keys {
-	@apply flex space-x-0.5 font-semibold;
+	@apply flex space-x-0.5 p-0;
+	min-width: unset;
 }
 
-.DocSearch--active {
-	@apply overflow-hidden !important;
-}
-
-.DocSearch-Container {
-	@apply fixed top-0 left-0 z-[200] flex h-screen w-screen flex-col bg-black/40 p-4 backdrop-blur-sm dark:bg-gray-700/80 768:p-6 992:p-[10vh] 1200:p-[12vh];
-}
-
-.DocSearch-LoadingIndicator {
-	@apply mx-2 hidden h-6 w-6 text-brand;
-	background-size: 100% 100%;
-}
-
-.DocSearch-Container--Stalled .DocSearch-LoadingIndicator {
-	@apply block;
-}
-
-.DocSearch-Modal {
-	@apply mx-auto flex min-h-0 w-full max-w-[47.375rem] flex-col rounded-lg border-gray-soft bg-gray-elevate shadow-lg;
-}
-
-.DocSearch-Modal *:focus {
-	@apply !border-r-0 !outline-none !ring-0;
-}
-
-.DocSearch-Modal *:focus-visible,
-.DocSearch-Modal *.focus-visible {
-	@apply !border-2 !border-brand !outline !outline-2 !outline-offset-2 !outline-transparent !ring-4 !ring-brand;
-}
-
-.DocSearch-SearchBar {
-	@apply relative z-[1] flex flex-none items-center border-b border-gray-divider;
-}
-
-.DocSearch-Form {
-	@apply flex min-w-0 flex-auto items-center p-1;
-}
-
-.DocSearch-Dropdown-Container {
-	@apply pb-6;
-}
-
-.DocSearch-Dropdown {
-	@apply flex-auto overflow-auto;
-}
-
-.DocSearch-Hit {
-	@apply hover:bg-gray-hover;
-}
-
-.DocSearch-Hit--Result {
-	@apply relative mx-6;
-}
-
-.DocSearch-Hit--Result.DocSearch-Hit--Child {
-	@apply ml-12;
-}
-
-.DocSearch-Hit > a {
-	@apply relative border border-gray-divider text-sm;
-}
-
-.DocSearch-Hit--Result {
-	@apply border-b-0 !important;
+.DocSearch-Button-Key {
+	@apply top-0 m-0 flex h-auto w-auto space-x-0.5 bg-none p-0 text-[15px] font-semibold text-gray-inverse shadow-none;
 }
 
 .DocSearch-Input {
-	@apply mr-0 h-14 min-w-0 flex-1 appearance-none rounded-sm border-0 border-r border-gray-divider bg-transparent text-base text-gray-inverse;
+	padding-left: 0.75rem;
 }
 
-.DocSearch-Input:focus-visible,
-.DocSearch-Input.focus-visible {
-	@apply !border !ring-1;
+.DocSearch-Screen-Icon {
+	padding-bottom: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.DocSearch-Input::placeholder {
-	@apply text-gray-soft;
-}
-
-.DocSearch-Reset {
-	@apply mr-1 flex items-center justify-center p-4 text-gray-soft hover:text-gray-inverse;
-}
-
-.DocSearch-Input::-webkit-search-cancel-button,
-.DocSearch-Input::-webkit-search-decoration,
-.DocSearch-Input::-webkit-search-results-button,
-.DocSearch-Input::-webkit-search-results-decoration {
-	display: none;
-}
-
-.DocSearch-Cancel {
-	display: none;
-}
-
-.DocSearch-Hit-source {
-	@apply ml-4 mb-4 cursor-default pt-10 font-semibold leading-6 text-gray-inverse;
-}
-
-.DocSearch-Hits:first-child .DocSearch-Hit-source {
-	@apply pt-8;
-}
-
-.DocSearch-Hit-Container {
-	@apply flex items-center;
-}
-
-.DocSearch-Hit-Tree {
-	display: none;
-}
-
-.DocSearch-Hit-icon {
-	display: none;
-}
-
-.DocSearch-Hit-content-wrapper {
-	@apply z-[1] flex min-w-0 flex-auto flex-col-reverse;
-}
-
-.DocSearch-Hit-path {
-	@apply self-start rounded-full bg-gray-500 px-2.5 text-xs font-semibold leading-6 text-gray-current dark:bg-gray-200;
-}
-
-.DocSearch-Hit-path > mark {
-	@apply !text-gray-current;
-}
-
-.DocSearch-Hit-title {
-	@apply ml-0.5 mt-2.5 truncate font-normal leading-6 text-gray-soft;
-}
-
-.DocSearch-Hit-action {
-	@apply ml-3.5 flex-none;
-}
-
-.DocSearch-Hit-action svg {
-	@apply hidden;
-}
-
-.DocSearch-Hit-action-button {
-	@apply flex;
-}
-
-.DocSearch-Hit-action + .DocSearch-Hit-action {
-	@apply ml-2;
-}
-
-.DocSearch-Hit > a {
-	@apply block py-4 px-6;
-}
-
-.DocSearch-Hit--Result {
-	@apply py-3 px-4 !important;
-}
-
-.DocSearch-Hit {
-	@apply relative cursor-pointer;
-}
-
-.DocSearch-Hit:first-child > a {
-	@apply border-t border-gray-divider;
-}
-
-.DocSearch-Hit--Result {
-	@apply border-t-0 !important;
-}
-
-.DocSearch-Hit + .DocSearch-Hit .DocSearch-Hit--Result {
-	@apply mt-2;
-}
-
-.DocSearch-Hit--Result {
-	@apply rounded-lg bg-gray-inverse;
-}
-
-.DocSearch-Hit--FirstChild::before {
-	@apply top-0 !important;
-}
-
-.DocSearch-Hit--LastChild::before {
-	@apply bottom-0 !important;
-}
-
-.DocSearch-Hits mark {
-	background: none;
-	@apply border-b-2 border-brand font-semibold text-gray-inverse;
-}
-
-.DocSearch-Footer {
-	@apply flex flex-none justify-end border-t border-gray-divider py-4 px-6;
-}
-
-.DocSearch-Commands {
-	@apply hidden;
-}
-
-.DocSearch-Logo a {
-	@apply flex items-center text-xs font-medium text-gray-soft;
-}
-
-.DocSearch-Logo svg {
-	@apply ml-3 dark:text-gray-soft;
-}
-
-.DocSearch-Hit--deleting,
-.DocSearch-Hit--favoriting {
-	opacity: 0;
-	transition: all 250ms linear;
-}
-
-.DocSearch-NoResults .DocSearch-Screen-Icon {
-	@apply hidden;
-}
-
-.DocSearch-Title {
-	@apply mb-10 text-lg leading-6;
-}
-
-.DocSearch-Title strong {
-	@apply font-semibold text-gray-inverse;
-}
-
-.DocSearch-StartScreen .DocSearch-Help {
-	@apply py-16 px-6 text-center text-gray-soft;
-}
-
-.DocSearch-NoResults {
-	@apply px-4 pt-10 pb-8;
-}
-
-.DocSearch-NoResults .DocSearch-Title {
-	@apply text-center text-gray-soft;
-}
-
-.DocSearch-NoResults-Prefill-List .DocSearch-Help {
-	@apply mb-3 text-sm font-semibold leading-6 text-gray-inverse;
-}
-
-.DocSearch-NoResults-Prefill-List ul {
-	@apply overflow-hidden rounded-md border border-gray-divider bg-gray-100 dark:bg-gray-700;
-}
-
-.DocSearch-NoResults-Prefill-List ul li {
-	@apply border-t border-gray-divider;
-}
-
-.DocSearch-NoResults-Prefill-List ul li:first-child {
-	@apply border-t-0;
-}
-
-.DocSearch-NoResults-Prefill-List button {
-	@apply w-full cursor-pointer p-2 text-left text-gray-soft hover:bg-gray-hover hover:text-gray-inverse;
-}
-
-@media only screen and (max-width: 991px) {
-	.DocSearch-Button {
-		@apply m-0 -mr-2 h-9 w-14 justify-center border-0 bg-transparent p-0 shadow-none hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=%23707070&width=28&height=28');
-	}
-
-	.DocSearch-Button:hover {
-		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=black&width=28&height=28');
-	}
-
-	.dark .DocSearch-Button {
-		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=%238d8d8d&width=28&height=28');
-	}
-
-	.dark .DocSearch-Button:hover {
-		background-image: url('https://api.iconify.design/ri:search-2-line.svg?color=white&width=28&height=28');
-	}
-
-	.DocSearch-Button-Placeholder {
-		@apply hidden;
-	}
-
-	.DocSearch-Button-Keys {
-		@apply hidden;
-	}
+.DocSearch-NoResults-Prefill-List {
+	padding-top: 24px;
 }

@@ -59,7 +59,7 @@ export type GestureAction =
 
 The `repeat` <AttrWord /> represents of number of times a gesture event `type` should be
 repeated before the action is performed. If you want an event to occur _twice_ before the action
-is performed, this will be a _single_ repitition (e.g., value of `1`).
+is performed, this will be a _single_ repitition (i.e., value of `1`).
 
 <slot name="repeat" />
 
