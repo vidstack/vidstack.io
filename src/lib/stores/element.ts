@@ -28,5 +28,6 @@ export const elementHeading = derived(
 
 function formatElementHeading(name: string) {
 	if (name === 'Hls') return 'HLS';
+	if (name === 'Youtube') return 'YouTube';
 	return name;
 }

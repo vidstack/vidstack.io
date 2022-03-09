@@ -45,7 +45,13 @@
 				'fullscreen',
 				'custom-elements'
 			].map(toItems(coreConceptsSlug)),
-			Providers: ['audio', 'video', ['hls', { title: 'HLS' }]]
+			Providers: [
+				'audio',
+				'video',
+				['hls', { title: 'HLS' }],
+				'vimeo',
+				['youtube', { title: 'YouTube' }]
+			]
 				.map(markAsExperimental)
 				.map(toItems(providers, true)),
 			Media: ['media-sync', 'media-visibility'].map(markAsExperimental).map(toItems(media, true)),

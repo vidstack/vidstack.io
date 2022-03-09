@@ -22,6 +22,7 @@ export function camelToKebabCase(str: string) {
 
 function formatTitle(name: string) {
 	if (name === 'Hls') return 'HLS';
+	if (name === 'Youtube') return 'YouTube';
 	return name;
 }
 
