@@ -78,6 +78,59 @@ can be imported from the `@vidstack/player` module.
 <vds-video-player on:vds-playing={onPlaying} />
 ```
 
+## Custom Attributes (CSS)
+
+A core part of working with the player library is styling using custom attributes in CSS.
+Unfortunately, Svelte doesn't play nicely with it. You'll receive a warning in your
+IDE, _and_ it won't compile the CSS properly. Writing well-defined global attribute selectors
+will resolve all issues.
+
+:::no
+Shorthand scoped attribute selectors:
+:::
+
+```css
+/* BAD EXAMPLES! */
+
+vds-poster[img-error] {
+}
+
+[media-paused] .pause-icon {
+}
+
+:not([media-paused]) .play-icon {
+}
+
+/*
+ Due to CSS specificity and Svelte class scoping,
+ the `.pause-icon` class will override the global selector below.
+*/
+.pause-icon {
+}
+:global([media-paused] .pause-icon) {
+}
+```
+
+:::yes
+Well-defined global attribute selectors:
+:::
+
+```css
+/* GOOD EXAMPLES! */
+
+vds-poster:global([img-error]) {
+}
+
+:global(vds-media-ui:not([media-paused])) .play-icon {
+}
+
+.pause-icon {
+}
+
+:global(vds-media-ui[media-paused]) .pause-icon {
+}
+```
+
 ## Media Store
 
 The media store enables you to subscribe directly to specific media state changes, rather than
