@@ -12,46 +12,6 @@ if using the native `poster` attribute because it lives inside the browser's med
 
 <slot name="usage" />
 
-```css:copy
-vds-poster {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 0;
-}
-
-.big-play-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	transition: opacity 300ms ease-in;
-	z-index: 1; /** Above `vds-poster`. */
-}
-
-.big-play-button > vds-play-button {
-	width: 48px;
-	height: 48px;
-}
-
-/* Show when media is ready. */
-[media-can-play] .big-play-button {
-	opacity: 1;
-}
-
-/* Hide when playback starts. */
-[media-started] .big-play-button {
-	opacity: 0;
-}
-```
-
 ### Loading Strategy
 
 You can specify a loading strategy if desired (`eager` or `lazy`); otherwise, it'll fall back to
@@ -94,5 +54,61 @@ vds-poster[img-loading] {
 /* Hide poster if it fails to load. */
 vds-poster[img-error] {
 	display: none;
+}
+```
+
+## Styling
+
+In the following code snippets, we put together a poster with a big play button on top, once
+playback starts they'll both fade out.
+
+<slot name="styling" />
+
+```css:copy
+vds-poster {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+
+/* Hide poster if it fails to load. */
+/* It'd be better if we replaced it with something else. */
+vds-poster[img-error] {
+	display: none;
+}
+
+.big-play-button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 300ms ease-in;
+	z-index: 1; /** Above `vds-poster`. */
+}
+
+.big-play-button-container .play-icon {
+	color: white;
+	width: 56px;
+	height: 56px;
+}
+
+/* Show when media is ready. */
+[media-can-play] .big-play-button-container {
+	opacity: 1;
+}
+
+/* Hide when playback starts. */
+[media-started] vds-poster,
+[media-started] .big-play-button-container {
+	opacity: 0;
+	pointer-events: none;
 }
 ```

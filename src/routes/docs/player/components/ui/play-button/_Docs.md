@@ -18,11 +18,11 @@ controller.
 }
 ```
 
-## Example
+## Styling
 
 Here's a simple styled `<vds-play-button>` example containing a play and pause icon:
 
-<slot name="styled-example" />
+<slot name="styling" />
 
 ```css:copy
 vds-play-button {

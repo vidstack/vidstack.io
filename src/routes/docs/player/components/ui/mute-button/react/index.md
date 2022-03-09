@@ -15,7 +15,7 @@ import Docs from '../_Docs.md';
 </VideoPlayer>
 ```
 
-```jsx:copy:slot=styled-example
+```jsx:copy:slot=styling
 <MuteButton>
 	<svg className="mute-icon" ariaHidden="true" viewBox="0 0 24 24">
 		<path

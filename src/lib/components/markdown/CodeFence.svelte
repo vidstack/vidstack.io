@@ -19,7 +19,6 @@
 
 	// `linesCount-1` since last line is always empty (prettier)
 	$: lines = [...Array(linesCount - 1).keys()].map((n) => n + 1);
-	$: highlightedLines = lines.filter(isHighlightLine);
 
 	let showCopiedCodePrompt = false;
 	async function copyCodeToClipboard() {
@@ -102,7 +101,7 @@
 		</div>
 	{/if}
 
-	<div class="code relative z-0">
+	<div class="code relative z-0 overflow-hidden">
 		<div class={clsx(showLineNumbers && 'pl-10')}>
 			{@html code}
 		</div>
@@ -117,14 +116,21 @@
 		</pre>
 		{/if}
 
-		{#each highlightedLines as lineNumber}
-			<div
-				class="absolute top-2.5 left-0 w-full border-l-[5px] border-l-brand-300 bg-brand-200/5 font-mono text-[0.875em] text-transparent"
-				style={`transform: translateY(${(lineNumber - 1) * 100}%);`}
-				aria-hidden="true"
-			>
-				x
-			</div>
-		{/each}
+		<div
+			class="pointer-events-none absolute inset-0 mt-[0.7em] h-full w-full leading-[27px]"
+			aria-hidden="true"
+		>
+			{#each lines as lineNumber}
+				{#if isHighlightLine(lineNumber)}
+					<div
+						class="w-full border-l-[5px] border-l-brand-300 bg-brand-200/5 font-mono text-transparent"
+					>
+						&nbsp;
+					</div>
+				{:else}
+					<br />
+				{/if}
+			{/each}
+		</div>
 	</div>
 </div>

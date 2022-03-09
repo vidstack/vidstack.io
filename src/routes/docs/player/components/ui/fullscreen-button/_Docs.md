@@ -25,11 +25,11 @@ event to the media controller.
 }
 ```
 
-## Example
+## Styling
 
-Here's a simple styled `<vds-fullscreen-button>` example containing enter and exit fullscreen icons:
+Here's a styled `<vds-fullscreen-button>` example containing enter and exit fullscreen icons:
 
-<slot name="styled-example" />
+<slot name="styling" />
 
 ```css:copy
 vds-fullscreen-button {

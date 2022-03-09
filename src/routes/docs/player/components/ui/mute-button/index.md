@@ -15,7 +15,7 @@ import Docs from './_Docs.md';
 </vds-video-player>
 ```
 
-```html:copy:slot=styled-example
+```html:copy:slot=styling
 <vds-mute-button>
 	<svg class="mute-icon" aria-hidden="true" viewBox="0 0 24 24">
 		<path

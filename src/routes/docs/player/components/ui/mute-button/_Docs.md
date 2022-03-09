@@ -18,11 +18,11 @@ controller.
 }
 ```
 
-## Example
+## Styling
 
-Here's a simple styled `<vds-mute-button>` example containing a mute and unmute icon:
+Here's a styled `<vds-mute-button>` example containing a mute and unmute icon:
 
-<slot name="styled-example" />
+<slot name="styling" />
 
 ```css:copy
 vds-mute-button {

@@ -1,7 +1,7 @@
 .markdown pre {
 	tab-size: 2;
 	-o-tab-size: 2;
-	-moz-tab-size: 4;
+	-moz-tab-size: 2;
 }
 
 .markdown p + .admonition {
