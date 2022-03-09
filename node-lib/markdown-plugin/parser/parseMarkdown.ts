@@ -45,6 +45,7 @@ export function parseMarkdownToSvelte(
 	addGlobalImports(hoistedTags);
 
 	if (isRoute) {
+		addHeadTags(filePath, hoistedTags, meta);
 		addMarkdownMeta(hoistedTags, meta);
 		addMarkdownSlug(options.baseUrl ?? '/', filePath, hoistedTags);
 	}
@@ -85,6 +86,25 @@ function addGlobalImports(tags: string[]) {
 }
 
 const ROOT_ROUTES_PATH = path.resolve(process.cwd(), 'src/routes');
+
+function addHeadTags(filePath: string, tags: string[], meta: MarkdownMeta) {
+	const segments = filePath.replace(path.resolve(ROOT_ROUTES_PATH, 'docs/player'), '').split('/');
+	const category = formatCategory(segments[1] === 'components' ? segments[2] : segments[1]);
+	const title = `${category}: ${meta.title ?? ''}`;
+	const description = meta.description ?? title;
+
+	tags.push(
+		[
+			'<svelte:head>',
+			`<title>${title} | Vidstack</title>`,
+			`<meta name="description" content="${description}" />`,
+			`<meta name="twitter:description" content="${description}" />`,
+			`<meta name="og:description" content="${description}" />`,
+			'</svelte:head>'
+		].join('\n')
+	);
+}
+
 function addMarkdownSlug(baseUrl: string, filePath: string, hoistedTags: string[]) {
 	const route = `${baseUrl}${path.relative(ROOT_ROUTES_PATH, filePath)}`;
 
@@ -214,6 +234,8 @@ const OPENING_SCRIPT_MODULE_TAG_RE = /<\s*script[^>]*\scontext="module"\s*[^>]*>
 const CLOSING_SCRIPT_TAG_RE = /<\/script>/;
 const OPENING_STYLE_TAG_RE = /<\s*style[^>]*>/;
 const CLOSING_STYLE_TAG_RE = /<\/style>/;
+const OPENING_SVELTE_HEAD_TAG_RE = /<\s*svelte:head[^>]*>/;
+const CLOSING_SVELTE_HEAD_TAG_RE = /<\/svelte:head>/;
 function dedupeHoistedTags(tags: string[] = []): string[] {
 	const deduped = new Map();
 
@@ -234,6 +256,8 @@ function dedupeHoistedTags(tags: string[] = []): string[] {
 			merge('script', tag, OPENING_SCRIPT_TAG_RE, CLOSING_SCRIPT_TAG_RE);
 		} else if (OPENING_STYLE_TAG_RE.test(tag)) {
 			merge('style', tag, OPENING_STYLE_TAG_RE, CLOSING_STYLE_TAG_RE);
+		} else if (OPENING_SVELTE_HEAD_TAG_RE.test(tag)) {
+			merge('svelte:head', tag, OPENING_SVELTE_HEAD_TAG_RE, CLOSING_SVELTE_HEAD_TAG_RE);
 		} else {
 			// Treat unknowns as unique and leave them as-is.
 			deduped.set(Symbol(), tag);
@@ -241,4 +265,17 @@ function dedupeHoistedTags(tags: string[] = []): string[] {
 	});
 
 	return Array.from(deduped.values());
+}
+
+function uppercaseFirstLetter(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function kebabToTitleCase(str) {
+	return uppercaseFirstLetter(str.replace(/-./g, (x) => ' ' + x[1].toUpperCase()));
+}
+
+function formatCategory(path: string) {
+	if (path === 'ui') return 'UI';
+	return kebabToTitleCase(path);
 }

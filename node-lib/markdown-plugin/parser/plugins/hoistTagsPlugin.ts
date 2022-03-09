@@ -6,7 +6,7 @@ import type { MarkdownParserEnv } from '../types';
  * Avoid rendering Svelte script/style blocks. Extract them into `env`, and hoist them root level.
  */
 export const hoistTagsPlugin: PluginSimple = (parser) => {
-	const tags = ['script', 'style'];
+	const tags = ['script', 'style', 'svelte:head'];
 	const hoistTagsRegexp = new RegExp(`^<(${tags.join('|')})(?=(\\s|>|$))`, 'i');
 
 	const rawRule = parser.renderer.rules.html_block!;
