@@ -35,6 +35,8 @@ hide the controls if media is not ready for playback, or the user is idle.
 	height: 100%;
 	/* prevent blocking lower elements (e.g., gestures). */
 	pointer-events: none;
+	/** place above poster (optional). */
+	z-index: 1;
 }
 
 .controls {

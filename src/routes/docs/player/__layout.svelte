@@ -60,6 +60,7 @@
 				'poster',
 				'gesture',
 				'controls',
+				'buffering-indicator',
 				'toggle-button',
 				'play-button',
 				'mute-button',

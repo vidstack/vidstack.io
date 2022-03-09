@@ -11,7 +11,13 @@
 	import FrameworkSelect from './_components/_FrameworkSelect.svelte';
 
 	const ignoreSelect = new Set(['vds-youtube', 'vds-vimeo']);
-	const ignoreImports = new Set(['vds-youtube', 'vds-vimeo', 'vds-controls']);
+
+	const ignoreImports = new Set([
+		'vds-youtube',
+		'vds-vimeo',
+		'vds-controls',
+		'vds-buffering-indicator'
+	]);
 </script>
 
 <ComponentHeading />
