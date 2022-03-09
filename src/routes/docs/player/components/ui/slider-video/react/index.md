@@ -8,7 +8,7 @@ import Docs from '../_Docs.md';
 <TimeSlider>
 	<SliderVideo
 	  src="https://media-files.vidstack.io/240p.mp4"
-	></SliderVideo>
+	/>
 </TimeSlider>
 ```
 
@@ -19,11 +19,12 @@ import Docs from '../_Docs.md';
 />
 ```
 
-```jsx:copy-highlight:slot=styling{2-4}
+```jsx:copy-highlight:slot=styling{3-5}
 <TimeSlider>
+	{/* ... */}
 	<SliderVideo
 		src="https://media-files.vidstack.io/240p.mp4"
-	></SliderVideo>
+	/>
 </TimeSlider>
 ```
 

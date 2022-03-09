@@ -19,8 +19,9 @@ element.addEventListener('canplay', (event) => {
 });
 ```
 
-```html:copy-highlight:slot=styling{2-4}
+```html:copy-highlight:slot=styling{3-5}
 <vds-time-slider>
+	<!-- ... -->
 	<vds-slider-video
 		src="https://media-files.vidstack.io/240p.mp4"
 	></vds-slider-video>

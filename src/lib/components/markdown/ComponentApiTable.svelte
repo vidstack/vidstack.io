@@ -39,11 +39,13 @@
 
 <script lang="ts">
 	import clsx from 'clsx';
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
 
 	import QuestionIcon from '~icons/ri/question-fill';
 	import ArrowDropDownIcon from '~icons/ri/arrow-drop-down-fill';
 
+	import { page } from '$app/stores';
+	import { browser } from '$app/env';
 	import { ariaBool } from '$utils/aria';
 	import { camelToKebabCase, camelToTitleCase } from '$utils/string';
 	import { isReactPath } from '$stores/path';
@@ -86,8 +88,10 @@
 		].filter(Boolean);
 	}
 
-	onMount(() => {
-		const hash = new URL(location.href).hash;
+	function onHashChange() {
+		if (!$page.url.hash) return;
+
+		const hash = $page.url.hash;
 		const key = hash.slice(1);
 		const category = key.split('--')[0];
 		const heading = document.getElementById(category);
@@ -109,7 +113,11 @@
 				scroll.scrollTo({ top: container.offsetTop });
 			});
 		}
-	});
+	}
+
+	$: if (browser && $page.url.hash) {
+		tick().then(onHashChange);
+	}
 </script>
 
 {#each categories as category (category)}
