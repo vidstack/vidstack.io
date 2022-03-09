@@ -10,6 +10,28 @@ defined user gestures. Some examples include:
 
 <slot name="usage" />
 
+You can position the gesture using CSS so it's only triggered in certain regions of the player:
+
+```css:copy
+/* Gesture can be interacted with _anywhere_ on the player. */
+vds-gesture.anywhere {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Gesture can be interacted with on the _right 25%_ of the player. */
+vds-gesture.right-25 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 25%;
+	height: 100%;
+}
+```
+
 ### Type
 
 The `type` <AttrWord /> seen in the snippet above can be any valid DOM event type

@@ -12,6 +12,20 @@ if using the native `poster` attribute because it lives inside the browser's med
 
 <slot name="usage" />
 
+You can position the poster using CSS like so:
+
+```css:copy
+/* Fill entire background. */
+vds-poster {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+}
+```
+
 ### Loading Strategy
 
 You can specify a loading strategy if desired (`eager` or `lazy`); otherwise, it'll fall back to

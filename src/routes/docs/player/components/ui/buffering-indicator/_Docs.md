@@ -4,11 +4,20 @@ We don't provide a buffering indicator component out of the box because you can 
 some HTML, CSS, and [media attributes](../../../getting-started/styling.md#media-attributes).
 
 The `media-waiting:ignore` attribute can be used to show the indicator while media is buffering. Optionally,
-the `media-can-play:ignore` attribute could also be used to display the indicator as media is intiailly loading.
+the `media-can-play:ignore` attribute could also be used to display the indicator while media is intiailly loading.
+
+```css:copy
+/* Show buffering indicator while media is not ready, or buffering. */
+:not([media-can-play]) .buffering-icon,
+[media-waiting] .buffering-icon {
+	opacity: 1;
+}
+```
 
 ## Styling
 
-In the following example, we put together a convetional buffering spinner in the center of the player:
+In the following example, we put together a convetional buffering spinner, and position it at the
+center of the player:
 
 <slot name="styling" />
 
@@ -44,7 +53,7 @@ In the following example, we put together a convetional buffering spinner in the
 	stroke-dashoffset: 50;
 }
 
-/* Show buffering indicator while media is not ready for playback, or buffering. */
+/* Show buffering indicator while media is not ready, or buffering. */
 :not([media-can-play]) .buffering-icon,
 [media-waiting] .buffering-icon {
 	opacity: 1;

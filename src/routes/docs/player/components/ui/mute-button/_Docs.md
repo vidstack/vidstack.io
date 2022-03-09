@@ -31,6 +31,7 @@ vds-mute-button {
 	height: 24px;
 	border-radius: 4px;
 	cursor: pointer;
+	color: white;
 }
 
 vds-mute-button > svg {

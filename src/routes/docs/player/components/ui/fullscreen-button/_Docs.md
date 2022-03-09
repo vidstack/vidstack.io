@@ -38,6 +38,7 @@ vds-fullscreen-button {
 	height: 24px;
 	border-radius: 4px;
 	cursor: pointer;
+	color: white;
 }
 
 vds-fullscreen-button > svg {

@@ -14,6 +14,19 @@ The following media attributes can be useful when building a controls container:
 | `media-can-started:ignore`    | Hide controls after media has started (e.g., hide initial big play button). |
 | `media-can-fullscreen:ignore` | Show alternative controls for when media is in fullscreen.                  |
 
+```css:copy
+/* Hide controls while media is loading, or user is idle. */
+:not([media-can-play]) .controls,
+[media-idle] .controls {
+	opacity: 0;
+}
+
+/* Show controls if autoplay fails. */
+[media-autoplay-error] .controls {
+	opacity: 1;
+}
+```
+
 ## Styling
 
 In the following example, we create a conventional three-tier (top/middle/bottom) set of controls. You
