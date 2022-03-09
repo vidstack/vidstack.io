@@ -10,13 +10,17 @@
 	import ComponentTabbedLinks from './_components/_ComponentTabbedLinks.svelte';
 	import FrameworkSelect from './_components/_FrameworkSelect.svelte';
 
-	const ignore = new Set(['vds-youtube', 'vds-vimeo']);
+	const ignoreSelect = new Set(['vds-youtube', 'vds-vimeo']);
+	const ignoreImports = new Set(['vds-youtube', 'vds-vimeo', 'vds-controls']);
 </script>
 
 <ComponentHeading />
 
-{#if !ignore.has($elementTagName)}
+{#if !ignoreSelect.has($elementTagName)}
 	<FrameworkSelect />
+{/if}
+
+{#if !ignoreImports.has($elementTagName)}
 	<ComponentTabbedLinks />
 {/if}
 
@@ -24,7 +28,7 @@
 	<ExperimentalWarning />
 {/if}
 
-{#if !$isApiPath && !ignore.has($elementTagName)}
+{#if !$isApiPath && !ignoreImports.has($elementTagName)}
 	<div>
 		<h2>Import</h2>
 		<p>

@@ -59,6 +59,7 @@
 				'aspect-ratio',
 				'poster',
 				'gesture',
+				'controls',
 				'toggle-button',
 				'play-button',
 				'mute-button',
