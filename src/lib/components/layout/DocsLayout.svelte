@@ -4,12 +4,10 @@
 
 	import clsx from 'clsx';
 	import Navbar from './navbar/Navbar.svelte';
-	import Sidebar, { isActiveSidebarItem, type SidebarNav } from './sidebar/Sidebar.svelte';
+	import Sidebar, { getSidebarContext } from './sidebar/Sidebar.svelte';
 
 	import { ariaBool } from '$utils/aria';
 	import { type CloseDialogCallback, dialogManager } from '$actions/dialogManager';
-	import { page } from '$app/stores';
-	import { activeMarkdownCategory } from '$stores/markdown';
 	import { hideDocumentScrollbar } from '$utils/scroll';
 	import Button from '$components/base/Button.svelte';
 
@@ -17,20 +15,7 @@
 	let isNavPopoverOpen = false;
 	let closeSidebar: CloseDialogCallback;
 
-	export let nav: SidebarNav = {};
-
-	$: allItems = Object.values(nav).flat();
-	$: activeItemIndex = allItems.findIndex((item) => isActiveSidebarItem(item, $page.url.pathname));
-	$: activeItem = allItems[activeItemIndex];
-
-	$: previousItem = allItems[activeItemIndex - 1];
-	$: nextItem = allItems[activeItemIndex + 1];
-
-	$: activeCategory = Object.keys(nav).find((category) =>
-		nav[category].some((item) => item.title === activeItem?.title && item.slug === activeItem?.slug)
-	);
-
-	$: activeMarkdownCategory.set(activeCategory ?? '');
+	const { activeCategory, activeItem, nextItem, previousItem } = getSidebarContext();
 </script>
 
 <div
@@ -81,11 +66,11 @@
 
 			<ol class="text-md mt-px ml-1 flex items-center whitespace-nowrap leading-6 text-gray-soft">
 				<li class="flex items-center">
-					{activeCategory}
+					{$activeCategory}
 					<RightArrowIcon class="mx-1" width="16" height="16" />
 				</li>
 				<li class="truncate font-semibold text-slate-900 dark:text-slate-200">
-					{activeItem?.title}
+					{$activeItem?.title}
 				</li>
 			</ol>
 		</div>
@@ -93,31 +78,31 @@
 </div>
 
 <main class="max-w-8xl z-20 mx-auto 1200:pr-10">
-	<Sidebar {nav} open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
+	<Sidebar open={isSidebarOpen} on:close={(e) => closeSidebar(e.detail)} />
 
 	<div class="px-4 576:px-6 768:px-8 992:pl-[21rem]">
 		<div class="relative mx-auto mt-[13rem] w-full max-w-3xl 992:mt-32">
 			<slot />
 
-			{#if previousItem || nextItem}
+			{#if $previousItem || $nextItem}
 				<hr class="mt-20 border-gray-divider" />
 			{/if}
 
 			<div class="flex items-center pt-12 pb-20 text-lg font-semibold text-gray-300 992:text-xl">
-				{#if previousItem}
+				{#if $previousItem}
 					<div class="mb-4 flex flex-col items-start">
 						<span class="ml-3 mb-4 inline-block text-gray-inverse">Previous</span>
-						<Button arrow="left" href={previousItem.slug} class="hover:text-gray-inverse">
-							{previousItem.title}
+						<Button arrow="left" href={$previousItem.slug} class="hover:text-gray-inverse">
+							{$previousItem.title}
 						</Button>
 					</div>
 				{/if}
 
-				{#if nextItem}
+				{#if $nextItem}
 					<div class="ml-auto mb-4 flex flex-col items-end">
 						<span class="mr-3 mb-4 inline-block text-gray-inverse">Next</span>
-						<Button arrow="right" href={nextItem.slug} class="hover:text-gray-inverse">
-							{nextItem.title}
+						<Button arrow="right" href={$nextItem.slug} class="hover:text-gray-inverse">
+							{$nextItem.title}
 						</Button>
 					</div>
 				{/if}

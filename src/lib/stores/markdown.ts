@@ -21,5 +21,4 @@ export type MarkdownMeta = {
 // Singletons that are managed in `parseMarkdown.ts`.
 
 export const markdownMeta = writable<MarkdownMeta | null>(null);
-export const activeMarkdownCategory = writable<string | null>(null);
 export const markdownSlug = writable<string>('');

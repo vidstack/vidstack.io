@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { elementTagName } from '$stores/element';
 	import { isReactPath } from '$stores/path';
-	import { activeMarkdownCategory } from '$stores/markdown';
+
+	import { getSidebarContext } from '$components/layout/sidebar/Sidebar.svelte';
 
 	export let hash: string | null = null;
 
-	$: categorySegment = $activeMarkdownCategory.toLowerCase();
+	const { activeCategory } = getSidebarContext();
+
+	$: categorySegment = $activeCategory.toLowerCase();
 	$: base = `/docs/player/components/${categorySegment}`;
 	$: componentSegment = $elementTagName.replace('vds-', '');
 	$: frameworkSegment = $isReactPath ? '/react' : '';

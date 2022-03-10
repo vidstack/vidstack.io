@@ -1,10 +1,10 @@
 <script lang="ts">
 	import DocsLayout from '$components/layout/DocsLayout.svelte';
-	import { toItems } from '$components/layout/sidebar/Sidebar.svelte';
+	import { createSidebarContext, toItems } from '$components/layout/sidebar/Sidebar.svelte';
 	import { EXPERIMENTAL_TAG_NAMES } from '$stores/element';
-	import { activeMarkdownCategory } from '$stores/markdown';
 	import { isReactPath } from '$stores/path';
 	import { isString } from '$utils/unit';
+	import { derived } from 'svelte/store';
 
 	const baseUrl = '/docs/player/';
 	const baseSlug = (path: string) => `${baseUrl}${path}`;
@@ -27,7 +27,7 @@
 		return [name, options];
 	};
 
-	function buildNav(_) {
+	function buildNav() {
 		return {
 			'Getting Started': [
 				['quickstart', { match: true }],
@@ -77,13 +77,14 @@
 		};
 	}
 
-	$: nav = buildNav($isReactPath);
+	const nav = derived(isReactPath, () => buildNav());
+	const { activeCategory } = createSidebarContext(nav);
 </script>
 
-<DocsLayout {nav}>
+<DocsLayout>
 	<div class="markdown prose z-10 dark:prose-invert">
 		<p class="mb-3.5 text-[15px] font-semibold leading-6 text-brand">
-			{$activeMarkdownCategory}
+			{$activeCategory}
 		</p>
 
 		<slot />

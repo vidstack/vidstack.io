@@ -38,11 +38,71 @@
 			return buildItem([slug, options], slugFn);
 		};
 	}
+
+	export const SIDEBAR_CONTEXT_KEY = Symbol();
+
+	export type SidebarContext = {
+		nav: Readable<SidebarNav>;
+		allItems: Readable<SidebarItem[]>;
+		activeItemIndex: Readable<number>;
+		activeItem: Readable<SidebarItem | null>;
+		previousItem: Readable<SidebarItem | null>;
+		nextItem: Readable<SidebarItem | null>;
+		activeCategory: Readable<string | null>;
+	};
+
+	export function createSidebarContext(nav: Readable<SidebarNav>): SidebarContext {
+		const allItems = derived(nav, ($nav) => Object.values($nav).flat());
+
+		const activeItemIndex = derived([allItems, page], ([$allItems, $page]) =>
+			$allItems.findIndex((item) => isActiveSidebarItem(item, $page.url.pathname))
+		);
+
+		const activeItem = derived(
+			[allItems, activeItemIndex],
+			([$allItems, $activeItemIndex]) => $allItems[$activeItemIndex]
+		);
+
+		const previousItem = derived(
+			[allItems, activeItemIndex],
+			([$allItems, $activeItemIndex]) => $allItems[$activeItemIndex - 1]
+		);
+
+		const nextItem = derived(
+			[allItems, activeItemIndex],
+			([$allItems, $activeItemIndex]) => $allItems[$activeItemIndex + 1]
+		);
+
+		const activeCategory = derived([nav, activeItem], ([$nav, $activeItem]) =>
+			Object.keys($nav).find((category) =>
+				$nav[category].some(
+					(item) => item.title === $activeItem?.title && item.slug === $activeItem?.slug
+				)
+			)
+		);
+
+		const ctx: SidebarContext = {
+			nav,
+			allItems,
+			activeItemIndex,
+			activeItem,
+			previousItem,
+			nextItem,
+			activeCategory
+		};
+
+		setContext(SIDEBAR_CONTEXT_KEY, ctx);
+		return ctx;
+	}
+
+	export function getSidebarContext(): SidebarContext {
+		return getContext(SIDEBAR_CONTEXT_KEY);
+	}
 </script>
 
 <script lang="ts">
 	import clsx from 'clsx';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher, getContext, onMount, setContext } from 'svelte';
 	import { page } from '$app/stores';
 
 	import ExperimentalIcon from '~icons/ri/test-tube-fill';
@@ -54,6 +114,7 @@
 	import Overlay from '$components/base/Overlay.svelte';
 	import LazyDocSearch from '$components/markdown/LazyDocSearch.svelte';
 	import { scrollIntoCenter } from '$utils/scroll';
+	import { derived, type Readable } from 'svelte/store';
 
 	const dispatch = createEventDispatcher();
 
@@ -62,13 +123,11 @@
 	// Only valid on small screen (<992px).
 	export let open = false;
 
-	export let nav: SidebarNav = {};
+	const { nav, activeItem } = getSidebarContext();
 
 	function scrollToActiveItem() {
-		const allItems = Object.values(nav).flat();
-		const activeItem = allItems.find((item) => isActiveSidebarItem(item, $page.url.pathname));
-		if (!activeItem) return;
-		const activeEl = sidebar.querySelector(`a[href="${activeItem.slug}"]`);
+		if (!$activeItem) return;
+		const activeEl = sidebar.querySelector(`a[href="${$activeItem.slug}"]`);
 		if (activeEl) {
 			scrollIntoCenter(sidebar, activeEl, { behaviour: 'smooth' });
 		}
@@ -114,8 +173,8 @@
 		</div>
 
 		<ul>
-			{#each Object.keys(nav) as category (category)}
-				{@const items = nav[category]}
+			{#each Object.keys($nav) as category (category)}
+				{@const items = $nav[category]}
 				<li class="mt-12 first:mt-0 992:mt-10">
 					<h5 class="text-gray-strong mb-8 text-lg font-semibold 992:mb-3">{category}</h5>
 					<ul class="space-y-3 border-l border-gray-divider">
