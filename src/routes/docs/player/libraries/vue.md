@@ -98,7 +98,7 @@ such as objects and arrays without any issues.
 
 ```vue
 <template>
-	<vds-hls :hls-config="{ lowLatencyMode: true }" />
+  <vds-hls :hls-config="{ lowLatencyMode: true }" />
 </template>
 ```
 

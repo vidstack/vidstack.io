@@ -20,15 +20,15 @@ The player exposes media state as attributes and CSS variables on the `vds-media
 
 ```html
 <vds-video-player src="...">
-	<vds-media-ui
-		media-paused
-		media-waiting
-		media-can-play
-		...
-		style="--media-current-time: 500; --media-duration: 1000; ..."
-	>
-		<!-- ... -->
-	</vds-media-ui>
+  <vds-media-ui
+    media-paused
+    media-waiting
+    media-can-play
+    ...
+    style="--media-current-time: 500; --media-duration: 1000; ..."
+  >
+    <!-- ... -->
+  </vds-media-ui>
 </vds-video-player>
 ```
 

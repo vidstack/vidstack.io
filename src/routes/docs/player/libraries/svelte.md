@@ -35,14 +35,14 @@ reference to a custom element if needed. This is _generally_ only required when 
 
 ```svelte
 <script lang="ts">
-	import { type VideoPlayerElement } from '@vidstack/player';
+  import { type VideoPlayerElement } from '@vidstack/player';
 
-	let videoPlayer: VideoPlayerElement;
+  let videoPlayer: VideoPlayerElement;
 
-	$: if (videoPlayer) {
-		const canPlayType = videoPlayer.canPlayType('video/mp4');
-		// ...
-	}
+  $: if (videoPlayer) {
+    const canPlayType = videoPlayer.canPlayType('video/mp4');
+    // ...
+  }
 </script>
 
 <vds-video-player bind:this={videoPlayer} />
@@ -68,11 +68,11 @@ can be imported from the `@vidstack/player` module.
 
 ```svelte
 <script lang="ts">
-	import { type MediaPlayingEvent } from '@vidstack/player';
+  import { type MediaPlayingEvent } from '@vidstack/player';
 
-	function onPlaying(event: MediaPlayingEvent) {
-		// ...
-	}
+  function onPlaying(event: MediaPlayingEvent) {
+    // ...
+  }
 </script>
 
 <vds-video-player on:vds-playing={onPlaying} />

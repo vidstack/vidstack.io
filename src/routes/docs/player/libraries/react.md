@@ -33,14 +33,14 @@ import { type VideoPlayerElement } from '@vidstack/player';
 import { VideoPlayer } from '@vidstack/player/react';
 
 function MyPlayer() {
-	const playerRef = useRef<VideoPlayerElement>(null);
+  const playerRef = useRef<VideoPlayerElement>(null);
 
-	useEffect(() => {
-		const canPlayType = playerRef.current!.canPlayType('video/mp4');
-		// ...
-	}, []);
+  useEffect(() => {
+    const canPlayType = playerRef.current!.canPlayType('video/mp4');
+    // ...
+  }, []);
 
-	return <VideoPlayer ref={playerRef} />;
+  return <VideoPlayer ref={playerRef} />;
 }
 ```
 
@@ -54,7 +54,7 @@ any issues.
 import { HlsPlayer } from '@vidstack/player/react';
 
 function MyPlayer() {
-	return <HlsPlayer hlsConfig={{ lowLatencyMode: true }} />;
+  return <HlsPlayer hlsConfig={{ lowLatencyMode: true }} />;
 }
 ```
 
@@ -71,11 +71,11 @@ import { type MediaPlayingEvent } from '@vidstack/player';
 import { VideoPlayer } from '@vidstack/player/react';
 
 function MyPlayer() {
-	function onPlaying(event: MediaPlayingEvent) {
-		// ...
-	}
+  function onPlaying(event: MediaPlayingEvent) {
+    // ...
+  }
 
-	return <VideoPlayer onPlaying={onPlaying} />;
+  return <VideoPlayer onPlaying={onPlaying} />;
 }
 ```
 

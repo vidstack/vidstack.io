@@ -22,61 +22,61 @@ console.log(kleur.cyan(`Scaffolding component documentation files.\n`));
 let newFiles = false;
 
 for (const component of components) {
-	const category = component.source.dirPath.split('/')[0];
+  const category = component.source.dirPath.split('/')[0];
 
-	const shouldIgnore =
-		ignoredCategories.some((i) => i.test(category)) ||
-		ignoredElements.some((i) => i.test(component.tagName));
+  const shouldIgnore =
+    ignoredCategories.some((i) => i.test(category)) ||
+    ignoredElements.some((i) => i.test(component.tagName));
 
-	if (shouldIgnore) continue;
+  if (shouldIgnore) continue;
 
-	const baseTagName = component.tagName.slice('vds-'.length);
+  const baseTagName = component.tagName.slice('vds-'.length);
 
-	const dirPath = resolve(PLAYER_DOCS_DIR, category, baseTagName);
-	const reactDirPath = resolve(dirPath, 'react');
+  const dirPath = resolve(PLAYER_DOCS_DIR, category, baseTagName);
+  const reactDirPath = resolve(dirPath, 'react');
 
-	const indexFilePath = resolve(dirPath, 'index.md');
-	const apiFilePath = resolve(dirPath, 'api.md');
-	const docsFilePath = resolve(dirPath, '_Docs.md');
-	const reactFilePath = resolve(reactDirPath, 'index.md');
-	const reactApiFilePath = resolve(reactDirPath, 'api.md');
+  const indexFilePath = resolve(dirPath, 'index.md');
+  const apiFilePath = resolve(dirPath, 'api.md');
+  const docsFilePath = resolve(dirPath, '_Docs.md');
+  const reactFilePath = resolve(reactDirPath, 'index.md');
+  const reactApiFilePath = resolve(reactDirPath, 'api.md');
 
-	const exists = existsSync(dirPath);
-	const routePath = relative(ROUTES_DIR, apiFilePath);
+  const exists = existsSync(dirPath);
+  const routePath = relative(ROUTES_DIR, apiFilePath);
 
-	const apiComment =
-		'<!-- Built on demand in `apiDocsPlugin.ts`, and for styling see `ComponentApiTable.svelte`. -->\n';
+  const apiComment =
+    '<!-- Built on demand in `apiDocsPlugin.ts`, and for styling see `ComponentApiTable.svelte`. -->\n';
 
-	const indexContent = [
-		'<script>',
-		"import Docs from './_Docs.md';",
-		'</script>',
-		'',
-		'<Docs>',
-		'  <!-- ... -->',
-		'</Docs>',
-		''
-	].join('\n');
+  const indexContent = [
+    '<script>',
+    "import Docs from './_Docs.md';",
+    '</script>',
+    '',
+    '<Docs>',
+    '  <!-- ... -->',
+    '</Docs>',
+    '',
+  ].join('\n');
 
-	if (!exists) {
-		ensureDirSync(dirPath);
-		ensureDirSync(reactDirPath);
-		writeFileSync(docsFilePath, ['## Usage', '', 'Coming Soon.', ''].join('\n'));
-		writeFileSync(indexFilePath, indexContent);
-		writeFileSync(reactFilePath, indexContent.replace('./_Docs', '../_Docs'));
-		writeFileSync(apiFilePath, apiComment);
-		writeFileSync(reactApiFilePath, apiComment);
-		console.log(kleur.bold(`- routes/${routePath}`));
-		newFiles = true;
-	}
+  if (!exists) {
+    ensureDirSync(dirPath);
+    ensureDirSync(reactDirPath);
+    writeFileSync(docsFilePath, ['## Usage', '', 'Coming Soon.', ''].join('\n'));
+    writeFileSync(indexFilePath, indexContent);
+    writeFileSync(reactFilePath, indexContent.replace('./_Docs', '../_Docs'));
+    writeFileSync(apiFilePath, apiComment);
+    writeFileSync(reactApiFilePath, apiComment);
+    console.log(kleur.bold(`- routes/${routePath}`));
+    newFiles = true;
+  }
 }
 
 if (!newFiles) {
-	console.log(kleur.bold(" No new component's were found."));
+  console.log(kleur.bold(" No new component's were found."));
 }
 
 function getJson(filePath) {
-	return JSON.parse(readFileSync(filePath).toString());
+  return JSON.parse(readFileSync(filePath).toString());
 }
 
 console.log('\n Note: This only generates the component file templates.');

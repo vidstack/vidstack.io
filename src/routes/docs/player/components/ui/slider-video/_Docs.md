@@ -27,12 +27,12 @@ it before media is ready or if it fails to load.
 ```css
 /* Temporarily hide video while loading. */
 vds-slider-video:not([video-can-play]) {
-	opacity: 0;
+  opacity: 0;
 }
 
 /* Hide video if it fails to load. */
 vds-slider-video[video-error] {
-	display: none;
+  display: none;
 }
 ```
 

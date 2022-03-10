@@ -11,7 +11,7 @@ So you can best decide what install method is best for you, we'll quickly look a
 reasons to locally bundle instead of using a CDN.
 
 - It provides the greatest control over the library. If you're looking to build your own
-  player elements or modify certain behaviour, then this is the path of least resistance.
+  player elements or modify certain behavior, then this is the path of least resistance.
 
 - It provides the optimal development experience working with the library because your IDE
   can provide you with type/value validation and documentation. We also ship a helpful

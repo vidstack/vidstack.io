@@ -24,12 +24,7 @@ export const htmlInlineRule: RuleInline = (state, silent) => {
 
   // Quick fail on second char.
   const ch = state.src.charCodeAt(pos + 1);
-  if (
-    ch !== 0x21 /* ! */ &&
-    ch !== 0x3f /* ? */ &&
-    ch !== 0x2f /* / */ &&
-    !isLetter(ch)
-  ) {
+  if (ch !== 0x21 /* ! */ && ch !== 0x3f /* ? */ && ch !== 0x2f /* / */ && !isLetter(ch)) {
     return false;
   }
 

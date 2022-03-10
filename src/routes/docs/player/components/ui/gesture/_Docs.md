@@ -45,14 +45,14 @@ is performed.
 
 ```ts
 export type GestureAction =
-	| 'play'
-	| 'pause'
-	| 'mute'
-	| 'unmute'
-	| 'enter-fullscreen'
-	| 'exit-fullscreen'
-	| `seek:${number}`
-	| `toggle:${'paused' | 'muted' | 'fullscreen'}`;
+  | 'play'
+  | 'pause'
+  | 'mute'
+  | 'unmute'
+  | 'enter-fullscreen'
+  | 'exit-fullscreen'
+  | `seek:${number}`
+  | `toggle:${'paused' | 'muted' | 'fullscreen'}`;
 ```
 
 ### Repeat
@@ -116,19 +116,19 @@ gesture event types (i.e., they generally don't occur at the same time).
 
 ```css
 vds-gesture {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .seek-gesture {
-	width: 25%;
+  width: 25%;
 }
 
 .seek-gesture.right {
-	left: unset;
-	right: 0;
+  left: unset;
+  right: 0;
 }
 ```

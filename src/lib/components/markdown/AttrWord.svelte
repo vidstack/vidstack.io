@@ -1,24 +1,24 @@
 <script>
-	import { isReactPath } from '$stores/path';
+  import { isReactPath } from '$stores/path';
 
-	import { uppercaseFirstLetter } from '$utils/string';
+  import { uppercaseFirstLetter } from '$utils/string';
 
-	export let plural = false;
-	export let short = false;
-	export let title = false;
+  export let plural = false;
+  export let short = false;
+  export let title = false;
 
-	const plurals = {
-		property: 'properties'
-	};
+  const plurals = {
+    property: 'properties',
+  };
 
-	function pluralize(word) {
-		return plurals[word] ?? `${word}s`;
-	}
+  function pluralize(word) {
+    return plurals[word] ?? `${word}s`;
+  }
 
-	$: htmlWord = short ? 'attr' : 'attribute';
-	$: reactWord = short ? 'prop' : 'property';
-	$: word = $isReactPath ? reactWord : htmlWord;
-	$: properWord = plural ? pluralize(word) : word;
+  $: htmlWord = short ? 'attr' : 'attribute';
+  $: reactWord = short ? 'prop' : 'property';
+  $: word = $isReactPath ? reactWord : htmlWord;
+  $: properWord = plural ? pluralize(word) : word;
 </script>
 
 {title ? uppercaseFirstLetter(properWord) : properWord}

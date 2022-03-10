@@ -1,3 +1,3 @@
 export function ariaBool(value: boolean) {
-	return value ? 'true' : 'false';
+  return value ? 'true' : 'false';
 }

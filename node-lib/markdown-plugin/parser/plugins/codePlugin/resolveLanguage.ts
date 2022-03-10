@@ -15,31 +15,31 @@ let languagesMap: LanguagesMap;
  * Lazy generate languages map.
  */
 const getLanguagesMap = (): LanguagesMap => {
-	if (!languagesMap) {
-		languagesMap = Object.values(languages).reduce((result, item) => {
-			item.aliases.forEach((alias) => {
-				result[alias] = item;
-			});
-			return result;
-		}, {});
-	}
+  if (!languagesMap) {
+    languagesMap = Object.values(languages).reduce((result, item) => {
+      item.aliases.forEach((alias) => {
+        result[alias] = item;
+      });
+      return result;
+    }, {});
+  }
 
-	return languagesMap;
+  return languagesMap;
 };
 
 /**
  * Resolve language for highlight from token info.
  */
 export const resolveLanguage = (info: string): HighlightLanguage => {
-	// Get user-defined language alias.
-	const alias = info.match(/^([a-zA-Z]+)/)?.[1] || 'text';
+  // Get user-defined language alias.
+  const alias = info.match(/^([a-zA-Z]+)/)?.[1] || 'text';
 
-	// If the alias does not have a match in the map fallback to the alias itself.
-	return (
-		getLanguagesMap()[alias] ?? {
-			name: alias,
-			ext: alias,
-			aliases: [alias]
-		}
-	);
+  // If the alias does not have a match in the map fallback to the alias itself.
+  return (
+    getLanguagesMap()[alias] ?? {
+      name: alias,
+      ext: alias,
+      aliases: [alias],
+    }
+  );
 };

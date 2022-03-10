@@ -7,11 +7,11 @@ The `<vds-toggle>` component is a foundational element used to build other toggl
 
 ```css
 vds-toggle-button[pressed] .pressed {
-	display: none;
+  display: none;
 }
 
 vds-toggle-button:not([pressed]) .not-pressed {
-	display: none;
+  display: none;
 }
 ```
 

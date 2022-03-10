@@ -1,16 +1,16 @@
 import { listen } from 'svelte/internal';
 
 export function isHovering(
-	node: Node,
-	callback: (isHovering: boolean) => void
+  node: Node,
+  callback: (isHovering: boolean) => void,
 ): SvelteActionReturnType {
-	const enterListenerOff = listen(node, 'pointerenter', () => callback(true));
-	const leaveListenerOff = listen(node, 'pointerleave', () => callback(false));
+  const enterListenerOff = listen(node, 'pointerenter', () => callback(true));
+  const leaveListenerOff = listen(node, 'pointerleave', () => callback(false));
 
-	return {
-		destroy() {
-			enterListenerOff();
-			leaveListenerOff();
-		}
-	};
+  return {
+    destroy() {
+      enterListenerOff();
+      leaveListenerOff();
+    },
+  };
 }

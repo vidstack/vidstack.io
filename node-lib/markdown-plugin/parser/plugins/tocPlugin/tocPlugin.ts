@@ -16,36 +16,36 @@ import { createTocBlockRule } from './createTocBlockRule';
  * @see https://github.com/nagaozen/markdown-it-toc-done-right
  */
 export const tocPlugin: PluginSimple = (parser) => {
-	const pattern = /^\[\[toc\]\]$/i;
-	const level = [2, 3];
+  const pattern = /^\[\[toc\]\]$/i;
+  const level = [2, 3];
 
-	let headers: MarkdownHeader[];
+  let headers: MarkdownHeader[];
 
-	// Push the rule to the end of the chain, and resolve headers from the parsed tokens.
-	parser.core.ruler.push('resolveTocHeaders', (state) => {
-		headers = resolveHeadersFromTokens(state.tokens, {
-			level,
-			allowHtml: true,
-			escapeText: true
-		});
-		return true;
-	});
+  // Push the rule to the end of the chain, and resolve headers from the parsed tokens.
+  parser.core.ruler.push('resolveTocHeaders', (state) => {
+    headers = resolveHeadersFromTokens(state.tokens, {
+      level,
+      allowHtml: true,
+      escapeText: true,
+    });
+    return true;
+  });
 
-	// Add toc syntax as a block rule.
-	parser.block.ruler.before('heading', 'toc', createTocBlockRule({ pattern }), {
-		alt: ['paragraph', 'reference', 'blockquote']
-	});
+  // Add toc syntax as a block rule.
+  parser.block.ruler.before('heading', 'toc', createTocBlockRule({ pattern }), {
+    alt: ['paragraph', 'reference', 'blockquote'],
+  });
 
-	// Custom toc_body render rule.
-	parser.renderer.rules.toc_open = () => {
-		if (!headers) {
-			return '';
-		}
+  // Custom toc_body render rule.
+  parser.renderer.rules.toc_open = () => {
+    if (!headers) {
+      return '';
+    }
 
-		return `<TableOfContents headers={\`${JSON.stringify(headers, [
-			'title',
-			'slug',
-			'children'
-		])}\`}>`;
-	};
+    return `<TableOfContents headers={\`${JSON.stringify(headers, [
+      'title',
+      'slug',
+      'children',
+    ])}\`}>`;
+  };
 };

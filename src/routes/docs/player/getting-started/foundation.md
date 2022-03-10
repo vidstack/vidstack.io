@@ -46,9 +46,9 @@ can be used before they're defined!
 ```html
 <!-- Browser will upgrade elements once the script above has run. -->
 <vds-video-player>
-	<vds-media-ui>
-		<vds-play-button />
-	</vds-media-ui>
+  <vds-media-ui>
+    <vds-play-button />
+  </vds-media-ui>
 </vds-video-player>
 ```
 
@@ -156,13 +156,13 @@ request was satisfied.
 
 ```js
 player.addEventListener('vds-play–request', () => {
-	console.log('Play request was made.');
+  console.log('Play request was made.');
 });
 
 player.addEventListener('vds-play', (event) => {
-	// Request events are attached to media events.
-	const playRequestEvent = event.requestEvent;
-	console.log('Play request was satisfied.');
+  // Request events are attached to media events.
+  const playRequestEvent = event.requestEvent;
+  console.log('Play request was satisfied.');
 });
 
 playButton.dispatchEvent('vds-play-request', { bubbles: true });
@@ -180,15 +180,15 @@ to the **origin event**, which is the event that started the chain.
 
 ```js
 player.addEventListener('vds-play', (event) => {
-	// Was this triggered by an actual person?
-	const userPlayed = event.isOriginTrusted;
+  // Was this triggered by an actual person?
+  const userPlayed = event.isOriginTrusted;
 });
 
 player.addEventListener('vds-playing', (event) => {
-	// Is this resuming from buffering?
-	if (event.triggerEvent?.type === 'vds-waiting') {
-		// ...
-	}
+  // Is this resuming from buffering?
+  if (event.triggerEvent?.type === 'vds-waiting') {
+    // ...
+  }
 });
 ```
 
@@ -216,11 +216,11 @@ Tracking media state via events:
 let paused = true;
 
 player.addEventListener('vds-pause', () => {
-	paused = true;
+  paused = true;
 });
 
 player.addEventListener('vds-play', () => {
-	paused = false;
+  paused = false;
 });
 ```
 
@@ -230,7 +230,7 @@ Tracking media state via store subscription:
 
 ```js
 const unsubscribe = player.store.paused.subscribe(($paused) => {
-	console.log('Is Paused:', $paused);
+  console.log('Is Paused:', $paused);
 });
 
 unsubscribe();

@@ -31,15 +31,15 @@ The player exposes media state on the `vds-media-ui` element. For example:
 
 ```html
 <vds-video-player src="...">
-	<vds-media-ui
-		media-paused
-		media-waiting
-		media-can-play
-		...
-		style="--vds-media-current-time: 500; --vds-media-duration: 1000; ..."
-	>
-		<!-- ... -->
-	</vds-media-ui>
+  <vds-media-ui
+    media-paused
+    media-waiting
+    media-can-play
+    ...
+    style="--vds-media-current-time: 500; --vds-media-duration: 1000; ..."
+  >
+    <!-- ... -->
+  </vds-media-ui>
 </vds-video-player>
 ```
 
@@ -54,12 +54,12 @@ something like this:
 ```css
 .media-play-icon,
 [media-paused] .media-pause-icon {
-	opacity: 0;
+  opacity: 0;
 }
 
 .media-pause-icon,
 [media-paused] .media-play-icon {
-	opacity: 100;
+  opacity: 100;
 }
 ```
 
@@ -111,13 +111,13 @@ we change the fill background color.
 
 ```html
 <div class="relative h-6 w-full bg-gray-200">
-	<div
-		class="
+  <div
+    class="
 			media-waiting:bg-sky-500 absolute top-0 left-0 h-full w-full
 			origin-left
 			scale-x-[calc(var(--vds-media-current-time)/var(--vds-media-duration))]
 			transform bg-gray-400 will-change-transform
 		"
-	></div>
+  ></div>
 </div>
 ```

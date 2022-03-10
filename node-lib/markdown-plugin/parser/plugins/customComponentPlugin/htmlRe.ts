@@ -22,19 +22,19 @@ const declaration = '<![A-Z]+\\s+[^>]*>';
 const cdata = '<!\\[CDATA\\[[\\s\\S]*?\\]\\]>';
 
 export const HTML_TAG_RE = new RegExp(
-	'^(?:' +
-		open_tag +
-		'|' +
-		close_tag +
-		'|' +
-		comment +
-		'|' +
-		processing +
-		'|' +
-		declaration +
-		'|' +
-		cdata +
-		')'
+  '^(?:' +
+    open_tag +
+    '|' +
+    close_tag +
+    '|' +
+    comment +
+    '|' +
+    processing +
+    '|' +
+    declaration +
+    '|' +
+    cdata +
+    ')',
 );
 
 export const HTML_OPEN_CLOSE_TAG_RE = new RegExp('^(?:' + open_tag + '|' + close_tag + ')');

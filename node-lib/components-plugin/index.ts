@@ -16,10 +16,10 @@ const elements = getJson(elementsPath);
 const components: ComponentMeta[] = elements.components;
 
 export const componentsPlugin = (): Plugin[] => [
-	apiDocsPlugin(components),
-	headingsPlugin(components)
+  apiDocsPlugin(components),
+  headingsPlugin(components),
 ];
 
 function getJson(filePath) {
-	return JSON.parse(readFileSync(filePath).toString());
+  return JSON.parse(readFileSync(filePath).toString());
 }

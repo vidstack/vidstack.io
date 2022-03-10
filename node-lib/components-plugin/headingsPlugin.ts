@@ -10,28 +10,28 @@ const PLAYER_DOCS_ID_RE = /\/docs\/player\/components\//;
 const API_ID_RE = /api\.md$/;
 
 export const headingsPlugin = (components: ComponentMeta[]): Plugin => {
-	return {
-		name: PLUGIN_NAME,
-		enforce: 'pre' as const,
-		transform(markdown, id) {
-			if (PLAYER_DOCS_ID_RE.test(id) && MD_ID_RE.test(id) && !API_ID_RE.test(id)) {
-				const { tagName, title: componentTitle } = getComponentNameFromId(id);
-				const component = components.find((component) => component.tagName === tagName);
+  return {
+    name: PLUGIN_NAME,
+    enforce: 'pre' as const,
+    transform(markdown, id) {
+      if (PLAYER_DOCS_ID_RE.test(id) && MD_ID_RE.test(id) && !API_ID_RE.test(id)) {
+        const { tagName, title: componentTitle } = getComponentNameFromId(id);
+        const component = components.find((component) => component.tagName === tagName);
 
-				if (component) {
-					const isReact = /\/react\/?/.test(id);
-					const titlePostfix = isReact ? ' (React)' : '';
-					const title = `${componentTitle} Docs${titlePostfix}`;
+        if (component) {
+          const isReact = /\/react\/?/.test(id);
+          const titlePostfix = isReact ? ' (React)' : '';
+          const title = `${componentTitle} Docs${titlePostfix}`;
 
-					const frontmatter = [`title: ${title}`].join('\n');
+          const frontmatter = [`title: ${title}`].join('\n');
 
-					return markdown.startsWith('---\n')
-						? markdown.replace('---\n', `---\n${frontmatter}`)
-						: ['---', frontmatter, '---'].join('\n') + markdown;
-				}
-			}
+          return markdown.startsWith('---\n')
+            ? markdown.replace('---\n', `---\n${frontmatter}`)
+            : ['---', frontmatter, '---'].join('\n') + markdown;
+        }
+      }
 
-			return null;
-		}
-	};
+      return null;
+    },
+  };
 };

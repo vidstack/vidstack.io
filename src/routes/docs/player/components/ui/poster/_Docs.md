@@ -62,12 +62,12 @@ when the image fails to load.
 ```css
 /* Do something while image is loading. */
 vds-poster[img-loading] {
-	background-color: #e8e8e8;
+  background-color: #e8e8e8;
 }
 
 /* Hide poster if it fails to load. */
 vds-poster[img-error] {
-	display: none;
+  display: none;
 }
 ```
 

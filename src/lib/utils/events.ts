@@ -1,25 +1,25 @@
 import { onDestroy } from 'svelte';
 
 export function createDisposalBin() {
-	let bin = [];
+  let bin = [];
 
-	function add(callback: () => void) {
-		bin.push(callback);
-	}
+  function add(callback: () => void) {
+    bin.push(callback);
+  }
 
-	function dispose() {
-		bin.forEach((fn) => fn());
-		bin = [];
-	}
+  function dispose() {
+    bin.forEach((fn) => fn());
+    bin = [];
+  }
 
-	try {
-		onDestroy(dispose);
-	} catch (e) {
-		//
-	}
+  try {
+    onDestroy(dispose);
+  } catch (e) {
+    //
+  }
 
-	return {
-		add,
-		dispose
-	};
+  return {
+    add,
+    dispose,
+  };
 }
