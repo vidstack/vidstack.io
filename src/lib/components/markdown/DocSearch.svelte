@@ -19,10 +19,6 @@
 			appId: 'JV3QY1UI79',
 			indexName: 'vidstack',
 			apiKey: '03b81ed3b7849b33599967cec76734fe'
-			// Testing
-			// appId: 'R2IYF7ETH7',
-			// apiKey: '599cec31baffa4868cae4e79f180729b',
-			// indexName: 'docsearch'
 		});
 
 		mounted = true;

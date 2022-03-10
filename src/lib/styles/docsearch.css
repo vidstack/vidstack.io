@@ -12,6 +12,7 @@
 	--docsearch-logo-color: #414141;
 	--docsearch-hit-color: #949494;
 	--docsearch-hit-active-color: white;
+	--docsearch-hit-active-color: white;
 }
 
 :root.dark {
@@ -27,6 +28,10 @@
 	--docsearch-footer-background: #242424;
 	--docsearch-muted-color: #c1c1c1;
 	--docsearch-logo-color: #c1c1c1;
+}
+
+.DocSearch-Container {
+	@apply bg-black/70 backdrop-blur-sm dark:bg-gray-700/80;
 }
 
 .DocSearch-Button {
@@ -69,4 +74,23 @@
 
 .DocSearch-NoResults-Prefill-List {
 	padding-top: 24px;
+}
+
+@media only screen and (max-width: 991px) {
+	.DocSearch-Button {
+		--docsearch-text-color: var(--text-gray-soft);
+		@apply m-0 mr-2 border-0 bg-transparent p-0 hover:bg-transparent;
+	}
+
+	.DocSearch-Button-Placeholder {
+		@apply hidden;
+	}
+
+	.DocSearch-Search-Icon {
+		@apply inline-block h-6 w-6;
+	}
+
+	.DocSearch-Button-Keys {
+		@apply hidden;
+	}
 }
